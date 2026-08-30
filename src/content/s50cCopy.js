@@ -1,0 +1,185 @@
+export const s50cCopy = {
+  challenge: {
+    section: "02",
+    title: "UNDERSTANDING THE CHALLENGE",
+    points: [
+      {
+        number: "01",
+        key: "target",
+        title: "TARGET VISIBILITY",
+        description: "Is this the exact point being measured?",
+      },
+      {
+        number: "02",
+        key: "task",
+        title: "TASK COMPLEXITY",
+        description: "What step am I on?",
+      },
+      {
+        number: "03",
+        key: "context",
+        title: "MEASUREMENT CONTEXT",
+        description: "What does this value refer to later?",
+      },
+    ],
+    journey: {
+      title: "MEASUREMENT JOURNEY",
+      steps: [
+        { key: "see", title: "SEE", description: "Can I clearly identify the target?", icon: "eye" },
+        { key: "aim", title: "AIM", description: "Am I measuring the right point?", icon: "target" },
+        { key: "measure", title: "MEASURE", description: "What step am I on?", icon: "measure" },
+        { key: "verify", title: "VERIFY", description: "Did I measure what I intended?", icon: "verify" },
+        { key: "record", title: "RECORD", description: "Can I understand this data later?", icon: "record" },
+      ],
+      themes: ["VISIBILITY", "GUIDANCE", "CONTEXT"],
+    },
+  },
+  structure: {
+    section: "03",
+    title: "FROM COMPLEXITY TO STRUCTURE",
+    introduction: "Organizing a professional measurement system around clear tasks.",
+    capabilitiesTitle: "MANY CAPABILITIES",
+    capabilities: [
+      { label: "ANGLE", icon: "angle.png" },
+      { label: "DISTANCE", icon: "distance.png" },
+      { label: "HEIGHT", icon: "height.png" },
+      { label: "DEPTH", icon: "depth.png" },
+      { label: "INDIRECT HEIGHT", icon: "indirect-height.png" },
+      { label: "INDIRECT DISTANCE", icon: "indirect-distance.png" },
+      { label: "HEIGHT (2-POINTS)", icon: "height-two-points.png" },
+      { label: "AREA", icon: "area.png" },
+      { label: "VOLUME ROOM", icon: "volume-room.png" },
+      { label: "TRIANGLE AREA", icon: "triangle-area.png" },
+      { label: "ROOF ANGLE", icon: "roof-angle.png" },
+      { label: "VOLUME", icon: "volume.png" },
+      { label: "CIRCLE AREA", icon: "circle-area.png" },
+      { label: "CYLINDER VOLUME", icon: "cylinder-volume.png" },
+      { label: "STAKE OUT", icon: "stake-out.png" },
+      { label: "TRAPEZOID AREA", icon: "trapezoid-area.png" },
+    ],
+    principlesTitle: "DESIGN PRINCIPLES APPLIED",
+    principles: [
+      { icon: "◎", title: "MEASUREMENT FIRST", description: "The core task is always one step away." },
+      { icon: "♡", title: "ACCESSIBLE SUPPORT", description: "Tools that help, stay close to the task." },
+      { icon: "▱", title: "REDUCED COMPLEXITY", description: "Advanced functions are organized, not hidden." },
+    ],
+    groups: [
+      { number: "01", key: "measurement", title: "MEASUREMENT", items: ["Distance", "Continuous", "Area", "Volume", "P2P"] },
+      { number: "02", key: "camera", title: "CAMERA & TARGETING", items: ["Camera View", "Zoom", "Targeting"] },
+      { number: "03", key: "records", title: "RECORDS", items: ["Measurement History", "Saved Data"] },
+      { number: "04", key: "settings", title: "DEVICE SETTINGS", items: ["Unit", "Reference", "Bluetooth", "Display", "Language"] },
+    ],
+    logic: {
+      title: "UX STRUCTURE LOGIC",
+      flow: ["Core Task", "Support", "Review", "Configure"],
+      columns: [
+        { number: "01", title: "MEASUREMENT", description: "Where the work gets done." },
+        { number: "02", title: "CAMERA & TARGETING", description: "Support tools during measurement." },
+        { number: "03", title: "RECORDS", description: "Review and manage what you've done." },
+        { number: "04", title: "DEVICE SETTINGS", description: "Configure how the device works for you." },
+      ],
+    },
+  },
+  interaction: {
+    section: "04",
+    title: "INTERACTION MODEL",
+    introduction: "Designing clear control across physical buttons and on-screen states.",
+    intro: "S50C uses physical controls to keep measurement actions stable, fast, and predictable in real-world conditions.",
+    coreAction: {
+      title: "CORE ACTION",
+      label: "MEASURE / CONFIRM",
+      description: "Keeps the primary action always within reach.",
+    },
+    navigation: {
+      title: "NAVIGATION & ADJUSTMENT",
+      description: "Browse modes, switch options, and adjust values with consistent directional logic.",
+      controls: [
+        { key: "previous", label: "PREVIOUS / –" },
+        { key: "next", label: "NEXT / +" },
+      ],
+    },
+    shortcuts: {
+      title: "DIRECT SHORTCUTS",
+      items: [
+        { key: "function", title: "FUNCTION", description: "Quick access to measurement modes and tools." },
+        { key: "settings", title: "SETTINGS", description: "Adjust device preferences and system options." },
+        { key: "camera", title: "CAMERA", description: "Enter visual targeting directly for precise measurement." },
+        { key: "favorite", title: "FAVORITE", description: "Recall saved functions and measurements instantly." },
+      ],
+    },
+    principles: {
+      title: "CONTROL PRINCIPLES",
+      items: [
+        { key: "primary", title: "PRIMARY ACTION FIRST", description: "The main action is centered and always within easy reach." },
+        { key: "direction", title: "CONSISTENT DIRECTIONAL LOGIC", description: "Left and right maintain the same meaning everywhere." },
+        { key: "access", title: "DIRECT ACCESS TO FREQUENT TOOLS", description: "Shortcuts reduce steps and speed up real-world workflows." },
+      ],
+    },
+    logic: {
+      title: "INPUT → STATE → FEEDBACK",
+      stages: [
+        { key: "input", title: "INPUT", description: "Physical button press" },
+        { key: "state", title: "STATE", description: "Selected / Measuring / Adjusting" },
+        { key: "feedback", title: "FEEDBACK", description: "Highlight / Updated value / Confirmation" },
+      ],
+    },
+    tagline: "PHYSICAL-FIRST, SCREEN-SUPPORTED",
+  },
+  measurementExperience: {
+    section: "05",
+    title: "CORE MEASUREMENT EXPERIENCE",
+    introduction: "Turning complex measurement into a clear, guided sequence.",
+    intro: "S50C guides users from target to result with a logical flow and real-time feedback—reducing mistakes and building confidence.",
+    steps: [
+      { number: "01", key: "target", title: "TARGET", description: "Use camera view to find and aim at the target.", image: "camera-ui.png", alt: "Camera measurement interface showing a building target and 328.081 feet" },
+      { number: "02", key: "measure", title: "MEASURE", description: "Press measure to capture the distance.", image: "ready-ui-green.png", alt: "Ready-to-measure interface showing a green blank distance and unit" },
+      { number: "03", key: "verify", title: "VERIFY", description: "Review the result and check related information.", image: "result-ui.png", alt: "Measurement result interface showing 32.532 feet" },
+    ],
+    cameraAssisted: {
+      title: "CAMERA-ASSISTED MEASUREMENT",
+      subtitle: "See the target. Measure with confidence.",
+      benefits: [
+        { key: "visible", title: "VISIBLE TARGET", description: "Know exactly what you are measuring." },
+        { key: "aiming", title: "CLEAR AIMING", description: "Targeting feedback helps reduce uncertainty." },
+        { key: "result", title: "IMMEDIATE RESULT", description: "Measurement feedback stays close to the target context." },
+      ],
+    },
+    feedback: {
+      title: "MEASUREMENT FEEDBACK",
+      subtitle: "Every state is clear. Every step is informed.",
+      states: [
+        { key: "ready", title: "READY", description: "Device ready to measure.", image: "ready-ui-green.png", alt: "Ready-to-measure interface with green placeholder and unit" },
+        { key: "result", title: "RESULT", description: "Clear result with key measurement data.", image: "result-ui.png", alt: "Measurement result showing 32.532 feet" },
+      ],
+    },
+    outcomes: {
+      title: "EXPERIENCE OUTCOMES",
+      items: [
+        { number: "01", key: "visible", title: "VISIBLE TARGET", description: "Users can clearly understand what is being measured." },
+        { number: "02", key: "state", title: "CLEAR STATE", description: "Each screen communicates the current step and next action." },
+        { number: "03", key: "trusted", title: "TRUSTED RESULT", description: "Results are easy to verify before moving forward." },
+      ],
+    },
+  },
+  finalExperience: {
+    section: "06",
+    title: "FINAL EXPERIENCE",
+    introduction: "A complete interface system built for real-world measurement.",
+    description: "Every measurement mode, setting, and record is designed to be clear, consistent, and effortless to use in the field.",
+    screens: [
+      { key: "camera", image: "camera-measurement.png", alt: "Camera measurement interface showing 328.081 feet" },
+      { key: "single", image: "single-result.png", alt: "Single measurement result showing 32.532 feet" },
+      { key: "menu", image: "function-menu.png", alt: "Two-point indirect height function menu" },
+      { key: "indirect", image: "indirect-height-result.png", alt: "Indirect height measurement result showing 145.313 feet" },
+      { key: "continuous", image: "continuous-measurement.png", alt: "Continuous measurement interface showing a 6.660 foot maximum" },
+      { key: "special", image: "special-measurement.png", alt: "Special measurement interface showing 0.328 meters" },
+      { key: "settings", image: "settings.png", alt: "S50C settings interface" },
+      { key: "history", image: "history.png", alt: "S50C measurement history interface showing 35.294 feet" },
+    ],
+    summary: [
+      { key: "feedback", title: "CLEAR VISUAL FEEDBACK", description: "High-contrast UI and camera view reduce aiming errors and improve accuracy." },
+      { key: "system", title: "COMPLETE MEASUREMENT SYSTEM", description: "Multiple modes and settings cover diverse on-site scenarios." },
+      { key: "data", title: "ORGANIZED AND ACCESSIBLE DATA", description: "Measurements and records are easy to review and manage anytime." },
+    ],
+  },
+};

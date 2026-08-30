@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "reference_lock_version": "v1",
+  "source_strategy_locked": true,
+  "review_scope": "all_sections",
+  "viewports": {
+    "desktop": { "width": 1650, "height": 933 },
+    "ultrawide": { "width": 1635, "height": 892 },
+    "mobile": { "width": 375, "height": 812 }
+  },
+  "fidelity_ledger": "docs/fidelity-ledger.md",
+  "fresh_review": "docs/fresh-review.md",
+  "fresh_review_mode": "independent",
+  "final_status": "pass",
+  "sections": [
+    {
+      "id": "hero",
+      "reference": {
+        "path": "references/locked/v1/01-hero.png",
+        "sha256": "504c16b8c53981d1f5c5785deb7538517b0810868cf0fb4c056c15b9f5506252"
+      },
+      "render_contract": "docs/restoration-plan.md",
+      "topology": {
+        "kind": "section-specific",
+        "shared_with": [],
+        "reason": "Hero 使用独立的大字网格与立方体运动区"
+      },
+      "captures": {
+        "desktop": "qa/screenshots/desktop/hero.png",
+        "ultrawide": "qa/screenshots/ultrawide/hero.png",
+        "mobile": "qa/screenshots/mobile/hero.png"
+      },
+      "gates": {
+        "visual_meaning": "pass",
+        "hierarchy": "pass",
+        "personal_evidence": "pass",
+        "composition": "pass",
+        "typography": "pass",
+        "asset_crop": "pass",
+        "overlap": "pass",
+        "responsive": "pass",
+        "reference_fidelity": "pass"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "works",
+      "reference": {
+        "path": "references/locked/v1/02-selected-works.png",
+        "sha256": "77cf7a0e7a6c095394e8d46816eef8e47e74d5765d6f50b7e4ba1134831581d8"
+      },
+      "render_contract": "docs/restoration-plan.md",
+      "topology": {
+        "kind": "section-specific",
+        "shared_with": [],
+        "reason": "作品选择状态包含独立的标题轨道、放大 WebGL 立方体与项目元数据"
+      },
+      "captures": {
+        "desktop": "qa/screenshots/desktop/works.png",
+        "ultrawide": "qa/screenshots/ultrawide/works.png",
+        "mobile": "qa/screenshots/mobile/works.png"
+      },
+      "gates": {
+        "visual_meaning": "pass",
+        "hierarchy": "pass",
+        "personal_evidence": "pass",
+        "composition": "pass",
+        "typography": "pass",
+        "asset_crop": "pass",
+        "overlap": "pass",
+        "responsive": "pass",
+        "reference_fidelity": "pass"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "project-detail",
+      "reference": {
+        "path": "references/locked/v1/03-project-detail.png",
+        "sha256": "4bcad5ae0ba7998d2f8025c7e33006a25693ed46550e5419dc74bcd475d2c1dd"
+      },
+      "render_contract": "docs/restoration-plan.md",
+      "topology": {
+        "kind": "section-specific",
+        "shared_with": [],
+        "reason": "详情使用独立的媒体与粘性说明双栏拓扑"
+      },
+      "captures": {
+        "desktop": "qa/screenshots/desktop/detail.png",
+        "ultrawide": "qa/screenshots/ultrawide/detail.png",
+        "mobile": "qa/screenshots/mobile/detail.png"
+      },
+      "gates": {
+        "visual_meaning": "pass",
+        "hierarchy": "pass",
+        "personal_evidence": "pass",
+        "composition": "pass",
+        "typography": "pass",
+        "asset_crop": "pass",
+        "overlap": "pass",
+        "responsive": "pass",
+        "reference_fidelity": "pass"
+      },
+      "status": "pass"
+    },
+    {
+      "id": "contact",
+      "reference": {
+        "path": "references/locked/v1/04-contact.png",
+        "sha256": "5e4e27db32f3478e6246beead99e44494cc53bb222b1a6128e249318304e99b7"
+      },
+      "render_contract": "docs/restoration-plan.md",
+      "topology": {
+        "kind": "section-specific",
+        "shared_with": [],
+        "reason": "Contact 使用独立的描边宣言、联系面板与线框立方体布局"
+      },
+      "captures": {
+        "desktop": "qa/screenshots/desktop/contact.png",
+        "ultrawide": "qa/screenshots/ultrawide/contact.png",
+        "mobile": "qa/screenshots/mobile/contact.png"
+      },
+      "gates": {
+        "visual_meaning": "pass",
+        "hierarchy": "pass",
+        "personal_evidence": "pass",
+        "composition": "pass",
+        "typography": "pass",
+        "asset_crop": "pass",
+        "overlap": "pass",
+        "responsive": "pass",
+        "reference_fidelity": "pass"
+      },
+      "status": "pass"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horizon fullscreen cover comparison</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height: 100%; background: #0c0f0d; color: #f3f5f1; font-family: Arial, sans-serif; }
+      main { padding: 28px; }
+      h1 { margin: 0 0 8px; font-size: 24px; }
+      p { margin: 0 0 24px; color: #9ca69e; font-size: 14px; }
+      .comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+      figure { margin: 0; padding: 12px; border: 1px solid #26312a; background: #111713; }
+      figcaption { margin-bottom: 10px; color: #74f05b; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+      img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
+      .notes { margin-top: 20px; padding: 14px; border: 1px solid #26312a; color: #c6cec8; font-size: 13px; line-height: 1.5; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Horizon fullscreen project cover</h1>
+      <p>Reference interaction state and local implementation, normalized into equal viewing cells.</p>
+      <section class="comparison">
+        <figure>
+          <figcaption>Reference recording — full-viewport project media</figcaption>
+          <img src="./screenshots/horizon-fullscreen-cover/reference-video-cover.png" alt="Reference recording full-viewport project media" />
+        </figure>
+        <figure>
+          <figcaption>Implementation — Horizon cover at scrollTop 0</figcaption>
+          <img src="./screenshots/horizon-fullscreen-cover/02-horizon-cover-scrolltop-0.png" alt="Horizon implementation full-viewport cover" />
+        </figure>
+      </section>
+      <div class="notes">Matched behavior: the expanded project face resolves into a complete viewport-height media surface, keeps the persistent project controls above it, and does not reveal project-information content until the user scrolls.</div>
+    </main>
+  </body>
+</html>
