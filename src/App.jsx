@@ -39,6 +39,8 @@ const SPATIAL_EASE = [0.76, 0, 0.24, 1];
 const ENTER_EASE = [0.65, 0, 0.35, 1];
 const ENTER_DURATION_SECONDS = 0.48;
 const ENTER_DURATION_MS = ENTER_DURATION_SECONDS * 1000;
+const ABOUT_PAGE_FADE_SECONDS = 0.18;
+const ABOUT_PAGE_EASE = [0.22, 1, 0.36, 1];
 
 function afterPaint() {
   return new Promise((resolve) => {
@@ -305,18 +307,18 @@ function Contact({ activeIndex, onActiveChange, copied, onCopy }) {
 
 export function App() {
   const startsOnAbout = window.location.pathname === "/about";
-  const [route, setRoute] = useState(() => window.location.pathname);
-  const [activeIndex, setActiveIndex] = useState(startsOnAbout ? 3 : 0);
+  const initialIndex = 3;
+  const [activeIndex, setActiveIndex] = useState(initialIndex);
   const [detailIndex, setDetailIndex] = useState(startsOnAbout ? 3 : null);
   const [transitionState, setTransitionState] = useState(startsOnAbout ? "project" : "idle");
   const [detailNavVisible, setDetailNavVisible] = useState(startsOnAbout);
   const [transitionVisual, setTransitionVisual] = useState({
     visible: false,
-    index: startsOnAbout ? 3 : 0,
+    index: initialIndex,
     presentation: "home",
     presentationDuration: 520,
     rotationDuration: 400,
-    background: projects[startsOnAbout ? 3 : 0].background,
+    background: projects[initialIndex].background,
   });
   const [copied, setCopied] = useState(false);
   const reduceMotion = useReducedMotion();
@@ -358,7 +360,6 @@ export function App() {
   useEffect(() => {
     const handlePopState = () => {
       const nextRoute = window.location.pathname;
-      setRoute(nextRoute);
       if (nextRoute === "/about") {
         setActiveIndex(3);
         setDetailIndex(3);
@@ -368,6 +369,7 @@ export function App() {
         setDetailIndex(null);
         setTransitionState("idle");
         setDetailNavVisible(false);
+        detailStageRef.current?.removeAttribute("style");
       }
     };
     window.addEventListener("popstate", handlePopState);
@@ -387,22 +389,57 @@ export function App() {
     }));
   }, []);
 
+  const openAboutPage = useCallback(async () => {
+    if (transitionStateRef.current !== "idle") return;
+    const detailStage = detailStageRef.current;
+    if (!detailStage) return;
+
+    setActiveIndex(3);
+    setTransitionState("about-opening");
+    transitionStateRef.current = "about-opening";
+    setDetailNavVisible(false);
+
+    detailStage.style.visibility = "hidden";
+    detailStage.style.pointerEvents = "none";
+    detailStage.style.opacity = "0";
+    detailStage.style.transform = "translate3d(0, 4px, 0)";
+    setDetailIndex(3);
+    detailIndexRef.current = 3;
+    if (window.location.pathname !== "/about") {
+      window.history.pushState({}, "", "/about");
+    }
+
+    await afterPaint();
+    resetDetailScroll(detailStage);
+    detailStage.style.visibility = "";
+
+    if (!reduceMotion) {
+      await animate(
+        detailStage,
+        { opacity: 1, transform: "translate3d(0, 0px, 0)" },
+        { duration: ABOUT_PAGE_FADE_SECONDS, ease: ABOUT_PAGE_EASE },
+      ).finished;
+    }
+
+    detailStage.removeAttribute("style");
+    setDetailNavVisible(true);
+    setTransitionState("project");
+    transitionStateRef.current = "project";
+  }, [reduceMotion]);
+
   const openProjectTimeline = useCallback(async (requestedIndex) => {
     if (transitionStateRef.current !== "idle") return;
     const nextIndex = Number.isInteger(requestedIndex) ? requestedIndex : activeIndex;
-    if (nextIndex !== 3 && !projects[nextIndex]?.openable) return;
+    if (nextIndex < 0 || nextIndex > 2 || !projects[nextIndex]?.openable) return;
 
     const cubeRect = cubeZoneRef.current?.getBoundingClientRect();
     const sharedCubeLayer = sharedCubeLayerRef.current;
     const homeCubeApi = homeCubeApiRef.current;
-    const transitionStage = transitionStageRef.current;
-    const transitionLayer = transitionLayerRef.current;
     const detailStage = detailStageRef.current;
     const preMountProject = nextIndex >= 0 && nextIndex < 3;
     const homeCubeSurface = cubeZoneRef.current?.querySelector("[data-project-cube-surface]");
     if (!cubeRect || !detailStage) return;
     if (preMountProject && (!sharedCubeLayer || !homeCubeApi || !homeCubeSurface)) return;
-    if (!preMountProject && (!transitionStage || !transitionLayer)) return;
 
     setTransitionState("opening");
     transitionStateRef.current = "opening";
@@ -488,66 +525,37 @@ export function App() {
       transitionStateRef.current = "project";
       return;
     }
-
-    // About Me intentionally retains its existing route and entry behavior.
-    transitionLayer.style.opacity = "1";
-    transitionBackdropRef.current.style.opacity = "0";
-    transitionStage.style.left = "0px";
-    transitionStage.style.top = "0px";
-    transitionStage.style.width = `${window.innerWidth}px`;
-    transitionStage.style.height = `${window.innerHeight}px`;
-    transitionStage.style.transformOrigin = "0 0";
-    const startTransform = getRectTransform(cubeRect);
-    transitionStage.style.transform = `translate3d(${startTransform.x}px, ${startTransform.y}px, 0px) scale(${startTransform.scaleX}, ${startTransform.scaleY})`;
-    setTransitionVisual({
-      visible: true,
-      index: nextIndex,
-      presentation: "home",
-      presentationDuration: 560,
-      rotationDuration: 400,
-      background: projects[nextIndex].background,
-    });
-    const ready = detailReadyRef.current;
-    if (ready.index === nextIndex) await ready.promise;
-    await afterPaint();
-
-    if (reduceMotion) {
-      setDetailIndex(nextIndex);
-      detailIndexRef.current = nextIndex;
-      await afterPaint();
-      resetDetailScroll(detailStage);
-      detailStage.style.visibility = "";
-      detailStage.style.pointerEvents = "";
-      transitionLayer.style.opacity = "0";
-    } else {
-      setTransitionVisual((current) => ({ ...current, presentation: "flat" }));
-      await animate(
-        transitionStage,
-        { transform: "translate3d(0px, 0px, 0px) scale(1, 1)" },
-        { duration: 0.56, ease: SPATIAL_EASE },
-      ).finished;
-      setDetailIndex(nextIndex);
-      detailIndexRef.current = nextIndex;
-      window.history.pushState({}, "", "/about");
-      setRoute("/about");
-      await afterPaint();
-      resetDetailScroll(detailStage);
-      detailStage.style.visibility = "";
-      detailStage.style.pointerEvents = "";
-      transitionLayer.style.opacity = "0";
-      await afterPaint();
-    }
-
-    setTransitionVisual((current) => ({ ...current, visible: false }));
-    transitionStage.style.transform = "none";
-    if (reduceMotion) {
-      window.history.pushState({}, "", "/about");
-      setRoute("/about");
-    }
-    setDetailNavVisible(true);
-    setTransitionState("project");
-    transitionStateRef.current = "project";
   }, [activeIndex, reduceMotion]);
+
+  const closeAboutPage = useCallback(async () => {
+    if (transitionStateRef.current !== "project" || detailIndexRef.current !== 3) return;
+    const detailStage = detailStageRef.current;
+    if (!detailStage) return;
+
+    setTransitionState("about-closing");
+    transitionStateRef.current = "about-closing";
+    setDetailNavVisible(false);
+
+    if (!reduceMotion) {
+      await animate(
+        detailStage,
+        { opacity: 0, transform: "translate3d(0, 4px, 0)" },
+        { duration: ABOUT_PAGE_FADE_SECONDS, ease: ABOUT_PAGE_EASE },
+      ).finished;
+    }
+
+    detailStage.style.visibility = "hidden";
+    detailStage.style.pointerEvents = "none";
+    setDetailIndex(null);
+    detailIndexRef.current = null;
+    if (window.location.pathname === "/about") {
+      window.history.pushState({}, "", "/");
+    }
+    await afterPaint();
+    detailStage.removeAttribute("style");
+    setTransitionState("idle");
+    transitionStateRef.current = "idle";
+  }, [reduceMotion]);
 
   const closeProjectTimeline = useCallback(async () => {
     if (transitionStateRef.current !== "project") return;
@@ -556,13 +564,10 @@ export function App() {
     const sharedCubeLayer = sharedCubeLayerRef.current;
     const homeCubeApi = homeCubeApiRef.current;
     const homeCubeSurface = cubeZoneRef.current?.querySelector("[data-project-cube-surface]");
-    const transitionStage = transitionStageRef.current;
-    const transitionLayer = transitionLayerRef.current;
     const detailStage = detailStageRef.current;
-    if (currentIndex === null || !cubeRect || !detailStage) return;
+    if (currentIndex === null || currentIndex > 2 || !cubeRect || !detailStage) return;
     const persistentProject = currentIndex >= 0 && currentIndex < 3;
     if (persistentProject && (!sharedCubeLayer || !homeCubeApi || !homeCubeSurface)) return;
-    if (!persistentProject && (!transitionStage || !transitionLayer)) return;
 
     setTransitionState("closing");
     transitionStateRef.current = "closing";
@@ -626,47 +631,14 @@ export function App() {
       detailIndexRef.current = null;
       await afterPaint();
       detailStage.style.visibility = "";
-    } else if (reduceMotion) {
-      setDetailIndex(null);
-      detailIndexRef.current = null;
-    } else {
-      const target = getRectTransform(cubeRect);
-      await animate(
-        detailStage,
-        target,
-        { duration: 0.36, ease: SPATIAL_EASE },
-      ).finished;
-
-      setRect(transitionStage, cubeRect);
-      transitionLayer.style.opacity = "1";
-      transitionBackdropRef.current.style.opacity = "0";
-      setTransitionVisual({
-        visible: true,
-        index: currentIndex,
-        presentation: "flat",
-        presentationDuration: 180,
-        rotationDuration: 400,
-        background: projects[currentIndex].background,
-      });
-      await afterPaint();
-      detailStage.style.opacity = "0";
-      setDetailIndex(null);
-      detailIndexRef.current = null;
-      setTransitionVisual((current) => ({ ...current, presentation: "home" }));
-      await motionDelay(0.18);
-      await animate(transitionLayer, { opacity: 0 }, { duration: 0.04, ease: "linear" }).finished;
     }
 
     detailStage.style.opacity = "1";
     detailStage.style.transform = "none";
     setTransitionVisual((current) => ({ ...current, visible: false }));
-    if (route === "/about") {
-      window.history.pushState({}, "", "/");
-      setRoute("/");
-    }
     setTransitionState("idle");
     transitionStateRef.current = "idle";
-  }, [reduceMotion, route]);
+  }, [reduceMotion]);
 
   const nextProjectTimeline = useCallback(async () => {
     if (transitionStateRef.current !== "project") return;
@@ -767,8 +739,8 @@ export function App() {
     transitionStateRef.current = "project";
   }, [reduceMotion]);
 
-  const handleOpenAbout = useCallback(() => openProjectTimeline(3), [openProjectTimeline]);
-  const handleCloseAbout = useCallback(() => closeProjectTimeline(), [closeProjectTimeline]);
+  const handleOpenAbout = useCallback(() => openAboutPage(), [openAboutPage]);
+  const handleCloseAbout = useCallback(() => closeAboutPage(), [closeAboutPage]);
   const handleOpenProject = useCallback((index) => openProjectTimeline(index), [openProjectTimeline]);
   const handleNextProject = useCallback(() => nextProjectTimeline(), [nextProjectTimeline]);
 

@@ -488,12 +488,17 @@ canvas:focus-visible {
   overflow: hidden;
 }
 
-.project-cube__surface:focus-within {
+.project-cube__canvas:focus-visible {
   outline: 3px solid #ff3d00;
   outline-offset: -4px;
 }
 
-.project-cube__surface:focus-within .project-cube__canvas {
+.persistent-project-transition .project-cube__canvas:focus-visible,
+.spatial-project-transition .project-cube__canvas:focus-visible {
+  outline: 0;
+}
+
+.app:not([data-transition-state="idle"]) .works-cube-zone .project-cube__canvas:focus-visible {
   outline: 0;
 }
 
@@ -3732,6 +3737,7 @@ canvas:focus-visible {
   position: relative;
   min-width: 0;
   height: 100%;
+  transform: translateY(1.4cqw);
 }
 
 .ia-node {
@@ -13654,6 +13660,7 @@ canvas:focus-visible {
 
   .tools-case-study .tools-introduction__lead {
     width: min(660px, 68vw);
+    transform: translateX(-20px);
   }
 
   .tools-case-study .tools-introduction__lead h3 {

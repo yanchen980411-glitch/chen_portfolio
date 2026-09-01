@@ -1776,6 +1776,8 @@ function ToolsStructureNode({ className, icon: Icon, label, central = false }) {
 }
 
 function ToolsFromInsightToStructure() {
+  const { language } = useLanguage();
+
   return (
     <section className="tools-structure-section" aria-labelledby="tools-structure-title">
       <div className="tools-structure-shell">
@@ -1872,7 +1874,13 @@ function ToolsFromInsightToStructure() {
           <Quotes className="tools-structure-summary__quote tools-structure-summary__quote--open" aria-hidden="true" weight="fill" />
           <p>
             <span>The project became the structure</span>
-            <span>that <em>connected</em> them.</span>
+            <span>
+              {language === "zh" ? (
+                <>将所有任务<em>连接</em>起来。</>
+              ) : (
+                <>that <em>connected</em> them.</>
+              )}
+            </span>
           </p>
           <Quotes className="tools-structure-summary__quote tools-structure-summary__quote--close" aria-hidden="true" weight="fill" />
         </blockquote>
