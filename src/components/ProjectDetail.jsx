@@ -6,6 +6,7 @@ import { s50cCopy } from "../content/s50cCopy";
 import { LanguageSwitcher, useLanguage } from "../i18n/LanguageContext";
 import {
   ArrowDown,
+  ArrowLeft,
   ArrowRight,
   ArrowUp,
   ArrowsClockwise,
@@ -14,22 +15,34 @@ import {
   Camera,
   CheckCircle,
   Circle,
+  ClockCounterClockwise,
   DeviceMobile,
+  DotsThree,
   Crosshair,
   Eye,
   FileText,
+  Flag,
+  FlagPennant,
   FolderOpen,
+  Gear,
+  Golf,
   HandTap,
   House,
+  Info,
   Lightbulb,
   Lightning,
+  MapPin,
+  ListNumbers,
+  Play,
   PlusCircle,
   Pulse,
   Quotes,
   Selection,
+  Stack,
   Star,
   Trash,
   UsersThree,
+  XCircle,
 } from "@phosphor-icons/react";
 
 function useProjectDialog(onClose, dialogRef, active = true) {
@@ -198,6 +211,7 @@ function HorizonOverviewPage() {
 
 function HorizonResearchPage() {
   const { language } = useLanguage();
+  const isZh = language === "zh";
   const copy = horizonResearchCopy[language] ?? horizonResearchCopy.en;
   const researchVisuals = [
     "/assets/projects/ag1/research/research-context.png",
@@ -213,7 +227,10 @@ function HorizonResearchPage() {
   return (
     <section className="horizon-case-page horizon-research-page" aria-labelledby="research-title">
       <figure className="horizon-research-artwork">
-        <div className="horizon-research-artboard" data-i18n-skip>
+        <div
+          className={`horizon-research-artboard ${isZh ? "horizon-research-artboard--zh" : ""}`.trim()}
+          data-i18n-skip
+        >
           <div className="horizon-research-background" aria-hidden="true" />
 
           <header className="horizon-research-intro">
@@ -257,16 +274,33 @@ function HorizonResearchPage() {
               <p>{copy.opportunity.subtitle}</p>
             </header>
             <div className="horizon-research-experience-visual">
+              {isZh ? (
+                <CaseStudyImage
+                  className="horizon-research-opportunity-course"
+                  src="/assets/projects/ag1/cover-v2/golf-course.png"
+                  alt=""
+                />
+              ) : null}
               <CaseStudyImage
                 className="horizon-research-opportunity-scene"
                 src="/assets/projects/ag1/research/opportunity-scene.png"
                 alt="Golf course viewed through the Horizon HUD and glasses"
               />
-              <CaseStudyImage
-                className="horizon-research-opportunity-overflow"
-                src="/assets/projects/ag1/research/opportunity-glasses-overflow.png"
-                alt=""
-              />
+              {isZh ? (
+                <div className="horizon-research-glasses-crop">
+                  <CaseStudyImage
+                    className="horizon-research-glasses-front"
+                    src="/assets/projects/ag1/research/horizon-glasses-front-real.png"
+                    alt="MILESEEY Horizon 智能眼镜正视图"
+                  />
+                </div>
+              ) : (
+                <CaseStudyImage
+                  className="horizon-research-opportunity-overflow"
+                  src="/assets/projects/ag1/research/opportunity-glasses-overflow.png"
+                  alt=""
+                />
+              )}
             </div>
             <p className="horizon-research-opportunity-caption">{copy.opportunity.caption}</p>
           </section>
@@ -292,7 +326,7 @@ function HorizonResearchPage() {
               {copy.insights.items.map((item, index) => (
                 <li key={item.number}>
                   <CaseStudyImage src={insightVisuals[index]} alt="" />
-                  <header><span>{item.number}</span><h4>{item.title}</h4></header>
+                  <header>{isZh ? null : <span>{item.number}</span>}<h4>{item.title}</h4></header>
                   <p>{item.description}</p>
                 </li>
               ))}
@@ -347,6 +381,49 @@ const journeyStages = [
   },
 ];
 
+const journeyStagesZh = [
+  {
+    number: "01",
+    title: "准备",
+    subtitle: "开始前",
+    image: "/assets/projects/ag1/journey/prepare.png",
+    goal: "击球前了解本洞信息。",
+    type: "prepare",
+  },
+  {
+    number: "02",
+    title: "开球",
+    subtitle: "第一次击球",
+    image: "/assets/projects/ag1/journey/tee-shot.png",
+    goal: "选择合适的目标与球杆。",
+    type: "tee",
+  },
+  {
+    number: "03",
+    title: "球道",
+    subtitle: "判断下一杆",
+    image: "/assets/projects/ag1/journey/fairway.png",
+    goal: "判断距离与下一杆。",
+    type: "fairway",
+  },
+  {
+    number: "04",
+    title: "果岭预览",
+    subtitle: "查看果岭",
+    image: "/assets/projects/ag1/journey/green.png",
+    goal: "了解果岭与旗杆位置。",
+    type: "green",
+  },
+  {
+    number: "05",
+    title: "进入下一洞",
+    subtitle: "完成本洞",
+    image: "/assets/projects/ag1/journey/move-on.png",
+    goal: "不中断流程地记录结果。",
+    type: "score",
+  },
+];
+
 const journeyPainPoints = [
   {
     number: "P01",
@@ -374,7 +451,64 @@ const journeyPainPoints = [
   },
 ];
 
-function JourneyInformationModule({ type }) {
+const journeyPainPointsZh = [
+  {
+    number: "P01",
+    title: "信息分散",
+    description: "关键信息分散在不同设备与时刻，球手必须反复切换注意力，才能收集完成一杆所需的信息。",
+  },
+  {
+    number: "P02",
+    title: "信息依赖情境",
+    description: "一洞中的关键信息需要不同信息，始终呈现相同内容会造成不必要的视觉负担。",
+  },
+  {
+    number: "P03",
+    title: "交互打断比赛",
+    description: "当球手必须停下来查找或操作输入时，即使步骤简单，也会打断比赛。",
+  },
+  {
+    number: "P04",
+    title: "记录打断流程",
+    description: "计分发生在行动之后，因此交互尤其需要快速、轻量。",
+  },
+];
+
+const journeyPageCopy = {
+  en: {
+    title: "MAPPING THE MOMENTS THAT MATTER",
+    subtitle: "User Journey & Pain Points",
+    intro:
+      "We mapped a complete hole from tee to green to understand what information golfers need, when they need it, and where the current experience breaks down.",
+    labels: {
+      stage: "STAGE",
+      goal: "USER GOAL",
+      information: "INFORMATION NEED",
+      demand: "INFORMATION DEMAND",
+      high: "High",
+      low: "Low",
+      pain: "PAIN POINTS",
+    },
+    transition: "These pain points guided the design principles and shaped the interaction system of Horizon.",
+  },
+  zh: {
+    title: "梳理关键时刻",
+    subtitle: "用户旅程与痛点",
+    intro:
+      "我们梳理了从发球台到果岭的一洞体验，理解球手在何时真正需要什么信息，\n以及现有体验在哪些环节中出现痛点。",
+    labels: {
+      stage: "阶段",
+      goal: "用户目标",
+      information: "信息需求",
+      demand: "信息强度",
+      high: "高",
+      low: "低",
+      pain: "痛点",
+    },
+  },
+};
+
+function JourneyInformationModule({ type, isZh = false }) {
   if (type === "prepare") {
     return (
       <div className="journey-hud journey-hud-prepare">
@@ -411,12 +545,37 @@ function JourneyInformationModule({ type }) {
   }
 
   if (type === "green") {
+    if (isZh) {
+      return (
+        <div className="journey-hud journey-hud-green journey-hud-green--zh">
+          <CaseStudyImage
+            className="journey-green-preview-image"
+            src="/assets/projects/ag1/complete-experience/green-preview.png"
+            alt="果岭轮廓、旗杆位置与距离预览"
+          />
+        </div>
+      );
+    }
+
     return (
       <div className="journey-hud journey-hud-green">
         <small>GREEN</small>
         <div className="journey-green-preview">
           <CaseStudyImage src="/assets/projects/ag1/overview/course-overview.png" alt="Green shape and pin position" />
           <span>PIN</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (isZh) {
+    return (
+      <div className="journey-hud journey-hud-score journey-hud-score--zh">
+        <div className="journey-score-crop">
+          <CaseStudyImage
+            src="/assets/projects/ag1/complete-experience/score-input.png"
+            alt="Score 3、4、5 与 Putts 2 计分界面"
+          />
         </div>
       </div>
     );
@@ -432,18 +591,24 @@ function JourneyInformationModule({ type }) {
 }
 
 function HorizonJourneyPage() {
+  const { language } = useLanguage();
+  const isZh = language === "zh";
+  const copy = journeyPageCopy[language] ?? journeyPageCopy.en;
+  const stages = isZh ? journeyStagesZh : journeyStages;
+  const painPoints = isZh ? journeyPainPointsZh : journeyPainPoints;
+
   return (
-    <section className="horizon-case-page horizon-journey-page" aria-labelledby="journey-title">
-      <div className="journey-artboard">
+    <section
+      className={`horizon-case-page horizon-journey-page ${isZh ? "horizon-journey-page--zh" : ""}`.trim()}
+      aria-labelledby="journey-title"
+    >
+      <div className={`journey-artboard ${isZh ? "journey-artboard--zh" : ""}`.trim()} data-i18n-skip>
         <header className="journey-header">
           <div className="journey-header-copy">
             <p className="journey-number">02</p>
-            <h2 id="journey-title">MAPPING THE MOMENTS THAT MATTER</h2>
-            <p className="journey-subtitle">User Journey &amp; Pain Points</p>
-            <p className="journey-intro">
-              We mapped a complete hole from tee to green to understand what information golfers need, when they need
-              it, and where the current experience breaks down.
-            </p>
+            <h2 id="journey-title">{copy.title}</h2>
+            <p className="journey-subtitle">{copy.subtitle}</p>
+            <p className="journey-intro">{copy.intro}</p>
           </div>
           <div className="journey-top-visual" aria-hidden="true">
             <CaseStudyImage className="journey-top-map" src="/assets/projects/ag1/overview/course-overview.png" alt="" />
@@ -456,7 +621,7 @@ function HorizonJourneyPage() {
 
         <div className="journey-grid journey-stage-headings">
           <span aria-hidden="true" />
-          {journeyStages.map((stage, index) => (
+          {stages.map((stage, index) => (
             <div className="journey-stage-heading" key={stage.number}>
               <div><span>{stage.number}</span><strong>{stage.title}</strong></div>
               <small>{stage.subtitle}</small>
@@ -466,35 +631,35 @@ function HorizonJourneyPage() {
         </div>
 
         <div className="journey-grid journey-photo-row">
-          <p className="journey-row-label">STAGE</p>
-          {journeyStages.map((stage) => (
+          <p className="journey-row-label">{copy.labels.stage}</p>
+          {stages.map((stage) => (
             <figure key={stage.number}><CaseStudyImage src={stage.image} alt={`${stage.title} golf stage`} /></figure>
           ))}
         </div>
 
         <div className="journey-grid journey-goal-row">
-          <p className="journey-row-label">USER<br />GOAL</p>
-          {journeyStages.map((stage) => <p key={stage.number}>{stage.goal}</p>)}
+          <p className="journey-row-label">{copy.labels.goal}</p>
+          {stages.map((stage) => <p key={stage.number}>{stage.goal}</p>)}
         </div>
 
         <div className="journey-grid journey-information-row">
-          <p className="journey-row-label">INFORMATION<br />NEED</p>
-          {journeyStages.map((stage) => <JourneyInformationModule key={stage.number} type={stage.type} />)}
+          <p className="journey-row-label">{copy.labels.information}</p>
+          {stages.map((stage) => <JourneyInformationModule key={stage.number} type={stage.type} isZh={isZh} />)}
         </div>
 
         <div className="journey-grid journey-demand-row">
-          <p className="journey-row-label">INFORMATION<br />DEMAND</p>
+          <p className="journey-row-label">{copy.labels.demand}</p>
           <div className="journey-demand-graphic">
-            <span className="journey-demand-high">High</span>
-            <span className="journey-demand-low">Low</span>
+            <span className="journey-demand-high">{copy.labels.high}</span>
+            <span className="journey-demand-low">{copy.labels.low}</span>
             <CaseStudyImage src="/assets/projects/ag1/journey/demand-curve.png" alt="Information demand rises at the tee shot and gradually falls toward move on" />
           </div>
         </div>
 
         <div className="journey-pain-row">
-          <p className="journey-row-label journey-pain-label">PAIN POINTS</p>
+          <p className="journey-row-label journey-pain-label">{copy.labels.pain}</p>
           <div className="journey-pain-list">
-            {journeyPainPoints.map((pain) => (
+            {painPoints.map((pain) => (
               <article className="journey-pain" key={pain.number}>
                 <div className="journey-pain-heading"><span aria-hidden="true">!</span><h3><strong>{pain.number}</strong> {pain.title}</h3></div>
                 <p>{pain.description}</p>
@@ -503,10 +668,12 @@ function HorizonJourneyPage() {
           </div>
         </div>
 
-        <footer className="journey-transition">
-          <CaseStudyImage src="/assets/projects/ag1/journey/transition-target.png" alt="" />
-          <p>These pain points guided the design principles and shaped the interaction system of Horizon.</p>
-        </footer>
+        {!isZh ? (
+          <footer className="journey-transition">
+            <CaseStudyImage src="/assets/projects/ag1/journey/transition-target.png" alt="" />
+            <p>{copy.transition}</p>
+          </footer>
+        ) : null}
       </div>
     </section>
   );
@@ -517,6 +684,73 @@ const architectureFunctions = [
   { title: "SCORE", description: "Score Input · Putts", className: "ia-score" },
   { title: "MENU", description: "More Information", className: "ia-menu" },
   { title: "GREEN", description: "Green Preview · Pin Position", className: "ia-green" },
+];
+
+const designPrinciplesZh = [
+  {
+    number: "01",
+    title: "情境驱动",
+    statement: "在正确的时刻呈现正确的信息",
+    body: "根据球手所在的阶段和场景，动态提供最相关的内容，避免无关信息干扰。",
+    type: "contextual",
+    Icon: Crosshair,
+  },
+  {
+    number: "02",
+    title: "一瞥即懂",
+    statement: "一瞥获取 1–2 条关键信息",
+    body: "通过极简的视觉层级与清晰的信息结构，让球手无需复杂操作即可快速获取信息。",
+    type: "glanceable",
+    Icon: Eye,
+  },
+  {
+    number: "03",
+    title: "高效操作",
+    statement: "在比赛中减少交互步骤",
+    body: "结合触控、滑动和按键操作，让球手在不中断专注的情况下完成操作。",
+    type: "efficient",
+    Icon: HandTap,
+  },
+  {
+    number: "04",
+    title: "可预测",
+    statement: "保持一致的逻辑，并提供明确反馈",
+    body: "延续熟悉的交互模式与信息结构，让球手在不同功能间都能快速理解并返回。",
+    type: "predictable",
+    Icon: Stack,
+  },
+];
+
+const principlesPageCopyZh = {
+  title: "将洞察转化为系统",
+  subtitle: "设计原则与信息架构",
+  intro: (
+    <>
+      基于研究与洞察，我们提炼出核心设计原则，<br />
+      并构建 Horizon 的整体体验框架与信息结构，确保信息在合适的时机、以简洁的方式出现。
+    </>
+  ),
+  architectureTitle: "信息架构",
+  architectureIntro: (
+    <>
+      以球洞为核心，构建清晰的信息层级，<br />
+      让关键功能在三步之内即可到达。
+    </>
+  ),
+};
+
+const architectureTopZh = [
+  { title: "历史", Icon: ClockCounterClockwise },
+  { title: "开始", className: "ia-play", Icon: Play },
+  { title: "设置", Icon: Gear },
+];
+
+const architectureFunctionsZh = [
+  { title: "击球", description: "球杆建议", className: "ia-shot", Icon: Golf },
+  { title: "记分", description: "分数输入 · 推杆", className: "ia-score", Icon: ListNumbers },
+  { title: "球道", description: "距离与障碍物", className: "ia-fairway", Icon: FlagPennant },
+  { title: "果岭", description: "果岭预览 · 旗杆位置", className: "ia-green", Icon: Flag },
+  { title: "球洞信息", description: "标准杆 · 距离 · 地图", className: "ia-hole-info", Icon: Info },
 ];
 
 function PrincipleVisual({ type }) {
@@ -585,9 +819,10 @@ const designPrinciples = [
   },
 ];
 
-function ArchitectureNode({ title, description, className = "" }) {
+function ArchitectureNode({ title, description, className = "", Icon }) {
   return (
     <div className={`ia-node ${className}`}>
+      {Icon ? <Icon className="ia-node-icon" aria-hidden="true" weight="regular" /> : null}
       <strong>{title}</strong>
       {description && <small>{description}</small>}
     </div>
@@ -595,28 +830,50 @@ function ArchitectureNode({ title, description, className = "" }) {
 }
 
 function HorizonPrinciplesPage() {
+  const { language } = useLanguage();
+  const isZh = language === "zh";
+  const principles = isZh ? designPrinciplesZh : designPrinciples;
+  const functions = isZh ? architectureFunctionsZh : architectureFunctions;
+
   return (
     <section className="horizon-case-page horizon-principles-page" aria-labelledby="principles-title">
-      <div className="principles-artboard">
+      <div className={`principles-artboard ${isZh ? "principles-artboard--zh" : ""}`.trim()} data-i18n-skip>
         <header className="principles-header">
           <p className="principles-number">03</p>
-          <h2 id="principles-title">TURNING INSIGHTS INTO A SYSTEM</h2>
-          <p className="principles-subtitle">Design Principles &amp; Information Architecture</p>
-          <p className="principles-intro">
-            Based on research findings, we defined four principles that shaped Horizon’s experience and overall
-            information structure.
+          <h2 id="principles-title">{isZh ? principlesPageCopyZh.title : "TURNING INSIGHTS INTO A SYSTEM"}</h2>
+          <p className="principles-subtitle">
+            {isZh ? principlesPageCopyZh.subtitle : <>Design Principles &amp; Information Architecture</>}
           </p>
+          <p className="principles-intro">
+            {isZh ? principlesPageCopyZh.intro : (
+              <>Based on research findings, we defined four principles that shaped Horizon’s experience and overall
+                information structure.</>
+            )}
+          </p>
+          {isZh ? (
+            <div className="principles-header-product" aria-hidden="true">
+              <CaseStudyImage className="principles-header-trajectory" src="/assets/projects/ag1/journey/demand-curve.png" alt="" />
+              <CaseStudyImage className="principles-header-glasses" src="/assets/projects/ag1/overview/horizon-glasses.png" alt="" />
+            </div>
+          ) : null}
         </header>
 
-        <div className="principles-grid">
-          {designPrinciples.map((principle) => (
+        <div className={`principles-grid ${isZh ? "principles-grid--zh" : ""}`.trim()}>
+          {isZh ? <p className="principles-section-label">设计原则</p> : null}
+          {principles.map((principle) => (
             <article className="design-principle" key={principle.number}>
-              <PrincipleVisual type={principle.type} />
+              {!isZh ? <PrincipleVisual type={principle.type} /> : null}
               <div className="principle-heading">
                 <span>{principle.number}</span>
                 <h3>{principle.title}</h3>
+                {isZh && principle.Icon ? <principle.Icon className="principle-heading-icon" aria-hidden="true" weight="regular" /> : null}
               </div>
-              <p className="principle-statement">{principle.statement}</p>
+              <div className="principle-keyline">
+                {isZh && principle.type === "glanceable" ? (
+                  <div className="principle-distance-zh"><strong>495</strong><span>YD</span></div>
+                ) : null}
+                <p className="principle-statement">{principle.statement}</p>
+              </div>
               <p className="principle-body">{principle.body}</p>
             </article>
           ))}
@@ -626,36 +883,46 @@ function HorizonPrinciplesPage() {
 
         <section className="architecture-section" aria-labelledby="architecture-title">
           <div className="architecture-intro">
-            <h3 id="architecture-title">INFORMATION ARCHITECTURE</h3>
+            <h3 id="architecture-title">{isZh ? principlesPageCopyZh.architectureTitle : "INFORMATION ARCHITECTURE"}</h3>
             <p>
-              A hub-centered structure keeps the core experience shallow and places key information within one step
-              of the main screen.
+              {isZh ? principlesPageCopyZh.architectureIntro : (
+                <>A hub-centered structure keeps the core experience shallow and places key information within one step
+                  of the main screen.</>
+              )}
             </p>
           </div>
 
-          <div className="ia-diagram" aria-label="Horizon information architecture">
+          <div className={`ia-diagram ${isZh ? "ia-diagram--zh" : ""}`.trim()} aria-label={isZh ? "Horizon 信息架构" : "Horizon information architecture"}>
             <div className="ia-top-row">
-              <ArchitectureNode title="HISTORY" />
-              <ArchitectureNode title="PLAY" className="ia-play" />
-              <ArchitectureNode title="SETTINGS" />
+              {isZh ? architectureTopZh.map((item) => <ArchitectureNode key={item.title} {...item} />) : (
+                <>
+                  <ArchitectureNode title="HISTORY" />
+                  <ArchitectureNode title="PLAY" className="ia-play" />
+                  <ArchitectureNode title="SETTINGS" />
+                </>
+              )}
             </div>
 
-            <ArchitectureNode title="COURSE SELECTION" className="ia-course-selection" />
+            <ArchitectureNode title={isZh ? "球场选择" : "COURSE SELECTION"} className="ia-course-selection" Icon={isZh ? Flag : undefined} />
 
             <div className="ia-node ia-hole-main">
-              <strong>HOLE MAIN</strong>
-              <small>F / C / B Distance&nbsp;&nbsp;·&nbsp;&nbsp;Hazards&nbsp;&nbsp;·&nbsp;&nbsp;Club&nbsp;&nbsp;·&nbsp;&nbsp;Hole Info</small>
+              <strong>{isZh ? "球洞主页" : "HOLE MAIN"}</strong>
+              <small>
+                {isZh ? "前 / 中 / 后距离 · 地图 · 球杆建议 · 球洞信息" : (
+                  <>F / C / B Distance&nbsp;&nbsp;·&nbsp;&nbsp;Hazards&nbsp;&nbsp;·&nbsp;&nbsp;Club&nbsp;&nbsp;·&nbsp;&nbsp;Hole Info</>
+                )}
+              </small>
             </div>
 
-            <div className="ia-functions">
-              {architectureFunctions.map((item) => (
+            <div className={`ia-functions ${isZh ? "ia-functions--zh" : ""}`.trim()}>
+              {functions.map((item) => (
                 <ArchitectureNode key={item.title} {...item} />
               ))}
             </div>
 
-            <div className="ia-secondary-row">
-              <ArchitectureNode title="SCORECARD" description="View full scorecard" />
-              <ArchitectureNode title="TEAM SCORECARD" description="View team scores" />
+            <div className={`ia-secondary-row ${isZh ? "ia-secondary-row--zh" : ""}`.trim()}>
+              <ArchitectureNode title={isZh ? "记分卡" : "SCORECARD"} description={isZh ? "查看完整记分卡" : "View full scorecard"} Icon={isZh ? FileText : undefined} />
+              <ArchitectureNode title={isZh ? "团队记分卡" : "TEAM SCORECARD"} description={isZh ? "查看团队成绩" : "View team scores"} Icon={isZh ? UsersThree : undefined} />
             </div>
           </div>
         </section>
@@ -864,7 +1131,293 @@ function UserTaskFlow({ kind, number, title, goal, steps }) {
   );
 }
 
+const coreRoundNodesZh = [
+  { title: "首页", Icon: House, className: "user-flow-node-small" },
+  { title: "开始", Icon: Play, className: "user-flow-node-small" },
+  { title: "球场\n选择", Icon: Flag, className: "user-flow-node-course" },
+  { title: "球洞主页", Icon: Crosshair, className: "user-flow-node-main", main: true },
+  { title: "开始\n当前球洞", Icon: FlagPennant, className: "user-flow-node-small" },
+  { title: "下一洞", Icon: Flag, className: "user-flow-node-small" },
+  { title: "回合\n完成", Icon: CheckCircle, className: "user-flow-node-complete" },
+];
+
+const holeMainFunctionsZh = [
+  { title: "击球", Icon: Golf, description: "球杆建议" },
+  { title: "记分", Icon: ListNumbers, description: "分数输入 · 计杆" },
+  { title: "菜单", Icon: DotsThree, description: "更多信息" },
+  { title: "风向", Icon: ArrowsClockwise, description: "果岭预览 · 旗杆位置" },
+];
+
+const scoringStepsZh = [
+  { number: "1", title: "查看本洞信息", type: "hole", gesture: "CLICK" },
+  { number: "2", title: "记录杆数", type: "score", gesture: "CLICK" },
+  { number: "3", title: "记录推杆数", type: "putts", gesture: "CLICK" },
+  { number: "4", title: "确认并继续", type: "confirm", gesture: "DOUBLE CLICK" },
+];
+
+const greenStepsZh = [
+  { number: "1", title: "观察果岭", type: "green-overview", gesture: "CLICK" },
+  { number: "2", title: "选择旗杆位置", type: "green-position", gesture: "SWIPE", note: "移动位置" },
+  { number: "3", title: "微调旗杆位置", type: "grid", gesture: "CLICK" },
+  { number: "4", title: "确认", type: "grid-confirm", gesture: "CLICK" },
+];
+
+function UserFlowNodeZh({ node }) {
+  const Icon = node.Icon;
+
+  return (
+    <div className={`user-flow-node ${node.className}`}>
+      <Icon className="user-flow-node-icon" aria-hidden="true" weight="regular" />
+      <strong>{node.title.split("\n").map((line) => <span key={line}>{line}</span>)}</strong>
+      {node.main ? (
+        <small>
+          <span>前 / 中 / 后距离 · 地图</span>
+          <span>球杆建议 · 记分预览</span>
+        </small>
+      ) : null}
+    </div>
+  );
+}
+
+function FlowHudMockupZh({ type }) {
+  if (type === "hole") {
+    return (
+      <div className="flow-hud-mockup flow-hud-mockup--zh flow-hud-hole">
+        <div className="hud-topline"><span>HOLE 04</span><span>PAR 5</span></div>
+        <strong className="hud-distance">495<small>YD</small></strong>
+        <div className="hud-fcb"><span>F 523</span><span>C 495</span><span>B 468</span></div>
+        <CaseStudyImage src="/assets/projects/ag1/overview/course-overview.png" alt="Hole 04 course overview" />
+      </div>
+    );
+  }
+
+  if (type === "score" || type === "putts") {
+    const isScore = type === "score";
+    return (
+      <div className="flow-hud-mockup flow-hud-mockup--zh flow-hud-counter">
+        <div className="hud-topline"><span>{isScore ? "SCORE" : "PUTTS"}</span></div>
+        <div className="hud-counter-value">
+          <button type="button" aria-label="减少">−</button>
+          <strong>{isScore ? "+1" : "2"}</strong>
+          <button type="button" aria-label="增加">＋</button>
+        </div>
+        <small>Hole 04&nbsp;&nbsp;&nbsp;Par 5</small>
+      </div>
+    );
+  }
+
+  if (type === "confirm") {
+    return (
+      <div className="flow-hud-mockup flow-hud-mockup--zh flow-hud-confirm">
+        <div className="hud-topline"><span>SCORE</span></div>
+        <strong>+1</strong>
+        <small>Putts&nbsp;&nbsp;&nbsp;2</small>
+        <CheckCircle className="hud-confirm-svg" aria-hidden="true" weight="regular" />
+      </div>
+    );
+  }
+
+  if (type === "green-overview" || type === "green-position") {
+    return (
+      <div className={`flow-hud-mockup flow-hud-mockup--zh flow-hud-green-simple ${type === "green-position" ? "is-position" : ""}`}>
+        <div className="hud-topline"><span>Green</span><span>Back</span></div>
+        {type === "green-overview" ? <span className="hud-green-front">Front</span> : null}
+        {type === "green-overview" ? (
+          <FlagPennant className="hud-green-flag-svg" aria-hidden="true" weight="fill" />
+        ) : (
+          <Crosshair className="hud-green-position-svg" aria-hidden="true" weight="regular" />
+        )}
+      </div>
+    );
+  }
+
+  if (type === "grid" || type === "grid-confirm") {
+    return (
+      <div className="flow-hud-mockup flow-hud-mockup--zh flow-hud-grid">
+        <div className="hud-grid-title">Pin Position</div>
+        <PinGrid />
+      </div>
+    );
+  }
+
+  if (type === "menu") {
+    const items = [
+      { Icon: ListNumbers, label: "记分卡" },
+      { Icon: UsersThree, label: "团队成绩" },
+      { Icon: Gear, label: "设置" },
+      { Icon: DotsThree, label: "更多" },
+    ];
+
+    return (
+      <div className="flow-hud-mockup flow-hud-mockup--zh flow-hud-menu">
+        <div className="hud-topline"><span>MENU</span></div>
+        <div className="hud-menu-items">
+          {items.map(({ Icon, label }) => (
+            <span key={label}><Icon aria-hidden="true" weight="regular" /><small>{label}</small></span>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "scorecard") {
+    return (
+      <div className="flow-hud-mockup flow-hud-mockup--zh flow-hud-table">
+        <div className="hud-topline"><span>SCORECARD</span></div>
+        <div className="hud-score-grid hud-score-grid-head"><span>Hole</span><span>1</span><span>2</span><span>3</span><span>5</span><span>…</span><span>Total</span></div>
+        <div className="hud-score-grid"><span>Par</span><span>4</span><span>3</span><span>4</span><span>5</span><span>…</span><span>36</span></div>
+        <div className="hud-score-grid"><span>Score</span><span>4</span><span>3</span><span>5</span><span>4</span><span>…</span><span>37</span></div>
+      </div>
+    );
+  }
+
+  if (type === "team") {
+    return (
+      <div className="flow-hud-mockup flow-hud-mockup--zh flow-hud-table flow-hud-team">
+        <div className="hud-topline"><span>TEAM SCORECARD</span></div>
+        <div className="hud-team-row hud-team-head"><span>Pos</span><span>球队</span><span>本洞</span><span>总分</span></div>
+        <div className="hud-team-row"><span>1</span><span>球队 A</span><span>-1</span><span>10</span></div>
+        <div className="hud-team-row"><span>2</span><span>球队 B</span><span>+3</span><span>14</span></div>
+        <div className="hud-team-row"><span>3</span><span>球队 C</span><span>+5</span><span>18</span></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flow-hud-mockup flow-hud-mockup--zh flow-hud-return">
+      <ArrowLeft aria-hidden="true" weight="regular" />
+      <span>返回</span>
+    </div>
+  );
+}
+
+function GestureMarkZh({ type, description }) {
+  const labels = { CLICK: "点击", SWIPE: "滑动", "DOUBLE CLICK": "双击" };
+  return <GestureMark type={type} label={labels[type]} description={description} />;
+}
+
+function UserTaskFlowZh({ kind, number, title, goal, steps }) {
+  return (
+    <section className={`user-task-flow user-task-flow-${kind}`} aria-labelledby={`user-flow-${kind}-title-zh`}>
+      <header>
+        <div><span>{number}</span><h3 id={`user-flow-${kind}-title-zh`}>{title}</h3></div>
+        <p><strong>用户目标：</strong>{goal}</p>
+      </header>
+      <div className="user-task-steps">
+        {steps.map((step) => (
+          <article className="user-task-step" key={step.title}>
+            <div className="user-step-title"><span>{step.number}</span><strong>{step.title}</strong></div>
+            <FlowHudMockupZh type={step.type} />
+            <GestureMarkZh type={step.gesture} />
+            {step.note ? <small className="user-step-note">{step.note}</small> : null}
+          </article>
+        ))}
+      </div>
+      {kind === "scoring" ? (
+        <div className="task-flow-footer task-flow-footer-scoring">
+          <GestureMark type="SWIPE" label="← 滑动 →" description="切换球洞（上一个 / 下一个）" />
+          <GestureMark type="DOUBLE CLICK" label="双击" description="返回主页或开始下一洞" />
+        </div>
+      ) : (
+        <div className="task-flow-footer task-flow-footer-green">
+          <GestureMark type="DOUBLE CLICK" label="双击" description="返回上一步或离开果岭" />
+        </div>
+      )}
+    </section>
+  );
+}
+
+function HorizonUserFlowPageZh() {
+  const secondarySteps = [
+    { number: "1", title: "打开菜单", type: "menu" },
+    { number: "2", title: "查看记分卡", type: "scorecard" },
+    { number: "3", title: "查看团队成绩", type: "team" },
+    { number: "4", title: "返回继续比赛", type: "return" },
+  ];
+
+  return (
+    <section className="horizon-case-page horizon-user-flow-page horizon-user-flow-page--zh" aria-labelledby="user-flow-title-zh">
+      <div className="user-flow-artboard user-flow-artboard--zh" data-i18n-skip>
+        <section className="user-flow-top">
+          <header className="user-flow-header">
+            <p>04</p>
+            <h2 id="user-flow-title-zh">从开始到每一次击球</h2>
+            <h3>用户流程</h3>
+            <p>梳理球手完成一轮比赛的核心路径，<br />并将高频操作集中在<br />“球洞主页”附近。</p>
+          </header>
+
+          <aside className="user-flow-legend" aria-label="点击、滑动与双击说明">
+            <GestureMarkZh type="CLICK" description="选择 / 确认" />
+            <GestureMarkZh type="SWIPE" description="浏览 / 切换" />
+            <GestureMarkZh type="DOUBLE CLICK" description="返回 / 退出" />
+          </aside>
+
+          <div className="core-flow-label"><span /><strong>核心比赛流程</strong><span /></div>
+          <div className="core-round-flow">
+            {coreRoundNodesZh.map((node, index) => (
+              <div className={`core-round-item ${node.main ? "is-main" : ""}`} key={node.title}>
+                <UserFlowNodeZh node={node} />
+                {index < coreRoundNodesZh.length - 1 ? <i className="core-flow-arrow" aria-hidden="true" /> : null}
+              </div>
+            ))}
+          </div>
+
+          <div className="hole-main-functions">
+            {holeMainFunctionsZh.map(({ title, Icon, description }) => (
+              <div key={title}>
+                <Icon aria-hidden="true" weight="regular" />
+                <strong>{title}</strong>
+                <small>{description}</small>
+              </div>
+            ))}
+          </div>
+          <span className="core-functions-connector" aria-hidden="true" />
+          <span className="core-round-loop" aria-hidden="true" />
+        </section>
+
+        <div className="user-task-flows">
+          <UserTaskFlowZh
+            kind="scoring"
+            number="01"
+            title="计分流程"
+            goal="不中断比赛地记录本洞成绩。"
+            steps={scoringStepsZh}
+          />
+          <UserTaskFlowZh
+            kind="green"
+            number="02"
+            title="果岭流程"
+            goal="了解果岭并设置当前旗杆位置。"
+            steps={greenStepsZh}
+          />
+        </div>
+
+        <section className="secondary-flow secondary-flow--zh" aria-labelledby="secondary-flow-title-zh">
+          <header>
+            <div><span>03</span><h3 id="secondary-flow-title-zh">更多信息流程</h3></div>
+            <p><strong>用户目标：</strong>从菜单快速获取所需信息。</p>
+          </header>
+          <div className="secondary-flow-track">
+            {secondarySteps.map((step, index) => (
+              <article className="secondary-flow-step" key={step.title}>
+                <div className="user-step-title"><span>{step.number}</span><strong>{step.title}</strong></div>
+                <FlowHudMockupZh type={step.type} />
+                {index < secondarySteps.length - 1 ? <i className="secondary-flow-arrow" aria-hidden="true" /> : null}
+              </article>
+            ))}
+          </div>
+          <p className="secondary-flow-note">信息被组织为一个清晰的流程，<br />从一次操作到下一次操作，<br />帮助球手在最少的交互中<br />获取所需信息。</p>
+        </section>
+      </div>
+    </section>
+  );
+}
+
 function HorizonUserFlowPage() {
+  const { language } = useLanguage();
+
+  if (language === "zh") return <HorizonUserFlowPageZh />;
+
   return (
     <section className="horizon-case-page horizon-user-flow-page" aria-labelledby="user-flow-title">
       <div className="user-flow-artboard">
@@ -985,7 +1538,158 @@ function HudAction({ icon, label }) {
   );
 }
 
+const fovConstraintsZh = [
+  { icon: "viewport", title: "有限视野", copy: "狭小的视野需要浓缩信息\n并保持视觉对齐。" },
+  { icon: "mono", title: "单色显示", copy: "单色绿色界面降低复杂度，\n并最大化可读性。" },
+  { icon: "world", title: "真实世界优先", copy: "HUD 在不遮挡真实球场的前提下\n提供关键信息。" },
+  { icon: "glance", title: "扫视式阅读", copy: "清晰的视觉层级让信息可在 1 秒内完成读取。" },
+];
+
+const hudLayersZh = [
+  { letter: "A", title: "主要信息", copy: "顶部中央的关键距离信息（F / C / B）\n支持主要决策。" },
+  { letter: "B", title: "情境信息", copy: "障碍物（沙坑 / 水域）与球杆建议\n提供决策背景。" },
+  { letter: "C", title: "状态信息", copy: "左上角轮次信息、右侧球洞状态与\n电量，帮助用户保持方向感。" },
+  { letter: "D", title: "操作层", copy: "核心操作位于底部中央，\n便于快速且一致地访问。" },
+];
+
+const visualHierarchyZh = [
+  { number: "01", title: "主要", lines: ["495 码（中心）", "前、中、后距离", "字号最大，对比最强。"] },
+  { number: "02", title: "情境", lines: ["沙坑 / 水域等距离", "球杆推荐", "次要但关键。"] },
+  { number: "03", title: "状态", lines: ["球洞与回合（左上）", "球洞编号 / 标准杆 / 分数（右侧）", "电量（右上）", "帮助保持方向感。"] },
+  { number: "04", title: "操作", lines: ["击球 / 记分 / 菜单 / 果岭", "一致、快速访问", "置于底部中央。"] },
+];
+
+const placementRationaleZh = [
+  { icon: "clock", eyebrow: "左上：轮次信息", copy: "该信息用于比赛节奏的掌控，\n但并不紧急，因此放在视觉起点。" },
+  { icon: "target", eyebrow: "顶部中央：主要距离", copy: "最重要的决策信息放在\n最高优先级，并位于视野中央。" },
+  { icon: "water", eyebrow: "两侧：障碍物", copy: "障碍物距离分布在地图两侧，\n便于快速比较，同时不占据中央视野。" },
+  { icon: "club", eyebrow: "左下：球杆建议", copy: "当前球杆信息可被迅速查看，\n并靠近可能的手部操作位置。" },
+  { icon: "actions", eyebrow: "底部中央：操作层", copy: "核心操作集中在底部，\n形成稳定且符合肌肉记忆的访问方式。" },
+  { icon: "flag", eyebrow: "右侧：球洞状态", copy: "球洞编号、标准杆与成绩\n位于右侧，无需寻找即可快速定位。" },
+];
+
+function HorizonFovHudPageZh() {
+  return (
+    <section className="horizon-case-page horizon-fov-hud-page horizon-fov-hud-page--zh" aria-labelledby="fov-hud-title-zh">
+      <div className="fov-hud-artboard fov-hud-artboard--zh" data-i18n-skip>
+        <header className="fov-hud-header">
+          <div className="fov-hud-heading">
+            <p className="fov-hud-number">05</p>
+            <div>
+              <h2 id="fov-hud-title-zh">为有限视野而设计</h2>
+              <h3>视野与 HUD 布局</h3>
+            </div>
+          </div>
+          <p className="fov-hud-intro">
+            Horizon HUD 面向狭窄的单目视野设计，信息经过优先级排序与分组，<br />
+            并放置在可快速读取且不遮挡球场的位置。
+          </p>
+        </header>
+
+        <div className="fov-constraints" aria-label="视野设计约束">
+          {fovConstraintsZh.map((item) => (
+            <article key={item.title}>
+              <FovIcon type={item.icon} />
+              <div><h3>{item.title}</h3><p>{item.copy.split("\n").map((line) => <span key={line}>{line}</span>)}</p></div>
+            </article>
+          ))}
+        </div>
+
+        <section className="fov-hud-main">
+          <aside className="fov-hud-layers" aria-labelledby="hud-layers-title-zh">
+            <h3 id="hud-layers-title-zh">HUD 信息层级</h3>
+            <div>
+              {hudLayersZh.map((item) => (
+                <article key={item.letter}>
+                  <span>{item.letter}</span>
+                  <div><h4>{item.title}</h4><p>{item.copy.split("\n").map((line) => <span key={line}>{line}</span>)}</p></div>
+                </article>
+              ))}
+            </div>
+          </aside>
+
+          <figure className="fov-hud-analysis" aria-label="Horizon HUD 布局分析">
+            <figcaption className="fov-callout fov-callout-round">轮次信息</figcaption>
+            <figcaption className="fov-callout fov-callout-distance">主要距离</figcaption>
+            <figcaption className="fov-callout fov-callout-hazard">障碍物信息</figcaption>
+            <figcaption className="fov-callout fov-callout-map">球场地图</figcaption>
+            <figcaption className="fov-callout fov-callout-club">球杆建议</figcaption>
+            <figcaption className="fov-callout fov-callout-battery">电量</figcaption>
+            <figcaption className="fov-callout fov-callout-status">球洞状态<br />及分数</figcaption>
+            <figcaption className="fov-callout fov-callout-actions">操作层</figcaption>
+
+            <div className="fov-hud-screen">
+              <div className="fov-hud-round fov-analysis-box">
+                <span><b>Hole</b><strong>07:23</strong></span>
+                <span><b>Round</b><strong>01:04:28</strong></span>
+              </div>
+              <div className="fov-hud-primary fov-analysis-box">
+                <span><b>F</b><strong>484</strong></span>
+                <span><b>C</b><strong>495</strong></span>
+                <span><b>B</b><strong>507</strong></span>
+              </div>
+              <span className="fov-hud-battery fov-analysis-box" aria-label="电量"><i /></span>
+              <div className="fov-hud-hazards fov-analysis-box">
+                <span><b>Bunker</b><strong>474</strong></span>
+                <span><b>Bunker</b><strong>452</strong></span>
+              </div>
+              <div className="fov-hud-water">
+                <span><b>Water</b><strong>429</strong></span>
+                <span><b>Water</b><strong>421</strong></span>
+              </div>
+              <div className="fov-hud-course-map fov-analysis-box">
+                <CaseStudyImage src="/assets/projects/ag1/overview/hole-interface.png" alt="" />
+              </div>
+              <div className="fov-hud-club fov-analysis-box"><b>· Dr</b><strong>230–250</strong></div>
+              <div className="fov-hud-status fov-analysis-box"><strong>#4 Par5</strong><b>−10</b></div>
+              <div className="fov-hud-clear fov-analysis-box">
+                <strong>KEEP THE<br />COURSE VIEW<br />CLEAR</strong>
+                <span>中央区域保持简洁，<br />为真实世界视野<br />留出空间。</span>
+              </div>
+              <div className="fov-hud-actions fov-analysis-box">
+                <HudAction icon="⊕" label="Shot" />
+                <HudAction icon="▧" label="Score" />
+                <HudAction icon="⌘" label="Menu" />
+                <HudAction icon="⌁" label="Green" />
+              </div>
+            </div>
+          </figure>
+
+          <aside className="fov-visual-hierarchy" aria-labelledby="visual-hierarchy-title-zh">
+            <h3 id="visual-hierarchy-title-zh">视觉层级</h3>
+            <div>
+              {visualHierarchyZh.map((item) => (
+                <article key={item.number}>
+                  <span>{item.number}</span>
+                  <div><h4>{item.title}</h4><p>{item.lines.map((line) => <span key={line}>{line}</span>)}</p></div>
+                </article>
+              ))}
+            </div>
+            <p className="fov-world-note"><FovIcon type="glance" />让真实世界始终可见</p>
+          </aside>
+        </section>
+
+        <section className="fov-placement" aria-labelledby="placement-title-zh">
+          <h3 id="placement-title-zh">布局依据</h3>
+          <div className="fov-placement-row">
+            {placementRationaleZh.map((item) => (
+              <article key={item.eyebrow}>
+                <FovIcon type={item.icon} />
+                <div><h4>{item.eyebrow}</h4><p>{item.copy.split("\n").map((line) => <span key={line}>{line}</span>)}</p></div>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
+    </section>
+  );
+}
+
 function HorizonFovHudPage() {
+  const { language } = useLanguage();
+
+  if (language === "zh") return <HorizonFovHudPageZh />;
+
   return (
     <section className="horizon-case-page horizon-fov-hud-page" aria-labelledby="fov-hud-title">
       <div className="fov-hud-artboard">
@@ -1120,8 +1824,31 @@ const explorationVersions = [
   },
 ];
 
+const explorationVersionsZh = [
+  {
+    version: "V1",
+    note: "信息堆叠",
+    image: "/assets/projects/ag1/exploration/v1.png",
+    copy: "完整信息直接堆叠、填充较多；最终方案已取消填充高亮。",
+  },
+  {
+    version: "V2",
+    note: "结构优化",
+    image: "/assets/projects/ag1/exploration/v2.png",
+    copy: "优化信息层级与布局，聚焦核心内容，提升可读性。",
+  },
+  {
+    version: "V3",
+    note: "最终方案",
+    image: "/assets/projects/ag1/exploration/v3.png",
+    copy: "聚焦关键信息，保持视野简洁；快速浏览即可获取所需内容。",
+  },
+];
+
 const scoringBefore = ["Hole Main", "Score", "Scorecard", "Edit", "Score"];
 const scoringAfter = ["Hole Main", "Score Input", "Putts"];
+const scoringBeforeZh = ["选择球洞", "记分", "记录推杆", "编辑", "记分", "同步"];
+const scoringAfterZh = ["球洞主页", "分数输入", "推杆", "确认"];
 
 const takeaways = [
   { icon: "target", title: "CLARITY OVER DENSITY", copy: "Less information,\nbetter decisions." },
@@ -1129,6 +1856,14 @@ const takeaways = [
   { icon: "context", title: "CONTEXT DRIVEN", copy: "Surface what matters,\nwhen it matters." },
   { icon: "feedback", title: "FEEDBACK MATTERS", copy: "Every action needs a clear,\nimmediate response." },
   { icon: "ar", title: "DESIGNED FOR AR", copy: "Respect the real world,\neliminate what distracts." },
+];
+
+const takeawaysZh = [
+  { icon: "target", title: "聚焦核心信息", copy: "更少信息，\n更高可读性。" },
+  { icon: "context", title: "情境驱动", copy: "在需要的时机\n呈现重要信息。" },
+  { icon: "feedback", title: "即时反馈", copy: "每个操作都有清晰反馈，\n增强控制感。" },
+  { icon: "depth", title: "简化操作步骤", copy: "减少操作，\n让球手专注当下。" },
+  { icon: "ar", title: "为 AR 而设计", copy: "兼顾真实世界，\n减少干扰。" },
 ];
 
 function ExplorationSectionRule({ children, className = "" }) {
@@ -1191,37 +1926,58 @@ function ExplorationSketch({ type }) {
 }
 
 function HorizonDesignExplorationPage() {
+  const { language } = useLanguage();
+  const isZh = language === "zh";
+  const versions = isZh ? explorationVersionsZh : explorationVersions;
+  const beforeSteps = isZh ? scoringBeforeZh : scoringBefore;
+  const afterSteps = isZh ? scoringAfterZh : scoringAfter;
+  const takeawayItems = isZh ? takeawaysZh : takeaways;
+
   return (
-    <section className="horizon-case-page horizon-design-exploration-page" aria-labelledby="design-exploration-title">
-      <div className="design-exploration-artboard">
+    <section
+      className={`horizon-case-page horizon-design-exploration-page ${isZh ? "horizon-design-exploration-page--zh" : ""}`.trim()}
+      aria-labelledby="design-exploration-title"
+    >
+      <div className={`design-exploration-artboard ${isZh ? "design-exploration-artboard--zh" : ""}`.trim()}>
         <header className="design-exploration-header">
           <p>06</p>
           <div>
-            <h2 id="design-exploration-title">REFINING THE EXPERIENCE</h2>
-            <h3>Design Exploration &amp; Micro-interactions</h3>
+            <h2 id="design-exploration-title">{isZh ? "持续打磨体验" : "REFINING THE EXPERIENCE"}</h2>
+            <h3>{isZh ? "设计探索与微交互" : <>Design Exploration &amp; Micro-interactions</>}</h3>
           </div>
           <span aria-hidden="true" />
-          <p>Exploring how information hierarchy, interaction depth and feedback evolved into a clearer AR experience.</p>
+          <p>
+            {isZh ? (
+              <>
+                探索信息层级、交互深度与反馈机制，<br />
+                通过多轮迭代优化，打造更加流畅、直观且沉浸的 AR 体验。
+              </>
+            ) : (
+              "Exploring how information hierarchy, interaction depth and feedback evolved into a clearer AR experience."
+            )}
+          </p>
         </header>
 
-        <ExplorationSectionRule className="design-exploration-rule">DESIGN EXPLORATION</ExplorationSectionRule>
+        <ExplorationSectionRule className="design-exploration-rule">
+          {isZh ? "设计探索" : "DESIGN EXPLORATION"}
+        </ExplorationSectionRule>
 
         <section className="design-exploration-top">
           <article className="hud-hierarchy-exploration">
             <ExplorationModuleTitle
               number="01"
-              title="HUD HIERARCHY EXPLORATION"
-              question="How might we prioritize the most critical information within a limited field of view?"
+              title={isZh ? "HUD 层级探索" : "HUD HIERARCHY EXPLORATION"}
+              question={isZh ? "如何在有限视野内优先呈现最关键信息？" : "How might we prioritize the most critical information within a limited field of view?"}
             />
             <div className="exploration-version-row">
-              {explorationVersions.map((item, index) => (
+              {versions.map((item, index) => (
                 <article className="exploration-version" key={item.version}>
                   <figure>
-                    <CaseStudyImage src={item.image} alt={`${item.version} AG1 HUD`} />
+                    <CaseStudyImage src={item.image} alt={`${item.version} ${isZh ? "Horizon" : "AG1"} HUD`} />
                     <figcaption><strong>{item.version}</strong><span>{item.note}</span></figcaption>
                   </figure>
                   <p>{item.copy}</p>
-                  {index < explorationVersions.length - 1 && <i className="exploration-version-arrow" aria-hidden="true">›</i>}
+                  {index < versions.length - 1 && <i className="exploration-version-arrow" aria-hidden="true">›</i>}
                 </article>
               ))}
             </div>
@@ -1230,77 +1986,119 @@ function HorizonDesignExplorationPage() {
           <article className="scoring-flow-exploration">
             <ExplorationModuleTitle
               number="02"
-              title="SCORING FLOW EXPLORATION"
-              question={<>How might we minimize interaction depth<br />while keeping scoring accurate and quick?</>}
+              title={isZh ? "计分流程探索" : "SCORING FLOW EXPLORATION"}
+              question={isZh ? <>如何在保持计分准确性的同时，<br />减少交互步骤？</> : <>How might we minimize interaction depth<br />while keeping scoring accurate and quick?</>}
             />
             <div className="scoring-flow-columns">
-              <ScoreFlow title="BEFORE" steps={scoringBefore} copy={<>Too many steps<br />between play and scoring.</>} />
-              <ScoreFlow title="AFTER" steps={scoringAfter} copy={<>Direct editing reduces<br />interaction depth and keeps<br />the player in rhythm.</>} />
+              <ScoreFlow
+                title={isZh ? "调整前" : "BEFORE"}
+                steps={beforeSteps}
+                copy={isZh ? <>步骤较多，容易打断<br />比赛节奏。</> : <>Too many steps<br />between play and scoring.</>}
+              />
+              {isZh ? <i className="exploration-score-change" aria-hidden="true">→</i> : null}
+              <ScoreFlow
+                title={isZh ? "调整后" : "AFTER"}
+                steps={afterSteps}
+                copy={isZh ? <>精简流程，减少不必要的步骤，<br />让球手更专注于比赛。</> : <>Direct editing reduces<br />interaction depth and keeps<br />the player in rhythm.</>}
+              />
             </div>
           </article>
 
           <article className="pin-exploration">
             <ExplorationModuleTitle
               number="03"
-              title="GREEN – PIN POSITION EXPLORATION"
-              question={<>How might we minimize pin placement fast and<br />precise with minimal input?</>}
+              title={isZh ? "果岭与旗杆位置探索" : "GREEN – PIN POSITION EXPLORATION"}
+              question={isZh ? "如何更快速、直观地设置旗杆位置？" : <>How might we minimize pin placement fast and<br />precise with minimal input?</>}
             />
             <div className="pin-exploration-options">
-              <article><h4>A: Free Placement</h4><ExplorationSketch type="free" /><p>Difficult to control<br />with touchpad.<br />Low precision.</p></article>
-              <article><h4>B: Region Move</h4><ExplorationSketch type="region" /><p>Better, but still<br />requires fine control<br />and more steps.</p></article>
-              <article><h4>Selected Direction:<br />2 × 2 Pin Grid</h4><ExplorationSketch type="selected" /><p>Fast, precise, and<br />easy to understand.<br />Perfect for swipe input.</p></article>
+              <article>
+                <h4>{isZh ? "A. 自由放置" : "A: Free Placement"}</h4>
+                <ExplorationSketch type="free" />
+                <p>{isZh ? <>触控选择目标位置，<br />灵活高效。</> : <>Difficult to control<br />with touchpad.<br />Low precision.</>}</p>
+              </article>
+              <article>
+                <h4>{isZh ? "B. 区域移动" : "B: Region Move"}</h4>
+                <ExplorationSketch type="region" />
+                <p>{isZh ? <>在区域内快速移动，<br />兼顾速度与精度。</> : <>Better, but still<br />requires fine control<br />and more steps.</>}</p>
+              </article>
+              <article>
+                <h4>{isZh ? "C. 2 × 2 网格选择" : <>Selected Direction:<br />2 × 2 Pin Grid</>}</h4>
+                <ExplorationSketch type="selected" />
+                <p>{isZh ? <>清晰直观的选择方式，<br />适合大多数场景。</> : <>Fast, precise, and<br />easy to understand.<br />Perfect for swipe input.</>}</p>
+              </article>
             </div>
           </article>
         </section>
 
-        <ExplorationSectionRule className="micro-interactions-rule">MICRO-INTERACTIONS</ExplorationSectionRule>
+        <ExplorationSectionRule className="micro-interactions-rule">
+          {isZh ? "微交互" : "MICRO-INTERACTIONS"}
+        </ExplorationSectionRule>
 
         <section className="micro-interactions-row">
           <article className="micro-focus-state">
-            <ExplorationModuleTitle number="01" title="FOCUS STATE (SWIPE)" />
-            <div className="focus-state-frames">
-              <div><ActionButton icon="⊕" label="Shot" /><ActionButton icon="▧" label="Score" /><ActionButton icon="≡" label="Menu" active /><ActionButton icon="⌁" label="Green" /></div>
-              <b aria-hidden="true">→</b>
-              <div><ActionButton icon="⊕" label="Shot" /><ActionButton icon="▧" label="Score" active /><ActionButton icon="≡" label="Menu" /><ActionButton icon="⌁" label="Green" /></div>
-            </div>
-            <p>Current focus is highlighted so<br />the next action is predictable.</p>
+            <ExplorationModuleTitle number="01" title={isZh ? "焦点状态（滑动）" : "FOCUS STATE (SWIPE)"} />
+            {isZh ? (
+              <div className="focus-state-actions">
+                <ActionButton icon="⊕" label="击球" />
+                <ActionButton icon="▧" label="记分" />
+                <ActionButton icon="≡" label="菜单" active />
+                <ActionButton icon="⚑" label="果岭" />
+                <ActionButton icon="⊙" label="地图" />
+                <ActionButton icon="⚙" label="设置" />
+                <ActionButton icon="•••" label="更多" />
+              </div>
+            ) : (
+              <div className="focus-state-frames">
+                <div><ActionButton icon="⊕" label="Shot" /><ActionButton icon="▧" label="Score" /><ActionButton icon="≡" label="Menu" active /><ActionButton icon="⌁" label="Green" /></div>
+                <b aria-hidden="true">→</b>
+                <div><ActionButton icon="⊕" label="Shot" /><ActionButton icon="▧" label="Score" active /><ActionButton icon="≡" label="Menu" /><ActionButton icon="⌁" label="Green" /></div>
+              </div>
+            )}
+            <p>{isZh ? <>清晰的焦点反馈，<br />让下一步操作更明确。</> : <>Current focus is highlighted so<br />the next action is predictable.</>}</p>
           </article>
 
           <article className="micro-select-feedback">
-            <ExplorationModuleTitle number="02" title="SELECT FEEDBACK (CLICK)" />
+            <ExplorationModuleTitle number="02" title={isZh ? "选择反馈（点击）" : "SELECT FEEDBACK (CLICK)"} />
             <div className="select-feedback-frames">
-              <ActionButton icon="⌁" label="Idle" />
+              <ActionButton icon={isZh ? "+" : "⌁"} label={isZh ? "待机" : "Idle"} />
               <b aria-hidden="true">→</b>
-              <ActionButton icon="⌁" label="Active" active />
+              <ActionButton icon={isZh ? "⚑" : "⌁"} label={isZh ? "选中" : "Active"} active />
               <b aria-hidden="true">→</b>
-              <ActionButton icon="⌁" label="Enter" />
+              <ActionButton icon={isZh ? "✓" : "⌁"} label={isZh ? "确认" : "Enter"} />
             </div>
-            <p>Immediate feedback confirms that<br />the system received the input.</p>
+            <p>{isZh ? <>即时的视觉反馈，<br />降低操作不确定性。</> : <>Immediate feedback confirms that<br />the system received the input.</>}</p>
           </article>
 
           <article className="micro-score-adjustment">
-            <ExplorationModuleTitle number="03" title="SCORE ADJUSTMENT" />
-            <div className="score-adjustment-frames">
-              <span><small>SCORE</small><strong>0</strong></span><b>→</b>
-              <span className="is-emphasis"><small>SCORE</small><strong>+1</strong></span><b>→</b>
-              <span><small>SCORE</small><strong>+1</strong></span>
-            </div>
-            <p>Number briefly scales and brightens<br />to acknowledge the change.</p>
+            <ExplorationModuleTitle number="03" title={isZh ? "成绩调整" : "SCORE ADJUSTMENT"} />
+            {isZh ? (
+              <div className="score-adjustment-pairs">
+                <span><small>记分</small><i>−</i><strong>0</strong><i>＋</i></span>
+                <span><small>推杆</small><i>−</i><strong>+1</strong><i>＋</i></span>
+              </div>
+            ) : (
+              <div className="score-adjustment-frames">
+                <span><small>SCORE</small><strong>0</strong></span><b>→</b>
+                <span className="is-emphasis"><small>SCORE</small><strong>+1</strong></span><b>→</b>
+                <span><small>SCORE</small><strong>+1</strong></span>
+              </div>
+            )}
+            <p>{isZh ? <>数字变化有清晰反馈，<br />让确认更安心。</> : <>Number briefly scales and brightens<br />to acknowledge the change.</>}</p>
           </article>
 
           <article className="micro-pin-selection">
-            <ExplorationModuleTitle number="04" title="PIN POSITION SELECTION" />
+            <ExplorationModuleTitle number="04" title={isZh ? "旗杆位置选择" : "PIN POSITION SELECTION"} />
             <div className="pin-selection-frames">
               <ExplorationPinGrid position="top-left" /><b>→</b><ExplorationPinGrid position="top-right" active /><b>→</b><ExplorationPinGrid position="bottom-left" confirmed />
             </div>
-            <p>Movement is clear, position is obvious,<br />confirmation is simple.</p>
+            <p>{isZh ? <>移动路径清晰，位置一目了然，<br />确认更简单。</> : <>Movement is clear, position is obvious,<br />confirmation is simple.</>}</p>
           </article>
         </section>
 
         <section className="design-takeaways" aria-labelledby="design-takeaways-title">
-          <h3 id="design-takeaways-title">DESIGN<br />TAKEAWAYS</h3>
+          <h3 id="design-takeaways-title">{isZh ? <>设计<br />关键洞察</> : <>DESIGN<br />TAKEAWAYS</>}</h3>
           <div>
-            {takeaways.map((item) => (
+            {takeawayItems.map((item) => (
               <article key={item.title}>
                 <span className={`exploration-takeaway-icon takeaway-${item.icon}`} aria-hidden="true"><i /><b /></span>
                 <div><h4>{item.title}</h4><p>{item.copy.split("\n").map((line) => <span key={line}>{line}</span>)}</p></div>
@@ -2412,6 +3210,109 @@ function S50CMeasurementJourney({ journey }) {
 }
 
 function S50CChallengeSection() {
+  const { language } = useLanguage();
+
+  if (language === "zh") {
+    const points = [
+      {
+        number: "01",
+        key: "target",
+        title: "目标可见性",
+        description: "我是否正在对准正确的测量目标？",
+      },
+      {
+        number: "02",
+        key: "task",
+        title: "任务复杂度",
+        description: "当前测量进行到哪一步？",
+      },
+      {
+        number: "03",
+        key: "context",
+        title: "测量语境",
+        description: "这个数值对应的对象与含义是什么？",
+      },
+    ];
+    const journeySteps = [
+      { key: "see", title: "识别", description: "我能清楚识别目标吗？", icon: Eye },
+      { key: "aim", title: "瞄准", description: "我是否对准了正确的测量点？", icon: Crosshair },
+      { key: "measure", title: "测量", description: "当前测量进行到哪一步？", icon: XCircle },
+      { key: "verify", title: "确认", description: "测量结果是否符合预期？", icon: CheckCircle },
+      { key: "record", title: "记录", description: "之后还能理解这条数据吗？", icon: ListNumbers },
+    ];
+
+    return (
+      <section
+        className="s50c-overview-visual s50c-challenge-section s50c-challenge-section--zh"
+        aria-labelledby="s50c-challenge-title-zh"
+        data-i18n-skip
+      >
+        <div className="s50c-challenge-frame--zh">
+          <header className="s50c-challenge-header s50c-challenge-header--zh">
+            <span>02 /</span>
+            <h2 id="s50c-challenge-title-zh">理解核心挑战</h2>
+          </header>
+
+          <div className="s50c-challenge-artboard s50c-challenge-artboard--zh">
+            <CaseStudyImage
+              className="s50c-challenge-background--zh"
+              src="/assets/projects/s50c/challenge/challenge-building-background.png"
+              alt="施工中的建筑场景"
+            />
+            <div className="s50c-challenge-shade--zh" aria-hidden="true" />
+            <span className="s50c-challenge-sightline--zh" aria-hidden="true" />
+            <Crosshair className="s50c-challenge-target--zh" weight="light" aria-hidden="true" />
+            <CaseStudyImage
+              className="s50c-challenge-product--zh"
+              src="/assets/projects/s50c/challenge/challenge-hand-device.png"
+              alt="手持 S50C 激光测距仪"
+            />
+            <CaseStudyImage
+              className="s50c-challenge-measurement-ui--zh"
+              src="/assets/projects/s50c/challenge/challenge-measurement-ui.png"
+              alt="显示 26.445 英尺的真实设备测量界面"
+            />
+
+            <div className="s50c-challenge-points s50c-challenge-points--zh" aria-label="三项核心测量挑战">
+              {points.map((point) => <S50CChallengePoint point={point} key={point.key} />)}
+            </div>
+
+            <section className="s50c-measurement-journey s50c-measurement-journey--zh" aria-labelledby="s50c-journey-title-zh">
+              <header>
+                <MapPin weight="regular" aria-hidden="true" />
+                <h3 id="s50c-journey-title-zh">测量旅程</h3>
+              </header>
+              <div className="s50c-journey-steps s50c-journey-steps--zh">
+                {journeySteps.map((step, index) => {
+                  const JourneyIcon = step.icon;
+                  return (
+                    <React.Fragment key={step.key}>
+                      <article className="s50c-journey-step s50c-journey-step--zh">
+                        <span className="s50c-journey-icon-frame--zh" aria-hidden="true">
+                          <JourneyIcon weight="light" />
+                        </span>
+                        <h4>{step.title}</h4>
+                        <p>{step.description}</p>
+                      </article>
+                      {index < journeySteps.length - 1 ? (
+                        <ArrowRight className="s50c-journey-arrow--zh" weight="light" aria-hidden="true" />
+                      ) : null}
+                    </React.Fragment>
+                  );
+                })}
+              </div>
+              <div className="s50c-journey-themes s50c-journey-themes--zh" aria-label="可见性，引导，语境">
+                <span>可见性</span>
+                <span>引导</span>
+                <span>语境</span>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   const copy = s50cCopy.challenge;
 
   return (

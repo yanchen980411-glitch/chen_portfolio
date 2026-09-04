@@ -6,9 +6,9 @@ const LanguageContext = createContext(null);
 function readStoredLanguage() {
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    return stored === "en" || stored === "zh" ? stored : "en";
+    return stored === "en" || stored === "zh" ? stored : "zh";
   } catch {
-    return "en";
+    return "zh";
   }
 }
 

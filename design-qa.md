@@ -136,6 +136,190 @@ The reference and a 941 px implementation capture were placed side by side in on
 
 final result: passed
 
+## S50C 中文版第 02 页
+
+- 视觉参考：`/Users/ccchen/Desktop/01.png`（1447 × 1087 px）。
+- 浏览器实现：`s50c-challenge-zh-final.png`；viewport 为 1337 × 875 CSS px。
+- 同比例对照：`s50c-challenge-comparison-final.png`（参考图与实现画板均归一到 1447 × 1087 px）。
+- 英文回归：`s50c-challenge-en-regression.png`。
+- 状态：`zh-CN`，MILESEEY S50C，第 02 页。
+
+### Full-view comparison
+
+- 构图与比例：passed — 中文专属画板使用参考图 1447:1087 比例；黑色页眉、建筑主视觉、左下手持设备、三组挑战、真实测量界面与底部旅程面板按相同纵向节奏排列。
+- 主视觉图层：passed — 建筑背景、手持 S50C 与 26.445 ft 测量界面为三个独立图片节点；目标点与斜向连接线均为独立网页元素，产品层没有任何色相滤镜，实体测量键保留原绿色。
+- 信息层级：passed — 01 / 02 / 03 圆形编号、挑战标题和说明均为可编辑 DOM；三组信息分别落在画面左中、中央与右侧区域。
+- 测量旅程：passed — 半透明深色面板、标题、五个步骤、五个 Phosphor 图标、四个箭头、三组关键词、描边与装饰线全部由 React / HTML / CSS 构建。
+- 色彩：passed — 中文画板通过 `--s50c-challenge-accent: #13b2ba` 统一控制页码、标题、目标、连接线、图标、关键词和重点描边。
+
+### Focused checks
+
+- 指定文案：passed — 主标题、三组挑战、五步旅程及“可见性 / 引导 / 语境”均与本次中文规范一致，并用 `data-i18n-skip` 防止全局翻译器再次替换。
+- 图片边界：passed — 3 个图片节点全部加载完成，中文根画板 `scrollWidth === clientWidth`，没有横向溢出。
+- 非整图实现：passed — DOM 中不存在对参考图 `01.png` 的引用；画板包含 8 个独立 article、代码化图标与分离的视觉图层，可单独编辑任何文案、位置或颜色。
+- 英文隔离：passed — 切换 English 后不渲染 `.s50c-challenge-section--zh`，英文标题仍为 `UNDERSTANDING THE CHALLENGE`，场景素材仍为原 `/assets/projects/s50c/challenge/challenge-scene-text-free.png`。
+- 页面隔离：passed — 新增规则全部限定在 `.s50c-challenge-section--zh`、`.s50c-challenge-frame--zh` 与其后代选择器中；S50C 其他章节和其他项目选择器未改。
+- 生产构建：passed — `vite build --configLoader native` 与 Sites 构建准备脚本均成功。
+
+### Comparison history
+
+- Pass 1 [P1]：原页面虽然叠加了 DOM 文案，但建筑、产品、目标线与设备界面仍合并在同一场景图中，无法满足独立素材与可维护结构要求。
+- Fix：生成干净建筑底图与透明手持设备图层，裁取原始 26.445 ft 设备界面，并用中文专属 React 分支重建挑战标注、目标系统和旅程面板。
+- Pass 2：按 1447 × 1087 同比例对照校准页眉高度、产品比例、目标连线、三组信息与旅程面板高度；浏览器实测无溢出且所有图片完成加载。
+- No actionable P0/P1/P2 findings remain.
+
+final result: passed
+
+## Horizon 中文版第 05 页
+
+- 视觉参考：`/Users/ccchen/Desktop/流程/AG1中文版/05.png`（1548 × 1016 px）。
+- 浏览器实现：`horizon-fov-hud-zh-final.png`；viewport 为 1338 × 876 CSS px，截图 API 输出为 1338 × 876 px。
+- 实现画板：799.10 × 524.47 CSS px；根画板 `scrollWidth === clientWidth` 且 `scrollHeight === clientHeight`。
+- 同尺度全页对照：`horizon-fov-hud-comparison-final.png`（参考图与实现均归一为 799 × 524 px）。
+- 中央 HUD 局部对照：`horizon-fov-hud-central-comparison-final.png`（两侧均归一为 640 × 403 px）。
+- 英文回归：`horizon-fov-hud-en-regression.png`。
+- 状态：`zh-CN`，MILESEEY Horizon，第 05 页居中显示。
+
+### Full-view comparison
+
+- 构图与比例：passed — 中文画板使用参考图的 1548:1016 比例；顶部标题和四项约束、左侧 HUD 信息层级、中央 HUD、右侧视觉层级、底部布局依据均保持同一纵向节奏。
+- 字体与排版：passed — `05`、白色主标题、绿色副标题、两行说明和各层级中文均为可编辑 DOM 文本；小字号正文已在第二轮提高字号与对比度，无异常断行、截断或重叠。
+- 间距与布局：passed — 中央 HUD 与参考图保持同等主视觉占比；第二轮将左右分栏边界重新对齐，底部六张说明卡完整落入画板范围。
+- 色彩与视觉 token：passed — 中文专属画板复用 Horizon 中文章节的 `#83ff3a` 荧光绿，并使用既有青色分析标注、深黑蓝绿色背景和低对比灰白说明。
+- 图片质量：passed — 中央球场地图继续复用现有 `/assets/projects/ag1/overview/hole-interface.png`，只在中文画板内提升亮度和饱和度；未复制、嵌入或裁切参考图作为网页素材。
+- 文案与内容：passed — 顶部使用 `Horizon HUD`，未出现 `AG1 HUD`；中央外部标注完整显示“球洞状态及分数”；正式 HUD UI 的 F / C / B、Shot / Score / Menu / Green 等英文保持原样。
+- 图标与描边：passed — 延用现有 Horizon FOV 图标、HUD 结构和细线系统；四项约束、A–D 层级、01–04 层级和六项布局依据均完整。
+- 固定导航：accepted constraint — `/返回` 与 `下一个` 为用户要求不修改的全局 sticky 导航；同尺度画板对照使用不受导航遮挡的居中滚动状态。
+- 响应与边界：passed — 当前桌面 split viewport 无根级溢出；窄屏继续沿用项目既有横向可滚动画板策略，中文只调整画板基准比例。
+
+### English isolation and runtime
+
+- 英文分支继续渲染原始 `HorizonFovHudPage` DOM，显示 `DESIGNING FOR A LIMITED FIELD OF VIEW`、原 `AG1 HUD` 说明和 `HOLE STATUS`，且不带 `.fov-hud-artboard--zh`。
+- 新增数据只由 `HorizonFovHudPageZh` 使用；新增布局规则全部位于 `.fov-hud-artboard--zh` / `.horizon-fov-hud-page--zh` 作用域，Horizon 其他章节选择器未修改。
+- 中文 → English → 中文切换正常，返回中文后仍显示第 05 页专属结构。
+- 浏览器日志只有 Vite 连接、热更新和 React DevTools 提示，无 error 或 warning。
+- Production build：passed（`pnpm run build`）。
+- Sites worker suite：passed（4 tests，0 failures）。
+
+### Comparison history
+
+- Pass 1 findings [P2]：现有英文画板的全局翻译无法满足 `Horizon HUD` 与完整状态标注文案；中文小字号说明偏暗，左右分栏边界与参考图有可见偏差，球场地图层级略弱。
+- Fix：增加中文专属数据与 `data-i18n-skip` 画板；提高中文说明字号和对比度，重新分配左右栏宽度但保持中央 HUD 位置，并仅在中文画板内增强既有地图素材。
+- Post-fix evidence：全页同尺度对照和中央 HUD 局部对照确认主要区域比例、信息层级、HUD 结构、绿色关系与指定文案一致；浏览器 DOM 验收确认无溢出且没有 `AG1 HUD`。
+- P3：参考图底部的极弱绿色线框地形属于辅助装饰；为避免引入非真实素材或修改公共背景，本次保持克制的深色渐变，不影响信息结构与可读性。
+- No actionable P0/P1/P2 findings remain.
+
+final result: passed
+
+## Horizon 中文版第 04 页
+
+- 视觉参考：`/Users/ccchen/Desktop/流程/AG1中文版/04.png`（1672 × 941 px）。
+- 浏览器实现：`horizon-user-flow-zh-final.png`；viewport 为 1337 × 875 CSS px，截图 API 输出为 1337 × 875 px。
+- 同尺度全页对照：`horizon-user-flow-comparison-final.png`（参考图与实现均归一为 808 × 455 px）。
+- 中下部流程局部对照：`horizon-user-flow-detail-comparison-final.png`。
+- 英文回归：`horizon-user-flow-en-regression.png`。
+- 状态：`zh-CN`，MILESEEY Horizon，第 04 页左侧案例画板对齐视口顶部。
+
+### Full-view comparison
+
+- 构图与比例：passed — 中文画板使用参考图的 1672:941 比例；顶部标题、手势说明、核心比赛流程、两列任务流程和底部更多信息流程保持同一纵向节奏。
+- 页面结构：passed — 右上只保留点击 / 滑动 / 双击说明框；中文版 DOM 不包含眼镜素材；球洞主页与四个高频功能使用细线连接。
+- 任务流程：passed — 计分与果岭两列的标题、用户目标、四步卡片、箭头、手势说明和底部返回逻辑均与参考图对应。
+- 更多信息：passed — 底部流程从菜单直接进入记分卡、团队成绩和返回，不再保留旧版额外的球洞主页卡片。
+
+### Focused fidelity review
+
+- 字体与排版：passed — 主标题、副标题、说明、流程标题、用户目标和步骤标签均为可编辑中文 DOM 文本；字号与权重按 1672 px 画板容器单位缩放，无异常断行或截断。
+- 间距与布局节奏：passed — 顶部约占 42%、双任务流程约占 36%、更多信息流程约占 22%；用户目标位于章节标题下方，卡片与底部手势说明保持参考图的层级间距。
+- 色彩与视觉 token：passed — 中文专属画板使用深黑绿色基底、Horizon 荧光绿描边与重点、白色标题和低对比说明；英文 token 未改变。
+- 图片与图标质量：passed — 仅复用现有球洞地图素材和项目已安装的 Phosphor 图标；参考图未作为背景图嵌入，也未生成或替换产品素材。
+- 文案与内容：passed — 标题、说明、核心比赛流程、计分流程、果岭流程、更多信息流程和总结全部显示指定中文版文案；正式设备 UI 标签（SCORE、PUTTS、Pin Position、MENU、SCORECARD）按参考图保留。
+- 特别检查：passed — 果岭流程第 2 步没有九宫格；九宫格只出现在第 3 / 4 步；页面右上没有眼镜；根画板 `scrollWidth === clientWidth` 且 `scrollHeight === clientHeight`。
+- 英文隔离：passed — 英文状态仍渲染原 `HorizonUserFlowPage` 返回结构，显示 `FROM START TO EVERY SHOT`，不带 `.user-flow-artboard--zh`；新增布局规则全部由 `.user-flow-artboard--zh` / `.horizon-user-flow-page--zh` 限定。
+- 运行时：passed — 干净浏览器标签中验证中文 → English → 中文切换，三次状态均无 console error；生产构建与 Sites worker 4 项测试通过。
+
+### Comparison history
+
+- Pass 1 findings [P2]：旧中文依赖全局文本替换，仍保留三处英文说明；旧画板为 3:2，结构与 16:9 参考图不同；顶部仍使用旧流程密度；果岭第 2 步含多余图形；底部从球洞主页开始而非从菜单开始。
+- Fix：新增 `HorizonUserFlowPageZh`、中文数据与严格作用域样式；重排为 1672:941 画板；将手势说明独立置于右上；重建计分、果岭与更多信息三条中文流程；移除中文版眼镜与果岭第 2 步网格。
+- Pass 2 finding [P2]：首轮实现把两条“用户目标”排在章节标题同行，导致卡片整体比参考图偏上。
+- Fix：将用户目标恢复到标题下方，重新对齐任务卡片、手势说明与分隔线；同时去除中文版九宫格默认高亮并固定底部总结宽度。
+- Post-fix evidence：全页与局部对照均显示主要分区、卡片尺寸、标题层级和连接线位置与参考图一致；浏览器边界检查无溢出。
+- P3：参考图底部的弱绿色线框地形没有对应的真实项目素材，本次保持纯深色底以避免引入生成装饰，不影响流程理解与层级。
+- No actionable P0/P1/P2 findings remain.
+
+final result: passed
+
+## Horizon 中文版第 06 页
+
+- 视觉参考：`/Users/ccchen/Desktop/06.png`（1586 × 992 px）。
+- 浏览器实现：`horizon-design-exploration-zh-viewport-final.png`；viewport 为 1337 × 875 CSS px，浏览器 DPR 为 2，截图 API 输出已归一为 CSS 像素。
+- 实现画板：`horizon-design-exploration-zh-final.png`（808 × 506 px，对应 807.99 × 506.01 CSS px，99:62）。
+- 全页同尺度对照：`horizon-design-exploration-comparison-final.png`；参考图以 Lanczos 归一到 808 × 506 px 后与实现并排比较。
+- 局部对照：`horizon-design-exploration-top-comparison.png` 与 `horizon-design-exploration-micro-comparison.png`。
+- 英文回归截图：`horizon-design-exploration-en-regression.png`。
+- 状态：`zh-CN`，MILESEEY Horizon，第 06 页完整画板可见。
+
+### Fidelity review
+
+- 字体与排版：passed — 06、主标题、副标题、两行说明、三组设计探索、四组微交互与五项洞察形成与参考图一致的层级；中文正文保持可读，没有异常截断。
+- 间距与布局节奏：passed — 画板采用参考图 99:62 比例；顶部、中部和底部由三条水平线分区，左中右探索列、四个微交互模块和五个底部洞察等宽对齐。
+- 色彩：passed — 中文画板使用纯黑基底、白色主信息、灰白说明与 `#83ff3a` Horizon 荧光绿；该绿色与现有 Horizon 中文第 03 页专属色一致。
+- 图片与图形质量：passed — V1 / V2 / V3 继续使用现有真实 HUD PNG；未生成或替换产品素材。三张 HUD、流程框、旗杆方案、网格、圆形操作按钮、分割线与底部洞察图标均按统一尺寸和线宽组织。
+- 文案：passed — 指定中文标题、问题句、三版 HUD 说明、调整前后步骤、三个旗杆方案、四组微交互说明与五项设计洞察全部显示；说明性英文已清除，正式 HUD 图片内的英文 UI 保持原样。
+- 选中态：passed — “菜单”和“选中”只使用双层绿色描边，图标本身保持绿色线性样式；浏览器计算样式确认背景为透明，无实心绿色填充。
+- V1：passed — 明确写出“填充较多”，并说明最终方案已取消填充高亮；V2 / V3 清楚呈现结构优化与最终聚焦方向。
+- 微交互：passed — 焦点状态包含击球、记分、菜单、果岭、地图、设置、更多；选择反馈包含待机、选中、确认；成绩调整与三步旗杆位置示意完整。
+- 底部洞察：passed — 仅保留聚焦核心信息、情境驱动、即时反馈、简化操作步骤、为 AR 而设计五项必要模块，没有额外装饰元素。
+- 响应与边界：passed — 目标桌面 split viewport 中完整画板可见；窄屏继续使用项目既有横向可滚动画板策略。
+- 运行时：passed — 中文与英文往返切换正常；浏览器控制台无 error / warning。
+
+### English isolation
+
+- 英文分支不带 `horizon-design-exploration-page--zh` 或 `design-exploration-artboard--zh`，继续使用原 16:11 画板、`#00f52a` 色值、原英文文案、原模块结构与原间距。
+- 英文画板实测保持 807.99 × 555.49 CSS px，标题仍为 `REFINING THE EXPERIENCE`；切回中文后恢复 99:62 中文画板与“持续打磨体验”。
+- 新增视觉规则全部位于 `.design-exploration-artboard--zh ...` 和 `.horizon-design-exploration-page--zh` 作用域；Horizon 其他章节与其他项目选择器未修改。
+
+### Comparison history
+
+- Pass 1 findings [P2]：原中文依赖全局翻译，顶部计分步骤与说明侵入“微交互”分隔线；V1 说明过长；焦点与选择反馈仍使用实心绿色填充。
+- Fix：加入中文专属内容数据与结构，压缩计分步骤的垂直节奏，精简 V1 说明；将两处选中态统一为透明底色和外圈描边，并重排底部五项洞察。
+- Post-fix evidence：最终全页与两张局部并排对照显示三个分区边界清晰、顶部内容不再覆盖中部分隔线、选中态无填充、五项洞察完整。
+- P3：参考图底部的弱绿色地形线属于非必要装饰；按用户要求删除或弱化多余装饰，本次保留纯黑留白。
+- No actionable P0/P1/P2 findings remain.
+
+final result: passed
+
+## Horizon 中文版第 01 页
+
+- 视觉参考：`/Users/ccchen/Desktop/01.png`（1535 × 1024 px）。
+- 产品源图：`/Users/ccchen/Desktop/1.png`；复制后的产品 asset 与源图 SHA-256 完全一致。
+- 实现截图：`horizon-research-zh-final.png`；浏览器 viewport 为 1337 × 875，Chapter 01 artboard 为 798.47 × 532.31 CSS px（3:2）。
+- 全页对照：`horizon-research-comparison.png`。
+- “设计机会”局部对照：`horizon-research-opportunity-comparison.png`。
+
+### Fidelity review
+
+- 层级与节奏：passed — 标题、顶部说明、左右对比、研究方法与关键洞察遵循参考图的 3:2 构图和信息层级。
+- 中文文案：passed — 所有指定文案均按要求更新；“设计机会”未添加 Horizon 前缀；无裁切或异常溢出。
+- 产品素材：passed — 中文分支只使用真实正视图，保持原始比例；CSS 仅负责裁切、定位、叠加和克制的绿色环境投影。
+- 既有素材：passed — 流程图标、箭头、曲线、三张研究图片、关键洞察图标、球场与 HUD 继续使用原素材。
+- HUD：passed — `156 YD`、`GREEN`、`BUNKER`、`98 YD` 保持既有图层。
+- 布局边界：passed — artboard 的 `scrollWidth === clientWidth` 且 `scrollHeight === clientHeight`，没有后代元素越界。
+- 语言隔离：passed — `zh-CN` 使用 `horizon-research-artboard--zh` 和真实正视图；`en` 不含该 class，继续使用原英文文案与原 overflow-glasses 素材。
+- 语言往返：passed — 实测 `zh-CN → en → zh-CN` 后两套 DOM 分支和素材均正确恢复。
+- Production build：passed（`pnpm run build`）。
+- Sites worker tests：passed（4/4）。
+
+### Comparison history
+
+- Pass 1：建立 3:2 中文构图并替换中文版文案。
+- Pass 2：将干净球场与原 HUD 图层分离，移除旧侧视产品在中文版中的残留。
+- Pass 3：提高真实正视眼镜的可见范围，将其置于球场图下半部，并修正研究区域最后 3 px 的纵向溢出。
+- No P0/P1/P2 findings remain.
+
+final result: passed
+
 ## MILESEEY Tools — annotated positioning polish (2026-08-30)
 
 - Source visual truth: Browser Comments 2–3 supplied on 2026-08-30 for the Connected Measurement tape popup and Section 01 Project Overview image at `1159 × 731`.
@@ -477,5 +661,81 @@ final result: passed
 - Initial finding [P1]: the fixed right information panel would have appeared beside a standalone cover if the old shell remained the outer viewport.
 - Fix: placed the full cover before the complete split layout, then made the existing right information panel sticky only within the case-study portion.
 - No P0/P1/P2 findings remain. The source recording and this portfolio intentionally use different project imagery and typography; the matched target is the spatial handoff, full-viewport cover state, and user-controlled reveal.
+
+final result: passed
+
+## Horizon 中文版第 02 页
+
+- 视觉参考：`/Users/ccchen/Desktop/02.png`（1535 × 1024 px）。
+- 浏览器实现：`horizon-journey-zh-final.png`；viewport 为 1337 × 875 CSS px，device scale factor 为 1。
+- 实现 artboard：`horizon-journey-zh-artboard.png`（798 × 532 px，对应 798.47 × 532.31 CSS px）。
+- 全页同尺度对照：`horizon-journey-comparison.png`。
+- HUD 信息卡局部对照：`horizon-journey-hud-comparison.png`。
+- 状态：`zh-CN`，MILESEEY Horizon，第 02 页对齐左侧案例页顶部。
+
+### Findings
+
+- 字体与层级：passed — 02、主标题、副标题、说明、阶段标题、行标签与痛点信息保持参考图的层级和中文密度，无异常断行。
+- 间距与布局：passed — 五阶段、图片、目标、信息卡、强度曲线和四项痛点继续使用现有 3:2 栅格，主要分区比例与参考图一致。
+- 色彩：passed — 深色基底、绿色 HUD、白色说明与橙红痛点保持原设计语言；中文版痛点强调色向参考图靠拢。
+- 图片质量：passed — 五张阶段图片、顶部眼镜、球洞地图和需求曲线继续使用现有项目素材，无生成或替换。
+- 文案：passed — 指定中文标题、说明、五个阶段、五条目标、五个行标签和四条痛点全部按要求显示；第 03 阶段无“重新”。
+- 第 04 信息卡：passed — 使用现有 `complete-experience/green-preview.png`，完整显示 448 / 439 / 426、旗杆轮廓和 Move。
+- 第 05 信息卡：passed — 裁切复用现有 `complete-experience/score-input.png`，可见内容仅保留 Score 3 / 4 / 5 与 Putts 2。
+- 结尾总结：passed — 中文分支不渲染绿色总结；英文分支继续保留。
+- 英文隔离：passed — 实测英文版仍显示原始标题、阶段、目标、标签、原 green/score DOM、TOTAL +1 和底部总结，且不带 `journey-artboard--zh`。
+- 布局边界：passed — artboard 的 `scrollWidth === clientWidth` 且 `scrollHeight === clientHeight`；顶部产品图的超出部分由原父级裁切，属于既有构图。
+- 固定项目导航：accepted constraint — 截图中的固定返回/下一个按钮属于用户明确要求保留的全局 sticky 导航，不计入第 02 页画板差异。
+
+### Comparison history
+
+- Pass 1：完成中文文案、标签、痛点和第 04 / 第 05 信息卡分支；发现计分卡仍露出 Hole 信息且 Putts 被裁切。
+- Pass 2：调整现有计分素材的裁切位置，露出完整 Score 与 Putts；发现顶部仍残留 Hole 圆圈边缘。
+- Pass 3：缩小并上移素材裁切区域，最终只保留 Score 3 / 4 / 5 与 Putts 2。
+- No P0/P1/P2 findings remain.
+
+final result: passed
+
+## Horizon 中文版第 03 页
+
+- 视觉参考：`/Users/ccchen/Desktop/03.png`（1536 × 1024 px，3:2）。
+- 浏览器实现：`horizon-principles-zh-final.png`；viewport 为 1337 × 875 CSS px，浏览器 DPR 为 2，截图 API 输出已归一为 CSS 像素。
+- 实现画板：`horizon-principles-zh-artboard.png`（798 × 532 px，对应 798.47 × 532.31 CSS px，3:2）。
+- 英文回归基线：`horizon-principles-en-baseline.png`。
+- 英文回归结果：`horizon-principles-en-regression.png`。
+- 状态：`zh-CN`，MILESEEY Horizon，第 03 页对齐左侧案例画板顶部。
+
+### Full-view comparison
+
+- 构图与比例：passed — 中文画板从旧 1672:941 比例调整为参考图的 3:2；顶部介绍、四原则、分隔线与信息架构四个纵向分区落点与参考图一致。
+- 视觉层级：passed — 左上 03、白色主标题、绿色副标题和两行说明形成清晰层级；右上只保留现有 Horizon 产品图和绿色轨迹素材，没有 slogan。
+- 设计原则：passed — 4 个原则横向排列，使用细竖线分隔，不增加卡片底色；编号、名称、Phosphor 线性图标、绿色核心句与说明保持扁平且克制。
+- 信息架构：passed — “球洞主页”为最大核心节点；历史 / 开始 / 设置、开始 → 球场选择 → 球洞主页、五个下级模块及两个较小的记分子页面全部以细绿色直角连线组织。
+- 固定导航：accepted constraint — 浏览器全屏截图左上仍会覆盖既有 `/返回` 与 `下一个` sticky 按钮；这是用户明确要求不修改的全局结构，不计为第 03 页画板差异。
+
+### Focused fidelity review
+
+- 字体与排版：passed — 指定中文标题、副标题、说明、四原则文案及架构标签均为可编辑 DOM 文本；页面无“前两页”，无异常断行或截断。
+- 间距与布局节奏：passed — 画板为 3:2，四原则分区与下方架构分区均以容器宽度单位缩放；根画板 `scrollWidth === clientWidth` 且 `scrollHeight === clientHeight`。
+- 色彩：passed — 中文专属画板使用深黑绿色基底、白色主信息、低对比灰白说明和 Horizon 荧光绿重点；开始入口只做轻量层级强化。
+- 图片与图标质量：passed — 右上复用现有 `overview/horizon-glasses.png` 与 `journey/demand-curve.png`；功能图标复用项目已安装的 Phosphor 图标库，没有生成图、占位图或自制 SVG。
+- 文案与内容：passed — 4 个设计原则、5 个球洞主页功能、记分卡 / 团队记分卡及其副标题均与本次中文规范一致；正式名称 Horizon 与 495 YD 保持原样。
+- 层级语义：passed — 球洞主页不渲染图片、SVG 或球形装饰；记分卡与团队记分卡使用更小节点并由记分层级线连接。
+- 响应与边界：passed — 当前桌面 split viewport 无根级溢出；窄屏沿用项目既有横向可滚动画板策略，中文版仅将最小画板宽度改为对应的 3:2 基准。
+- 运行时：passed — 页面加载、中文 → English → 中文切换正常；浏览器控制台无 error / warning。
+
+### English isolation
+
+- 英文分支不带 `principles-artboard--zh`，继续使用原 1672:941 画板、原英文文案、原四原则视觉、原 4 个功能节点和原间距。
+- 修改前后的英文截图尺寸均为 1337 × 875；逐通道比较结果为 `changedChannels: 0 / 3,509,625`，`maxDelta: 0`，确认英文第 03 页像素级无变化。
+- 新增布局规则全部位于 `.principles-artboard--zh ...` 作用域；Horizon 其他章节与其他项目选择器未修改。
+
+### Comparison history
+
+- Pass 1 findings [P1/P2]：旧中文依赖全局翻译，文案不符合指定内容；画板为 16:9，缺少顶部产品视觉；信息架构只有 4 个下级节点，且层级密度与 3:2 参考图不一致。
+- Fix：增加中文专属文案数据与 `data-i18n-skip`；复用原有组件、产品素材和图标库，加入第五个“球道”节点，并用 `.principles-artboard--zh` 重新组织 3:2 分区和连线。
+- Post-fix evidence：`horizon-principles-zh-final.png` 与 `horizon-principles-zh-artboard.png` 显示完整 3:2 构图；浏览器 DOM 验收确认 4 个原则、3 个一级入口、5 个主页功能、2 个记分子页面、无 slogan、无“前两页”、无球形装饰、根画板无溢出。
+- P3：参考图底部的弱绿色线框地形为可选装饰；为避免引入新的非真实素材，本次保持底部留白，不影响架构层级和可读性。
+- No actionable P0/P1/P2 findings remain.
 
 final result: passed
