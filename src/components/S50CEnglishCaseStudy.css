@@ -1,0 +1,1117 @@
+/* S50C English locale rebuild.
+   The confirmed Chinese classes remain the shared composition layer; every
+   language-specific adjustment below is scoped to the English case study. */
+
+.s50c--en {
+  container-type: inline-size;
+  width: 100%;
+  min-width: 0;
+  color: #f4f7f7;
+  font-family: Poppins, Inter, "Helvetica Neue", Arial, sans-serif;
+}
+
+.s50c--en [data-s50c-en-page],
+.s50c--en [data-s50c-en-page] * {
+  box-sizing: border-box;
+}
+
+.s50c--en [data-s50c-en-page] :where(h2, h3, h4, p, li, figcaption, blockquote, strong, span) {
+  min-width: 0;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.s50c--en [data-s50c-en-page] :where(h2, h3, h4) {
+  text-wrap: balance;
+}
+
+.s50c--en [data-s50c-en-page] :where(p, li, figcaption, blockquote) {
+  text-wrap: pretty;
+}
+
+.s50c--en > .s50c-overview-visual {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+}
+
+/* 01 — Project Overview */
+.s50c--en .s50c-overview-section--en .s50c-overview-artboard--zh {
+  grid-template-rows: 3.2cqw auto auto auto;
+  gap: 1.55cqw;
+  min-height: 83.35cqw;
+  aspect-ratio: auto;
+  overflow: hidden;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-primary--zh {
+  grid-row: 2;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-scenarios--zh {
+  grid-row: 3;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-details--zh {
+  grid-row: 4;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-primary--zh {
+  grid-template-columns: minmax(0, 1.7fr) minmax(28cqw, 1fr);
+  gap: 2.5cqw;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-title--zh > div {
+  align-items: flex-start;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-title--zh h2 {
+  max-width: 18ch;
+  line-height: 1.08;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-title--zh h3 {
+  max-width: 28ch;
+  font-size: clamp(24px, 2.55cqw, 34px);
+  line-height: 1.28;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-copy--zh {
+  max-width: 64ch;
+  gap: 0.8cqw;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-copy--zh p,
+.s50c--en .s50c-overview-section--en .s50c-overview-insight--zh > p,
+.s50c--en .s50c-overview-section--en .s50c-overview-insight--zh li,
+.s50c--en .s50c-overview-section--en .s50c-overview-features--zh p,
+.s50c--en .s50c-overview-section--en .s50c-overview-scenario--zh p,
+.s50c--en .s50c-overview-section--en .s50c-overview-users--zh p,
+.s50c--en .s50c-overview-section--en .s50c-overview-details--zh li {
+  font-size: clamp(10.5px, 1cqw, 12.5px);
+  line-height: 1.5;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-features--zh {
+  align-self: auto;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-features--zh article,
+.s50c--en .s50c-overview-section--en .s50c-overview-insight--zh,
+.s50c--en .s50c-overview-section--en .s50c-overview-details--zh > section {
+  height: auto;
+  min-height: 0;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-insights--zh {
+  grid-template-rows: repeat(3, auto);
+  align-content: space-between;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-scenarios--zh > div {
+  grid-template-columns: repeat(3, minmax(0, 0.9fr)) minmax(27cqw, 1.45fr);
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-scenario--zh img {
+  height: 7.6cqw;
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-users--zh {
+  grid-template-columns: minmax(0, 1.1fr) minmax(10cqw, 0.9fr);
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-details--zh {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.35fr) minmax(0, 1fr);
+}
+
+.s50c--en .s50c-overview-section--en .s50c-overview-details--zh > section:first-child ul {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* 02 — Real-world context */
+.s50c--en > section.s50c-overview-visual.s50c-field-context-section--en {
+  background: #000;
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-artboard--zh {
+  grid-template-rows: clamp(42px, 4.7cqw, 48px) auto minmax(53cqw, 1fr) auto;
+  gap: 1.45cqw;
+  min-height: 86.55cqw;
+  aspect-ratio: auto;
+  background: #000;
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-header--zh {
+  grid-row: 2;
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-body--zh {
+  grid-row: 3;
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-inputs--zh {
+  grid-row: 4;
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-heading--zh h2 {
+  max-width: 31ch;
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-header--zh > p {
+  max-width: 92ch;
+  font-size: clamp(11px, 1.02cqw, 13px);
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-body--zh {
+  grid-template-columns: minmax(0, 1.56fr) minmax(31cqw, 1fr);
+  gap: 1.8cqw;
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-media--zh {
+  grid-template-rows: minmax(0, 3.1fr) minmax(10.5cqw, 1fr);
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-thumbnail--zh span {
+  font-size: clamp(9px, 0.72cqw, 10px);
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-constraints--zh > div {
+  grid-template-rows: repeat(4, minmax(11.1cqw, auto));
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-constraint--zh {
+  grid-template-columns: 4.15cqw minmax(0, 1fr) 7.9cqw;
+  gap: 1cqw;
+  height: auto;
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-constraint-copy--zh h4 {
+  font-size: clamp(12px, 1.16cqw, 15px);
+  line-height: 1.22;
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-constraint-copy--zh p,
+.s50c--en .s50c-field-context-section--en .s50c-field-context-input--zh p {
+  font-size: clamp(10.5px, 0.9cqw, 12px);
+  line-height: 1.48;
+}
+
+.s50c--en .s50c-field-context-section--en .s50c-field-context-inputs--zh {
+  grid-template-columns: 14.5cqw minmax(0, 1fr);
+  min-height: 11.5cqw;
+}
+
+/* 03 — Field task journey */
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-artboard--zh {
+  grid-template-rows: clamp(42px, 4.7cqw, 48px) auto minmax(42cqw, 1fr) minmax(19cqw, auto);
+  gap: 1.15cqw;
+  min-height: 86.85cqw;
+  aspect-ratio: auto;
+}
+
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-header--zh {
+  grid-row: 2;
+}
+
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-steps--zh {
+  grid-row: 3;
+}
+
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-considerations--zh {
+  grid-row: 4;
+}
+
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-header--zh h2 {
+  max-width: 26ch;
+}
+
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-header--zh p {
+  max-width: 104ch;
+  font-size: clamp(11px, 1cqw, 13px);
+}
+
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-step--zh {
+  grid-template-rows: minmax(3.6cqw, auto) minmax(7.6cqw, auto) minmax(19.8cqw, 1fr) minmax(6.8cqw, auto);
+  gap: 0.6cqw;
+}
+
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-step--zh > header {
+  align-items: flex-start;
+}
+
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-step--zh > header h3 {
+  font-size: clamp(11.5px, 1.05cqw, 13.5px);
+  line-height: 1.25;
+  white-space: normal;
+}
+
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-step--zh > p,
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-keywords--zh > span,
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-consideration--zh p {
+  font-size: clamp(10px, 0.86cqw, 11.5px);
+}
+
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-considerations--zh {
+  grid-template-columns: 18cqw minmax(0, 1fr);
+}
+
+.s50c--en .s50c-task-journey-section--en .s50c-task-journey-consideration--zh {
+  grid-template-columns: 2.65cqw minmax(0, 1fr);
+  padding: 0.8cqw 1cqw;
+}
+
+/* 04 — Core challenges */
+.s50c--en .s50c-challenge-section--en .s50c-challenge-header--zh h2 {
+  max-width: 34ch;
+  font-size: clamp(22px, 2.22cqw, 31px);
+  line-height: 1.08;
+  white-space: normal;
+}
+
+.s50c--en .s50c-challenge-section--en .s50c-challenge-points--zh .s50c-challenge-point h3,
+.s50c--en .s50c-challenge-section--en .s50c-journey-step--zh h4 {
+  white-space: normal;
+}
+
+.s50c--en .s50c-challenge-section--en .s50c-challenge-points--zh .s50c-challenge-point p {
+  max-width: 17em;
+  font-size: clamp(11px, 1.18cqw, 15px);
+}
+
+.s50c--en .s50c-challenge-section--en .s50c-measurement-journey--zh {
+  height: 36.5%;
+}
+
+.s50c--en .s50c-challenge-section--en .s50c-journey-step--zh p {
+  font-size: clamp(10px, 0.96cqw, 12px);
+}
+
+/* 05 — Information structure */
+.s50c--en .s50c-structure-section--en .s50c-structure-artboard--zh {
+  min-height: 92cqw;
+}
+
+.s50c--en .s50c-structure-section--en {
+  padding-bottom: clamp(32px, 4vw, 48px);
+}
+
+.s50c--en .s50c-structure-section--en .s50c-structure-header--zh h2 {
+  max-width: 35ch;
+  line-height: 1.12;
+}
+
+.s50c--en .s50c-structure-section--en .s50c-capability-grid--zh figure,
+.s50c--en .s50c-structure-section--en .s50c-principle-card--zh,
+.s50c--en .s50c-structure-section--en .s50c-structure-card--zh,
+.s50c--en .s50c-structure-section--en .s50c-logic-node--zh {
+  height: auto;
+}
+
+.s50c--en .s50c-structure-section--en .s50c-capability-grid--zh figure {
+  min-height: 6.8cqw;
+}
+
+.s50c--en .s50c-structure-section--en .s50c-capability-grid--zh figcaption,
+.s50c--en .s50c-structure-section--en .s50c-principle-card--zh p,
+.s50c--en .s50c-structure-section--en .s50c-structure-card--zh h3,
+.s50c--en .s50c-structure-section--en .s50c-logic-node--zh h4 {
+  white-space: normal;
+}
+
+.s50c--en .s50c-structure-section--en .s50c-capability-grid--zh figcaption,
+.s50c--en .s50c-structure-section--en .s50c-principle-card--zh p,
+.s50c--en .s50c-structure-section--en .s50c-structure-card-columns--zh ul,
+.s50c--en .s50c-structure-section--en .s50c-logic-node--zh p {
+  font-size: clamp(10px, 0.94cqw, 11.5px);
+}
+
+.s50c--en .s50c-structure-section--en .s50c-structure-card--measurement--zh {
+  min-height: 18.8cqw;
+}
+
+.s50c--en .s50c-structure-section--en .s50c-structure-card--camera--zh,
+.s50c--en .s50c-structure-section--en .s50c-structure-card--records--zh,
+.s50c--en .s50c-structure-section--en .s50c-structure-card--settings--zh {
+  min-height: 13.1cqw;
+}
+
+.s50c--en .s50c-structure-section--en .s50c-structure-logic--zh {
+  min-height: 17.8cqw;
+}
+
+.s50c--en .s50c-structure-section--en .s50c-device-stage--en {
+  display: contents;
+}
+
+/* 06 — Interaction model */
+.s50c--en .s50c-interaction-section--en .s50c-interaction-artboard--zh {
+  min-height: 82cqw;
+}
+
+.s50c--en .s50c-interaction-section--en {
+  padding-bottom: 80px;
+}
+
+.s50c--en .s50c-interaction-section--en .s50c-interaction-header--zh h2,
+.s50c--en .s50c-interaction-section--en .s50c-interaction-module-heading--zh h3 {
+  white-space: normal;
+}
+
+.s50c--en .s50c-interaction-section--en .s50c-interaction-header--zh small,
+.s50c--en .s50c-interaction-section--en .s50c-interaction-module-heading--zh p,
+.s50c--en .s50c-interaction-section--en .s50c-interaction-key-card--zh p,
+.s50c--en .s50c-interaction-section--en .s50c-interaction-shortcut-list--zh p,
+.s50c--en .s50c-interaction-section--en .s50c-interaction-flow-list--zh p,
+.s50c--en .s50c-interaction-section--en .s50c-interaction-principle-list--zh p {
+  font-size: clamp(10.5px, 0.98cqw, 12px);
+  line-height: 1.48;
+}
+
+.s50c--en .s50c-interaction-section--en :where(.s50c-interaction-key-card--measure--zh, .s50c-interaction-nav-card--zh, .s50c-interaction-shortcut-list--zh article, .s50c-interaction-flow-list--zh article, .s50c-interaction-principle-list--zh article) {
+  height: auto;
+}
+
+.s50c--en .s50c-interaction-section--en .s50c-interaction-key-card--measure--zh {
+  min-height: 13.2cqw;
+}
+
+.s50c--en .s50c-interaction-section--en .s50c-interaction-nav-card--zh {
+  min-height: 16.4cqw;
+}
+
+.s50c--en .s50c-interaction-section--en .s50c-interaction-shortcut-list--zh article {
+  min-height: 9.2cqw;
+}
+
+.s50c--en .s50c-interaction-section--en .s50c-interaction-flow-list--zh article {
+  min-height: 15.8cqw;
+}
+
+.s50c--en .s50c-interaction-section--en .s50c-interaction-principle-list--zh article {
+  min-height: 12.4cqw;
+}
+
+/* 07 — Core measurement experience */
+.s50c--en .s50c-measurement-section--en .s50c-measurement-artboard--zh {
+  min-height: 72cqw;
+  aspect-ratio: auto;
+}
+
+.s50c--en .s50c-measurement-section--en {
+  padding-bottom: 70px;
+}
+
+.s50c--en .s50c-measurement-section--en .s50c-measurement-header--zh {
+  max-width: 68cqw;
+}
+
+.s50c--en .s50c-measurement-section--en .s50c-measurement-header--zh h2,
+.s50c--en .s50c-measurement-section--en .s50c-measurement-module-heading--zh h3,
+.s50c--en .s50c-measurement-section--en .s50c-measurement-highlights--zh > header h3 {
+  white-space: normal;
+}
+
+.s50c--en .s50c-measurement-section--en .s50c-measurement-header--zh h2 {
+  max-width: 31ch;
+  line-height: 1.1;
+}
+
+.s50c--en .s50c-measurement-section--en .s50c-measurement-header--zh small,
+.s50c--en .s50c-measurement-section--en .s50c-measurement-module-heading--zh > p,
+.s50c--en .s50c-measurement-section--en .s50c-measurement-point-list--zh p,
+.s50c--en .s50c-measurement-section--en .s50c-measurement-context-list--zh p,
+.s50c--en .s50c-measurement-section--en .s50c-measurement-state-list--zh p,
+.s50c--en .s50c-measurement-section--en .s50c-measurement-highlights--zh p {
+  font-size: clamp(10px, 0.9cqw, 11.5px);
+}
+
+.s50c--en .s50c-measurement-section--en .s50c-measurement-module-heading--zh > p {
+  min-height: 5.4cqw;
+}
+
+.s50c--en .s50c-measurement-section--en .s50c-measurement-context-content--zh {
+  grid-template-columns: 42% minmax(0, 1fr);
+}
+
+.s50c--en .s50c-measurement-section--en .s50c-measurement-modules--zh {
+  top: 17.2cqw;
+}
+
+.s50c--en .s50c-measurement-section--en .s50c-measurement-highlights--zh {
+  top: 58cqw;
+}
+
+.s50c--en .s50c-measurement-section--en .s50c-measurement-highlights--zh article {
+  min-height: 7cqw;
+}
+
+/* 08 — Final UI gallery */
+.s50c--en .s50c-final-section--en .s50c-final-artboard--zh {
+  min-height: 79cqw;
+  aspect-ratio: auto;
+}
+
+.s50c--en .s50c-final-section--en .s50c-final-header--zh > p {
+  max-width: 44ch;
+  font-size: clamp(21px, 2.05cqw, 30px);
+}
+
+.s50c--en .s50c-final-section--en .s50c-final-header--zh > small {
+  max-width: 86ch;
+  font-size: clamp(11px, 1.03cqw, 13px);
+}
+
+@media (max-width: 1499px) and (min-width: 721px) {
+  .s50c--en .s50c-overview-section--en .s50c-overview-title--zh h2,
+  .s50c--en .s50c-field-context-section--en .s50c-field-context-heading--zh h2,
+  .s50c--en .s50c-task-journey-section--en .s50c-task-journey-header--zh h2,
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-header--zh h2,
+  .s50c--en .s50c-structure-section--en .s50c-structure-header--zh h2,
+  .s50c--en .s50c-interaction-section--en .s50c-interaction-header--zh h2,
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-header--zh h2,
+  .s50c--en .s50c-final-section--en .s50c-final-header--zh h2 {
+    font-size: clamp(22px, 2.3cqw, 30px);
+    line-height: 1.14;
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-artboard--zh {
+    min-height: 96.35cqw;
+  }
+
+  .s50c--en .s50c-field-context-section--en .s50c-field-context-artboard--zh {
+    min-height: 94.55cqw;
+  }
+
+  .s50c--en .s50c-task-journey-section--en .s50c-task-journey-artboard--zh {
+    min-height: 94.85cqw;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-structure-artboard--zh {
+    min-height: 94cqw;
+  }
+
+  .s50c--en .s50c-interaction-section--en .s50c-interaction-artboard--zh {
+    min-height: 85cqw;
+  }
+
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-artboard--zh {
+    min-height: 75cqw;
+  }
+}
+
+@media (max-width: 1120px) {
+  .s50c-overview-layout:has(> .s50c-pages-scroll > .s50c--en) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1120px) and (min-width: 721px) {
+  .s50c--en .s50c-overview-section--en .s50c-overview-artboard--zh {
+    min-height: 86.35cqw;
+  }
+
+  .s50c--en .s50c-field-context-section--en .s50c-field-context-artboard--zh {
+    min-height: 87.55cqw;
+  }
+
+  .s50c--en .s50c-task-journey-section--en .s50c-task-journey-artboard--zh {
+    min-height: 87.85cqw;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-structure-artboard--zh {
+    min-height: 94cqw;
+  }
+
+  .s50c--en .s50c-interaction-section--en .s50c-interaction-artboard--zh {
+    min-height: 85cqw;
+  }
+}
+
+/* English copy needs content-led vertical flow at intermediate widths. */
+@media (max-width: 1499px) and (min-width: 721px) {
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-artboard--zh {
+    display: block;
+    min-height: 0;
+    padding: clamp(30px, 3.65cqw, 48px) 2.8cqw clamp(38px, 4.5cqw, 60px);
+    overflow: hidden;
+  }
+
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-header--zh,
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-modules--zh,
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-highlights--zh {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-header--zh {
+    width: min(72%, 70ch);
+    max-width: none;
+  }
+
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-modules--zh {
+    margin-top: clamp(22px, 2.4cqw, 34px);
+  }
+
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-highlights--zh {
+    margin-top: clamp(30px, 3.2cqw, 44px);
+  }
+}
+
+@media (min-width: 721px) {
+  @container (max-width: 900px) {
+    .s50c--en .s50c-field-context-section--en .s50c-field-context-constraint--zh {
+      grid-template-columns: 4.15cqw minmax(0, 1fr);
+      grid-template-areas:
+        "icon copy"
+        "icon meta";
+      column-gap: 1cqw;
+      row-gap: 0.45cqw;
+      padding: 0.7cqw 0;
+    }
+
+    .s50c--en .s50c-field-context-section--en .s50c-field-context-constraint-icon--zh {
+      grid-area: icon;
+    }
+
+    .s50c--en .s50c-field-context-section--en .s50c-field-context-constraint-copy--zh {
+      grid-area: copy;
+    }
+
+    .s50c--en .s50c-field-context-section--en .s50c-field-context-constraint-meta--zh {
+      grid-area: meta;
+      align-self: auto;
+      gap: 0.45cqw;
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .s50c--en .s50c-measurement-section--en .s50c-measurement-accuracy-content--zh,
+    .s50c--en .s50c-measurement-section--en .s50c-measurement-context-content--zh {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25cqw;
+    }
+
+    .s50c--en .s50c-measurement-section--en :where(.s50c-measurement-camera-ui--zh, .s50c-measurement-result-ui--zh) {
+      width: min(220px, 84%);
+      margin: 0 auto;
+    }
+  }
+
+  @container (max-width: 820px) {
+    .s50c--en .s50c-measurement-section--en .s50c-measurement-header--zh {
+      width: min(100%, 70ch);
+    }
+
+    .s50c--en .s50c-measurement-section--en .s50c-measurement-modules--zh {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 30px;
+    }
+
+    .s50c--en .s50c-measurement-section--en .s50c-measurement-modules--zh > article + article {
+      padding-top: 30px;
+      border-top: 1px solid rgba(213, 229, 230, 0.16);
+    }
+
+    .s50c--en .s50c-measurement-section--en .s50c-measurement-modules--zh > article + article::before {
+      display: none;
+    }
+
+    .s50c--en .s50c-measurement-section--en .s50c-measurement-module-heading--zh > p {
+      min-height: 0;
+    }
+
+    .s50c--en .s50c-measurement-section--en .s50c-measurement-accuracy-content--zh,
+    .s50c--en .s50c-measurement-section--en .s50c-measurement-context-content--zh {
+      grid-template-columns: minmax(180px, 0.72fr) minmax(0, 1.28fr);
+      gap: 24px;
+    }
+
+    .s50c--en .s50c-measurement-section--en :where(.s50c-measurement-camera-ui--zh, .s50c-measurement-result-ui--zh) {
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .s50c--en > .s50c-overview-visual {
+    width: calc(100vw - 15px);
+    height: auto;
+    min-height: 0;
+    padding-bottom: 88px;
+    overflow: visible;
+  }
+
+  .s50c--en > .s50c-structure-section--en {
+    padding-bottom: 40px;
+  }
+
+  .s50c--en [data-s50c-en-page] :where(p, li, figcaption) {
+    font-size: 12px;
+    line-height: 1.58;
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-artboard--zh,
+  .s50c--en .s50c-field-context-section--en .s50c-field-context-artboard--zh,
+  .s50c--en .s50c-task-journey-section--en .s50c-task-journey-artboard--zh,
+  .s50c--en .s50c-final-section--en .s50c-final-artboard--zh {
+    min-height: 0;
+    aspect-ratio: auto;
+    overflow: visible;
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-artboard--zh {
+    display: block;
+    padding-top: 76px;
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-title--zh > div,
+  .s50c--en .s50c-field-context-section--en .s50c-field-context-heading--zh > div,
+  .s50c--en .s50c-task-journey-section--en .s50c-task-journey-header--zh > div {
+    align-items: flex-start;
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-title--zh h2,
+  .s50c--en .s50c-field-context-section--en .s50c-field-context-heading--zh h2,
+  .s50c--en .s50c-task-journey-section--en .s50c-task-journey-header--zh h2 {
+    max-width: 13ch;
+    font-size: clamp(21px, 6.2vw, 26px);
+    line-height: 1.16;
+    white-space: normal;
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-title--zh h3 {
+    max-width: 24ch;
+    font-size: clamp(22px, 6.1vw, 28px);
+    line-height: 1.25;
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-primary--zh,
+  .s50c--en .s50c-overview-section--en .s50c-overview-scenarios--zh > div,
+  .s50c--en .s50c-overview-section--en .s50c-overview-details--zh,
+  .s50c--en .s50c-overview-section--en .s50c-overview-users--zh {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-insights--zh,
+  .s50c--en .s50c-overview-section--en .s50c-overview-scenarios--zh,
+  .s50c--en .s50c-overview-section--en .s50c-overview-details--zh {
+    margin-top: 32px;
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-features--zh {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-features--zh article,
+  .s50c--en .s50c-overview-section--en .s50c-overview-features--zh article:first-child,
+  .s50c--en .s50c-overview-section--en .s50c-overview-details--zh > section {
+    padding: 18px 0;
+    border-left: 0;
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-features--zh article + article,
+  .s50c--en .s50c-overview-section--en .s50c-overview-details--zh > section + section {
+    border-top: 1px solid rgba(216, 235, 235, 0.3);
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-scenario--zh img {
+    height: 160px;
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-users--zh {
+    padding: 20px 0 0;
+    border-top: 1px solid rgba(216, 235, 235, 0.3);
+    border-left: 0;
+  }
+
+  .s50c--en .s50c-field-context-section--en .s50c-field-context-header--zh,
+  .s50c--en .s50c-task-journey-section--en .s50c-task-journey-header--zh {
+    margin-top: 0;
+  }
+
+  .s50c--en .s50c-field-context-section--en .s50c-field-context-constraint--zh {
+    grid-template-columns: 48px minmax(0, 1fr) 28px;
+    min-height: 0;
+  }
+
+  .s50c--en .s50c-task-journey-section--en .s50c-task-journey-step--zh {
+    grid-template-rows: auto auto minmax(240px, auto) auto;
+  }
+
+  .s50c--en .s50c-task-journey-section--en .s50c-task-journey-considerations--zh {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .s50c--en .s50c-task-journey-section--en .s50c-task-journey-considerations--zh > header {
+    border-right: 0;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-frame--zh {
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: auto;
+    overflow: visible;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-header--zh {
+    position: relative;
+    inset: auto;
+    align-items: flex-start;
+    height: auto;
+    min-height: 0;
+    padding: 104px 18px 28px;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-header--zh h2 {
+    max-width: 15ch;
+    font-size: clamp(23px, 6.8vw, 30px);
+    line-height: 1.15;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-artboard--zh {
+    position: relative;
+    inset: auto;
+    display: block;
+    min-height: 0;
+    padding: 390px 18px 36px;
+    overflow: hidden;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-product--zh {
+    top: 26px;
+    left: -10%;
+    width: 66%;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-measurement-ui--zh {
+    top: 178px;
+    left: 52%;
+    width: 31%;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-target--zh {
+    top: 40px;
+    left: 79%;
+    width: 34px;
+    height: 34px;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-sightline--zh {
+    top: 198px;
+    left: 42%;
+    width: 45%;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-points--zh {
+    position: relative;
+    inset: auto;
+    display: grid;
+    gap: 0;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-points--zh .s50c-challenge-point {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 16px;
+    padding: 22px 0;
+    border-top: 1px solid rgba(19, 178, 186, 0.45);
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-points--zh .s50c-challenge-point::before {
+    display: none;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-points--zh .s50c-challenge-point__number {
+    width: 54px;
+    font-size: 20px;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-points--zh .s50c-challenge-point h3 {
+    margin-top: 0;
+    font-size: 18px;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-challenge-points--zh .s50c-challenge-point p {
+    margin-top: 8px;
+    font-size: 13px;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-measurement-journey--zh {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    margin-top: 28px;
+    padding: 20px 16px;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-journey-steps--zh {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-journey-step--zh {
+    justify-items: start;
+    grid-template-columns: 58px minmax(0, 1fr);
+    column-gap: 14px;
+    text-align: left;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-journey-icon-frame--zh {
+    grid-row: 1 / span 2;
+    width: 58px;
+    height: 58px;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-journey-icon-frame--zh svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-journey-step--zh h4 {
+    margin-top: 4px;
+    font-size: 15px;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-journey-step--zh p {
+    max-width: none;
+    margin-top: 5px;
+    font-size: 12px;
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-journey-arrow--zh {
+    width: 24px;
+    height: 24px;
+    margin: 0 auto;
+    transform: rotate(90deg);
+  }
+
+  .s50c--en .s50c-challenge-section--en .s50c-journey-themes--zh {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    margin-top: 18px;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-structure-artboard--zh,
+  .s50c--en .s50c-interaction-section--en .s50c-interaction-artboard--zh,
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-artboard--zh {
+    min-height: 0;
+    aspect-ratio: auto;
+    overflow: visible;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-structure-artboard--zh {
+    padding-top: 196px;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-structure-header--zh {
+    top: 64px;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-structure-header--zh h2,
+  .s50c--en .s50c-interaction-section--en .s50c-interaction-header--zh h2,
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-header--zh h2 {
+    max-width: 15ch;
+    font-size: clamp(22px, 6.4vw, 28px);
+    line-height: 1.16;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-structure-groups--zh {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .s50c--en .s50c-structure-section--en :where(.s50c-structure-card--measurement--zh, .s50c-structure-card--camera--zh, .s50c-structure-card--records--zh, .s50c-structure-card--settings--zh) {
+    min-height: 0;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-structure-card--zh h3 {
+    font-size: 15px;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-structure-principles--zh > h3 {
+    width: 100%;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-device-stage--en {
+    position: relative;
+    display: block;
+    grid-row: 2;
+    width: 100%;
+    height: clamp(285px, 82vw, 430px);
+    margin: -28px 0 -48px;
+    overflow: clip;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-device-composite--zh {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 165%;
+    margin: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  .s50c--en .s50c-interaction-section--en .s50c-interaction-artboard--zh {
+    padding-top: 205px;
+  }
+
+  .s50c--en .s50c-interaction-section--en .s50c-interaction-header--zh small,
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-header--zh small {
+    display: block;
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .s50c--en .s50c-interaction-section--en :where(.s50c-interaction-key-card--measure--zh, .s50c-interaction-nav-card--zh, .s50c-interaction-shortcut-list--zh article, .s50c-interaction-flow-list--zh article, .s50c-interaction-principle-list--zh article) {
+    height: auto;
+    min-height: 0;
+  }
+
+  .s50c--en .s50c-interaction-section--en .s50c-interaction-key-card--measure--zh,
+  .s50c--en .s50c-interaction-section--en .s50c-interaction-nav-card--zh {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-artboard--zh {
+    padding-top: 226px;
+  }
+
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-header--zh {
+    max-width: none;
+  }
+
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-accuracy-content--zh,
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-context-content--zh {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .s50c--en .s50c-measurement-section--en :where(.s50c-measurement-camera-ui--zh, .s50c-measurement-result-ui--zh) {
+    width: min(280px, 78%);
+    margin: 0 auto;
+  }
+
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-highlights--zh {
+    position: relative;
+    inset: auto;
+    margin-top: clamp(28px, 11.5vw, 62px);
+  }
+
+  .s50c--en .s50c-final-section--en .s50c-final-header--zh > p {
+    max-width: 28ch;
+    font-size: 20px;
+    line-height: 1.32;
+  }
+
+  .s50c--en .s50c-final-section--en .s50c-final-header--zh > small {
+    max-width: 48ch;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 540px) {
+  .s50c--en .s50c-overview-section--en .s50c-overview-artboard--zh,
+  .s50c--en .s50c-field-context-section--en .s50c-field-context-artboard--zh,
+  .s50c--en .s50c-task-journey-section--en .s50c-task-journey-artboard--zh {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .s50c--en .s50c-overview-section--en .s50c-overview-users--zh > div {
+    margin-top: 14px;
+  }
+
+  .s50c--en .s50c-structure-section--en {
+    overflow: clip;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-logic-stages--zh {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px 14px;
+    text-align: left;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-logic-nodes--zh {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-logic-node--zh {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    column-gap: 14px;
+    align-items: start;
+    padding: 8px 0;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-logic-icon--zh {
+    grid-row: 1 / span 2;
+    margin: 0;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-logic-node--zh h4 {
+    margin-top: 0;
+    font-size: 13px;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-logic-node--zh p {
+    margin-top: 4px;
+    font-size: 12px;
+  }
+
+  .s50c--en .s50c-structure-section--en .s50c-logic-arrow--zh {
+    width: 18px;
+    height: 18px;
+    margin: 0 auto;
+    transform: rotate(90deg);
+  }
+
+  .s50c--en .s50c-interaction-section--en .s50c-interaction-artboard--zh {
+    padding-top: 225px;
+  }
+
+  .s50c--en .s50c-measurement-section--en .s50c-measurement-state-list--zh figure {
+    width: min(250px, 78%);
+  }
+}
+
+/* Keep the Page 05 heading and its complete composition below the fixed
+   project controls without reopening the tightened trailing gap. */
+@media (min-width: 721px) {
+  .s50c--en .s50c-structure-section--en {
+    --s50c-structure-nav-offset-en: clamp(34px, 4.6cqw, 48px);
+  }
+
+  .s50c--en .s50c-structure-section--en :where(
+    .s50c-structure-header--zh,
+    .s50c-capabilities--zh,
+    .s50c-structure-principles--zh,
+    .s50c-device-composite--zh,
+    .s50c-structure-groups--zh,
+    .s50c-structure-logic--zh
+  ) {
+    transform: translateY(var(--s50c-structure-nav-offset-en));
+  }
+}
+
+@media (min-width: 1500px) {
+  .s50c--en .s50c-structure-section--en .s50c-structure-artboard--zh {
+    min-height: calc(92cqw + var(--s50c-structure-nav-offset-en));
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1499px) {
+  .s50c--en .s50c-structure-section--en .s50c-structure-artboard--zh {
+    min-height: calc(94cqw + var(--s50c-structure-nav-offset-en));
+  }
+}

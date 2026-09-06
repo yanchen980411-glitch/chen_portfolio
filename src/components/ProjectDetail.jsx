@@ -1,5 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "motion/react";
+import { S50CEnglishCaseStudy } from "./S50CEnglishCaseStudy";
+import {
+  ToolsCaptureOrganizeEn,
+  ToolsCoreExperienceEn,
+  ToolsFinalExperienceEn,
+  ToolsMeasureSmarterEn,
+  ToolsProblemSectionEn,
+  ToolsProjectOverviewEn,
+  ToolsStructureSectionEn,
+} from "./ToolsEnglishCaseStudy";
+import { ToolsCompetitiveAnalysis } from "./ToolsCompetitiveAnalysis";
 import { ToolsAnimatedCover } from "./ToolsAnimatedCover";
 import { horizonResearchCopy } from "../content/horizonResearchCopy";
 import { s50cCopy } from "../content/s50cCopy";
@@ -12,6 +23,7 @@ import {
   ArrowsClockwise,
   ArrowsLeftRight,
   Blueprint,
+  BluetoothConnected,
   Camera,
   CheckCircle,
   Circle,
@@ -19,28 +31,38 @@ import {
   DeviceMobile,
   DotsThree,
   Crosshair,
+  Cube,
   Eye,
+  FilePdf,
   FileText,
+  FileXls,
   Flag,
   FlagPennant,
+  FloppyDisk,
   FolderOpen,
   Gear,
   Golf,
   HandTap,
+  Heart,
   House,
   Info,
   Lightbulb,
   Lightning,
   MapPin,
+  MagnifyingGlassPlus,
   ListNumbers,
+  Mountains,
   Play,
   PlusCircle,
   Pulse,
   Quotes,
+  Ruler,
   Selection,
+  ShareNetwork,
   Stack,
   Star,
   Trash,
+  User,
   UsersThree,
   XCircle,
 } from "@phosphor-icons/react";
@@ -2391,79 +2413,374 @@ function ToolsPrototypeSection() {
   );
 }
 
-function ToolsProjectOverview() {
+function ToolsProjectOverviewZh() {
   return (
-    <section className="tools-project" aria-label="MILESEEY Tools Project Overview">
-      <section className="tools-behance-hero" aria-labelledby="tools-overview-title">
-        <div className="tools-behance-copy">
-          <p className="tools-kicker">MOBILE MEASUREMENT / PROJECT WORKSPACE</p>
-          <h2 id="tools-overview-title"><span>MILESEEY</span><span>TOOLS</span></h2>
-          <p className="tools-behance-tagline">FROM MEASUREMENT TO PROJECT.</p>
+    <section
+      className="tools-project-overview--zh"
+      data-tools-zh-page="01"
+      data-i18n-skip
+      lang="zh-CN"
+      aria-labelledby="tools-project-overview-title--zh"
+    >
+      <div className="tools-project-overview__artboard--zh">
+        <header className="tools-project-overview__marker--zh" aria-label="01 Project Overview">
+          <span>01</span>
+          <strong>PROJECT OVERVIEW</strong>
+          <i aria-hidden="true" />
+        </header>
+
+        <div className="tools-project-overview__copy--zh">
+          <h2 id="tools-project-overview-title--zh">
+            <span>让测量，</span>
+            <span>不止停留在一个数字<span aria-hidden="true">。</span></span>
+          </h2>
+
+          <div className="tools-project-overview__body--zh">
+            <p>
+              MILESEEY Tools 是一款面向现场测量与空间管理的移动应用。它连接激光测距设备，并将测量数据、平面图、现场照片与项目资料组织在同一个工作空间中。
+            </p>
+            <p>
+              本次设计以 Project 为核心，重新梳理从设备连接、现场记录到资料整理与交付的完整路径，减少跨工具切换与后期重复录入。
+            </p>
+          </div>
+
+          <div className="tools-project-overview__shift--zh">
+            <i aria-hidden="true" />
+            <strong>从测量工具，到数字化空间管理平台</strong>
+            <span aria-hidden="true" />
+          </div>
         </div>
 
-        <div className="tools-behance-visual tools-overview-composition" aria-label="MILESEEY Tools Home and Project Overview interfaces">
-          <figure className="tools-overview-floorplan" aria-hidden="true">
+        <div className="tools-project-overview__visual--zh" aria-label="MILESEEY Tools 设备连接、测量绘图与项目照片界面">
+          <figure className="tools-project-overview__blueprint--zh" aria-hidden="true">
             <CaseStudyImage src="/assets/projects/tools/floor-plan-workspace.png" alt="" />
           </figure>
 
-          <span className="tools-overview-measure tools-overview-measure--top" aria-hidden="true">6.72</span>
-          <span className="tools-overview-measure tools-overview-measure--side" aria-hidden="true">8.40</span>
-          <span className="tools-overview-coordinate" aria-hidden="true">X: 4.25<br />Y: 7.18</span>
+          <div className="tools-project-overview__link--zh tools-project-overview__link--device--zh" aria-hidden="true">
+            <span><BluetoothConnected size={24} weight="regular" /></span>
+          </div>
 
-          <figure className="tools-overview-ui tools-overview-ui--home">
+          <div className="tools-project-overview__link--zh tools-project-overview__link--photo--zh" aria-hidden="true">
+            <span><Camera size={23} weight="regular" /></span>
+          </div>
+
+          <figure className="tools-project-overview__ui--zh tools-project-overview__ui--device--zh">
+            <div className="tools-project-overview__device-crop--zh">
+              <CaseStudyImage
+                src="/assets/projects/tools/tools-home-connected.png"
+                alt="MILESEEY Tools 首页中的 S50C 已连接状态与电量"
+              />
+            </div>
+          </figure>
+
+          <figure className="tools-project-overview__ui--zh tools-project-overview__ui--workspace--zh">
             <CaseStudyImage
-              loading="eager"
-              src="/assets/projects/tools/tools-home-connected.png"
-              alt="MILESEEY Tools connected Home screen"
+              src="/assets/projects/tools/core-experience-measure-draw.png"
+              alt="MILESEEY Tools 设备列表与平面图测量绘图工作台"
             />
           </figure>
 
-          <figure className="tools-overview-ui tools-overview-ui--project">
+          <figure className="tools-project-overview__ui--zh tools-project-overview__ui--photos--zh">
             <CaseStudyImage
-              loading="eager"
-              src="/assets/projects/tools/tools-project-overview.png"
-              alt="MILESEEY Tools New Project Overview screen"
+              src="/assets/projects/tools/core-experience-project-overview.png"
+              alt="MILESEEY Tools 项目概览中的平面图、现场照片与表单"
             />
           </figure>
         </div>
-      </section>
+
+        <footer className="tools-project-overview__meta--zh" aria-label="项目角色、范围与平台">
+          <article>
+            <UsersThree size={27} weight="regular" aria-hidden="true" />
+            <div><span>ROLE</span><strong>交互设计 / UI 设计</strong></div>
+          </article>
+          <article>
+            <Stack size={27} weight="regular" aria-hidden="true" />
+            <div><span>SCOPE</span><strong>信息架构 / 核心流程 / 设计系统</strong></div>
+          </article>
+          <article>
+            <DeviceMobile size={27} weight="regular" aria-hidden="true" />
+            <div><span>PLATFORM</span><strong>iOS / Android</strong></div>
+          </article>
+        </footer>
+      </div>
+    </section>
+  );
+}
+
+function ToolsProjectOverview() {
+  const { language } = useLanguage();
+
+  return (
+    <section className="tools-project" aria-label="MILESEEY Tools Project Overview">
+      <figure className="tools-pre-prototype-cover" data-i18n-skip>
+        <CaseStudyImage
+          className="tools-pre-prototype-cover__image"
+          src="/assets/projects/tools/tools-pre-prototype-cover.png"
+          alt={
+            language === "zh"
+              ? "MILESEEY Tools 项目封面，展示 Project Detail、测量数据、图纸与现场记录"
+              : "MILESEEY Tools cover showing Project Detail, measurement data, floor plans, and site records"
+          }
+          width={1448}
+          height={1086}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+        />
+      </figure>
 
       <ToolsPrototypeSection />
 
-      <section className="tools-introduction" aria-labelledby="tools-introduction-title">
-        <div className="tools-introduction__lead">
-          <h3 id="tools-introduction-title">Introduction</h3>
-          <p className="tools-introduction__copy">MILESEEY Tools is a mobile workspace designed to connect physical measurement with digital project workflows. It brings device connection, floor planning, on-site documentation and project management into one continuous experience.</p>
+      {language === "zh" ? (
+        <ToolsProjectOverviewZh />
+      ) : (
+        <ToolsProjectOverviewEn />
+      )}
+    </section>
+  );
+}
+
+const toolsProblemFloorsZh = [
+  {
+    label: "一层图纸",
+    src: "/assets/projects/tools/measure-smarter/drawing-state-02.png",
+    alt: "一层户型图纸",
+  },
+  {
+    label: "二层图纸",
+    src: "/assets/projects/tools/measure-smarter/drawing-state-03.png",
+    alt: "二层户型图纸",
+  },
+  {
+    label: "地下层图纸",
+    src: "/assets/projects/tools/measure-smarter/drawing-state-05.png",
+    alt: "地下层户型图纸",
+  },
+];
+
+const toolsProblemMembersZh = [
+  { label: "成员 A", tone: "blue" },
+  { label: "成员 B", tone: "teal" },
+  { label: "成员 C", tone: "violet" },
+];
+
+const toolsProblemPhotosZh = [
+  {
+    src: "/assets/projects/tools/capture-organize/photo-edit-raw.png",
+    alt: "室内装修现场照片",
+    position: "interior",
+  },
+  {
+    src: "/assets/projects/s50c/context/concrete-site.png",
+    alt: "混凝土施工现场照片",
+    position: "concrete",
+  },
+  {
+    src: "/assets/projects/s50c/challenge/challenge-building-background.png",
+    alt: "建筑施工现场照片",
+    position: "building",
+  },
+];
+
+const toolsProblemIssuesZh = [
+  {
+    number: "01",
+    title: "项目资料分散",
+    copy: "测量、图纸、照片与表单缺少统一归属。",
+  },
+  {
+    number: "02",
+    title: "协作边界模糊",
+    copy: "成员职责与编辑、查看权限不够清晰。",
+  },
+  {
+    number: "03",
+    title: "交付依赖整理",
+    copy: "项目结束后仍需人工汇总各类现场资料。",
+  },
+];
+
+function ToolsProblemSectionZh() {
+  return (
+    <section
+      className="tools-problem--zh"
+      data-tools-zh-page="03"
+      data-i18n-skip
+      lang="zh-CN"
+      aria-labelledby="tools-problem-title--zh"
+    >
+      <div className="tools-problem__artboard--zh">
+        <CaseStudyImage
+          className="tools-problem__blueprint--zh"
+          src="/assets/projects/tools/floor-plan-workspace.png"
+          alt=""
+          aria-hidden="true"
+        />
+
+        <header className="tools-problem__header--zh">
+          <div className="tools-problem__marker--zh" aria-label="03 理解问题">
+            <span>03</span>
+            <strong>理解问题</strong>
+            <i aria-hidden="true" />
+          </div>
+
+          <h2 id="tools-problem-title--zh">
+            当测量进入团队，问题不再只是记录数据<span>。</span>
+          </h2>
+
+          <div className="tools-problem__intro--zh">
+            <p>一个现场项目同时包含多个楼层、多名成员、不同设备，以及持续产生的图纸、照片与表单。</p>
+            <p>以单人测量为中心的流程，难以支撑项目级协作。</p>
+          </div>
+        </header>
+
+        <div className="tools-problem__flow--zh" aria-label="从设备测量到项目交付的问题链路">
+          <svg
+            className="tools-problem__connections--zh"
+            viewBox="0 0 1000 270"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <defs>
+              <marker id="tools-problem-arrow--zh" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+                <path d="M1 1 L10 6 L1 11 Z" />
+              </marker>
+            </defs>
+            <path className="tools-problem__flow-line--zh" d="M22 112 H975" markerEnd="url(#tools-problem-arrow--zh)" />
+            <path className="tools-problem__warning-line--zh" d="M145 112 V238 M600 112 V238 M840 112 V238" />
+          </svg>
+
+          <article className="tools-problem__device--zh">
+            <div className="tools-problem__device-stage--zh">
+              <CaseStudyImage
+                src="/assets/projects/s50c/structure/device-front.png"
+                alt="MILESEEY S50C 激光测距设备"
+              />
+            </div>
+            <strong>设备测量</strong>
+          </article>
+
+          <div className="tools-problem__warning--zh tools-problem__warning--ownership--zh">
+            <span aria-label="警示">!</span>
+            <strong>归属不清</strong>
+          </div>
+
+          <article className="tools-problem__project--zh" aria-label="一个项目包含三层图纸和三名成员">
+            <header>
+              <span><FolderOpen size={24} weight="fill" aria-hidden="true" /></span>
+              <strong>一个项目</strong>
+              <DotsThree size={25} weight="bold" aria-hidden="true" />
+            </header>
+
+            <div className="tools-problem__project-content--zh">
+              <div className="tools-problem__floors--zh">
+                {toolsProblemFloorsZh.map((floor) => (
+                  <figure key={floor.label}>
+                    <div className="tools-problem__floor-image--zh">
+                      <CaseStudyImage src={floor.src} alt={floor.alt} />
+                    </div>
+                    <figcaption><Stack size={16} weight="regular" aria-hidden="true" /><span>{floor.label}</span></figcaption>
+                  </figure>
+                ))}
+              </div>
+
+              <ul className="tools-problem__members--zh" aria-label="项目成员">
+                {toolsProblemMembersZh.map((member) => (
+                  <li key={member.label}>
+                    <span data-tone={member.tone}><User size={20} weight="fill" aria-hidden="true" /></span>
+                    <strong>{member.label}</strong>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+
+          <div className="tools-problem__warning--zh tools-problem__warning--permission--zh">
+            <span aria-label="警示">!</span>
+            <strong>权限模糊</strong>
+          </div>
+
+          <article className="tools-problem__materials--zh" aria-label="现场资料">
+            <div className="tools-problem__photo-stack--zh">
+              {toolsProblemPhotosZh.map((photo, index) => (
+                <figure key={photo.src} style={{ "--photo-index": index }}>
+                  <CaseStudyImage className={`is-${photo.position}`} src={photo.src} alt={photo.alt} />
+                </figure>
+              ))}
+              <strong>现场照片</strong>
+            </div>
+            <div className="tools-problem__material-row--zh tools-problem__material-row--data--zh">
+              <span><FileXls size={19} weight="fill" aria-hidden="true" /></span>
+              <strong>测量数据</strong>
+            </div>
+            <div className="tools-problem__material-row--zh tools-problem__material-row--form--zh">
+              <span><FileText size={19} weight="fill" aria-hidden="true" /></span>
+              <strong>现场表单</strong>
+            </div>
+            <span className="tools-problem__more--zh" aria-label="还有其他现场资料"><DotsThree size={21} weight="bold" aria-hidden="true" /></span>
+            <b>现场资料</b>
+          </article>
+
+          <div className="tools-problem__warning--zh tools-problem__warning--manual--zh">
+            <span aria-label="警示">!</span>
+            <strong>人工汇总</strong>
+          </div>
+
+          <article className="tools-problem__delivery--zh" aria-label="项目报告与项目交付">
+            <div className="tools-problem__report--zh">
+              <header><FilePdf size={22} weight="fill" aria-hidden="true" /><strong>项目报告</strong></header>
+              <figure className="tools-problem__report-plan--zh">
+                <CaseStudyImage src="/assets/projects/tools/floor-plan-workspace.png" alt="项目报告中的户型图" />
+              </figure>
+              <div className="tools-problem__report-lines--zh" aria-hidden="true"><i /><i /><i /><i /></div>
+              <div className="tools-problem__report-photos--zh">
+                {toolsProblemPhotosZh.map((photo) => (
+                  <figure key={`report-${photo.src}`}>
+                    <CaseStudyImage className={`is-${photo.position}`} src={photo.src} alt={photo.alt} />
+                  </figure>
+                ))}
+              </div>
+              <span className="tools-problem__more--zh" aria-label="报告包含更多资料"><DotsThree size={18} weight="bold" aria-hidden="true" /></span>
+            </div>
+            <strong>项目交付</strong>
+          </article>
         </div>
 
-        <div className="tools-project-info">
-          <article>
-            <span>01</span>
-            <h4>Project Goal</h4>
-            <strong>Connect measurement, documentation and project management within one continuous workflow.</strong>
-          </article>
-          <article>
-            <span>02</span>
-            <h4>My Role</h4>
-            <p className="tools-project-info__list">UX Strategy · Interaction Design · UI Design · Prototyping</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h4>Scope</h4>
-            <p className="tools-project-info__list">Device Connection · Floor Planning · On-site Documentation · Project Management</p>
-          </article>
-        </div>
-      </section>
+        <ol className="tools-problem__issues--zh">
+          {toolsProblemIssuesZh.map((issue) => (
+            <li key={issue.number}>
+              <div><span>{issue.number}</span><strong>{issue.title}</strong></div>
+              <p>{issue.copy}</p>
+            </li>
+          ))}
+        </ol>
+
+        <aside className="tools-problem__challenge--zh" aria-label="设计挑战">
+          <div className="tools-problem__challenge-main--zh">
+            <header><strong>设计挑战</strong><i aria-hidden="true" /></header>
+            <p>如何以项目为核心，建立清晰的分工、记录、查看与交付机制<span>？</span></p>
+          </div>
+          <div className="tools-problem__challenge-summary--zh">
+            <span>从个人测量</span>
+            <span>到团队协作交付</span>
+          </div>
+        </aside>
+      </div>
     </section>
   );
 }
 
 function ToolsUnderstandingProblem() {
+  const { language } = useLanguage();
+
+  if (language === "zh") return <ToolsProblemSectionZh />;
+  if (language === "en") return <ToolsProblemSectionEn />;
+
   return (
     <section className="tools-problem-section" aria-labelledby="tools-problem-title">
       <div className="tools-problem-shell">
         <header className="tools-problem-header">
-          <p className="tools-problem-label"><span>02</span> — Understanding the Problem</p>
+          <p className="tools-problem-label"><span>03</span> — Understanding the Problem</p>
           <h2 id="tools-problem-title">
             <span>The tools were there.</span>
             <span>The workflow wasn&apos;t.</span>
@@ -2539,6 +2856,202 @@ function ToolsUnderstandingProblem() {
   );
 }
 
+const toolsStructurePrinciplesZh = [
+  {
+    number: "01",
+    title: "项目统一归属",
+    copy: "测量数据、图纸、照片与表单不再散落在不同入口，而是归入对应的 Project，并进一步关联到具体 Plan。",
+  },
+  {
+    number: "02",
+    title: "成员分工清晰",
+    copy: "每位成员只维护自己负责的 Plan，同时可以查看其他成员内容，既保留协作可见性，也避免离线编辑造成内容覆盖。",
+  },
+  {
+    number: "03",
+    title: "记录直达交付",
+    copy: "现场信息在记录时已经完成归档，项目结束后可直接汇总为报告与交付资料，减少二次整理。",
+  },
+];
+
+const toolsStructurePlansZh = toolsProblemFloorsZh.map((floor, index) => ({
+  ...floor,
+  owner: toolsProblemMembersZh[index],
+}));
+
+const toolsStructureTypesZh = [
+  { label: "测量", icon: Ruler },
+  { label: "图纸", icon: Blueprint },
+  { label: "照片", icon: Camera },
+  { label: "表单", icon: FileText },
+];
+
+function ToolsStructureMemberZh({ member }) {
+  return (
+    <li>
+      <span data-tone={member.tone} aria-hidden="true">
+        <User size={20} weight="fill" />
+      </span>
+      <strong>{member.label}</strong>
+    </li>
+  );
+}
+
+function ToolsStructureSectionZh() {
+  return (
+    <section
+      className="tools-structure--zh"
+      data-tools-zh-page="04"
+      data-i18n-skip
+      lang="zh-CN"
+      aria-labelledby="tools-structure-title--zh"
+    >
+      <div className="tools-structure03__artboard--zh">
+        <CaseStudyImage
+          className="tools-structure03__blueprint--zh"
+          src="/assets/projects/tools/floor-plan-workspace.png"
+          alt=""
+          aria-hidden="true"
+        />
+
+        <header className="tools-structure03__marker--zh" aria-label="04 从洞察到结构">
+          <span>04</span>
+          <strong>从洞察到结构</strong>
+          <i aria-hidden="true" />
+        </header>
+
+        <div className="tools-structure03__layout--zh">
+          <div className="tools-structure03__narrative--zh">
+            <h2 id="tools-structure-title--zh">
+              <span>以 Project 为核心，</span>
+              <span>重组现场工作的关系<span aria-hidden="true">。</span></span>
+            </h2>
+
+            <div className="tools-structure03__intro--zh">
+              <p>
+                一个现场项目通常包含多个楼层、不同成员，以及持续产生的测量数据与现场资料。过去以单次测量为中心的结构，很难说明每项内容属于哪个项目、由谁负责维护。
+              </p>
+              <p>
+                因此，我们将 Project 设为统一容器，再以 Plan 划分成员的工作范围，让设备数据、图纸、照片与表单在产生时就进入正确的位置。
+              </p>
+            </div>
+
+            <ol className="tools-structure03__principles--zh">
+              {toolsStructurePrinciplesZh.map((principle) => (
+                <li key={principle.number}>
+                  <span>{principle.number}</span>
+                  <div>
+                    <h3>{principle.title}</h3>
+                    <p>{principle.copy}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="tools-structure03__visual--zh" aria-label="以 Project 与 Plan 组织成员、设备数据和交付资料的产品结构">
+            <svg
+              className="tools-structure03__connections--zh"
+              viewBox="0 0 1000 820"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <defs>
+                <marker id="tools-structure03-arrow--zh" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+                  <path d="M1 1 L9 5 L1 9 Z" />
+                </marker>
+              </defs>
+              <path className="tools-structure03__device-line--zh" d="M54 575 H112 Q132 575 132 552 V296 Q132 275 154 275 H192" markerEnd="url(#tools-structure03-arrow--zh)" />
+              <path className="tools-structure03__delivery-line--zh" d="M842 538 H958" markerEnd="url(#tools-structure03-arrow--zh)" />
+            </svg>
+
+            <figure className="tools-structure03__device--zh">
+              <div>
+                <CaseStudyImage
+                  src="/assets/projects/s50c/structure/device-front.png"
+                  alt="MILESEEY S50C 激光测距设备"
+                />
+              </div>
+              <figcaption>设备数据</figcaption>
+            </figure>
+
+            <article className="tools-structure03__project--zh" aria-labelledby="tools-structure03-project-title--zh">
+              <header className="tools-structure03__project-bar--zh">
+                <div className="tools-structure03__project-name--zh">
+                  <FolderOpen size={27} weight="fill" aria-hidden="true" />
+                  <h3 id="tools-structure03-project-title--zh">一个 Project</h3>
+                  <span><i aria-hidden="true" />进行中</span>
+                </div>
+                <div className="tools-structure03__permissions--zh">
+                  <span>链接权限</span>
+                  <div role="group" aria-label="链接权限">
+                    <button type="button" aria-pressed="true">编辑</button>
+                    <button type="button" aria-pressed="false">仅查看</button>
+                  </div>
+                </div>
+              </header>
+
+              <section className="tools-structure03__workspace--zh" aria-labelledby="tools-structure03-workspace-title--zh">
+                <div>
+                  <h4 id="tools-structure03-workspace-title--zh">团队工作空间</h4>
+                  <p>按 Plan 分工，协作内容对团队可见</p>
+                </div>
+                <ul aria-label="项目成员">
+                  {toolsProblemMembersZh.map((member) => (
+                    <ToolsStructureMemberZh key={member.label} member={member} />
+                  ))}
+                </ul>
+              </section>
+
+              <div className="tools-structure03__plans--zh">
+                {toolsStructurePlansZh.map((plan, index) => (
+                  <article className={index === 0 ? "is-active" : undefined} key={plan.label}>
+                    <figure>
+                      <CaseStudyImage src={plan.src} alt={plan.alt} />
+                    </figure>
+                    <div className="tools-structure03__plan-name--zh">
+                      <h4>{plan.label}</h4>
+                      <p>负责人：{plan.owner.label}</p>
+                    </div>
+                    <ul aria-label={`${plan.label}包含的资料`}>
+                      {toolsStructureTypesZh.map(({ label, icon: Icon }) => (
+                        <li key={label}>
+                          <span><Icon size={21} weight="regular" aria-hidden="true" /></span>
+                          <strong>{label}</strong>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+
+              <footer className="tools-structure03__project-note--zh">
+                <Info size={21} weight="regular" aria-hidden="true" />
+                <p>Project 统一管理目标与资料，Plan 划分编辑边界，设备持续提供测量数据。</p>
+              </footer>
+            </article>
+
+            <aside className="tools-structure03__delivery--zh" aria-label="项目交付">
+              <header><FilePdf size={21} weight="fill" aria-hidden="true" /><strong>项目交付</strong></header>
+              <figure className="tools-structure03__delivery-plan--zh">
+                <CaseStudyImage src="/assets/projects/tools/floor-plan-workspace.png" alt="项目交付中的户型图" />
+              </figure>
+              <div className="tools-structure03__delivery-lines--zh" aria-hidden="true"><i /><i /><i /></div>
+              <div className="tools-structure03__delivery-photos--zh">
+                {toolsProblemPhotosZh.map((photo) => (
+                  <figure key={`structure-${photo.src}`}>
+                    <CaseStudyImage className={`is-${photo.position}`} src={photo.src} alt={photo.alt} />
+                  </figure>
+                ))}
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const toolsInsightMappings = [
   {
     number: "01",
@@ -2576,11 +3089,14 @@ function ToolsStructureNode({ className, icon: Icon, label, central = false }) {
 function ToolsFromInsightToStructure() {
   const { language } = useLanguage();
 
+  if (language === "zh") return <ToolsStructureSectionZh />;
+  if (language === "en") return <ToolsStructureSectionEn />;
+
   return (
     <section className="tools-structure-section" aria-labelledby="tools-structure-title">
       <div className="tools-structure-shell">
         <header className="tools-structure-header">
-          <p className="tools-structure-label"><span>03</span> — From Insight to Structure</p>
+          <p className="tools-structure-label"><span>04</span> — From Insight to Structure</p>
           <h2 id="tools-structure-title">
             <span>From scattered tasks</span>
             <span>to one project-centered workspace.</span>
@@ -2687,6 +3203,142 @@ function ToolsFromInsightToStructure() {
   );
 }
 
+const toolsCoreStepsZh = [
+  {
+    number: "01",
+    title: "创建 Project",
+    description: "从项目列表创建新项目，或继续正在进行的现场任务。",
+    image: "/assets/projects/tools/core-experience/step-01-create-project.png",
+    alt: "Tools 项目列表与 Create New Project 项目创建入口",
+    modifier: "create",
+  },
+  {
+    number: "02",
+    title: "选择空间来源",
+    description: "在空白 Floor Plan 中，通过 Insert 或 Scan 开始建立空间。",
+    image: "/assets/projects/tools/core-experience/step-02-select-space-source.png",
+    alt: "空白 Floor Plan 画布以及底部 Insert 和 Scan 入口",
+    modifier: "source",
+  },
+  {
+    number: "03",
+    title: "进入工作区",
+    description: "房间形成后，可继续移动、调整尺寸、复制或编辑。",
+    image: "/assets/projects/tools/core-experience/step-03-floor-plan-workspace.png",
+    alt: "Room1 平面图编辑工作区与尺寸和底部编辑工具",
+    modifier: "workspace",
+  },
+];
+
+function ToolsCoreExperienceZh() {
+  return (
+    <section
+      className="tools-core-experience--zh"
+      data-tools-zh-page="05"
+      data-i18n-skip
+      lang="zh-CN"
+      aria-labelledby="tools-core05-title--zh"
+    >
+      <div className="tools-core04__artboard--zh">
+        <svg
+          className="tools-core04__blueprint--zh"
+          viewBox="0 0 1448 1086"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+        >
+          <g className="tools-core04__blueprint-upper--zh">
+            <path d="M822 92H1394V374H1188V256H1012V374H822Z" />
+            <path d="M852 122H1362V344H1218V226H982V344H852Z" />
+            <path d="M1012 92V256M1188 92V256M822 212H982M1218 212H1394" />
+            <path d="M805 60H1410M805 51V69M1410 51V69M1423 92V374M1414 92H1432M1414 374H1432" />
+          </g>
+          <g className="tools-core04__blueprint-lower--zh">
+            <path d="M476 518H1054V968H790V874H624V968H476Z" />
+            <path d="M514 552H1018V932H824V838H590V932H514Z" />
+            <path d="M624 552V838M824 552V838M514 690H590M824 690H1018" />
+            <path d="M452 1000H1076M452 989V1011M1076 989V1011" />
+          </g>
+        </svg>
+
+        <header className="tools-core04__marker--zh" aria-label="05 核心体验">
+          <span>05</span>
+          <strong>核心体验</strong>
+          <i aria-hidden="true" />
+        </header>
+
+        <div className="tools-core04__header--zh">
+          <h2 id="tools-core05-title--zh">
+            <span>从创建项目开始，</span>
+            <span>让现场工作自然进入同一条路径<span aria-hidden="true">。</span></span>
+          </h2>
+          <p>
+            用户从 Project 进入具体 Floor Plan，在空白画布中选择 Insert 或 Scan；完成绘制后，图纸与现场照片继续保存在同一个项目中。
+          </p>
+        </div>
+
+        <svg
+          className="tools-core04__connections--zh"
+          viewBox="0 0 1448 1086"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d="M99 445V459" />
+          <path d="M427 445V459" />
+          <path d="M758 414V429" />
+          <path d="M321 459C350 459 350 396 386 396" />
+          <path d="M650 459C680 459 685 366 716 366" />
+          <circle cx="386" cy="396" r="7" />
+          <circle cx="716" cy="366" r="7" />
+        </svg>
+
+        <div className="tools-core04__flow--zh">
+          {toolsCoreStepsZh.map((step) => (
+            <article
+              className={`tools-core04__step--zh tools-core04__step--${step.modifier}--zh`}
+              key={step.number}
+            >
+              <header className="tools-core04__step-heading--zh">
+                <span>{step.number}</span>
+                <h3>{step.title}</h3>
+              </header>
+              <figure className="tools-core04__screen--zh">
+                <img
+                  src={step.image}
+                  alt={step.alt}
+                  width="393"
+                  height="852"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <p>{step.description}</p>
+            </article>
+          ))}
+
+          <aside className="tools-core04__photos--zh">
+            <figure>
+              <img
+                src="/assets/projects/tools/core-experience/step-03-project-photos.png"
+                alt="同一 Project 中的 Photos 页面，包含 Take Photo、Upload Photo 和 Photo 1"
+                width="393"
+                height="852"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <p>同一 Project 内继续管理现场照片</p>
+          </aside>
+        </div>
+
+        <footer className="tools-core04__summary--zh">
+          <i aria-hidden="true" />
+          <strong>从空间建立到资料整理，始终围绕同一个 Project 展开。</strong>
+        </footer>
+      </div>
+    </section>
+  );
+}
+
 const toolsCoreSummaryItems = [
   { label: "Device", icon: DeviceMobile },
   { label: "Floor Plan", icon: Blueprint },
@@ -2696,11 +3348,16 @@ const toolsCoreSummaryItems = [
 ];
 
 function ToolsCoreExperience() {
+  const { language } = useLanguage();
+
+  if (language === "zh") return <ToolsCoreExperienceZh />;
+  if (language === "en") return <ToolsCoreExperienceEn />;
+
   return (
     <section className="tools-core-section" aria-labelledby="tools-core-title">
       <div className="tools-core-shell">
         <header className="tools-core-header">
-          <p className="tools-core-label"><span>04</span> — Core Experience</p>
+          <p className="tools-core-label"><span>05</span> — Core Experience</p>
           <h2 id="tools-core-title">
             <span>One workflow.</span>
             <span>From site to project.</span>
@@ -2817,14 +3474,180 @@ const toolsDrawingTools = [
   { label: "Delete", image: "tool-delete.png" },
 ];
 
+const toolsMeasureEfficiencyStepsZh = [
+  {
+    number: "01",
+    title: "设备随时切换",
+    description: "输入数据时可选择当前连接的设备，明确每一条测量值的来源。",
+    image: "/assets/projects/tools/measure-smarter/device-switcher.png",
+    alt: "当前输入区域中的 S50C、X Tape Mini、设备来源切换和数字键盘",
+    width: 363,
+    height: 484,
+    modifier: "device",
+  },
+  {
+    number: "02",
+    title: "测量结果直接写入",
+    description: "测量值进入当前编辑的墙体与记录位置，无需在设备和 App 之间反复抄写。",
+    image: "/assets/projects/tools/core-experience/step-03-floor-plan-workspace.png",
+    alt: "Room1 Floor Plan 工作区、墙体尺寸和底部编辑工具",
+    width: 393,
+    height: 852,
+    modifier: "workspace",
+  },
+  {
+    number: "03",
+    title: "数据直接计算",
+    description: "在表格中多选记录后直接进行求和等计算，让现场数据立即可用。",
+    image: "/assets/projects/tools/measure-smarter/measurement-calculation.png",
+    alt: "项目数据表格、多选状态与 Sum 求和操作",
+    width: 393,
+    height: 389,
+    modifier: "calculation",
+  },
+];
+
+function ToolsMeasureSmarterZh() {
+  return (
+    <section
+      className="tools-measure--zh"
+      data-tools-zh-page="06"
+      data-i18n-skip
+      lang="zh-CN"
+      aria-labelledby="tools-measure06-title--zh"
+    >
+      <div className="tools-measure05__artboard--zh">
+        <svg
+          className="tools-measure05__blueprint--zh"
+          viewBox="0 0 1448 1086"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+        >
+          <g className="tools-measure05__blueprint-upper--zh">
+            <path d="M842 58H1397V398H1189V275H1033V398H842Z" />
+            <path d="M875 91H1364V365H1221V242H1001V365H875Z" />
+            <path d="M1033 58V275M1189 58V275M842 207H1001M1221 207H1397" />
+            <path d="M824 28H1415M824 18V38M1415 18V38M1426 58V398M1416 58H1436M1416 398H1436" />
+          </g>
+          <g className="tools-measure05__blueprint-lower--zh">
+            <path d="M378 486H1008V1039H753V936H567V1039H378Z" />
+            <path d="M415 522H972V1001H789V900H531V1001H415Z" />
+            <path d="M567 522V900M789 522V900M415 712H531M789 712H972" />
+            <path d="M354 1060H1034M354 1049V1071M1034 1049V1071" />
+          </g>
+        </svg>
+
+        <header className="tools-measure05__marker--zh" aria-label="06 高效测量">
+          <span>06</span>
+          <strong>高效测量</strong>
+          <i aria-hidden="true" />
+        </header>
+
+        <div className="tools-measure05__header--zh">
+          <h2 id="tools-measure06-title--zh">
+            <span>让设备、图纸与数据，</span>
+            <span>在同一条工作流中连续流动<span aria-hidden="true">。</span></span>
+          </h2>
+          <p>
+            用户可以随时切换当前测量设备，测量值直接进入正在编辑的图纸与数据表，并在记录完成后继续进行多选计算。
+          </p>
+        </div>
+
+        <svg
+          className="tools-measure05__connections--zh"
+          viewBox="0 0 1448 1086"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <defs>
+            <marker
+              id="tools-measure05-arrow--zh"
+              viewBox="0 0 10 10"
+              refX="8"
+              refY="5"
+              markerWidth="6"
+              markerHeight="6"
+              orient="auto-start-reverse"
+            >
+              <path d="M0 0L10 5L0 10Z" />
+            </marker>
+          </defs>
+          <path className="tools-measure05__connector--zh" d="M106 393V411" />
+          <path
+            className="tools-measure05__connector--zh"
+            d="M428 522C454 522 455 486 484 486"
+            markerEnd="url(#tools-measure05-arrow--zh)"
+          />
+          <path className="tools-measure05__connector--zh" d="M1026 397V420" />
+          <path
+            className="tools-measure05__connector--zh"
+            d="M835 488C882 494 917 516 960 548"
+            markerEnd="url(#tools-measure05-arrow--zh)"
+          />
+          <path className="tools-measure05__connector--zh" d="M1011 514V535" />
+        </svg>
+
+        <div className="tools-measure05__flow--zh">
+          {toolsMeasureEfficiencyStepsZh.map((step) => (
+            <article
+              className={`tools-measure05__step--zh tools-measure05__step--${step.modifier}--zh`}
+              key={step.number}
+            >
+              <header className="tools-measure05__step-heading--zh">
+                <span>{step.number}</span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              </header>
+
+              <figure className="tools-measure05__screen--zh">
+                <img
+                  src={step.image}
+                  alt={step.alt}
+                  width={step.width}
+                  height={step.height}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+
+              {step.modifier === "workspace" ? (
+                <aside className="tools-measure05__spatial-result--zh" aria-label="2D 到 3D 结果入口">
+                  <div>
+                    <Cube aria-hidden="true" weight="regular" />
+                    <strong>2D → 3D</strong>
+                  </div>
+                  <Cube aria-hidden="true" weight="thin" />
+                  <p>完成图纸后可快速查看空间结果</p>
+                </aside>
+              ) : null}
+            </article>
+          ))}
+        </div>
+
+        <footer className="tools-measure05__summary--zh">
+          <i aria-hidden="true" />
+          <strong>从测量、绘图到计算，数据始终沿着同一条路径前进。</strong>
+        </footer>
+      </div>
+    </section>
+  );
+}
+
 function ToolsMeasureSmarter() {
+  const { language } = useLanguage();
+
+  if (language === "zh") return <ToolsMeasureSmarterZh />;
+  if (language === "en") return <ToolsMeasureSmarterEn />;
+
   const assetRoot = "/assets/projects/tools/measure-smarter";
 
   return (
     <section className="tools-measure-section" aria-labelledby="tools-measure-title">
       <div className="tools-measure-shell">
         <header className="tools-measure-header">
-          <p className="tools-measure-label"><span>05</span> — Measure Smarter</p>
+          <p className="tools-measure-label"><span>06</span> — Measure Smarter</p>
           <h2 id="tools-measure-title">Measure Smarter.</h2>
           <p className="tools-measure-intro">
             Connecting devices, measurements and floor plans in one continuous workflow.
@@ -2930,14 +3753,149 @@ function ToolsMeasureSmarter() {
   );
 }
 
+const toolsCaptureStepsZh = [
+  {
+    number: "01",
+    title: "拍照与上传",
+    description: "从首页直接拍照或上传现场图片，减少在不同工具之间反复切换。",
+    image: "/assets/projects/tools/capture-organize/capture-photo.png",
+    alt: "Tools 首页的 Add Photo 弹窗，包含 Take Photo 与 Upload Photo 入口",
+    width: 393,
+    height: 488,
+    modifier: "capture",
+  },
+  {
+    number: "02",
+    title: "标注重点",
+    description: "使用线、框、箭头与文字补充尺寸和施工重点，让照片同时成为可读的现场记录。",
+    image: "/assets/projects/tools/capture-organize/photo-edit-annotated.png",
+    alt: "Photo 01 现场照片标注界面，包含尺寸、颜色、透明度与标注工具",
+    width: 393,
+    height: 852,
+    modifier: "annotate",
+  },
+  {
+    number: "03",
+    title: "归入项目",
+    description: "保存时关联对应的 Project 与 Plan，照片与表单自动进入正确的资料位置。",
+    image: "/assets/projects/tools/capture-organize/save-to-project-dialog.png",
+    alt: "Save to project 归档界面，包含照片名称、项目选择与创建操作",
+    width: 393,
+    height: 540,
+    modifier: "archive",
+  },
+];
+
+function ToolsCaptureOrganizeZh() {
+  return (
+    <section
+      className="tools-capture-organize--zh"
+      data-tools-zh-page="07"
+      data-i18n-skip
+      lang="zh-CN"
+      aria-labelledby="tools-capture07-title--zh"
+    >
+      <div className="tools-capture06__artboard--zh">
+        <svg
+          className="tools-capture06__blueprint--zh"
+          viewBox="0 0 1448 1086"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+        >
+          <g className="tools-capture06__blueprint-upper--zh">
+            <path d="M875 4H1424V398H1227V286H1090V398H940V207H875Z" />
+            <path d="M916 43H1386V355H1265V247H1052V355H978V169H916Z" />
+            <path d="M1090 4V286M1227 4V286M940 207H1090M1227 207H1424" />
+            <path d="M851 28H1434M851 17V39M1434 17V39M1405 4V398" />
+          </g>
+          <g className="tools-capture06__blueprint-lower--zh">
+            <path d="M776 598H1440V1082H1215V952H1022V1082H776Z" />
+            <path d="M819 638H1397V1041H1256V912H981V1041H819Z" />
+            <path d="M1022 638V912M1215 638V952M819 820H981M1256 820H1397" />
+            <path d="M750 1058H1420M750 1047V1069M1420 1047V1069" />
+          </g>
+        </svg>
+
+        <header className="tools-capture06__marker--zh" aria-label="07 记录与整理">
+          <span>07</span>
+          <strong>记录与整理</strong>
+          <i aria-hidden="true" />
+        </header>
+
+        <div className="tools-capture06__header--zh">
+          <h2 id="tools-capture07-title--zh">
+            <span>让现场资料，</span>
+            <span>在记录发生时就完成归档<span>。</span></span>
+          </h2>
+          <p>
+            照片、标注与表单在现场产生时就关联到对应的 Project 与 Plan。记录完成即同步归档，项目结束后无需再逐张查找和重新整理。
+          </p>
+        </div>
+
+        <svg
+          className="tools-capture06__connections--zh"
+          viewBox="0 0 1448 1086"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d="M407 363H470C483 363 487 370 487 384V426" />
+          <circle cx="407" cy="363" r="4" />
+          <circle cx="487" cy="426" r="4" />
+          <path d="M899 363H924C940 363 941 373 941 388V414C941 428 948 438 964 438H991" />
+          <circle cx="899" cy="363" r="4" />
+          <circle cx="991" cy="438" r="4" />
+        </svg>
+
+        <div className="tools-capture06__flow--zh">
+          {toolsCaptureStepsZh.map((step) => (
+            <article
+              className={`tools-capture06__step--zh tools-capture06__step--${step.modifier}--zh`}
+              key={step.number}
+            >
+              <header className="tools-capture06__step-heading--zh">
+                <span>{step.number}</span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              </header>
+
+              <figure className="tools-capture06__screen--zh">
+                <CaseStudyImage
+                  src={step.image}
+                  alt={step.alt}
+                  width={step.width}
+                  height={step.height}
+                />
+              </figure>
+            </article>
+          ))}
+        </div>
+
+        <footer className="tools-capture06__summary--zh">
+          <i aria-hidden="true" />
+          <strong>
+            记录不是项目结束后的补充，而是现场工作的一部分<span>。</span>
+          </strong>
+        </footer>
+      </div>
+    </section>
+  );
+}
+
 function ToolsCaptureOrganize() {
+  const { language } = useLanguage();
+
+  if (language === "zh") return <ToolsCaptureOrganizeZh />;
+  if (language === "en") return <ToolsCaptureOrganizeEn />;
+
   const assetRoot = "/assets/projects/tools/capture-organize";
 
   return (
     <section className="tools-capture-section" aria-labelledby="tools-capture-title">
       <div className="tools-capture-shell">
         <header className="tools-capture-header">
-          <p className="tools-capture-label"><span>06</span> — Capture &amp; Organize</p>
+          <p className="tools-capture-label"><span>07</span> — Capture &amp; Organize</p>
           <h2 id="tools-capture-title">
             <span>Capture every detail.</span>
             <span>Keep everything organized.</span>
@@ -3037,14 +3995,162 @@ function ToolsCaptureOrganize() {
   );
 }
 
+const toolsFinalExperiencePanelsZh = [
+  {
+    key: "home",
+    image: "/assets/projects/tools/final-experience/home-multi-device.png",
+    alt: "MILESEEY Tools 首页，显示多设备连接状态、创建项目与照片工作区入口",
+    width: 393,
+    height: 852,
+    revealOrder: 0,
+  },
+  {
+    key: "project",
+    image: "/assets/projects/tools/final-experience/project-detail.png",
+    alt: "New Project 1 项目详情页，显示项目状态与进行中的 Floor Plan",
+    width: 393,
+    height: 852,
+    revealOrder: 1,
+  },
+  {
+    key: "floor-card",
+    image: "/assets/projects/tools/final-experience/floor-plan-card.png",
+    alt: "Floor Plan 1 建筑平面图记录卡片",
+    width: 361,
+    height: 104,
+    revealOrder: 6,
+  },
+  {
+    key: "drawing",
+    image: "/assets/projects/tools/core-experience/step-03-floor-plan-workspace.png",
+    alt: "Floor Plan 1 绘图工作区，显示 Room1、尺寸与底部编辑工具",
+    width: 393,
+    height: 852,
+    revealOrder: 2,
+  },
+  {
+    key: "switcher",
+    image: "/assets/projects/tools/measure-smarter/device-switcher.png",
+    alt: "测量输入界面的设备切换面板，包含 S50C、X Tape Mini 与数字键盘",
+    width: 363,
+    height: 484,
+    revealOrder: 5,
+  },
+  {
+    key: "measurement",
+    image: "/assets/projects/tools/measure-smarter/measurement-calculation.png",
+    alt: "项目测量数据表，显示多选数据与 Sum 计算操作",
+    width: 393,
+    height: 389,
+    revealOrder: 4,
+  },
+  {
+    key: "collaboration",
+    image: "/assets/projects/tools/final-experience/invite-collaboration.png",
+    alt: "Project Team 与 Invite Member 协作权限界面",
+    width: 393,
+    height: 852,
+    revealOrder: 3,
+  },
+];
+
+function ToolsFinalExperienceZh() {
+  return (
+    <section
+      className="tools-final-experience--zh"
+      data-tools-zh-page="08"
+      data-i18n-skip
+      lang="zh-CN"
+      aria-labelledby="tools-final08-title--zh"
+    >
+      <div className="tools-final07__artboard--zh">
+        <svg
+          className="tools-final07__blueprint--zh"
+          viewBox="0 0 1448 1086"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+        >
+          <g className="tools-final07__blueprint-upper--zh">
+            <path d="M916 -12H1456V360H1332V268H1186V360H1034V207H916Z" />
+            <path d="M952 26H1418V322H1368V230H1150V322H1072V168H952Z" />
+            <path d="M1186 -12V268M1332 -12V268M1034 207H1186M1332 207H1456" />
+            <path d="M891 8H1432M891 -4V20M1432 -4V20M1400 -12V360" />
+            <path d="M991 62H1110V143H991ZM1218 79H1288V151H1218Z" />
+          </g>
+          <g className="tools-final07__blueprint-lower--zh">
+            <path d="M-40 663H634V1112H480V1004H308V1112H104V913H-40Z" />
+            <path d="M0 704H594V1070H520V963H270V1070H144V875H0Z" />
+            <path d="M308 704V1004M480 704V1004M144 875H308M480 875H594" />
+            <path d="M-14 1088H616M-14 1076V1100M616 1076V1100" />
+          </g>
+          <g className="tools-final07__blueprint-right--zh">
+            <path d="M858 718H1510V1114H1274V992H1086V1114H858Z" />
+            <path d="M902 758H1465V1072H1318V951H1042V1072H902Z" />
+            <path d="M1086 758V992M1274 758V992M902 875H1042M1318 875H1465" />
+          </g>
+        </svg>
+
+        <motion.header
+          className="tools-final07__header--zh"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-8% 0px" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <div className="tools-final07__marker--zh" aria-label="08 最终体验">
+            <span>08</span>
+            <strong>最终体验</strong>
+            <i aria-hidden="true" />
+          </div>
+          <h2 id="tools-final08-title--zh">
+            让每一种现场信息，都回到同一个 <span className="tools-final07__project-word--zh">Project<span>。</span></span>
+          </h2>
+          <p>从首页、项目到图纸与现场资料，所有操作被组织在一套连续、清晰的工作体验中。</p>
+        </motion.header>
+
+        <div className="tools-final07__stage--zh" aria-label="七个 MILESEEY Tools 最终体验界面">
+          {toolsFinalExperiencePanelsZh.map((panel) => (
+            <motion.div
+              className={`tools-final07__panel-motion--zh tools-final07__panel-motion--${panel.key}--zh`}
+              key={panel.key}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-5% 0px" }}
+              transition={{
+                duration: 0.52,
+                delay: 0.08 + (panel.revealOrder * 0.055),
+                ease: "easeOut",
+              }}
+            >
+              <figure className={`tools-final07__panel--zh tools-final07__panel--${panel.key}--zh`}>
+                <CaseStudyImage
+                  src={panel.image}
+                  alt={panel.alt}
+                  width={panel.width}
+                  height={panel.height}
+                />
+              </figure>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ToolsFinalExperience() {
+  const { language } = useLanguage();
+
+  if (language === "zh") return <ToolsFinalExperienceZh />;
+  if (language === "en") return <ToolsFinalExperienceEn />;
+
   const assetRoot = "/assets/projects/tools/final-experience";
 
   return (
     <section className="tools-final-section" aria-labelledby="tools-final-title">
       <div className="tools-final-shell">
         <header className="tools-final-header">
-          <p className="tools-final-label"><span>07</span> — Final Experience</p>
+          <p className="tools-final-label"><span>08</span> — Final Experience</p>
           <h2 id="tools-final-title">
             <span>One workspace.</span>
             <span>From measurement to project.</span>
@@ -3094,6 +4200,7 @@ function ToolsFinalExperience() {
 
 function ToolsCaseStudy({ project, onClose, onNext, active }) {
   const dialogRef = useRef(null);
+  const { language } = useLanguage();
   const { scrollRef, returnFromHero } = useSharedProjectDetailScroll(onClose);
   useProjectDialog(returnFromHero, dialogRef, active);
 
@@ -3124,8 +4231,9 @@ function ToolsCaseStudy({ project, onClose, onNext, active }) {
         scrollClassName="tools-project-shell-scroll"
       >
           <main className="horizon-pages-scroll tools-project-scroll">
-            <div className="tools-case-study-content">
+            <div className={language === "en" ? "tools-case-study-content tools-case--en" : "tools-case-study-content"}>
               <ToolsProjectOverview />
+              <ToolsCompetitiveAnalysis />
               <ToolsUnderstandingProblem />
               <ToolsFromInsightToStructure />
               <ToolsCoreExperience />
@@ -3167,6 +4275,629 @@ function ToolsCaseStudy({ project, onClose, onNext, active }) {
           </aside>
       </SharedProjectDetailScrollShell>
     </motion.div>
+  );
+}
+
+const s50cOverviewZh = {
+  features: [
+    {
+      number: "01",
+      key: "capability",
+      title: "专业能力",
+      description: <>距离、面积、体积、间接测量等多种模式，<br />需要被清晰组织。</>,
+      Icon: Ruler,
+    },
+    {
+      number: "02",
+      key: "field",
+      title: "现场操作",
+      description: <>在复杂环境中，<br />实体按键与屏幕反馈需要保持一致。</>,
+      Icon: HandTap,
+    },
+    {
+      number: "03",
+      key: "trust",
+      title: "结果可信",
+      description: <>测量数据需要可理解、可保存、可追溯，<br />支持后续工程记录与管理。</>,
+      Icon: FloppyDisk,
+    },
+  ],
+  challenges: [
+    "如何将复杂的专业功能组织为清晰的操作流程",
+    "如何保证强光、户外等复杂环境中的可视性与易用性",
+    "如何统一实体按键与屏幕反馈的交互体验",
+    "如何让测量结果可靠、可理解并支持后续管理",
+  ],
+  values: [
+    "提升现场测量效率",
+    "降低使用门槛与出错率",
+    "提供稳定、可靠的专业体验",
+    "让测量数据真正服务于施工与管理",
+  ],
+  scenarios: [
+    {
+      key: "construction",
+      title: "建筑施工",
+      description: <>室内外建筑结构的测量，<br />如层高、开间、距离等。</>,
+      image: "/assets/projects/s50c/challenge/challenge-building-background.png",
+      alt: "脚手架环绕的建筑施工现场",
+    },
+    {
+      key: "renovation",
+      title: "装修测量",
+      description: <>室内空间尺寸与面积测量，<br />辅助设计与施工。</>,
+      image: "/assets/projects/tools/capture-organize/photo-edit-raw.png",
+      alt: "正在施工中的室内空间",
+    },
+    {
+      key: "acceptance",
+      title: "工程验收",
+      description: <>记录关键尺寸数据，<br />用于验收、归档与后续查看。</>,
+      image: "/assets/projects/s50c/overview/field-acceptance-reference.png",
+      alt: "工程人员手持测距设备进行现场验收",
+    },
+  ],
+  users: [
+    ["建筑施工人员", "现场测量建模"],
+    ["装修 / 测量从业者", "室内空间测量"],
+    ["工程管理人员", "数据记录与验收"],
+  ],
+  role: [
+    "交互流程设计",
+    "界面与图标设计",
+    "实体按键逻辑梳理",
+    "数据记录与系统界面设计",
+    "切图与 UI 规范输出",
+    "评审与测试支持",
+  ],
+  goals: [
+    "让复杂的测量功能更清晰、易用",
+    "提升相机辅助瞄准的使用效率",
+    "优化实体按键与屏幕反馈的协同体验",
+    "建立统一、可扩展的界面系统",
+    "帮助用户在真实场景中快速完成测量任务",
+  ],
+  keywords: ["激光测距", "专业测量", "工业工具", "相机辅助", "现场场景", "清晰高效"],
+};
+
+function S50COverviewInsightZh({ title, Icon, children, className = "" }) {
+  return (
+    <section className={`s50c-overview-insight--zh ${className}`.trim()}>
+      <header>
+        <Icon weight="light" aria-hidden="true" />
+        <h3>{title}</h3>
+      </header>
+      {children}
+    </section>
+  );
+}
+
+function S50COverviewSectionZh() {
+  return (
+    <section
+      className="s50c-overview-visual s50c-overview-section--zh"
+      aria-labelledby="s50c-overview-title-zh"
+      data-s50c-zh-page="01"
+      data-i18n-skip
+    >
+      <div className="s50c-overview-artboard--zh">
+        <CaseStudyImage
+          className="s50c-overview-background--zh"
+          src="/assets/projects/s50c/challenge/challenge-building-background.png"
+          alt=""
+        />
+        <span className="s50c-overview-background-shade--zh" aria-hidden="true" />
+
+        <header className="s50c-overview-brand--zh">
+          <span>MILESEEY</span>
+          <div><b>S50C</b><small>专业测量<br />创造更好的现场</small></div>
+        </header>
+
+        <div className="s50c-overview-primary--zh">
+          <div className="s50c-overview-story--zh">
+            <header className="s50c-overview-title--zh">
+              <div><span>01 /</span><h2 id="s50c-overview-title-zh">项目概述</h2></div>
+              <h3>从专业测量工具，<br />到清晰可靠的现场体验。</h3>
+            </header>
+
+            <div className="s50c-overview-copy--zh">
+              <p>
+                S50C 是一款面向建筑施工与专业测量场景的相机辅助激光测距设备，<br />
+                覆盖距离、面积、体积、角度、间接测量等多种专业任务。
+              </p>
+            </div>
+
+            <div className="s50c-overview-features--zh" aria-label="三个项目特征">
+              {s50cOverviewZh.features.map((feature) => {
+                const FeatureIcon = feature.Icon;
+                return (
+                  <article key={feature.key}>
+                    <header>
+                      <FeatureIcon weight="light" aria-hidden="true" />
+                      <small>{feature.number}</small>
+                    </header>
+                    <h4>{feature.title}</h4>
+                    <p>{feature.description}</p>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+
+          <aside className="s50c-overview-insights--zh" aria-label="项目背景、设计挑战与核心价值">
+            <S50COverviewInsightZh title="项目背景" Icon={FileText} className="s50c-overview-background-copy--zh">
+              <p>
+                建筑施工与装修场景中，测量任务多样且环境复杂。<br />
+                传统工具效率有限、容易出错，用户需要更专业、更智能，同时更容易理解和操作的测量方案。
+              </p>
+            </S50COverviewInsightZh>
+
+            <S50COverviewInsightZh title="设计挑战" Icon={Crosshair}>
+              <ul>{s50cOverviewZh.challenges.map((item) => <li key={item}>{item}</li>)}</ul>
+            </S50COverviewInsightZh>
+
+            <S50COverviewInsightZh title="核心价值" Icon={Lightning}>
+              <ul>{s50cOverviewZh.values.map((item) => <li key={item}>{item}</li>)}</ul>
+            </S50COverviewInsightZh>
+          </aside>
+        </div>
+
+        <section className="s50c-overview-scenarios--zh" aria-labelledby="s50c-overview-scenarios-title-zh">
+          <header>
+            <h3 id="s50c-overview-scenarios-title-zh">使用场景</h3>
+            <span>从测量 · 到更好的现场</span>
+          </header>
+          <div>
+            {s50cOverviewZh.scenarios.map((scenario) => (
+              <article className={`s50c-overview-scenario--zh s50c-overview-scenario--${scenario.key}--zh`} key={scenario.key}>
+                <CaseStudyImage src={scenario.image} alt={scenario.alt} />
+                <h4>{scenario.title}</h4>
+                <p>{scenario.description}</p>
+              </article>
+            ))}
+
+            <aside className="s50c-overview-users--zh" aria-labelledby="s50c-overview-users-title-zh">
+              <header><UsersThree weight="light" aria-hidden="true" /><h3 id="s50c-overview-users-title-zh">典型用户</h3></header>
+              <blockquote>
+                <Quotes weight="fill" aria-hidden="true" />
+                <p>他们需要的不只是一个测量工具，<br />而是一套真正能在现场被信赖的测量系统。</p>
+              </blockquote>
+              <div>
+                {s50cOverviewZh.users.map(([title, description]) => (
+                  <p key={title}><strong>{title}</strong><span>{description}</span></p>
+                ))}
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <div className="s50c-overview-details--zh">
+          <section aria-labelledby="s50c-overview-role-title-zh">
+            <h3 id="s50c-overview-role-title-zh">我的角色</h3>
+            <h4>UX / UI Designer</h4>
+            <ul>{s50cOverviewZh.role.map((item) => <li key={item}>{item}</li>)}</ul>
+          </section>
+
+          <section aria-labelledby="s50c-overview-goals-title-zh">
+            <h3 id="s50c-overview-goals-title-zh">项目目标</h3>
+            <ul className="s50c-overview-goals--zh">
+              {s50cOverviewZh.goals.map((item) => (
+                <li key={item}><CheckCircle weight="light" aria-hidden="true" /><span>{item}</span></li>
+              ))}
+            </ul>
+          </section>
+
+          <section aria-labelledby="s50c-overview-keywords-title-zh">
+            <h3 id="s50c-overview-keywords-title-zh">关键词</h3>
+            <div className="s50c-overview-keywords--zh">
+              {s50cOverviewZh.keywords.map((item) => <span key={item}>{item}</span>)}
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+function S50CPlannedChapterZh({ number, title, subtitle }) {
+  return (
+    <section
+      className="s50c-overview-visual s50c-planned-section--zh"
+      aria-labelledby={`s50c-planned-title-${number}`}
+      data-s50c-zh-page={number}
+      data-i18n-skip
+    >
+      <div className="s50c-planned-artboard--zh">
+        <CaseStudyImage
+          src="/assets/projects/s50c/challenge/challenge-building-background.png"
+          alt=""
+          aria-hidden="true"
+        />
+        <span aria-hidden="true" />
+        <header>
+          <div><b>{number} /</b><h2 id={`s50c-planned-title-${number}`}>{title}</h2></div>
+          <p>{subtitle}</p>
+        </header>
+      </div>
+    </section>
+  );
+}
+
+const s50cFieldContextZh = {
+  constraints: [
+    {
+      number: "01",
+      title: "复杂现场",
+      description: <>远距离目标、遮挡与强光并存，<br />目标识别与瞄准必须足够清晰。</>,
+      english: <>COMPLEX<br />ENVIRONMENT</>,
+      Icon: Mountains,
+    },
+    {
+      number: "02",
+      title: "实体按键操作",
+      description: <>单手操作与低频注视要求按键逻辑稳定，<br />并与屏幕反馈保持一致。</>,
+      english: <>PHYSICAL<br />OPERATION</>,
+      Icon: HandTap,
+    },
+    {
+      number: "03",
+      title: "专业任务复杂",
+      description: <>距离、面积、体积、间接测量等模式<br />需要被清晰组织，避免功能堆叠。</>,
+      english: <>PROFESSIONAL<br />TASKS</>,
+      Icon: Stack,
+    },
+    {
+      number: "04",
+      title: "结果需要追溯",
+      description: <>结果不仅要准确，还应保留任务语境，<br />支持保存、回看与后续使用。</>,
+      english: <>DATA<br />TRACEABILITY</>,
+      Icon: FileText,
+    },
+  ],
+  scenes: [
+    {
+      key: "construction",
+      title: "建筑施工",
+      description: "室外结构 / 高空作业 / 长距离测量",
+      image: "/assets/projects/s50c/challenge/challenge-building-background.png",
+      alt: "无人物的建筑施工与脚手架现场",
+    },
+    {
+      key: "interior",
+      title: "室内装修",
+      description: "室内空间 / 尺寸与面积测量",
+      image: "/assets/projects/tools/capture-organize/photo-edit-raw.png",
+      alt: "正在施工中的室内空间",
+    },
+    {
+      key: "acceptance",
+      title: "工程验收",
+      description: "数据记录 / 现场确认 / 后续管理",
+      image: "/assets/projects/s50c/overview/field-acceptance-reference.png",
+      alt: "工程人员使用测距设备进行现场验收",
+    },
+  ],
+  inputs: [
+    {
+      number: "01",
+      title: "目标可见",
+      description: "让用户始终知道自己正在测量什么。",
+      Icon: Crosshair,
+    },
+    {
+      number: "02",
+      title: "状态清晰",
+      description: "让用户知道当前进行到哪一步。",
+      Icon: FileText,
+    },
+    {
+      number: "03",
+      title: "结果有语境",
+      description: "让数据离开现场后仍然可理解。",
+      Icon: ShareNetwork,
+    },
+  ],
+};
+
+function S50CFieldConstraintZh({ item }) {
+  const { Icon } = item;
+  return (
+    <article className="s50c-field-context-constraint--zh">
+      <span className="s50c-field-context-constraint-icon--zh" aria-hidden="true">
+        <Icon weight="light" />
+      </span>
+      <div className="s50c-field-context-constraint-copy--zh">
+        <h4>{item.title}</h4>
+        <p>{item.description}</p>
+      </div>
+      <div className="s50c-field-context-constraint-meta--zh">
+        <strong>{item.number}</strong>
+        <span>{item.english}</span>
+      </div>
+    </article>
+  );
+}
+
+function S50CFieldContextSectionZh() {
+  return (
+    <section
+      className="s50c-overview-visual s50c-field-context-section--zh"
+      aria-labelledby="s50c-field-context-title-zh"
+      data-s50c-zh-page="02"
+      data-i18n-skip
+    >
+      <div className="s50c-field-context-artboard--zh">
+        <header className="s50c-field-context-header--zh">
+          <div className="s50c-field-context-heading--zh">
+            <div>
+              <span>02 /</span>
+              <h2 id="s50c-field-context-title-zh">走进真实测量场景</h2>
+            </div>
+            <h3>背景与设计约束</h3>
+          </div>
+          <p>
+            在建筑施工与专业测量现场，准确的数字只是结果。真正的挑战，是在远距离、<br />
+            强光、遮挡与多任务切换中，让用户始终知道测什么、怎么测，以及结果如何被记录和使用。
+          </p>
+        </header>
+
+        <div className="s50c-field-context-body--zh">
+          <div className="s50c-field-context-media--zh">
+            <figure className="s50c-field-context-scene--zh">
+              <CaseStudyImage
+                src="/assets/projects/s50c/context/concrete-site.png"
+                alt="无人物的未完工混凝土建筑内部与远距离城市视线"
+              />
+              <span className="s50c-field-context-scene-shade--zh" aria-hidden="true" />
+              <figcaption>
+                <strong>真实现场，<br />是设计约束的来源。</strong>
+                <span>REAL SPACES<br />REAL CHALLENGES</span>
+              </figcaption>
+              <div className="s50c-field-context-measurement--zh" aria-label="从近处结构到远处目标的 12.650 米测量示意">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                  <polyline points="20,88 20,26 70,48 70,84" />
+                  <rect x="18.8" y="24.2" width="2.5" height="3.7" />
+                  <rect x="18.8" y="86.1" width="2.5" height="3.7" />
+                  <rect x="68.8" y="46.2" width="2.5" height="3.7" />
+                  <rect x="68.8" y="82.1" width="2.5" height="3.7" />
+                </svg>
+                <span>12.650 <small>m</small></span>
+              </div>
+            </figure>
+
+            <div className="s50c-field-context-thumbnails--zh" aria-label="三个典型测量场景">
+              {s50cFieldContextZh.scenes.map((scene, index) => (
+                <figure key={scene.key} className={`s50c-field-context-thumbnail--zh s50c-field-context-thumbnail--${scene.key}--zh`}>
+                  <CaseStudyImage src={scene.image} alt={scene.alt} />
+                  <figcaption>
+                    <small>0{index + 1}</small>
+                    <strong>{scene.title}</strong>
+                    <span>{scene.description}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+
+          <section className="s50c-field-context-constraints--zh" aria-labelledby="s50c-field-context-constraints-title-zh">
+            <header>
+              <h3 id="s50c-field-context-constraints-title-zh">设计约束</h3>
+              <span aria-hidden="true" />
+              <small>UNDERSTANDING<br />THE REAL CONTEXT</small>
+            </header>
+            <div>
+              {s50cFieldContextZh.constraints.map((item) => (
+                <S50CFieldConstraintZh key={item.number} item={item} />
+              ))}
+            </div>
+          </section>
+        </div>
+
+        <section className="s50c-field-context-inputs--zh" aria-labelledby="s50c-field-context-inputs-title-zh">
+          <header>
+            <h3 id="s50c-field-context-inputs-title-zh">设计输入</h3>
+            <span>DESIGN INPUT</span>
+          </header>
+          <div>
+            {s50cFieldContextZh.inputs.map((item) => {
+              const { Icon } = item;
+              return (
+                <article key={item.number} className="s50c-field-context-input--zh">
+                  <Icon weight="light" aria-hidden="true" />
+                  <div>
+                    <small>{item.number}</small>
+                    <h4>{item.title}</h4>
+                    <p>{item.description}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+      </div>
+    </section>
+  );
+}
+
+const s50cTaskJourneyZh = {
+  steps: [
+    {
+      number: "01",
+      key: "observe",
+      title: "观察与定位",
+      description: "扫描周围环境，确定测量位置与目标点，判断合适的测量角度。",
+      image: "/assets/projects/s50c/context/concrete-site.png",
+      alt: "无人物的混凝土施工空间与远距离目标",
+      visualType: "scene",
+      keywords: [
+        { label: "识别测量目标", Icon: Crosshair },
+        { label: "评估现场条件", Icon: Eye },
+      ],
+    },
+    {
+      number: "02",
+      key: "aim",
+      title: "对准与瞄准",
+      description: "通过相机取景与辅助标识，对准目标并确认测量点。",
+      image: "/assets/projects/s50c/final-experience/camera-measurement.png",
+      alt: "S50C 相机辅助瞄准与现场测量界面",
+      visualType: "ui",
+      keywords: [
+        { label: "相机辅助瞄准", Icon: Camera },
+        { label: "放大细节，提升精确性", Icon: MagnifyingGlassPlus },
+      ],
+    },
+    {
+      number: "03",
+      key: "mode",
+      title: "选择测量模式",
+      description: "根据现场需求，选择合适的测量模式（距离 / 面积 / 体积 / 间接测量等）。",
+      image: "/assets/projects/s50c/s50c-function-customize.png",
+      alt: "S50C 多种专业测量模式选择界面",
+      visualType: "ui",
+      keywords: [
+        { label: "多种专业测量模式", Icon: Selection },
+        { label: "覆盖不同现场任务", Icon: Stack },
+      ],
+    },
+    {
+      number: "04",
+      key: "measure",
+      title: "开始测量",
+      description: "按下测量键，设备快速获取数据，并在屏幕上实时显示结果。",
+      image: "/assets/projects/s50c/final-experience/single-result.png",
+      alt: "S50C 单次测量结果界面",
+      visualType: "ui",
+      keywords: [
+        { label: "一键测量", Icon: Lightning },
+        { label: "实时显示结果", Icon: Pulse },
+      ],
+    },
+    {
+      number: "05",
+      key: "record",
+      title: "记录与管理",
+      description: "测量结果可保存、查看或添加备注，方便后续使用与数据管理。",
+      image: "/assets/projects/s50c/final-experience/history.png",
+      alt: "S50C 历史测量记录与结果管理界面",
+      visualType: "ui",
+      keywords: [
+        { label: "自动保存记录", Icon: FloppyDisk },
+        { label: "支持备注与分类", Icon: FolderOpen },
+      ],
+    },
+  ],
+  considerations: [
+    {
+      key: "visibility",
+      title: "光线与可视性",
+      description: "强光、逆光或低光环境，会影响屏幕可视性与目标识别。",
+      Icon: Lightbulb,
+    },
+    {
+      key: "space",
+      title: "空间与结构",
+      description: "复杂的建筑结构带来遮挡、多角度测量等挑战。",
+      Icon: Blueprint,
+    },
+    {
+      key: "switching",
+      title: "任务切换",
+      description: "不同测量模式之间的切换，需要简单高效，避免操作干扰。",
+      Icon: ArrowsClockwise,
+    },
+    {
+      key: "management",
+      title: "结果管理",
+      description: "测量数据需要被清晰记录，便于回看、分享与后续使用。",
+      Icon: FileText,
+    },
+  ],
+};
+
+function S50CTaskJourneySectionZh() {
+  return (
+    <section
+      className="s50c-overview-visual s50c-task-journey-section--zh"
+      aria-labelledby="s50c-task-journey-title-zh"
+      data-s50c-zh-page="03"
+      data-i18n-skip
+    >
+      <div className="s50c-task-journey-artboard--zh">
+        <header className="s50c-task-journey-header--zh">
+          <div>
+            <span>03 /</span>
+            <h2 id="s50c-task-journey-title-zh">一次测量是怎么发生的</h2>
+          </div>
+          <h3>现场任务旅程</h3>
+          <p>
+            在真实的施工与装修场景中，一次测量往往不是单一操作，而是从观察环境、确认目标、选择模式、完成测量到记录结果的连续过程。<br />
+            用户需要在复杂的现场条件下，快速判断、准确操作，并确保测量数据可被保存和后续使用。
+          </p>
+        </header>
+
+        <ol className="s50c-task-journey-steps--zh" aria-label="一次现场测量的五个步骤">
+          {s50cTaskJourneyZh.steps.map((step, index) => (
+            <li className={`s50c-task-journey-step--zh s50c-task-journey-step--${step.key}--zh`} key={step.number}>
+              <header>
+                <span>{step.number}</span>
+                <h3>{step.title}</h3>
+              </header>
+              <p>{step.description}</p>
+
+              <figure className={`s50c-task-journey-visual--zh s50c-task-journey-visual--${step.visualType}--zh`}>
+                <CaseStudyImage src={step.image} alt={step.alt} />
+                {step.visualType === "scene" ? (
+                  <span className="s50c-task-journey-target--zh" aria-hidden="true">
+                    <Crosshair weight="light" />
+                  </span>
+                ) : null}
+              </figure>
+
+              <div className="s50c-task-journey-keywords--zh">
+                {step.keywords.map(({ label, Icon }) => (
+                  <span key={label}><Icon weight="light" aria-hidden="true" />{label}</span>
+                ))}
+              </div>
+
+              {index < s50cTaskJourneyZh.steps.length - 1 ? (
+                <>
+                  <ArrowRight className="s50c-task-journey-arrow--header--zh" weight="regular" aria-hidden="true" />
+                  <ArrowRight className="s50c-task-journey-arrow--media--zh" weight="regular" aria-hidden="true" />
+                </>
+              ) : null}
+            </li>
+          ))}
+        </ol>
+
+        <section className="s50c-task-journey-considerations--zh" aria-labelledby="s50c-task-journey-considerations-title-zh">
+          <header>
+            <h3 id="s50c-task-journey-considerations-title-zh">真实测量中的<br />关键考量</h3>
+            <span>KEY CONSIDERATIONS<br />IN REAL MEASUREMENT</span>
+          </header>
+          <div className="s50c-task-journey-consideration-rail--zh">
+            <CaseStudyImage
+              className="s50c-task-journey-consideration-backdrop--zh"
+              src="/assets/projects/s50c/context/concrete-site.png"
+              alt=""
+              aria-hidden="true"
+            />
+            {s50cTaskJourneyZh.considerations.map(({ key, title, description, Icon }) => (
+              <article className={`s50c-task-journey-consideration--zh s50c-task-journey-consideration--${key}--zh`} key={key}>
+                <Icon weight="light" aria-hidden="true" />
+                <div>
+                  <h4>{title}</h4>
+                  <p>{description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+      </div>
+    </section>
   );
 }
 
@@ -3245,11 +4976,12 @@ function S50CChallengeSection() {
       <section
         className="s50c-overview-visual s50c-challenge-section s50c-challenge-section--zh"
         aria-labelledby="s50c-challenge-title-zh"
+        data-s50c-zh-page="04"
         data-i18n-skip
       >
         <div className="s50c-challenge-frame--zh">
           <header className="s50c-challenge-header s50c-challenge-header--zh">
-            <span>02 /</span>
+            <span>04 /</span>
             <h2 id="s50c-challenge-title-zh">理解核心挑战</h2>
           </header>
 
@@ -3350,7 +5082,196 @@ function S50CStructureCard({ group }) {
   );
 }
 
+const s50cStructureZh = {
+  capabilities: [
+    { label: "角度", icon: "angle.png" },
+    { label: "距离", icon: "distance.png" },
+    { label: "高度", icon: "height.png" },
+    { label: "深度", icon: "depth.png" },
+    { label: "间接测高", icon: "indirect-height.png" },
+    { label: "间接测距", icon: "indirect-distance.png" },
+    { label: "两点测高", icon: "height-two-points.png" },
+    { label: "面积", icon: "area.png" },
+    { label: "房间体积", icon: "volume-room.png" },
+    { label: "三角形面积", icon: "triangle-area.png" },
+    { label: "屋顶角度", icon: "roof-angle.png" },
+    { label: "体积", icon: "volume.png" },
+    { label: "圆形面积", icon: "circle-area.png" },
+    { label: "圆柱体积", icon: "cylinder-volume.png" },
+    { label: "放样", icon: "stake-out.png" },
+    { label: "梯形面积", icon: "trapezoid-area.png" },
+  ],
+  principles: [
+    { key: "priority", Icon: Crosshair, title: "测量优先", description: "核心任务始终触手可及。" },
+    { key: "support", Icon: Heart, title: "支持随手可得", description: "辅助工具始终靠近当前任务。" },
+    { key: "clarity", Icon: Stack, title: "降低复杂度", description: "高级功能按需组织，减少认知负担。" },
+  ],
+  groups: [
+    {
+      number: "01",
+      key: "measurement",
+      title: "测量",
+      Icon: Ruler,
+      columns: [["距离", "面积", "体积", "P2P"], ["连续测量", "勾股测量"]],
+    },
+    {
+      number: "02",
+      key: "camera",
+      title: "相机与瞄准",
+      Icon: Crosshair,
+      columns: [["相机视图", "缩放", "瞄准"]],
+    },
+    {
+      number: "03",
+      key: "records",
+      title: "记录",
+      Icon: ClockCounterClockwise,
+      columns: [["测量历史", "已保存数据"]],
+    },
+    {
+      number: "04",
+      key: "settings",
+      title: "设备设置",
+      Icon: Gear,
+      columns: [["单位", "蓝牙", "语言"], ["基准", "显示"]],
+    },
+  ],
+  logic: [
+    { number: "01", title: "测量", stage: "核心任务", description: "完成核心工作的地方。", Icon: MapPin },
+    { number: "02", title: "相机与瞄准", stage: "辅助", description: "测量过程中的辅助工具。", Icon: Crosshair },
+    { number: "03", title: "记录", stage: "回顾", description: "回顾并管理已完成的工作。", Icon: FileText },
+    { number: "04", title: "设备设置", stage: "配置", description: "按需配置设备的工作方式。", Icon: Gear },
+  ],
+};
+
+function S50CStructureCardZh({ group }) {
+  const GroupIcon = group.Icon;
+
+  return (
+    <article className={`s50c-structure-card--zh s50c-structure-card--${group.key}--zh`}>
+      <header>
+        <span>{group.number}</span>
+        <h3>{group.title}</h3>
+      </header>
+      <div className="s50c-structure-card-columns--zh">
+        {group.columns.map((column, index) => (
+          <ul key={`${group.key}-${index}`}>
+            {column.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        ))}
+      </div>
+      <GroupIcon className="s50c-structure-card-icon--zh" weight="light" aria-hidden="true" />
+    </article>
+  );
+}
+
+function S50CStructureSectionZh() {
+  return (
+    <section
+      className="s50c-overview-visual s50c-structure-section s50c-structure-section--zh"
+      aria-labelledby="s50c-structure-title-zh"
+      data-s50c-zh-page="05"
+      data-i18n-skip
+    >
+      <div className="s50c-structure-artboard s50c-structure-artboard--zh">
+        <Blueprint className="s50c-structure-blueprint--zh" weight="thin" aria-hidden="true" />
+        <span className="s50c-structure-watermark--zh" aria-hidden="true">S50C</span>
+
+        <header className="s50c-structure-header--zh">
+          <div>
+            <span>05 /</span>
+            <h2 id="s50c-structure-title-zh">从复杂功能到清晰结构</h2>
+          </div>
+          <p>围绕清晰任务组织专业测量系统。</p>
+        </header>
+
+        <section className="s50c-capabilities--zh" aria-labelledby="s50c-capabilities-title-zh">
+          <h3 id="s50c-capabilities-title-zh">多种测量能力</h3>
+          <div className="s50c-capability-grid--zh">
+            {s50cStructureZh.capabilities.map((capability) => (
+              <figure key={capability.label}>
+                <CaseStudyImage
+                  src={`/assets/projects/s50c/structure/icons/${capability.icon}`}
+                  alt=""
+                />
+                <figcaption>{capability.label}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        <section className="s50c-structure-principles--zh" aria-labelledby="s50c-principles-title-zh">
+          <h3 id="s50c-principles-title-zh">设计原则落地</h3>
+          <div className="s50c-principle-list--zh">
+            {s50cStructureZh.principles.map((principle) => {
+              const PrincipleIcon = principle.Icon;
+              return (
+                <article className="s50c-principle-card--zh" key={principle.key}>
+                  <span className="s50c-principle-icon--zh" aria-hidden="true">
+                    <PrincipleIcon weight="light" />
+                  </span>
+                  <div>
+                    <h4>{principle.title}</h4>
+                    <p>{principle.description}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        <div className="s50c-device-composite s50c-device-composite--zh" aria-label="显示测量界面的 S50C 设备">
+          <CaseStudyImage
+            className="s50c-device-composite__body"
+            src="/assets/projects/s50c/structure/device-front.png"
+            alt="S50C 正面产品图"
+          />
+          <div className="s50c-device-composite__screen-mask">
+            <CaseStudyImage
+              className="s50c-device-composite__screen"
+              src="/assets/projects/s50c/structure/measurement-ui.png"
+              alt="S50C 正式测量界面"
+            />
+          </div>
+        </div>
+
+        <div className="s50c-structure-groups--zh" aria-label="S50C 功能结构">
+          {s50cStructureZh.groups.map((group) => <S50CStructureCardZh group={group} key={group.key} />)}
+        </div>
+
+        <section className="s50c-structure-logic--zh" aria-labelledby="s50c-logic-title-zh">
+          <h3 id="s50c-logic-title-zh">体验结构逻辑</h3>
+          <div className="s50c-logic-stages--zh" aria-label="核心任务到配置的体验流程">
+            {s50cStructureZh.logic.map((item) => <span key={item.number}>{item.stage}</span>)}
+          </div>
+          <div className="s50c-logic-nodes--zh">
+            {s50cStructureZh.logic.map((item, index) => {
+              const LogicIcon = item.Icon;
+              return (
+                <React.Fragment key={item.number}>
+                  <article className="s50c-logic-node--zh">
+                    <span className="s50c-logic-icon--zh" aria-hidden="true"><LogicIcon weight="light" /></span>
+                    <h4><b>{item.number}</b> {item.title}</h4>
+                    <p>{item.description}</p>
+                  </article>
+                  {index < s50cStructureZh.logic.length - 1 ? (
+                    <ArrowRight className="s50c-logic-arrow--zh" weight="light" aria-hidden="true" />
+                  ) : null}
+                </React.Fragment>
+              );
+            })}
+          </div>
+        </section>
+      </div>
+    </section>
+  );
+}
+
 function S50CStructureSection() {
+  const { language } = useLanguage();
+
+  if (language === "zh") return <S50CStructureSectionZh />;
+
   const copy = s50cCopy.structure;
 
   return (
@@ -3432,7 +5353,166 @@ function S50CInteractionButtonImage({ name, alt = "" }) {
   return <CaseStudyImage src={`/assets/projects/s50c/interaction/buttons/${name}.png?v=2`} alt={alt} />;
 }
 
+const s50cInteractionZh = {
+  shortcuts: [
+    { key: "function", title: "功能", description: "快速访问测量模式与工具。" },
+    { key: "settings", title: "设置", description: "调整设备偏好与系统选项。" },
+    { key: "camera", title: "相机", description: "进入视觉瞄准，进行精确测量。" },
+    { key: "favorite", title: "收藏", description: "快速调用已收藏的功能与测量记录。" },
+  ],
+  flow: [
+    { number: "01", key: "input", title: "输入", description: <>按下实体按键<br />选择测量模式。</>, Icon: Selection },
+    { number: "02", key: "state", title: "状态", description: <>屏幕实时反馈<br />当前状态与参数。</>, Icon: DeviceMobile },
+    { number: "03", key: "feedback", title: "反馈", description: <>输出测量结果，<br />并支持保存或继续操作。</>, Icon: CheckCircle },
+  ],
+  principles: [
+    { key: "direct", title: "高效直达", description: <>高频操作一键完成，<br />减少层级与操作步骤。</>, Icon: Lightning },
+    { key: "visible", title: "状态可知", description: <>关键状态实时反馈，<br />让用户随时掌握测量进程。</>, Icon: Crosshair },
+    { key: "consistent", title: "一致体验", description: <>按键逻辑在所有测量模式中保持一致，<br />降低学习成本。</>, Icon: Stack },
+  ],
+};
+
+function S50CInteractionModuleHeading({ id, title, description }) {
+  return (
+    <header className="s50c-interaction-module-heading--zh">
+      <div><h3 id={id}>{title}</h3><span aria-hidden="true" /></div>
+      <p>{description}</p>
+    </header>
+  );
+}
+
+function S50CInteractionSectionZh() {
+  return (
+    <section
+      className="s50c-overview-visual s50c-interaction-section s50c-interaction-section--zh"
+      aria-labelledby="s50c-interaction-title-zh"
+      data-s50c-zh-page="06"
+      data-i18n-skip
+    >
+      <div className="s50c-interaction-artboard s50c-interaction-artboard--zh">
+        <header className="s50c-interaction-header--zh">
+          <div>
+            <span>06 /</span>
+            <h2 id="s50c-interaction-title-zh">交互模型</h2>
+          </div>
+          <p>在实体按键与屏幕状态之间建立清晰的控制逻辑。</p>
+          <small>
+            S50C 通过实体按键，让复杂环境中的测量操作保持稳定、快速且可预期。<br />
+            我们将核心任务抽象为“输入 → 状态 → 反馈”的闭环，构建简单高效的交互模型。
+          </small>
+        </header>
+
+        <div className="s50c-interaction-primary--zh">
+          <article className="s50c-interaction-core--zh" aria-labelledby="s50c-core-title-zh">
+            <S50CInteractionModuleHeading
+              id="s50c-core-title-zh"
+              title="核心操作"
+              description="最常用的测量操作始终触手可及。"
+            />
+            <div className="s50c-interaction-key-card--zh s50c-interaction-key-card--measure--zh">
+              <S50CInteractionButtonImage name="measure" alt="S50C 测量与确认实体按键" />
+              <div>
+                <h4>测量 / 确认</h4>
+                <p>按下开始测量，<br />再次按下确认结果。</p>
+              </div>
+            </div>
+          </article>
+
+          <article className="s50c-interaction-navigation--zh" aria-labelledby="s50c-navigation-title-zh">
+            <S50CInteractionModuleHeading
+              id="s50c-navigation-title-zh"
+              title="导航与调节"
+              description="一致的方向逻辑，快速切换与调整。"
+            />
+            <div className="s50c-interaction-key-card--zh s50c-interaction-nav-card--zh">
+              <figure>
+                <S50CInteractionButtonImage name="previous" alt="S50C 上一个与减小数值实体按键" />
+                <figcaption>
+                  <h4>上一个 / −</h4>
+                  <p>切换选项或<br />减少数值。</p>
+                </figcaption>
+              </figure>
+              <figure>
+                <S50CInteractionButtonImage name="next" alt="S50C 下一个与增加数值实体按键" />
+                <figcaption>
+                  <h4>下一个 / +</h4>
+                  <p>切换选项或<br />增加数值。</p>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+        </div>
+
+        <section className="s50c-interaction-shortcuts--zh" aria-labelledby="s50c-shortcuts-title-zh">
+          <S50CInteractionModuleHeading
+            id="s50c-shortcuts-title-zh"
+            title="直接快捷键"
+            description="常用功能一键直达，减少操作层级。"
+          />
+          <div className="s50c-interaction-shortcut-list--zh">
+            {s50cInteractionZh.shortcuts.map((item) => (
+              <article key={item.key}>
+                <S50CInteractionButtonImage name={item.key} alt={`S50C ${item.title}实体按键`} />
+                <div><h4>{item.title}</h4><p>{item.description}</p></div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="s50c-interaction-flow--zh" aria-labelledby="s50c-flow-title-zh">
+          <S50CInteractionModuleHeading
+            id="s50c-flow-title-zh"
+            title="控制流程"
+            description="从按下实体按键到完成测量的完整闭环。"
+          />
+          <div className="s50c-interaction-flow-list--zh">
+            {s50cInteractionZh.flow.map((stage, index) => {
+              const StageIcon = stage.Icon;
+              return (
+                <React.Fragment key={stage.key}>
+                  <article>
+                    <header><span>{stage.number}</span><h4>{stage.title}</h4></header>
+                    <StageIcon weight="light" aria-hidden="true" />
+                    <p>{stage.description}</p>
+                  </article>
+                  {index < s50cInteractionZh.flow.length - 1 ? (
+                    <ArrowRight className="s50c-interaction-flow-arrow--zh" weight="light" aria-hidden="true" />
+                  ) : null}
+                </React.Fragment>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="s50c-interaction-principles--zh" aria-labelledby="s50c-principles-title-zh">
+          <S50CInteractionModuleHeading
+            id="s50c-principles-title-zh"
+            title="设计原则"
+            description="以真实使用场景为出发点，打造高效、可靠、易上手的交互体验。"
+          />
+          <div className="s50c-interaction-principle-list--zh">
+            {s50cInteractionZh.principles.map((item) => {
+              const PrincipleIcon = item.Icon;
+              return (
+                <article key={item.key}>
+                  <PrincipleIcon weight="light" aria-hidden="true" />
+                  <h4>{item.title}</h4>
+                  <p>{item.description}</p>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      </div>
+    </section>
+  );
+}
+
 function S50CInteractionSection() {
+  const { language } = useLanguage();
+
+  if (language === "zh") return <S50CInteractionSectionZh />;
+
   const copy = s50cCopy.interaction;
 
   return (
@@ -3541,7 +5621,172 @@ function S50CMeasurementDevice() {
   );
 }
 
+const s50cMeasurementZh = {
+  accuracyPoints: [
+    { key: "target", title: "瞄准点", description: <>清晰的十字瞄准<br />帮助对准目标。</>, Icon: Crosshair },
+    { key: "zoom", title: "实时变焦", description: <>支持放大查看，<br />远距离测量也清晰。</>, Icon: MagnifyingGlassPlus },
+    { key: "context", title: "环境视图", description: <>保留真实场景，<br />让测量更有上下文。</>, Icon: Camera },
+  ],
+  states: [
+    { key: "ready", title: "准备测量", description: <>进入测量模式，<br />等待按下测量键。</>, image: "ready-ui.png", alt: "S50C 准备测量界面" },
+    { key: "measuring", title: "测量进行中", description: <>动态反馈测量过程，<br />清晰提示当前状态。</>, image: "ready-ui-green.png", alt: "S50C 测量进行中界面" },
+    { key: "complete", title: "测量完成", description: <>立即显示测量结果，<br />快速又稳定。</>, image: "result-ui.png", alt: "S50C 32.532 英尺测量完成界面" },
+  ],
+  contextPoints: [
+    { key: "mode", title: "测量模式", description: "明确当前测量类型。", Icon: Ruler },
+    { key: "save", title: "保存记录", description: "一键保存测量结果。", Icon: FloppyDisk },
+    { key: "history", title: "历史记录", description: "快速查找过往测量数据。", Icon: ListNumbers },
+  ],
+  highlights: [
+    { key: "visible", title: "目标持续可见", description: "让用户始终知道正在测量什么。", Icon: Eye },
+    { key: "feedback", title: "状态连续反馈", description: "每一步操作都有清晰响应。", Icon: Crosshair },
+    { key: "context", title: "结果保留上下文", description: "让测量数据离开现场后仍然可理解。", Icon: Stack },
+  ],
+};
+
+function S50CMeasurementModuleHeadingZh({ number, title, core, description, id }) {
+  return (
+    <header className="s50c-measurement-module-heading--zh">
+      <div><span>{number}</span><h3 id={id}>{title}</h3><i aria-hidden="true" /></div>
+      <strong>{core}</strong>
+      <p>{description}</p>
+    </header>
+  );
+}
+
+function S50CMeasurementExperienceSectionZh() {
+  return (
+    <section
+      className="s50c-overview-visual s50c-measurement-section s50c-measurement-section--zh"
+      aria-labelledby="s50c-measurement-title-zh"
+      data-s50c-zh-page="07"
+      data-i18n-skip
+    >
+      <div className="s50c-measurement-artboard s50c-measurement-artboard--zh">
+        <CaseStudyImage
+          className="s50c-measurement-ambient-building--zh"
+          src="/assets/projects/s50c/challenge/challenge-building-background.png"
+          alt=""
+        />
+        <div className="s50c-measurement-ambient-axis--zh" aria-hidden="true">
+          <span>32.532 ft</span><i /><b />
+        </div>
+
+        <header className="s50c-measurement-header--zh">
+          <div><span>07 /</span><h2 id="s50c-measurement-title-zh">让每一步测量都清晰可见</h2></div>
+          <p>核心测量体验</p>
+          <small>
+            从目标识别、瞄准到测量反馈，关键状态始终保持可见，让用户清楚知道<br />
+            “正在测什么、当前进行到哪一步、结果意味着什么”。
+          </small>
+        </header>
+
+        <div className="s50c-measurement-modules--zh">
+          <article className="s50c-measurement-accuracy--zh" aria-labelledby="s50c-accuracy-title-zh">
+            <S50CMeasurementModuleHeadingZh
+              number="01"
+              title="看得准"
+              core="目标始终可见"
+              description={<>相机视图保留目标与瞄准点，让用户在复杂环境中<br />确认自己正在测量什么。</>}
+              id="s50c-accuracy-title-zh"
+            />
+            <div className="s50c-measurement-accuracy-content--zh">
+              <CaseStudyImage
+                className="s50c-measurement-camera-ui--zh"
+                src="/assets/projects/s50c/measurement/camera-ui.png"
+                alt="保留建筑环境、瞄准点、8 倍变焦与 328.081 英尺结果的 S50C 相机测量界面"
+              />
+              <div className="s50c-measurement-point-list--zh">
+                {s50cMeasurementZh.accuracyPoints.map((point) => {
+                  const PointIcon = point.Icon;
+                  return (
+                    <article key={point.key}>
+                      <span><PointIcon weight="light" aria-hidden="true" /></span>
+                      <div><h4>{point.title}</h4><p>{point.description}</p></div>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          </article>
+
+          <article className="s50c-measurement-stability--zh" aria-labelledby="s50c-stability-title-zh">
+            <S50CMeasurementModuleHeadingZh
+              number="02"
+              title="测得稳"
+              core="状态持续反馈"
+              description={<>从准备、测量到完成，每一次状态变化都有明确反馈，<br />减少对操作结果的不确定感。</>}
+              id="s50c-stability-title-zh"
+            />
+            <div className="s50c-measurement-state-list--zh">
+              {s50cMeasurementZh.states.map((state, index) => (
+                <React.Fragment key={state.key}>
+                  <figure>
+                    <CaseStudyImage src={`/assets/projects/s50c/measurement/${state.image}`} alt={state.alt} />
+                    <figcaption><h4>{state.title}</h4><p>{state.description}</p></figcaption>
+                  </figure>
+                  {index < s50cMeasurementZh.states.length - 1 ? (
+                    <ArrowRight className="s50c-measurement-state-arrow--zh" weight="light" aria-hidden="true" />
+                  ) : null}
+                </React.Fragment>
+              ))}
+            </div>
+          </article>
+
+          <article className="s50c-measurement-context--zh" aria-labelledby="s50c-context-title-zh">
+            <S50CMeasurementModuleHeadingZh
+              number="03"
+              title="看得懂"
+              core="结果保留语境"
+              description={<>结果不仅显示数值，也保留测量模式与任务状态，<br />让数据在测量结束后仍然具有意义。</>}
+              id="s50c-context-title-zh"
+            />
+            <div className="s50c-measurement-context-content--zh">
+              <CaseStudyImage
+                className="s50c-measurement-result-ui--zh"
+                src="/assets/projects/s50c/final-experience/single-result.png"
+                alt="保留 32.532 英尺、Single Measurement 模式、保存与历史入口的正式测量结果界面"
+              />
+              <div className="s50c-measurement-context-list--zh">
+                {s50cMeasurementZh.contextPoints.map((point) => {
+                  const PointIcon = point.Icon;
+                  return (
+                    <article key={point.key}>
+                      <span><PointIcon weight="light" aria-hidden="true" /></span>
+                      <div><h4>{point.title}</h4><p>{point.description}</p></div>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <section className="s50c-measurement-highlights--zh" aria-labelledby="s50c-measurement-highlights-title-zh">
+          <header><h3 id="s50c-measurement-highlights-title-zh">设计亮点</h3><span aria-hidden="true" /></header>
+          <p>聚焦真实使用场景，带来更直观、更可靠的测量体验。</p>
+          <div>
+            {s50cMeasurementZh.highlights.map((highlight) => {
+              const HighlightIcon = highlight.Icon;
+              return (
+                <article key={highlight.key}>
+                  <HighlightIcon weight="light" aria-hidden="true" />
+                  <span><h4>{highlight.title}</h4><p>{highlight.description}</p></span>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      </div>
+    </section>
+  );
+}
+
 function S50CMeasurementExperienceSection() {
+  const { language } = useLanguage();
+
+  if (language === "zh") return <S50CMeasurementExperienceSectionZh />;
+
   const copy = s50cCopy.measurementExperience;
 
   return (
@@ -3597,7 +5842,88 @@ function S50CMeasurementExperienceSection() {
   );
 }
 
+const s50cFinalZhGroups = [
+  {
+    key: "primary-measurement",
+    label: "测量",
+    screens: ["camera", "single"],
+  },
+  {
+    key: "primary-functions",
+    label: "功能",
+    screens: ["menu", "indirect"],
+  },
+  {
+    key: "secondary-measurement",
+    label: "测量",
+    screens: ["continuous", "special"],
+  },
+  {
+    key: "secondary-settings",
+    label: "设置",
+    screens: ["settings"],
+  },
+  {
+    key: "secondary-history",
+    label: "记录",
+    screens: ["history"],
+  },
+];
+
+function S50CFinalExperienceSectionZh() {
+  const screenByKey = Object.fromEntries(s50cCopy.finalExperience.screens.map((screen) => [screen.key, screen]));
+  const renderGroup = (group) => (
+    <section
+      className={`s50c-final-group--zh s50c-final-group--zh-${group.key}`}
+      aria-label={`${group.label}界面`}
+      key={group.key}
+    >
+      <header><span>{group.label}</span><i aria-hidden="true" /></header>
+      <div>
+        {group.screens.map((key) => {
+          const screen = screenByKey[key];
+          return (
+            <figure className={`s50c-final-screen--zh s50c-final-screen--zh-${key}`} key={key}>
+              <CaseStudyImage src={`/assets/projects/s50c/final-experience/${screen.image}`} alt={screen.alt} />
+            </figure>
+          );
+        })}
+      </div>
+    </section>
+  );
+
+  return (
+    <section
+      className="s50c-overview-visual s50c-final-section s50c-final-section--zh"
+      aria-labelledby="s50c-final-title-zh"
+      data-s50c-zh-page="08"
+      data-i18n-skip
+    >
+      <div className="s50c-final-artboard--zh">
+        <header className="s50c-final-header--zh">
+          <div><span>08</span><b>/</b><h2 id="s50c-final-title-zh">最终体验</h2></div>
+          <p>面向真实测量场景打造的完整界面系统。</p>
+          <small>测量、功能、设置与记录以统一而清晰的方式组织，帮助用户在现场快速完成任务。</small>
+        </header>
+
+        <div className="s50c-final-gallery--zh" aria-label="S50C 最终界面系统">
+          <div className="s50c-final-gallery-row--zh s50c-final-gallery-row--zh-primary">
+            {s50cFinalZhGroups.slice(0, 2).map(renderGroup)}
+          </div>
+          <div className="s50c-final-gallery-row--zh s50c-final-gallery-row--zh-secondary">
+            {s50cFinalZhGroups.slice(2).map(renderGroup)}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function S50CFinalExperienceSection() {
+  const { language } = useLanguage();
+
+  if (language === "zh") return <S50CFinalExperienceSectionZh />;
+
   const copy = s50cCopy.finalExperience;
   const screenByKey = Object.fromEntries(copy.screens.map((screen) => [screen.key, screen]));
   const renderScreen = (key) => {
@@ -3635,9 +5961,27 @@ function S50CFinalExperienceSection() {
   );
 }
 
+const s50cZhPageSequence = [
+  { key: "01", render: () => <S50COverviewSectionZh /> },
+  {
+    key: "02",
+    render: () => <S50CFieldContextSectionZh />,
+  },
+  {
+    key: "03",
+    render: () => <S50CTaskJourneySectionZh />,
+  },
+  { key: "04", render: () => <S50CChallengeSection /> },
+  { key: "05", render: () => <S50CStructureSection /> },
+  { key: "06", render: () => <S50CInteractionSection /> },
+  { key: "07", render: () => <S50CMeasurementExperienceSection /> },
+  { key: "08", render: () => <S50CFinalExperienceSection /> },
+];
+
 function S50CProjectOverview({ project, onClose, onNext, active }) {
   const dialogRef = useRef(null);
   const { scrollRef, returnFromHero } = useSharedProjectDetailScroll(onClose);
+  const { language } = useLanguage();
   useProjectDialog(returnFromHero, dialogRef, active);
 
   return (
@@ -3668,26 +6012,11 @@ function S50CProjectOverview({ project, onClose, onNext, active }) {
         caseClassName="s50c-overview-layout"
       >
           <main className="s50c-pages-scroll" aria-label="MILESEEY S50C portfolio sections">
-          <section className="s50c-overview-visual s50c-hero-section" aria-label="MILESEEY S50C project visual">
-            <div className="s50c-hero-artboard">
-              <CaseStudyImage
-                className="s50c-project-visual"
-                src="/assets/projects/s50c/hero/reference-v2.png"
-                alt="MILESEEY S50C portfolio hero with product render, measurement interfaces, and core features"
-              />
-              <h2 className="s50c-hero-title" aria-label="MILESEEY S50C">MILESEEY S50C</h2>
-            </div>
-          </section>
-
-          <S50CChallengeSection />
-
-          <S50CStructureSection />
-
-          <S50CInteractionSection />
-
-          <S50CMeasurementExperienceSection />
-
-          <S50CFinalExperienceSection />
+          {language === "zh" ? (
+            s50cZhPageSequence.map((page) => <React.Fragment key={page.key}>{page.render()}</React.Fragment>)
+          ) : (
+            <S50CEnglishCaseStudy />
+          )}
           </main>
 
           <aside className="horizon-project-intro s50c-project-intro" aria-label="MILESEEY S50C project information">

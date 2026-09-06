@@ -1,0 +1,2254 @@
+/* MILESEEY Tools — English locale geometry.
+   The current Chinese components remain the composition layer. Every rule in
+   this file is gated by the English case wrapper and an English page root. */
+
+.tools-case-study .tools-case-study-content.tools-case--en {
+  width: 100%;
+  min-width: 0;
+  zoom: 1;
+  container-type: inline-size;
+}
+
+.tools-case-study .tools-case--en [data-tools-en-page],
+.tools-case-study .tools-case--en [data-tools-en-page] * {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.tools-case-study .tools-case--en [data-tools-en-page] {
+  font-family: "Poppins", Inter, "Helvetica Neue", Arial, sans-serif;
+}
+
+.tools-case-study .tools-case--en [data-tools-en-page] :where(h2, h3, h4, p, li, figcaption, strong, b, span, button) {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.tools-case-study .tools-case--en [data-tools-en-page] :where(h2, h3, h4) {
+  text-wrap: balance;
+}
+
+.tools-case-study .tools-case--en [data-tools-en-page] :where(p, li, figcaption) {
+  text-wrap: pretty;
+}
+
+.tools-case-study .tools-case--en [data-tools-en-page] img {
+  max-width: 100%;
+}
+
+.tools-case-study .tools-case--en .tools-project-overview--en[data-tools-en-page="01"],
+.tools-case-study .tools-case--en .tools-project-overview--en[data-tools-en-page="01"] > .tools-project-overview__artboard--en {
+  background: #fff;
+}
+
+/* Desktop composition. The sections retain the Chinese 4:3 relationship at
+   wide viewports; only English text geometry and flexible card internals move. */
+@media (min-width: 1201px) {
+  /* 01 — Project Overview */
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__marker--en {
+    grid-template-columns: auto auto minmax(54px, 1fr);
+    width: 43cqw;
+    gap: 1.35cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__marker--en > strong {
+    font-size: clamp(10px, 0.98cqw, 14px);
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__copy--en {
+    top: 14cqw;
+    width: 42.2cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__copy--en h2 {
+    max-width: 13.8em;
+    font-size: clamp(27px, 3.18cqw, 43px);
+    line-height: 1.13;
+    letter-spacing: -0.045em;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__copy--en h2 > span {
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__body--en {
+    width: 40.8cqw;
+    margin-top: 2.1cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__body--en p {
+    font-size: clamp(12px, 1.18cqw, 15.5px);
+    line-height: 1.62;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__body--en p + p {
+    margin-top: 1.35cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__shift--en {
+    width: 40.8cqw;
+    min-height: 6.6cqw;
+    margin-top: 1.55cqw;
+    padding: 0.7cqw 1.4cqw 0.7cqw 2.45cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__shift--en > strong {
+    max-width: 35cqw;
+    font-size: clamp(13px, 1.32cqw, 18px);
+    line-height: 1.38;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__shift--en > span {
+    right: 1.8cqw;
+    bottom: 0.55cqw;
+    width: 17cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__meta--en {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.45fr) minmax(0, 0.76fr);
+    min-height: 7.2cqw;
+    padding-top: 1.55cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__meta--en article {
+    grid-template-columns: 3.15cqw minmax(0, 1fr);
+    padding-right: 1.8cqw;
+    padding-left: 1.8cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__meta--en span {
+    font-size: clamp(9.5px, 0.78cqw, 11px);
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__meta--en strong {
+    font-size: clamp(11px, 0.98cqw, 13.5px);
+    line-height: 1.38;
+    white-space: normal;
+  }
+
+  /* 02 — Understanding the Problem */
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__marker--en {
+    width: 39cqw;
+    gap: 1.35cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__marker--en > strong {
+    font-size: clamp(10px, 1.02cqw, 14px);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__header--en h2 {
+    max-width: 91cqw;
+    margin-top: 1.25cqw;
+    font-size: clamp(25px, 2.68cqw, 36px);
+    line-height: 1.17;
+    letter-spacing: -0.04em;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__intro--en {
+    max-width: 88cqw;
+    margin-top: 0.65cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__intro--en p {
+    font-size: clamp(11.5px, 1.08cqw, 14px);
+    line-height: 1.52;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__intro--en p + p {
+    margin-top: 0.25cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__flow--en {
+    top: 29.45cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__project--en {
+    height: 24.5cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__project--en > header {
+    height: 4.4cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__project-content--en {
+    grid-template-columns: minmax(0, 3.65fr) minmax(9.4cqw, 1.12fr);
+    height: calc(100% - 4.4cqw);
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__floors--en figcaption {
+    min-height: 3.25cqw;
+    padding: 0.35cqw 0.2cqw;
+    font-size: clamp(9.5px, 0.82cqw, 11px);
+    line-height: 1.18;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__floors--en figcaption svg {
+    display: none;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__members--en {
+    gap: 0.62cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__members--en li {
+    gap: 0.45cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__members--en li > span {
+    width: 2.45cqw;
+    height: 2.45cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__members--en li > strong {
+    font-size: clamp(10px, 0.9cqw, 11.5px);
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__device--en > strong,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__delivery--en > strong,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__materials--en > b {
+    max-width: 100%;
+    font-size: clamp(10.5px, 0.96cqw, 12.5px);
+    line-height: 1.25;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__warning--en > strong {
+    width: 8.5cqw;
+    max-width: none;
+    font-size: clamp(9.5px, 0.82cqw, 11px);
+    line-height: 1.18;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__photo-stack--en > strong,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__material-row--en > strong,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__report--en > header strong {
+    font-size: clamp(9.5px, 0.82cqw, 11px);
+    line-height: 1.15;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en {
+    top: 57.2cqw;
+    min-height: 6.5cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en li {
+    padding: 0.25cqw 2cqw 0;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en li > div {
+    align-items: flex-start;
+    gap: 0.8cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en li > div > span {
+    flex: 0 0 auto;
+    font-size: clamp(17px, 1.65cqw, 23px);
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en li > div > strong {
+    font-size: clamp(12px, 1.14cqw, 15.5px);
+    line-height: 1.22;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en li p {
+    margin: 0.7cqw 0 0;
+    font-size: clamp(11px, 0.94cqw, 12.5px);
+    line-height: 1.42;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__challenge--en {
+    top: 65.15cqw;
+    grid-template-columns: minmax(0, 1fr) minmax(17cqw, 22cqw);
+    min-height: 8.3cqw;
+    padding: 1.2cqw 1.8cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__challenge-main--en p {
+    max-width: 68cqw;
+    margin-top: 0.85cqw;
+    font-size: clamp(16px, 1.62cqw, 22px);
+    line-height: 1.28;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__challenge-summary--en {
+    padding-left: 2cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__challenge-summary--en span {
+    font-size: clamp(11px, 0.96cqw, 13px);
+    line-height: 1.32;
+    white-space: normal;
+  }
+
+  /* 03 — From Insight to Structure */
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__artboard--en {
+    aspect-ratio: auto;
+    min-height: 80cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__marker--en {
+    width: 42cqw;
+    gap: 1.35cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__marker--en > strong {
+    font-size: clamp(10px, 1.02cqw, 14px);
+    letter-spacing: 0.065em;
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__layout--en {
+    grid-template-columns: minmax(0, 35cqw) minmax(0, 1fr);
+    gap: 1.45cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__narrative--en h2 {
+    max-width: 12.5em;
+    font-size: clamp(27px, 2.78cqw, 37px);
+    line-height: 1.18;
+    letter-spacing: -0.045em;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__narrative--en h2 > span {
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__intro--en {
+    width: 34.2cqw;
+    margin-top: 1.2cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__intro--en p {
+    font-size: clamp(10.8px, 1.02cqw, 13.5px);
+    line-height: 1.55;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__intro--en p + p {
+    margin-top: 1.05cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__principles--en {
+    width: 34cqw;
+    margin-top: 1.15cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__principles--en li {
+    grid-template-columns: 3.15cqw minmax(0, 1fr);
+    gap: 0.72cqw;
+    padding: 0.8cqw 0;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__principles--en li > span {
+    font-size: clamp(18px, 1.9cqw, 26px);
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__principles--en h3 {
+    font-size: clamp(12.5px, 1.2cqw, 16px);
+    line-height: 1.25;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__principles--en p {
+    margin-top: 0.42cqw;
+    font-size: clamp(12.5px, 1.02cqw, 14.5px);
+    line-height: 1.48;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__visual--en {
+    height: 62cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project--en {
+    grid-template-rows: minmax(5.6cqw, auto) minmax(6.1cqw, auto) minmax(0, 1fr) minmax(4.8cqw, auto);
+    width: 54cqw;
+    height: 56.2cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project-bar--en {
+    gap: 0.9cqw;
+    padding: 0.7cqw 1.2cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project-name--en {
+    gap: 0.65cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project-name--en h3 {
+    font-size: clamp(11px, 1.08cqw, 14.5px);
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project-name--en > span {
+    min-height: 2.1cqw;
+    padding: 0.2cqw 0.65cqw;
+    font-size: clamp(9.5px, 0.82cqw, 11px);
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__permissions--en {
+    gap: 0.55cqw;
+    font-size: clamp(9.5px, 0.82cqw, 11px);
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__permissions--en button {
+    min-width: 5.25cqw;
+    height: 2.8cqw;
+    padding: 0 0.55cqw;
+    opacity: 1;
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__workspace--en {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 0.8cqw;
+    padding: 0.75cqw 1.45cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__workspace--en h4 {
+    font-size: clamp(11.5px, 0.98cqw, 13.5px);
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__workspace--en p {
+    max-width: 25cqw;
+    font-size: clamp(11.5px, 0.94cqw, 13px);
+    line-height: 1.3;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__workspace--en ul {
+    justify-content: flex-end;
+    gap: 0.55cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__workspace--en li {
+    flex-direction: column;
+    gap: 0.25cqw;
+    font-size: clamp(11px, 0.9cqw, 12.5px);
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__workspace--en li > span {
+    width: 2.3cqw;
+    height: 2.3cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en {
+    margin-right: 1.2cqw;
+    margin-left: 1.2cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article {
+    grid-template-columns: 7.2cqw 8.3cqw minmax(0, 1fr);
+    gap: 0.45cqw;
+    padding: 0.55cqw 0.75cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article > figure {
+    width: 6.8cqw;
+    height: 7.1cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plan-name--en {
+    padding-right: 0.2cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plan-name--en h4 {
+    font-size: clamp(12px, 1cqw, 14px);
+    line-height: 1.16;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plan-name--en p {
+    margin-top: 0.45cqw;
+    font-size: clamp(11px, 0.9cqw, 12.5px);
+    line-height: 1.2;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article > ul {
+    gap: 0.3cqw;
+    padding-left: 0.75cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article > ul li {
+    gap: 0.28cqw;
+    text-align: center;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article > ul li > span {
+    width: 2.45cqw;
+    height: 2.45cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article > ul li strong {
+    max-width: none;
+    font-size: clamp(10px, 0.94cqw, 11.5px);
+    line-height: 1.18;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project-note--en {
+    min-height: 4.8cqw;
+    margin: 0 1.2cqw 0.85cqw;
+    padding: 0.55cqw 0.9cqw;
+    padding-right: 10.2cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project-note--en p {
+    font-size: clamp(11.5px, 0.94cqw, 13px);
+    line-height: 1.32;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__device--en {
+    top: 41.5cqw;
+    left: -0.75cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__device-line--en {
+    d: path("M 137 575 H 160 Q 176 575 176 552 V 296 Q 176 275 192 275 H 208");
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__device--en figcaption {
+    max-width: 8cqw;
+    font-size: clamp(11px, 0.88cqw, 12.5px);
+    text-align: center;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__delivery--en {
+    top: 40cqw;
+    width: 13cqw;
+    height: 18.5cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__delivery--en > header strong {
+    font-size: clamp(11px, 0.88cqw, 12.5px);
+    line-height: 1.15;
+    white-space: normal;
+  }
+
+  /* 04 — Core Experience */
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__marker--en {
+    width: 39cqw;
+    gap: 1.35cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__marker--en > strong {
+    font-size: clamp(10px, 1.02cqw, 14px);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en {
+    width: 66cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en h2 {
+    max-width: 19em;
+    font-size: clamp(26px, 2.72cqw, 37px);
+    line-height: 1.16;
+    letter-spacing: -0.045em;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en h2 > span {
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en > p {
+    width: min(64cqw, 780px);
+    margin-top: 0.7cqw;
+    font-size: clamp(11px, 1.04cqw, 14px);
+    line-height: 1.52;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__flow--en {
+    top: 26.8cqw;
+    grid-template-columns: minmax(0, 20.4cqw) minmax(0, 20.4cqw) minmax(0, 24.2cqw) minmax(0, 19.4cqw);
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step-heading--en {
+    align-items: flex-start;
+    min-height: 5.2cqw;
+    gap: 0.75cqw;
+    padding-left: 0.45cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step-heading--en > span {
+    width: 3cqw;
+    height: 3cqw;
+    flex-basis: 3cqw;
+    font-size: clamp(13px, 1.25cqw, 17px);
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step-heading--en h3 {
+    padding-top: 0.18cqw;
+    font-size: clamp(11px, 1.08cqw, 14.5px);
+    line-height: 1.2;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__screen--en {
+    height: 29.7cqw;
+    margin-top: 0.55cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__screen--en img {
+    height: 29.7cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step--workspace--en {
+    top: -1.55cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step--workspace--en .tools-core04__screen--en,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step--workspace--en .tools-core04__screen--en img {
+    height: 32.1cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step--en > p,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__photos--en > p {
+    max-width: 20cqw;
+    margin-top: 0.75cqw;
+    font-size: clamp(11px, 1cqw, 13.5px);
+    line-height: 1.45;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__photos--en {
+    margin-top: 5.15cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__summary--en > strong {
+    font-size: clamp(13px, 1.28cqw, 17px);
+  }
+
+  /* 05 — Measure Smarter */
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__artboard--en {
+    aspect-ratio: auto;
+    min-height: 82cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__marker--en {
+    width: 39cqw;
+    gap: 1.35cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__marker--en > strong {
+    font-size: clamp(10px, 1.02cqw, 14px);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en {
+    width: 69cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en h2 {
+    max-width: 22em;
+    font-size: clamp(25px, 2.65cqw, 36px);
+    line-height: 1.16;
+    letter-spacing: -0.043em;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en h2 > span {
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en > p {
+    width: min(67cqw, 820px);
+    margin-top: 0.65cqw;
+    font-size: clamp(11px, 1.02cqw, 13.8px);
+    line-height: 1.5;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--device--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--workspace--en {
+    top: 27.7cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--calculation--en {
+    top: 39.5cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step-heading--en {
+    gap: 0.85cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step-heading--en > span {
+    width: 3.1cqw;
+    height: 3.1cqw;
+    flex-basis: 3.1cqw;
+    font-size: clamp(13px, 1.25cqw, 17px);
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step-heading--en h3 {
+    font-size: clamp(11.5px, 1.12cqw, 15px);
+    line-height: 1.2;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step-heading--en p {
+    max-width: 21cqw;
+    margin-top: 0.35cqw;
+    font-size: clamp(10.5px, 0.92cqw, 12.5px);
+    line-height: 1.42;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--workspace--en .tools-measure05__step-heading--en {
+    left: 35.2cqw;
+    width: 26.2cqw;
+    max-width: calc(100% - 35.2cqw);
+    min-height: 0;
+    height: auto;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--workspace--en .tools-measure05__step-heading--en > div {
+    width: 100%;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--workspace--en .tools-measure05__step-heading--en p {
+    max-width: none;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--workspace--en .tools-measure05__screen--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--workspace--en .tools-measure05__screen--en img {
+    height: 39.6cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--device--en .tools-measure05__screen--en {
+    width: 21.5cqw;
+    margin-top: 0.9cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--calculation--en .tools-measure05__screen--en {
+    width: 26cqw;
+    margin-top: 0.8cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__spatial-result--en {
+    left: 23.3cqw;
+    width: 10.8cqw;
+    min-height: 9.3cqw;
+    padding: 0.8cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__spatial-result--en strong {
+    font-size: clamp(10px, 0.88cqw, 11.5px);
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__spatial-result--en > p {
+    width: 15.5cqw;
+    font-size: clamp(10px, 0.86cqw, 11.5px);
+    line-height: 1.35;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__summary--en > strong {
+    font-size: clamp(13px, 1.28cqw, 17px);
+  }
+
+  /* 06 — Capture & Organize */
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__artboard--en {
+    aspect-ratio: auto;
+    min-height: calc(75cqw + 48px);
+    padding-top: calc(3.2cqw + 48px);
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__marker--en {
+    width: min(63%, 850px);
+    gap: 1.35cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__marker--en > strong {
+    font-size: clamp(13px, 1.35cqw, 18px);
+    letter-spacing: 0.025em;
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en {
+    width: min(64cqw, 820px);
+    margin-top: 2.5cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en h2 {
+    width: auto;
+    font-size: clamp(27px, 3.18cqw, 43px);
+    line-height: 1.16;
+    letter-spacing: -0.042em;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en h2 > span {
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en > p {
+    max-width: 61cqw;
+    margin-top: 0.8cqw;
+    font-size: clamp(11px, 1.06cqw, 14.2px);
+    line-height: 1.52;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__flow--en {
+    gap: 3.25cqw;
+    margin-top: 1.7cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__step-heading--en {
+    gap: 0.8cqw;
+    min-height: 8.15cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__step-heading--en > span {
+    font-size: clamp(16px, 1.55cqw, 21px);
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__step-heading--en h3 {
+    font-size: clamp(12px, 1.16cqw, 15.5px);
+    line-height: 1.22;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__step-heading--en p {
+    max-width: 24cqw;
+    margin-top: 0.38cqw;
+    font-size: clamp(11px, 0.98cqw, 13px);
+    line-height: 1.42;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__summary--en {
+    max-width: 72cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__summary--en > strong {
+    font-size: clamp(14px, 1.45cqw, 19.5px);
+  }
+
+  /* 07 — Final Experience */
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__artboard--en {
+    aspect-ratio: auto;
+    min-height: 86cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__marker--en {
+    width: min(60cqw, 850px);
+    gap: 1.35cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__marker--en > strong {
+    font-size: clamp(13px, 1.35cqw, 18px);
+    letter-spacing: 0.025em;
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__header--en h2 {
+    width: auto;
+    max-width: 91cqw;
+    margin-top: 2.1cqw;
+    font-size: clamp(28px, 3.45cqw, 46px);
+    line-height: 1.14;
+    letter-spacing: -0.045em;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__project-word--en {
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__header--en > p {
+    width: auto;
+    max-width: 88cqw;
+    margin-top: 0.6cqw;
+    font-size: clamp(11.5px, 1.16cqw, 15.5px);
+    line-height: 1.52;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__stage--en {
+    top: max(238px, 27cqw);
+  }
+}
+
+/* A split-screen desktop leaves the case column narrower at 1201–1399px.
+   English pages grow vertically here; text and UI are never globally scaled. */
+@media (min-width: 1201px) and (max-width: 1399px) {
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__artboard--en {
+    aspect-ratio: auto;
+    min-height: 86cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__meta--en {
+    bottom: 2.2cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__artboard--en {
+    aspect-ratio: auto;
+    min-height: 95cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__flow--en {
+    top: 38cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en {
+    top: 67cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__challenge--en {
+    top: 81cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__artboard--en {
+    aspect-ratio: auto;
+    min-height: 112cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__layout--en {
+    top: 17.2cqw;
+    bottom: 4cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__visual--en {
+    height: 79cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project--en {
+    height: 62.5cqw;
+  }
+
+  /* At split-screen desktop widths the longer third principle reaches farther
+     into the visual column. Keep the device attached to the Project edge, not
+     on top of the narrative, and redraw only its English connector origin. */
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__device--en {
+    left: -0.75cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__device-line--en {
+    d: path("M 137 575 H 160 Q 176 575 176 552 V 296 Q 176 275 192 275 H 208");
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__artboard--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__artboard--en,
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__artboard--en {
+    aspect-ratio: auto;
+    min-height: 91cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__flow--en {
+    top: 33cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__photos--en {
+    margin-top: 5.8cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--device--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--workspace--en {
+    top: 33cqw;
+  }
+
+  /* The English step-two heading needs the space to the right of the 2D/3D
+     branch card. Its content determines the height; the following step starts
+     lower so the two descriptions retain a clear reading order. */
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--workspace--en .tools-measure05__step-heading--en {
+    left: 35.2cqw;
+    width: 26.2cqw;
+    max-width: calc(100% - 35.2cqw);
+    min-height: 0;
+    height: auto;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--workspace--en .tools-measure05__step-heading--en > div {
+    width: 100%;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--workspace--en .tools-measure05__step-heading--en p {
+    max-width: none;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--calculation--en {
+    top: 46cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__artboard--en {
+    min-height: 92cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__summary--en {
+    bottom: 2.5cqw;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__artboard--en {
+    min-height: 90cqw;
+  }
+}
+
+/* In the split-detail layout, a 1400–1800px viewport still leaves the case
+   column at roughly 900–1150px. Resolve that physical column geometry instead
+   of treating it as a full-width desktop; 1920px remains on the wide layout. */
+@media (min-width: 1400px) {
+  @container (min-width: 840px) and (max-width: 1180px) {
+    .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__artboard--en {
+      min-height: calc(80cqw + 56px);
+    }
+
+    .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__layout--en {
+      top: max(150px, 13cqw);
+    }
+  }
+}
+
+/* 01 has a later Chinese stacking breakpoint than the other rebuilt pages. */
+@media (min-width: 761px) and (max-width: 1200px) {
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__artboard--en {
+    display: block;
+    min-height: 0;
+    aspect-ratio: auto;
+    padding: 72px clamp(30px, 5vw, 56px) 48px;
+    overflow: hidden;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__marker--en,
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__copy--en,
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__meta--en {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__marker--en {
+    grid-template-columns: auto auto minmax(32px, 1fr);
+    gap: 14px;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__marker--en > strong {
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__copy--en {
+    max-width: 760px;
+    margin-top: 44px;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__copy--en h2 {
+    max-width: 16ch;
+    font-size: clamp(34px, 5.2vw, 48px);
+    line-height: 1.14;
+    letter-spacing: -0.045em;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__copy--en h2 > span {
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__body--en {
+    width: min(100%, 680px);
+    margin-top: 28px;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__body--en p {
+    font-size: 16px;
+    line-height: 1.68;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__body--en p + p {
+    margin-top: 20px;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__shift--en {
+    width: min(100%, 680px);
+    min-height: 88px;
+    margin-top: 28px;
+    padding: 16px 20px 16px 28px;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__shift--en > strong {
+    font-size: 19px;
+    line-height: 1.5;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__visual--en {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: clamp(500px, 62cqw, 640px);
+    margin-top: 44px;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__blueprint--en {
+    top: -40px;
+    right: -20px;
+    left: -20px;
+    width: auto;
+    height: 112%;
+    transform: none;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__ui--workspace--en {
+    top: 122px;
+    left: 0;
+    width: 100%;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__ui--device--en {
+    top: 4px;
+    left: 0;
+    width: 46%;
+    height: 84px;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__device-crop--en::after {
+    height: 30px;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__ui--photos--en {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    width: 55%;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__link--device--en {
+    top: 44px;
+    left: 45%;
+    width: 24%;
+    height: 88px;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__link--photo--en {
+    top: 58%;
+    left: 59%;
+    width: 12%;
+    height: 104px;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__meta--en {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    min-height: 104px;
+    margin-top: 42px;
+    padding-top: 18px;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__meta--en article,
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__meta--en article:first-child {
+    grid-template-columns: 40px minmax(0, 1fr);
+    padding: 12px 18px;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__meta--en strong {
+    font-size: 13px;
+    white-space: normal;
+  }
+}
+
+/* 02 switches to content-led flow before its Chinese mobile breakpoint so a
+   narrow desktop case column never forces English through seven tiny columns. */
+@media (min-width: 801px) and (max-width: 1200px) {
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__artboard--en {
+    display: block;
+    min-height: 0;
+    aspect-ratio: auto;
+    padding: 72px clamp(30px, 5vw, 56px) 60px;
+    overflow: hidden;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__header--en,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__flow--en,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__challenge--en {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__marker--en {
+    grid-template-columns: auto auto minmax(32px, 1fr);
+    width: 100%;
+    gap: 14px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__marker--en > strong {
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__header--en h2 {
+    max-width: 24ch;
+    margin-top: 38px;
+    font-size: clamp(32px, 4.6vw, 44px);
+    line-height: 1.16;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__intro--en {
+    max-width: 74ch;
+    margin-top: 24px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__intro--en p {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__intro--en p + p {
+    margin-top: 8px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__flow--en {
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 48px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__connections--en {
+    display: none;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__device--en,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__project--en,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__materials--en,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__delivery--en,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__warning--en {
+    align-self: stretch;
+    width: 100%;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__device-stage--en {
+    height: 260px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__device--en > strong,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__delivery--en > strong,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__materials--en > b {
+    margin-top: 12px;
+    font-size: 17px;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__warning--en {
+    display: flex;
+    height: 116px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__warning--en::before,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__warning--en::after {
+    width: 1px;
+    height: 20px;
+    content: "";
+    background: repeating-linear-gradient(to bottom, var(--tools-problem-warning-zh) 0 5px, transparent 5px 9px);
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__warning--en > span {
+    position: static;
+    width: 32px;
+    height: 32px;
+    font-size: 17px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__warning--en > strong {
+    align-self: center;
+    font-size: 14px;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__project--en {
+    height: auto;
+    border-radius: 14px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__project--en > header {
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    height: 64px;
+    padding: 0 18px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__project-content--en {
+    display: block;
+    height: auto;
+    padding: 18px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__floors--en {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__floors--en figure {
+    grid-template-rows: minmax(150px, 1fr) auto;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__floors--en figcaption {
+    min-height: 58px;
+    padding: 10px;
+    font-size: 13px;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__members--en {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__members--en li {
+    justify-content: center;
+    min-height: 62px;
+    border-radius: 8px;
+    background: #f7f9fb;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__members--en li > span {
+    width: 36px;
+    height: 36px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__members--en li > strong {
+    font-size: 13px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__materials--en {
+    grid-template-rows: 200px 58px 58px 28px auto;
+    gap: 10px;
+    height: auto;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__photo-stack--en figure {
+    top: calc(var(--photo-index) * 12px);
+    right: calc(var(--photo-index) * 8%);
+    width: calc(72% - var(--photo-index) * 5%);
+    height: 165px;
+    border-width: 4px;
+    border-radius: 8px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__photo-stack--en figure:nth-of-type(1) {
+    right: 24%;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__photo-stack--en figure:nth-of-type(2) {
+    right: 13%;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__photo-stack--en figure:nth-of-type(3) {
+    right: 2%;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__material-row--en {
+    grid-template-columns: 44px minmax(0, 1fr);
+    padding: 8px 12px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__material-row--en > span {
+    width: 34px;
+    height: 34px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__material-row--en > strong {
+    font-size: 15px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__delivery--en {
+    padding-top: 0;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__report--en {
+    width: min(100%, 340px);
+    height: 474px;
+    padding: 22px 22px 14px;
+    border-radius: 10px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__report--en > header strong {
+    font-size: 15px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__report-plan--en {
+    height: 186px;
+    margin-top: 16px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__report-photos--en {
+    height: 72px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    min-height: 0;
+    margin-top: 56px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en li,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en li:first-child {
+    padding: 22px 24px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en li:first-child {
+    padding-left: 0;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en li > div {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en li > div > span {
+    font-size: 23px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en li > div > strong {
+    font-size: 17px;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en li p {
+    margin: 12px 0 0;
+    font-size: 14px;
+    line-height: 1.55;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__challenge--en {
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 24%);
+    gap: 28px;
+    min-height: 0;
+    margin-top: 42px;
+    padding: 28px 24px;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__challenge-main--en p {
+    margin-top: 18px;
+    font-size: clamp(23px, 3vw, 31px);
+    line-height: 1.36;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__challenge-summary--en span {
+    font-size: 15px;
+    line-height: 1.45;
+    white-space: normal;
+  }
+}
+
+/* 03–06 share the Chinese stacked order at tablet widths, with English cards
+   allowed to grow from their content instead of inheriting desktop heights. */
+@media (min-width: 1000px) and (max-width: 1200px) {
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__artboard--en,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__artboard--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__artboard--en,
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__artboard--en {
+    display: block;
+    min-height: 0;
+    aspect-ratio: auto;
+    padding: 72px clamp(30px, 5vw, 56px) 66px;
+    overflow: hidden;
+  }
+
+  /* 03 */
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__marker--en,
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__layout--en {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__marker--en {
+    grid-template-columns: auto auto minmax(32px, 1fr);
+    gap: 14px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__marker--en > strong {
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__layout--en {
+    display: block;
+    margin-top: 42px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__narrative--en h2 {
+    max-width: 18ch;
+    font-size: clamp(34px, 4.6vw, 46px);
+    line-height: 1.18;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__narrative--en h2 > span {
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__intro--en,
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__principles--en {
+    width: min(100%, 760px);
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__intro--en {
+    margin-top: 28px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__intro--en p {
+    font-size: 16px;
+    line-height: 1.66;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__intro--en p + p {
+    margin-top: 18px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__principles--en {
+    margin-top: 42px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__principles--en li {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 14px;
+    padding: 24px 0;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__principles--en li > span {
+    font-size: 27px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__principles--en h3 {
+    font-size: 20px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__principles--en p {
+    margin-top: 9px;
+    font-size: 15px;
+    line-height: 1.62;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__visual--en {
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    margin-top: 48px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__connections--en {
+    display: none;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project--en,
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__device--en,
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__delivery--en {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project--en {
+    order: 1;
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project-bar--en {
+    min-height: 112px;
+    padding: 20px;
+    align-items: flex-start;
+    gap: 18px;
+    flex-direction: column;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project-name--en h3 {
+    font-size: 20px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__permissions--en {
+    justify-content: space-between;
+    width: 100%;
+    gap: 12px;
+    font-size: 13px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__permissions--en button {
+    min-width: 84px;
+    height: 40px;
+    padding: 0 14px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__workspace--en {
+    min-height: 166px;
+    padding: 22px 20px;
+    align-items: flex-start;
+    gap: 20px;
+    flex-direction: column;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__workspace--en p {
+    max-width: 64ch;
+    margin-top: 6px;
+    font-size: 13px;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__workspace--en ul {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en {
+    margin: 0 14px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article {
+    grid-template-columns: 112px minmax(150px, 0.72fr) minmax(0, 1.4fr);
+    gap: 16px;
+    padding: 18px 10px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article > figure {
+    width: 112px;
+    height: 128px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plan-name--en h4 {
+    font-size: 16px;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plan-name--en p {
+    margin-top: 8px;
+    font-size: 12px;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article > ul {
+    gap: 8px;
+    padding-left: 12px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article > ul li strong {
+    font-size: 10px;
+    line-height: 1.2;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project-note--en {
+    min-height: 76px;
+    margin: 14px;
+    padding: 15px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project-note--en p {
+    font-size: 12px;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__device--en {
+    order: 2;
+    display: flex;
+    min-height: 260px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 28px;
+    padding: 24px;
+    border: 1px solid #e2e9ec;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__device--en > div {
+    width: 116px;
+    height: 184px;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__delivery--en {
+    order: 3;
+    display: grid;
+    grid-template-columns: minmax(110px, 28%) minmax(0, 1fr);
+    grid-template-rows: auto auto 82px;
+    gap: 12px 18px;
+    height: auto;
+    min-height: 238px;
+    margin-top: 20px;
+    padding: 22px;
+    border-radius: 12px;
+  }
+
+  /* 04 */
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__marker--en,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__flow--en,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__summary--en {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__marker--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__marker--en,
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__marker--en {
+    grid-template-columns: auto auto minmax(32px, 1fr);
+    gap: 14px;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__marker--en > strong,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__marker--en > strong,
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__marker--en > strong {
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en {
+    margin-top: 42px;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en h2,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en h2 {
+    max-width: 21ch;
+    font-size: clamp(34px, 4.6vw, 46px);
+    line-height: 1.18;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en h2 > span,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en h2 > span {
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en > p,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en > p {
+    width: min(100%, 760px);
+    margin-top: 22px;
+    font-size: 16px;
+    line-height: 1.68;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__connections--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__connections--en {
+    display: none;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__flow--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__flow--en {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 72px;
+    margin-top: 60px;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step--en,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__photos--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--workspace--en .tools-measure05__step-heading--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__spatial-result--en {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    transform: none;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step-heading--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step-heading--en {
+    width: min(100%, 600px);
+    min-height: 0;
+    gap: 16px;
+    padding: 0;
+    margin: 0 auto 24px;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step-heading--en > span,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step-heading--en > span {
+    width: 50px;
+    height: 50px;
+    flex-basis: 50px;
+    font-size: 20px;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step-heading--en h3,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step-heading--en h3 {
+    font-size: 22px;
+    line-height: 1.3;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__screen--en,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step--workspace--en .tools-core04__screen--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--device--en .tools-measure05__screen--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--workspace--en .tools-measure05__screen--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--calculation--en .tools-measure05__screen--en {
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    justify-content: center;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__screen--en img,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step--workspace--en .tools-core04__screen--en img,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__screen--en img {
+    width: min(100%, 360px);
+    max-width: 100%;
+    height: auto;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step--en > p,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__photos--en > p {
+    width: min(100%, 600px);
+    max-width: none;
+    margin: 22px auto 0;
+    font-size: 15px;
+    line-height: 1.62;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__photos--en {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__photos--en figure {
+    width: min(100%, 360px);
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__summary--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__summary--en {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    gap: 18px;
+    margin-top: 72px;
+  }
+
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__summary--en > strong,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__summary--en > strong {
+    font-size: 21px;
+    line-height: 1.48;
+  }
+
+  /* 05 */
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__marker--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__flow--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__summary--en {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step-heading--en {
+    align-items: flex-start;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step-heading--en p {
+    max-width: 520px;
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 1.62;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--device--en .tools-measure05__screen--en img {
+    width: min(100%, 330px);
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step--calculation--en .tools-measure05__screen--en img {
+    width: min(100%, 393px);
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__spatial-result--en {
+    display: flex;
+    align-items: center;
+    width: min(100%, 360px);
+    min-height: 0;
+    gap: 14px;
+    margin: 22px auto 0;
+    padding: 16px 18px;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__spatial-result--en > svg {
+    display: none;
+  }
+
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__spatial-result--en > p {
+    position: static;
+    width: auto;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  /* 06 */
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__artboard--en {
+    padding-top: 76px;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en {
+    width: min(100%, 760px);
+    margin-top: 42px;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en h2 {
+    width: auto;
+    font-size: clamp(34px, 4.8vw, 48px);
+    line-height: 1.18;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en h2 > span {
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en > p {
+    max-width: 70ch;
+    margin-top: 22px;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__connections--en {
+    display: none;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__flow--en {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 82px;
+    margin-top: 62px;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__step-heading--en {
+    gap: 16px;
+    min-height: 0;
+    margin-bottom: 28px;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__step-heading--en > span {
+    font-size: 29px;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__step-heading--en h3 {
+    font-size: 22px;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__step-heading--en p {
+    max-width: 620px;
+    margin-top: 8px;
+    font-size: 15px;
+    line-height: 1.62;
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__screen--en {
+    width: min(100%, 393px);
+  }
+
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__summary--en {
+    position: static;
+    max-width: 760px;
+    margin-top: 82px;
+  }
+}
+
+/* 07 stacks before the Chinese 900px breakpoint so the collage never competes
+   with a multi-line English headline in a narrow split-screen column. */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__artboard--en {
+    display: block;
+    min-height: 0;
+    aspect-ratio: auto;
+    padding: 76px clamp(30px, 5vw, 56px) 92px;
+    overflow: hidden;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__header--en,
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__stage--en,
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__panel-motion--en {
+    position: relative;
+    inset: auto;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__marker--en {
+    grid-template-columns: auto auto minmax(32px, 1fr);
+    width: 100%;
+    gap: 14px;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__marker--en > strong {
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__header--en h2 {
+    width: auto;
+    max-width: 20ch;
+    margin-top: 40px;
+    font-size: clamp(34px, 4.8vw, 48px);
+    line-height: 1.18;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__header--en > p {
+    width: auto;
+    max-width: 68ch;
+    margin-top: 22px;
+    font-size: 16px;
+    line-height: 1.65;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__stage--en {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    margin-top: 62px;
+    overflow: visible;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__panel-motion--en {
+    z-index: 2;
+    width: min(100%, 350px);
+    margin: 0 auto;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__panel-motion--floor-card--en {
+    width: min(100%, 361px);
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__panel--en {
+    transform: none;
+  }
+}
+
+/* Existing Chinese mobile layouts already establish the correct order. These
+   English-only adjustments preserve readable type and natural line wrapping. */
+@media (max-width: 999px) {
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__step-heading--en h3,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__step-heading--en h3 {
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en [data-tools-en-page] :where(h2, h3, h4, p, li, figcaption, strong, span, button) {
+    word-break: normal;
+    overflow-wrap: normal;
+    hyphens: none;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__narrative--en h2,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en h2,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en h2,
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en h2 {
+    max-width: 20ch;
+    font-size: clamp(29px, 6vw, 40px);
+    line-height: 1.2;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__narrative--en h2 > span,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en h2 > span,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en h2 > span,
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en h2 > span {
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__intro--en p,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en > p,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en > p,
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en > p {
+    font-size: 15px;
+    line-height: 1.68;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__workspace--en p,
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plan-name--en h4,
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plan-name--en p,
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article > ul li strong,
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__project-note--en p {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 900px) {
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__header--en h2 {
+    max-width: 19ch;
+    font-size: clamp(30px, 5.7vw, 42px);
+    line-height: 1.2;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__header--en > p {
+    max-width: 65ch;
+    font-size: 15px;
+    line-height: 1.66;
+  }
+}
+
+@media (max-width: 800px) {
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__copy--en h2,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__header--en h2 {
+    max-width: none;
+    font-size: clamp(27px, 4.6vw, 36px);
+    line-height: 1.2;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__narrative--en h2,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en h2,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en h2,
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en h2,
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__header--en h2 {
+    max-width: none;
+    font-size: clamp(27px, 4.6vw, 36px);
+    line-height: 1.2;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__intro--en p {
+    font-size: 15px;
+    line-height: 1.68;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__floors--en figcaption,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__members--en li > strong,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__material-row--en > strong {
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__issues--en li > div > strong,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__challenge-main--en p,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__challenge-summary--en span {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 760px) {
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__copy--en h2 {
+    max-width: 15ch;
+    font-size: clamp(30px, 8.4vw, 38px);
+    line-height: 1.17;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__body--en p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__shift--en > strong,
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__meta--en strong {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 440px) {
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__artboard--en,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__artboard--en,
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__artboard--en,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__artboard--en,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__artboard--en,
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__artboard--en,
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__artboard--en {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__marker--en > strong,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__marker--en > strong,
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__marker--en > strong,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__marker--en > strong,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__marker--en > strong,
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__marker--en > strong,
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__marker--en > strong {
+    font-size: 12px;
+    line-height: 1.15;
+    letter-spacing: 0.04em;
+    white-space: normal;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__copy--en h2,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__header--en h2,
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__narrative--en h2,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en h2,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en h2,
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en h2,
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__header--en h2 {
+    max-width: none;
+    font-size: clamp(24px, 6.15vw, 28px);
+    line-height: 1.22;
+    letter-spacing: -0.045em;
+  }
+
+  .tools-case-study .tools-case--en .tools-project-overview--en .tools-project-overview__body--en p,
+  .tools-case-study .tools-case--en .tools-problem--en .tools-problem__intro--en p,
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__intro--en p,
+  .tools-case-study .tools-case--en .tools-core-experience--en .tools-core04__header--en > p,
+  .tools-case-study .tools-case--en .tools-measure--en .tools-measure05__header--en > p,
+  .tools-case-study .tools-case--en .tools-capture-organize--en .tools-capture06__header--en > p,
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__header--en > p {
+    font-size: 14px;
+    line-height: 1.68;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article > ul li {
+    grid-template-columns: 28px minmax(0, 1fr);
+    align-items: center;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .tools-case-study .tools-case--en .tools-structure--en .tools-structure03__plans--en > article > ul li strong {
+    font-size: 10px;
+    line-height: 1.2;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tools-case-study .tools-case--en [data-tools-en-page] *,
+  .tools-case-study .tools-case--en [data-tools-en-page] *::before,
+  .tools-case-study .tools-case--en [data-tools-en-page] *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__header--en,
+  .tools-case-study .tools-case--en .tools-final-experience--en .tools-final07__panel-motion--en {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

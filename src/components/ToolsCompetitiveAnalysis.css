@@ -1,0 +1,948 @@
+/* MILESEEY Tools — bilingual Competitive Analysis.
+   Every rule is isolated to the Chinese page root or the English case wrapper. */
+
+.tools-case-study .tools-competitive--zh,
+.tools-case-study .tools-case--en .tools-competitive--en {
+  --tools-competitive-accent: #08b9ca;
+  --tools-competitive-accent-dark: #007f91;
+  --tools-competitive-ink: #07101f;
+  --tools-competitive-body: #35415a;
+  --tools-competitive-muted: #6b7790;
+  --tools-competitive-line: #d8e3eb;
+  --tools-competitive-soft: #eefafe;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  container-type: inline-size;
+  color: var(--tools-competitive-ink);
+  background: #fcfeff;
+  font-family: "Poppins", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en {
+  font-family: "Poppins", Inter, "Helvetica Neue", Arial, sans-serif;
+}
+
+.tools-case-study .tools-competitive--zh *,
+.tools-case-study .tools-case--en .tools-competitive--en * {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.tools-case-study .tools-competitive--zh :where(h2, h3, p, figure, table),
+.tools-case-study .tools-case--en .tools-competitive--en :where(h2, h3, p, figure, table) {
+  margin: 0;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en :where(h2, h3, p, th, td, strong, span) {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en :where(h2, h3) {
+  text-wrap: balance;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en :where(p, th) {
+  text-wrap: pretty;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__blueprint--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__blueprint--en {
+  position: absolute;
+  z-index: 0;
+  top: -3.5cqw;
+  right: -7cqw;
+  width: min(69cqw, 1040px);
+  height: min(45cqw, 680px);
+  pointer-events: none;
+  opacity: 0.28;
+  color: #5bc8ee;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__blueprint--zh g,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__blueprint--en g {
+  stroke: currentColor;
+  stroke-width: 1.15;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__artboard--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__artboard--en {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(18px, 1.65cqw, 28px);
+  width: 100%;
+  min-height: 75cqw;
+  padding: clamp(34px, 4.1cqw, 62px) clamp(24px, 3.25cqw, 50px) clamp(32px, 3.7cqw, 56px);
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__artboard--en {
+  min-height: 0;
+  gap: clamp(20px, 1.85cqw, 30px);
+  padding-top: clamp(36px, 4.35cqw, 66px);
+  padding-bottom: clamp(38px, 4.25cqw, 66px);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__header--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__header--en {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 940px);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__marker--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__marker--en {
+  display: grid;
+  grid-template-columns: auto auto auto minmax(64px, 1fr);
+  align-items: center;
+  gap: clamp(8px, 0.85cqw, 14px);
+  width: min(100%, 520px);
+  color: var(--tools-competitive-ink);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__marker--zh > span,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__marker--en > span {
+  color: var(--tools-competitive-accent-dark);
+  font-size: clamp(22px, 2.15cqw, 34px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__marker-slash--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__marker-slash--en {
+  color: var(--tools-competitive-accent-dark);
+  font-size: clamp(18px, 1.65cqw, 26px);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__marker--zh > strong,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__marker--en > strong {
+  color: #10192b;
+  font-size: clamp(14px, 1.45cqw, 21px);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: 0.055em;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__marker--en > strong {
+  font-size: clamp(13px, 1.3cqw, 19px);
+  letter-spacing: 0.12em;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__marker--zh > i,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__marker--en > i {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #aeb9c9;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__headline--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__headline--en {
+  width: min(100%, 980px);
+  margin-top: clamp(18px, 2.25cqw, 34px);
+  color: #03070d;
+  font-size: clamp(32px, 3.55cqw, 54px);
+  font-weight: 720;
+  line-height: 1.18;
+  letter-spacing: -0.045em;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__headline--en {
+  width: min(100%, 1040px);
+  max-width: 22em;
+  font-size: clamp(30px, 3.15cqw, 49px);
+  line-height: 1.13;
+  letter-spacing: -0.04em;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__headline-line--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__headline-line--en {
+  display: block;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__headline-line--en {
+  display: inline;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__headline-accent--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__headline-accent--en {
+  color: var(--tools-competitive-accent);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__intro--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__intro--en {
+  width: min(100%, 900px);
+  margin-top: clamp(12px, 1.1cqw, 18px);
+  color: var(--tools-competitive-body);
+  font-size: clamp(13px, 1.27cqw, 18px);
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__intro--en {
+  width: min(100%, 1000px);
+  max-width: 76em;
+  font-size: clamp(14px, 1.18cqw, 17px);
+  line-height: 1.68;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__cards--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__cards--en {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(12px, 1.35cqw, 21px);
+  width: 100%;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__card--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__card--en {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  align-content: start;
+  overflow: hidden;
+  border: 1px solid #cfe6ef;
+  border-radius: clamp(10px, 1.05cqw, 16px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 30px rgba(28, 71, 95, 0.055);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__brand--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__brand--en {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 0.75cqw, 12px);
+  min-height: clamp(48px, 4.7cqw, 70px);
+  padding: clamp(10px, 1cqw, 15px) clamp(11px, 1.05cqw, 16px);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__brand-icon--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__brand-icon--en {
+  display: block;
+  flex: 0 0 auto;
+  width: clamp(30px, 3.15cqw, 46px);
+  height: clamp(30px, 3.15cqw, 46px);
+  border-radius: 20%;
+  object-fit: cover;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__brand--zh > strong,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__brand--en > strong {
+  color: #101725;
+  font-size: clamp(16px, 1.72cqw, 25px);
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__brand--en > strong {
+  font-size: clamp(16px, 1.55cqw, 23px);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__gallery--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__gallery--en {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(4px, 0.55cqw, 8px);
+  padding: 0 clamp(9px, 0.85cqw, 13px);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__screen--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__screen--en {
+  position: relative;
+  aspect-ratio: 0.455;
+  overflow: hidden;
+  border: 1px solid rgba(143, 172, 188, 0.24);
+  border-radius: clamp(6px, 0.68cqw, 10px);
+  background: #edf4f7;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__product-image--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__product-image--en {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__analysis--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__analysis--en {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(7px, 0.65cqw, 10px);
+  padding: clamp(12px, 1.15cqw, 17px) clamp(12px, 1.25cqw, 19px) clamp(14px, 1.35cqw, 20px);
+  text-align: center;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__analysis--zh h3,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__analysis--en h3 {
+  color: #0c1424;
+  font-size: clamp(14px, 1.45cqw, 21px);
+  font-weight: 650;
+  line-height: 1.28;
+  letter-spacing: -0.025em;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__analysis--en h3 {
+  font-size: clamp(14px, 1.26cqw, 18px);
+  line-height: 1.35;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__analysis--zh h3 > span,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__analysis--en h3 > span {
+  display: inline;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__analysis--zh p,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__analysis--en p {
+  color: var(--tools-competitive-body);
+  font-size: clamp(13px, 1.02cqw, 15px);
+  font-weight: 400;
+  line-height: 1.62;
+  text-align: left;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__analysis--en p {
+  font-size: clamp(14px, 1.02cqw, 15.5px);
+  line-height: 1.64;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__synthesis--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__synthesis--en {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.78fr) minmax(280px, 0.92fr);
+  align-items: stretch;
+  gap: clamp(12px, 1.35cqw, 21px);
+  width: 100%;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__matrix-wrap--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix-wrap--en {
+  overflow: hidden;
+  border: 1px solid #d5e7ee;
+  border-radius: clamp(10px, 1cqw, 15px);
+  background: rgba(255, 255, 255, 0.96);
+  padding: clamp(10px, 1cqw, 15px) clamp(12px, 1.2cqw, 18px) clamp(9px, 0.85cqw, 13px);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  color: var(--tools-competitive-ink);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh th,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en th {
+  color: #172238;
+  font-size: clamp(10.5px, 0.86cqw, 12.5px);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh thead th,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en thead th {
+  padding: clamp(4px, 0.45cqw, 7px) clamp(3px, 0.45cqw, 7px) clamp(8px, 0.7cqw, 11px);
+  text-align: center;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh thead th:first-child,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en thead th:first-child {
+  width: 43%;
+  text-align: left;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh tbody tr,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en tbody tr {
+  border-top: 1px solid #e2ebf0;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh tbody th,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en tbody th {
+  padding: clamp(6px, 0.58cqw, 9px) clamp(4px, 0.45cqw, 7px);
+  text-align: left;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh td,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en td {
+  padding: clamp(5px, 0.52cqw, 8px) 4px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__matrix-mark--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix-mark--en {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(9px, 0.82cqw, 12px);
+  height: clamp(9px, 0.82cqw, 12px);
+  border-radius: 50%;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__mobile-product--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__mobile-product--en {
+  display: none;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__matrix-mark--core,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix-mark--core {
+  background: var(--tools-competitive-accent-dark);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__matrix-mark--supported,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix-mark--supported {
+  border: 2px solid var(--tools-competitive-accent-dark);
+  background: #fff;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__matrix-mark--none,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix-mark--none {
+  position: relative;
+  background: #717d8b;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__matrix-mark--none::after,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix-mark--none::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 52%;
+  height: 1.5px;
+  border-radius: 999px;
+  background: #fff;
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__sr--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__sr--en {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__legend--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__legend--en {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 5px clamp(10px, 0.9cqw, 14px);
+  margin-top: clamp(7px, 0.65cqw, 10px);
+  color: var(--tools-competitive-muted);
+  font-size: clamp(10px, 0.75cqw, 11.5px);
+  line-height: 1.3;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__legend--zh > span,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__legend--en > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__legend-mark,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__legend-mark {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__legend-mark--core,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__legend-mark--core {
+  background: var(--tools-competitive-accent-dark);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__legend-mark--supported,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__legend-mark--supported {
+  border: 2px solid var(--tools-competitive-accent-dark);
+  background: #fff;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__legend-mark--none,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__legend-mark--none {
+  position: relative;
+  background: #717d8b;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__legend-mark--none::after,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__legend-mark--none::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 52%;
+  height: 1.5px;
+  border-radius: 999px;
+  background: #fff;
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__opportunity--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity--en {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(11px, 1cqw, 16px);
+  min-height: 100%;
+  border: 1px solid #caedf4;
+  border-radius: clamp(10px, 1cqw, 15px);
+  padding: clamp(16px, 1.65cqw, 25px);
+  background: #eafafd;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__opportunity-icon--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity-icon--en {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(42px, 4.2cqw, 62px);
+  height: clamp(42px, 4.2cqw, 62px);
+  border-radius: 50%;
+  color: var(--tools-competitive-accent-dark);
+  background: rgba(8, 185, 202, 0.12);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__opportunity-icon--zh svg,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity-icon--en svg {
+  width: 55%;
+  height: 55%;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__opportunity-copy--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity-copy--en {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(7px, 0.65cqw, 10px);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__opportunity-copy--zh h3,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity-copy--en h3 {
+  color: var(--tools-competitive-accent-dark);
+  font-size: clamp(16px, 1.75cqw, 25px);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity-copy--en h3 {
+  font-size: clamp(15px, 1.5cqw, 21px);
+  letter-spacing: 0.035em;
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__opportunity-copy--zh p,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity-copy--en p {
+  color: #24304a;
+  font-size: clamp(13px, 1.12cqw, 16px);
+  line-height: 1.64;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity-copy--en p {
+  font-size: clamp(14px, 1.05cqw, 15.5px);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__opportunity-arrow--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity-arrow--en {
+  flex: 0 0 auto;
+  color: var(--tools-competitive-accent-dark);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__handoff--zh,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__handoff--en {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 5px minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(12px, 1.25cqw, 19px);
+  width: 100%;
+  margin-top: auto;
+  padding-top: clamp(2px, 0.45cqw, 7px);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__handoff--zh > i,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__handoff--en > i {
+  display: block;
+  width: 5px;
+  height: clamp(30px, 3.25cqw, 50px);
+  background: var(--tools-competitive-accent);
+}
+
+.tools-case-study .tools-competitive--zh .tools-competitive__handoff--zh > strong,
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__handoff--en > strong {
+  max-width: 64em;
+  color: #111827;
+  font-size: clamp(15px, 1.47cqw, 21px);
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__handoff--en > strong {
+  max-width: 76em;
+  font-size: clamp(14px, 1.22cqw, 18px);
+  line-height: 1.5;
+}
+
+@container (max-width: 1050px) {
+  .tools-case-study .tools-competitive--zh .tools-competitive__synthesis--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__synthesis--en {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__opportunity--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity--en {
+    min-height: 0;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__card--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__card--en {
+    border-radius: 12px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__analysis--zh p,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__analysis--en p {
+    line-height: 1.58;
+  }
+}
+
+@container (max-width: 760px) {
+  .tools-case-study .tools-competitive--zh .tools-competitive__artboard--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__artboard--en {
+    gap: 22px;
+    min-height: 0;
+    padding: 44px clamp(20px, 5.5cqw, 34px) 42px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__blueprint--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__blueprint--en {
+    top: 18px;
+    right: -28%;
+    width: 108%;
+    height: 48cqw;
+    opacity: 0.2;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__marker--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__marker--en {
+    grid-template-columns: auto auto auto minmax(36px, 1fr);
+    width: 100%;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__headline--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__headline--en {
+    margin-top: 24px;
+    font-size: clamp(29px, 7cqw, 42px);
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__intro--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__intro--en {
+    margin-top: 14px;
+    font-size: clamp(14px, 2.4cqw, 16px);
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__cards--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__cards--en {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__card--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__card--en {
+    width: 100%;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__brand--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__brand--en {
+    min-height: 62px;
+    padding: 12px 14px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__brand-icon--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__brand-icon--en {
+    width: 38px;
+    height: 38px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__brand--zh > strong,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__brand--en > strong {
+    font-size: 19px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__gallery--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__gallery--en {
+    gap: clamp(5px, 1.5cqw, 9px);
+    padding: 0 clamp(10px, 2.5cqw, 16px);
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__analysis--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__analysis--en {
+    gap: 8px;
+    padding: 15px 16px 18px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__analysis--zh h3,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__analysis--en h3 {
+    font-size: 17px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__analysis--zh p,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__analysis--en p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__matrix-wrap--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix-wrap--en {
+    padding: 12px 14px 11px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh th,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en th {
+    font-size: 11px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__opportunity--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity--en {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    padding: 18px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__opportunity-copy--zh h3,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity-copy--en h3 {
+    font-size: 18px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__opportunity-copy--zh p,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity-copy--en p {
+    font-size: 14px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__handoff--zh > strong,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__handoff--en > strong {
+    font-size: 15px;
+  }
+}
+
+@container (max-width: 440px) {
+  .tools-case-study .tools-competitive--zh .tools-competitive__artboard--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__artboard--en {
+    gap: 20px;
+    padding: 38px 18px 36px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__marker--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__marker--en {
+    grid-template-columns: auto auto minmax(0, auto) minmax(16px, 1fr);
+    gap: 7px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__marker--zh > span,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__marker--en > span {
+    font-size: 23px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__marker--zh > strong,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__marker--en > strong {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+  }
+
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__marker--en > strong {
+    font-size: 11px;
+    letter-spacing: 0.075em;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__headline--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__headline--en {
+    margin-top: 22px;
+    font-size: clamp(27px, 7.8cqw, 32px);
+    line-height: 1.2;
+  }
+
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__headline--en {
+    font-size: clamp(26px, 7.2cqw, 30px);
+    line-height: 1.16;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__gallery--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__gallery--en {
+    gap: 5px;
+    padding: 0 10px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__matrix-wrap--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix-wrap--en {
+    overflow: visible;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en {
+    display: block;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh thead,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh tbody,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en tbody {
+    display: grid;
+    gap: 10px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh tbody tr,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    overflow: hidden;
+    border: 1px solid #dce9ef;
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh tbody th,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en tbody th {
+    display: block;
+    padding: 10px 12px;
+    border-bottom: 1px solid #e5eef2;
+    background: #f3fbfd;
+    color: #152238;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh td,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en td {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    min-height: 34px;
+    padding: 7px 12px;
+    border-bottom: 1px solid #eef3f6;
+    color: #44516a;
+    font-size: 11px;
+    text-align: left;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__matrix--zh td:last-child,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix--en td:last-child {
+    border-bottom: 0;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__mobile-product--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__mobile-product--en {
+    display: inline;
+    font-weight: 500;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__matrix-mark--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__matrix-mark--en {
+    width: 11px;
+    height: 11px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__legend--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__legend--en {
+    justify-content: flex-start;
+    margin-top: 10px;
+    padding: 0 2px;
+    font-size: 10.5px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__opportunity--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity--en {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__opportunity-icon--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity-icon--en {
+    width: 42px;
+    height: 42px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__opportunity-arrow--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__opportunity-arrow--en {
+    grid-column: 2;
+    width: 24px;
+    height: 24px;
+    margin-top: 2px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__handoff--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__handoff--en {
+    grid-template-columns: 4px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .tools-case-study .tools-competitive--zh .tools-competitive__handoff--zh > i,
+  .tools-case-study .tools-case--en .tools-competitive--en .tools-competitive__handoff--en > i {
+    width: 4px;
+    height: 38px;
+  }
+}
+
+@media (max-width: 1120px) {
+  .tools-case-study .tools-competitive--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en {
+    width: 100%;
+  }
+}
+
+@media (max-width: 760px) {
+  .tools-case-study .tools-competitive--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en {
+    overflow-x: clip;
+  }
+}
+
+@media (max-width: 440px) {
+  .tools-case-study .tools-competitive--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tools-case-study .tools-competitive--zh,
+  .tools-case-study .tools-case--en .tools-competitive--en,
+  .tools-case-study .tools-competitive--zh *,
+  .tools-case-study .tools-case--en .tools-competitive--en * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
