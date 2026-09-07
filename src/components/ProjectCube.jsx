@@ -1,6 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { projects } from "../data/projects";
+import {
+  getS50CSharedVideoElement,
+  preloadS50CSharedCoverVideo,
+  setS50CSharedVideoPlaybackIntent,
+  subscribeS50CSharedVideoFrames,
+} from "./S50CSharedCoverVideo";
 import { ToolsAnimatedCover } from "./ToolsAnimatedCover";
 import {
   TOOLS_CUBE_SURFACE_HEIGHT,
@@ -42,6 +48,30 @@ function getFilledHomeCameraZ(aspect, isDesktop, useHomeComposition = false) {
 
 const FACE_LABELS = ["01 AG1", "02 S50C", "03 TOOLS APP", "ABOUT ME"];
 const FACE_TEXTURES = projects.map((project) => project.cover);
+const S50C_FACE_INDEX = projects.findIndex((project) => project.id === "s50c");
+let sharedS50CVideoTexture = null;
+let sharedS50CVideoTextureUsers = 0;
+
+function acquireS50CVideoTexture(video) {
+  if (!sharedS50CVideoTexture) {
+    sharedS50CVideoTexture = new THREE.VideoTexture(video);
+    sharedS50CVideoTexture.colorSpace = THREE.SRGBColorSpace;
+    sharedS50CVideoTexture.generateMipmaps = false;
+    sharedS50CVideoTexture.minFilter = THREE.LinearFilter;
+    sharedS50CVideoTexture.magFilter = THREE.LinearFilter;
+    sharedS50CVideoTexture.wrapS = THREE.ClampToEdgeWrapping;
+    sharedS50CVideoTexture.wrapT = THREE.ClampToEdgeWrapping;
+  }
+  sharedS50CVideoTextureUsers += 1;
+  return sharedS50CVideoTexture;
+}
+
+function releaseS50CVideoTexture() {
+  sharedS50CVideoTextureUsers = Math.max(0, sharedS50CVideoTextureUsers - 1);
+  if (sharedS50CVideoTextureUsers > 0 || !sharedS50CVideoTexture) return;
+  sharedS50CVideoTexture.dispose();
+  sharedS50CVideoTexture = null;
+}
 
 const FACE_TRANSFORMS = [
   { position: [0, 0, PANEL_OFFSET], rotation: [0, 0, 0] },
@@ -94,6 +124,21 @@ function applyPanelCover(texture, ratio, horizontalAlignment = 0.5) {
   texture.wrapT = THREE.ClampToEdgeWrapping;
   texture.repeat.set(repeatX, repeatY);
   texture.offset.set((1 - repeatX) * horizontalAlignment, (1 - repeatY) / 2);
+}
+
+function getPanelGeometrySize(definition) {
+  if (definition.fit !== "contain") {
+    return [CUBOID_WIDTH, CUBOID_HEIGHT];
+  }
+
+  const panelRatio = CUBOID_WIDTH / CUBOID_HEIGHT;
+  const imageRatio = Math.max(0.001, definition.ratio);
+
+  if (imageRatio >= panelRatio) {
+    return [CUBOID_WIDTH, CUBOID_WIDTH / imageRatio];
+  }
+
+  return [CUBOID_HEIGHT * imageRatio, CUBOID_HEIGHT];
 }
 
 function applyProjectedQuadTransform(element, points) {
@@ -155,6 +200,7 @@ export function ProjectCube({
   coverFlatViewport = false,
   interactive = true,
   homeComposition = false,
+  mediaPlaybackEnabled = false,
   apiRef,
 }) {
   const canvasRef = useRef(null);
@@ -170,6 +216,8 @@ export function ProjectCube({
   const presentationDurationRef = useRef(presentationDuration);
   const rotationDurationRef = useRef(rotationDuration);
   const coverFlatViewportRef = useRef(coverFlatViewport);
+  const mediaPlaybackEnabledRef = useRef(mediaPlaybackEnabled);
+  const mediaPlaybackKeyRef = useRef(Symbol("s50c-cube-video"));
   const apiRefRef = useRef(apiRef);
 
   const normalizedActiveIndex = normalizeIndex(activeIndex);
@@ -182,7 +230,47 @@ export function ProjectCube({
   presentationDurationRef.current = presentationDuration;
   rotationDurationRef.current = rotationDuration;
   coverFlatViewportRef.current = coverFlatViewport;
+  mediaPlaybackEnabledRef.current = mediaPlaybackEnabled;
   apiRefRef.current = apiRef;
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const playbackKey = mediaPlaybackKeyRef.current;
+    const canPlayVideo = mediaPlaybackEnabled
+      && mode !== "wireframe"
+      && normalizedActiveIndex === S50C_FACE_INDEX;
+
+    if (!canvas || !canPlayVideo) {
+      setS50CSharedVideoPlaybackIntent(playbackKey, false);
+      return undefined;
+    }
+
+    let disposed = false;
+    const updateIntent = (visible) => {
+      if (disposed) return;
+      setS50CSharedVideoPlaybackIntent(playbackKey, canPlayVideo && visible);
+    };
+
+    if (typeof IntersectionObserver === "undefined") {
+      updateIntent(true);
+      return () => {
+        disposed = true;
+        setS50CSharedVideoPlaybackIntent(playbackKey, false);
+      };
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => updateIntent(Boolean(entry?.isIntersecting && entry.intersectionRatio > 0)),
+      { threshold: [0, 0.01] },
+    );
+    observer.observe(canvas);
+
+    return () => {
+      disposed = true;
+      observer.disconnect();
+      setS50CSharedVideoPlaybackIntent(playbackKey, false);
+    };
+  }, [mediaPlaybackEnabled, mode, normalizedActiveIndex]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -195,6 +283,8 @@ export function ProjectCube({
     let firstFrameReadyCalled = false;
     let initialSceneReady = false;
     const settledFaceTextures = new Set();
+    const videoFrameUnsubscribers = [];
+    const videoTextureReleases = [];
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
@@ -419,41 +509,126 @@ export function ProjectCube({
 
     for (let index = 0; index < FACE_TEXTURES.length; index += 1) {
       const definition = FACE_TEXTURES[index];
-      const geometry = new THREE.PlaneGeometry(CUBOID_WIDTH, CUBOID_HEIGHT);
-      const texture = textureLoader.load(
-        definition.src,
-        () => {
-          if (disposed) {
-            texture.dispose();
-            return;
-          }
-          texture.needsUpdate = true;
-          renderScene();
-          markFaceTextureSettled(index);
-        },
-        undefined,
-        () => {
-          if (!disposed) {
+      const [panelWidth, panelHeight] = getPanelGeometrySize(definition);
+      const geometry = new THREE.PlaneGeometry(panelWidth, panelHeight);
+      let material;
+
+      if (definition.media === "video") {
+        const posterTexture = textureLoader.load(
+          definition.poster,
+          () => {
+            if (disposed) return;
+            posterTexture.needsUpdate = true;
             renderScene();
             markFaceTextureSettled(index);
-          }
-        },
-      );
-      texture.colorSpace = THREE.SRGBColorSpace;
-      texture.anisotropy = maxAnisotropy;
-      texture.minFilter = THREE.LinearMipmapLinearFilter;
-      texture.magFilter = THREE.LinearFilter;
-      applyPanelCover(texture, definition.ratio, index === 2 ? 0 : 0.5);
+          },
+          undefined,
+          () => {
+            if (!disposed) markFaceTextureSettled(index);
+          },
+        );
+        posterTexture.colorSpace = THREE.SRGBColorSpace;
+        posterTexture.anisotropy = maxAnisotropy;
+        posterTexture.minFilter = THREE.LinearMipmapLinearFilter;
+        posterTexture.magFilter = THREE.LinearFilter;
+        posterTexture.wrapS = THREE.ClampToEdgeWrapping;
+        posterTexture.wrapT = THREE.ClampToEdgeWrapping;
+        posterTexture.repeat.set(1, 1);
+        posterTexture.offset.set(0, 0);
 
-      const material = new THREE.MeshBasicMaterial({
-        map: texture,
-        toneMapped: false,
-      });
+        material = new THREE.MeshBasicMaterial({
+          map: posterTexture,
+          toneMapped: false,
+        });
+        textures.push(posterTexture);
+
+        const video = modeRef.current === "wireframe"
+          ? null
+          : getS50CSharedVideoElement();
+        if (video) {
+          const videoTexture = acquireS50CVideoTexture(video);
+          videoTextureReleases.push(releaseS50CVideoTexture);
+
+          preloadS50CSharedCoverVideo().then((readyVideo) => {
+            if (disposed || !readyVideo) return;
+            videoTexture.needsUpdate = true;
+            material.map = videoTexture;
+            material.needsUpdate = true;
+            renderScene();
+            markFaceTextureSettled(index);
+          });
+
+          videoFrameUnsubscribers.push(
+            subscribeS50CSharedVideoFrames(() => {
+              videoTexture.needsUpdate = true;
+              renderScene();
+            }, () => (
+              !disposed
+              && mediaPlaybackEnabledRef.current
+              && intendedIndexRef.current === index
+              && modeRef.current !== "wireframe"
+            )),
+          );
+        }
+      } else {
+        const texture = textureLoader.load(
+          definition.src,
+          () => {
+            if (disposed) {
+              texture.dispose();
+              return;
+            }
+            texture.needsUpdate = true;
+            renderScene();
+            markFaceTextureSettled(index);
+          },
+          undefined,
+          () => {
+            if (!disposed) {
+              renderScene();
+              markFaceTextureSettled(index);
+            }
+          },
+        );
+        texture.colorSpace = THREE.SRGBColorSpace;
+        texture.anisotropy = maxAnisotropy;
+        texture.minFilter = THREE.LinearMipmapLinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+        if (definition.fit === "contain") {
+          texture.wrapS = THREE.ClampToEdgeWrapping;
+          texture.wrapT = THREE.ClampToEdgeWrapping;
+          texture.repeat.set(1, 1);
+          texture.offset.set(0, 0);
+        } else {
+          applyPanelCover(texture, definition.ratio, index === 2 ? 0 : 0.5);
+        }
+
+        material = new THREE.MeshBasicMaterial({
+          map: texture,
+          toneMapped: false,
+        });
+        textures.push(texture);
+      }
+
       const panel = new THREE.Mesh(geometry, material);
       const transform = FACE_TRANSFORMS[index];
       panel.position.set(...transform.position);
       panel.rotation.set(...transform.rotation);
       panel.renderOrder = 2;
+
+      if (definition.fit === "contain" && definition.background) {
+        const backgroundGeometry = new THREE.PlaneGeometry(CUBOID_WIDTH, CUBOID_HEIGHT);
+        const backgroundMaterial = new THREE.MeshBasicMaterial({
+          color: definition.background,
+          toneMapped: false,
+        });
+        const backgroundPanel = new THREE.Mesh(backgroundGeometry, backgroundMaterial);
+        backgroundPanel.position.z = -0.002;
+        backgroundPanel.renderOrder = 1;
+        panel.add(backgroundPanel);
+        panelGeometries.push(backgroundGeometry);
+        panelMaterials.push(backgroundMaterial);
+      }
 
       const panelOutline = new THREE.LineLoop(panelOutlineGeometry, edgeMaterial);
       panelOutline.position.z = 0.002;
@@ -466,7 +641,6 @@ export function ProjectCube({
       panelMeshes.push(panel);
       panelGeometries.push(geometry);
       panelMaterials.push(material);
-      textures.push(texture);
     }
 
     const initialRotation = activeIndexRef.current * HALF_TURN;
@@ -1260,6 +1434,8 @@ export function ProjectCube({
       canvas.removeEventListener("pointercancel", finishDrag);
       canvas.removeEventListener("wheel", handleWheel);
       canvas.removeEventListener("keydown", handleKeyDown);
+      videoFrameUnsubscribers.forEach((unsubscribe) => unsubscribe());
+      videoTextureReleases.forEach((release) => release());
 
       controllerRef.current = null;
       if (apiRefRef.current) apiRefRef.current.current = null;

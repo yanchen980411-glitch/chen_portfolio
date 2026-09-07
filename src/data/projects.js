@@ -1,4 +1,5 @@
 import { TOOLS_COVER_RATIO, TOOLS_COVER_SRC } from "../components/toolsCoverConfig";
+import { S50C_COVER_MEDIA } from "../media/s50cCoverConfig";
 
 export const CONTACT_EMAIL = "yanchen04112023@163.com";
 
@@ -54,12 +55,8 @@ export const projects = [
     background: "#C1CAE4",
     detailBackground: "#dce8ee",
     accent: "#18bfc2",
-    texture: "/assets/projects/s50c/s50c-measure-result-light.png",
-    cover: {
-      src: "/assets/projects/s50c/s50c-cover.png",
-      ratio: 1672 / 941,
-      alt: "MILESEEY S50C smart laser rangefinder poster",
-    },
+    texture: S50C_COVER_MEDIA.poster,
+    cover: S50C_COVER_MEDIA,
     mediaClass: "media-portrait media-light",
     openable: true,
     gallery: [
@@ -118,14 +115,15 @@ export const projects = [
     description: "这里保留为空白项目面。下一项真实作品准备好后，会替换这一面。",
     decision: "不使用虚构案例填满作品集，保留真实内容的更新位置。",
     deliverables: "暂无",
-    background: "#F3D3DA",
+    background: "#E9D9CE",
     detailBackground: "#e8e4df",
     accent: "#080a09",
     texture: null,
     cover: {
-      src: "/assets/about/about-cube-cover.png",
-      ratio: 1537 / 1023,
-      alt: "About me — design with purpose",
+      src: "/assets/about/about-me-home-cover.png",
+      ratio: 4 / 3,
+      fit: "contain",
+      alt: "About Me cover with a pink architectural scene and frosted glass",
     },
     mediaClass: "media-empty",
     openable: false,

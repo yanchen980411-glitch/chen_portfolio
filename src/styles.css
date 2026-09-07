@@ -4892,6 +4892,32 @@ canvas:focus-visible {
   object-position: center;
 }
 
+.project-fullscreen-cover--s50c-video,
+.project-fullscreen-cover--s50c-video .project-fullscreen-cover__plane,
+.project-fullscreen-cover--s50c-video .project-fullscreen-cover__video {
+  background: var(--project-cover-background, #202528);
+}
+
+.project-fullscreen-cover--s50c-video .project-fullscreen-cover__plane {
+  width: min(160vh, 120vw);
+  width: min(160dvh, 120vw);
+  height: auto;
+  aspect-ratio: 1.6;
+}
+
+.project-fullscreen-cover--s50c-video .project-fullscreen-cover__video,
+.project-fullscreen-cover--s50c-video .s50c-shared-cover-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.project-fullscreen-cover--s50c-video .s50c-shared-cover-video {
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+}
+
 .horizon-case-layout {
   display: grid;
   grid-template-columns: minmax(0, 63.5%) minmax(330px, 36.5%);

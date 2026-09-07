@@ -12,6 +12,7 @@ import {
 } from "./ToolsEnglishCaseStudy";
 import { ToolsCompetitiveAnalysis } from "./ToolsCompetitiveAnalysis";
 import { ToolsAnimatedCover } from "./ToolsAnimatedCover";
+import { S50CSharedCoverVideo } from "./S50CSharedCoverVideo";
 import { horizonResearchCopy } from "../content/horizonResearchCopy";
 import { s50cCopy } from "../content/s50cCopy";
 import { LanguageSwitcher, useLanguage } from "../i18n/LanguageContext";
@@ -90,12 +91,14 @@ function CaseStudyImage({ loading = "lazy", decoding = "async", ...props }) {
   return React.createElement("img", { loading, decoding, ...props });
 }
 
-function ProjectFullscreenCover({ project }) {
-  const coverBackground = project.cover.ratio < 1 ? "#fff" : "#000";
-  const coverFit = project.cover.ratio < 1 ? "contain" : "cover";
+function ProjectFullscreenCover({ project, active = false }) {
+  const isS50CVideo = project.id === "s50c" && project.cover.media === "video";
+  const coverBackground = project.cover.background
+    ?? (project.cover.ratio < 1 ? "#fff" : "#000");
+  const coverFit = project.cover.fit ?? (project.cover.ratio < 1 ? "contain" : "cover");
   return (
     <section
-      className="horizon-fullscreen-cover project-fullscreen-cover"
+      className={`horizon-fullscreen-cover project-fullscreen-cover${isS50CVideo ? " project-fullscreen-cover--s50c-video" : ""}`}
       data-project-fullscreen-cover={project.id}
       aria-label={`${project.title} fullscreen cover`}
       style={{
@@ -104,7 +107,13 @@ function ProjectFullscreenCover({ project }) {
       }}
     >
       <div className="project-fullscreen-cover__plane">
-        {project.id === "tools" ? (
+        {isS50CVideo ? (
+          <S50CSharedCoverVideo
+            active={active}
+            className="project-fullscreen-cover__video"
+            label={project.cover.alt}
+          />
+        ) : project.id === "tools" ? (
           <ToolsAnimatedCover
             mode="hero"
             imageClassName="project-fullscreen-cover__image"
@@ -139,6 +148,7 @@ function SharedProjectDetailScrollShell({
   scrollRef,
   scrollClassName = "",
   caseClassName = "",
+  active = false,
   children,
 }) {
   const scrollClasses = [
@@ -154,7 +164,7 @@ function SharedProjectDetailScrollShell({
 
   return (
     <div ref={scrollRef} className={scrollClasses}>
-      <ProjectFullscreenCover project={project} />
+      <ProjectFullscreenCover project={project} active={active} />
       <div className={caseClasses}>{children}</div>
     </div>
   );
@@ -6007,6 +6017,7 @@ function S50CProjectOverview({ project, onClose, onNext, active }) {
         scrollRef={scrollRef}
         scrollClassName="s50c-project-scroll"
         caseClassName="s50c-overview-layout"
+        active={active}
       >
           <main className="s50c-pages-scroll" aria-label="MILESEEY S50C portfolio sections">
           {language === "zh" ? (

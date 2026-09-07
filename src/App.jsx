@@ -3,6 +3,7 @@ import { animate, useReducedMotion } from "motion/react";
 import { AboutPage } from "./components/AboutPage";
 import { ProjectCube } from "./components/ProjectCube";
 import { ProjectDetail } from "./components/ProjectDetail";
+import { preloadS50CSharedCoverVideo } from "./components/S50CSharedCoverVideo";
 import { CONTACT_EMAIL, projects } from "./data/projects";
 import { LanguageSwitcher, useLanguage } from "./i18n/LanguageContext";
 import { translateText } from "./i18n/translations";
@@ -187,6 +188,9 @@ function decodeImage(image) {
 }
 
 function prepareDetailHero(detailStage, index) {
+  if (projects[index]?.cover.media === "video") {
+    return preloadS50CSharedCoverVideo();
+  }
   const selector = DETAIL_HERO_IMAGE_SELECTORS[index];
   if (!detailStage || !selector) return Promise.resolve();
   const images = Array.from(detailStage.querySelectorAll(selector));
@@ -235,6 +239,7 @@ function Works({
   titleGroupRef,
   onCubeFirstFrameReady,
   reduceMotion,
+  s50cVideoPlaybackEnabled,
 }) {
   const project = projects[activeIndex];
   const publishedProjects = projects.slice(0, 3);
@@ -406,6 +411,7 @@ function Works({
           homeComposition
           apiRef={cubeApiRef}
           onFirstFrameReady={onCubeFirstFrameReady}
+          mediaPlaybackEnabled={s50cVideoPlaybackEnabled}
           ariaLabel={`项目索引长方体，当前为 ${activeIndex === 3 ? "ABOUT ME" : project.title}`}
         />
       </div>
@@ -725,9 +731,12 @@ export function App() {
   }, [renderedDetailIndex]);
 
   useEffect(() => {
-    // Warm all three project cover assets while the visitor is still browsing
-    // the homepage. ENTER never waits for image loading or decoding.
-    const preloaders = projects.slice(0, 3).map((project) => {
+    // Warm all four homepage face assets while the visitor is still browsing.
+    // ENTER never waits for image loading or video decoding.
+    const preloaders = projects.map((project) => {
+      if (project.cover.media === "video") {
+        return preloadS50CSharedCoverVideo();
+      }
       const image = new Image();
       image.decoding = "async";
       image.src = project.cover.src;
@@ -1152,6 +1161,11 @@ export function App() {
           titleGroupRef={titleGroupRef}
           onCubeFirstFrameReady={handleHomeCubeFirstFrameReady}
           reduceMotion={reduceMotion}
+          s50cVideoPlaybackEnabled={
+            detailIndex === null
+            || transitionState === "opening"
+            || transitionState === "closing"
+          }
         />
         <Contact
           activeIndex={activeIndex}
@@ -1207,6 +1221,7 @@ export function App() {
             rotationDuration={transitionVisual.rotationDuration}
             coverFlatViewport={transitionState === "opening"}
             interactive={false}
+            mediaPlaybackEnabled={transitionVisual.visible}
             className="spatial-project-transition__canvas"
             ariaLabel="项目空间转场"
           />
