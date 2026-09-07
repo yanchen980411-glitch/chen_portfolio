@@ -41,6 +41,28 @@ const ENTER_DURATION_SECONDS = 0.48;
 const ENTER_DURATION_MS = ENTER_DURATION_SECONDS * 1000;
 const ABOUT_PAGE_FADE_SECONDS = 0.18;
 const ABOUT_PAGE_EASE = [0.22, 1, 0.36, 1];
+const HOME_INTRO_PROGRESS_MS = 1017;
+const HOME_INTRO_PROGRESS_END_MS = 1070;
+const HOME_INTRO_BLINK_HALF_MS = 400;
+const HOME_INTRO_BACKGROUND_MS = 600;
+const HOME_INTRO_CONTENT_MS = 400;
+const HOME_INTRO_TITLE_DELAY_MS = 60;
+const HOME_INTRO_TITLE_MS = 600;
+const HOME_BACKGROUND_WIPE_DELAY_MS = 150;
+const HOME_BACKGROUND_WIPE_DURATION_MS = 600;
+const HOME_PROJECT_TITLES = ["HORIZON", "S50C", "TOOLS APP"];
+
+function easeOutCubic(value) {
+  return 1 - Math.pow(1 - value, 3);
+}
+
+function createDeferred() {
+  let resolve;
+  const promise = new Promise((nextResolve) => {
+    resolve = nextResolve;
+  });
+  return { promise, resolve, settled: false };
+}
 
 function afterPaint() {
   return new Promise((resolve) => {
@@ -190,20 +212,157 @@ function resetDetailScroll(detailStage) {
     });
 }
 
-function Works({ activeIndex, onActiveChange, onOpenProject, onOpenAbout, cubeZoneRef, cubeApiRef }) {
+function HomeIntro({ phase, progress, overlayRef, textRef }) {
+  if (phase === "complete") return null;
+
+  return (
+    <div
+      ref={overlayRef}
+      className="portfolio-home-intro"
+      aria-hidden="true"
+      data-i18n-skip="true"
+    >
+      <div className="portfolio-home-intro__frame">
+        <span ref={textRef} className="portfolio-home-intro__text">
+          {phase === "loading" ? `LOADING: ${progress}%` : "CHEN YAN"}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function Works({
+  activeIndex,
+  onActiveChange,
+  onOpenProject,
+  onOpenAbout,
+  cubeZoneRef,
+  cubeApiRef,
+  worksSectionRef,
+  titleGroupRef,
+  onCubeFirstFrameReady,
+  reduceMotion,
+}) {
   const project = projects[activeIndex];
   const publishedProjects = projects.slice(0, 3);
+  const initialBackgroundRef = useRef(project.background);
+  const [currentBackground, setCurrentBackground] = useState(initialBackgroundRef.current);
+  const [transitionBackground, setTransitionBackground] = useState(initialBackgroundRef.current);
+  const [isBackgroundWiping, setIsBackgroundWiping] = useState(false);
+  const backgroundWipeStateRef = useRef({
+    current: initialBackgroundRef.current,
+    requested: initialBackgroundRef.current,
+    target: null,
+    running: false,
+    delayTimer: 0,
+    fallbackTimer: 0,
+    resetFrame: 0,
+    resetFrameAfterPaint: 0,
+  });
+  const runPendingBackgroundWipeRef = useRef(null);
+  const finishBackgroundWipeRef = useRef(null);
+  const reduceMotionRef = useRef(reduceMotion);
+  reduceMotionRef.current = reduceMotion;
+
+  runPendingBackgroundWipeRef.current = () => {
+    const state = backgroundWipeStateRef.current;
+    if (state.running || state.current === state.requested) return;
+
+    if (reduceMotionRef.current) {
+      state.current = state.requested;
+      setCurrentBackground(state.current);
+      setTransitionBackground(state.current);
+      setIsBackgroundWiping(false);
+      return;
+    }
+
+    state.running = true;
+    state.target = null;
+    setIsBackgroundWiping(false);
+    setTransitionBackground(state.requested);
+
+    state.delayTimer = window.setTimeout(() => {
+      state.delayTimer = 0;
+      state.target = state.requested;
+      setTransitionBackground(state.target);
+      setIsBackgroundWiping(true);
+      state.fallbackTimer = window.setTimeout(
+        () => finishBackgroundWipeRef.current?.(),
+        HOME_BACKGROUND_WIPE_DURATION_MS + 80,
+      );
+    }, HOME_BACKGROUND_WIPE_DELAY_MS);
+  };
+
+  finishBackgroundWipeRef.current = () => {
+    const state = backgroundWipeStateRef.current;
+    if (!state.running || !state.target) return;
+
+    window.clearTimeout(state.fallbackTimer);
+    state.fallbackTimer = 0;
+    state.current = state.target;
+    state.target = null;
+    setCurrentBackground(state.current);
+    setIsBackgroundWiping(false);
+
+    // Let the transition layer snap below the viewport before starting a queued wipe.
+    state.resetFrame = window.requestAnimationFrame(() => {
+      state.resetFrame = 0;
+      state.resetFrameAfterPaint = window.requestAnimationFrame(() => {
+        state.resetFrameAfterPaint = 0;
+        state.running = false;
+        runPendingBackgroundWipeRef.current?.();
+      });
+    });
+  };
+
+  useEffect(() => {
+    const state = backgroundWipeStateRef.current;
+    state.requested = project.background;
+
+    // A newer selection made during the 150ms lead-in replaces the pending color.
+    if (state.running && !state.target) {
+      setTransitionBackground(state.requested);
+      return;
+    }
+
+    runPendingBackgroundWipeRef.current?.();
+  }, [project.background]);
+
+  useEffect(() => () => {
+    const state = backgroundWipeStateRef.current;
+    window.clearTimeout(state.delayTimer);
+    window.clearTimeout(state.fallbackTimer);
+    window.cancelAnimationFrame(state.resetFrame);
+    window.cancelAnimationFrame(state.resetFrameAfterPaint);
+  }, []);
 
   return (
     <section
+      ref={worksSectionRef}
       id="works"
       className="section-shell works-section"
-      style={{ "--section-bg": project.background, "--project-accent": project.accent }}
+      style={{ "--section-bg": currentBackground, "--project-accent": project.accent }}
       aria-labelledby="works-title"
     >
+      <div
+        className="works-background works-background--current"
+        style={{ backgroundColor: currentBackground }}
+        aria-hidden="true"
+      />
+      <div
+        className={`works-background works-background--transition${isBackgroundWiping ? " is-active" : ""}`}
+        style={{ backgroundColor: transitionBackground }}
+        aria-hidden="true"
+        onTransitionEnd={(event) => {
+          if (event.target === event.currentTarget && event.propertyName === "transform") {
+            finishBackgroundWipeRef.current?.();
+          }
+        }}
+      />
+
       <SiteNav active="works" />
 
-      <div className="project-title-list" id="works-title">
+      <div ref={titleGroupRef} className="project-title-list" id="works-title">
         <button
           className={`project-title-about ${activeIndex === 3 ? "is-active" : ""}`}
           type="button"
@@ -233,7 +392,7 @@ function Works({ activeIndex, onActiveChange, onOpenProject, onOpenAbout, cubeZo
               onActiveChange(index);
             }}
           >
-            <span>{item.title}</span>
+            <span>{HOME_PROJECT_TITLES[index]}</span>
           </button>
         ))}
 
@@ -251,7 +410,9 @@ function Works({ activeIndex, onActiveChange, onOpenProject, onOpenAbout, cubeZo
             onOpenProject(index);
           }}
           mode="filled"
+          homeComposition
           apiRef={cubeApiRef}
+          onFirstFrameReady={onCubeFirstFrameReady}
           ariaLabel={`项目索引长方体，当前为 ${activeIndex === 3 ? "ABOUT ME" : project.title}`}
         />
       </div>
@@ -307,6 +468,8 @@ function Contact({ activeIndex, onActiveChange, copied, onCopy }) {
 
 export function App() {
   const startsOnAbout = window.location.pathname === "/about";
+  const playsHomeIntro = useRef(window.location.pathname === "/").current;
+  const prebootIntro = useRef(window.__portfolioHomeIntroBoot ?? null).current;
   const initialIndex = 3;
   const [activeIndex, setActiveIndex] = useState(initialIndex);
   const [detailIndex, setDetailIndex] = useState(startsOnAbout ? 3 : null);
@@ -321,9 +484,18 @@ export function App() {
     background: projects[initialIndex].background,
   });
   const [copied, setCopied] = useState(false);
+  const [homeIntroPhase, setHomeIntroPhase] = useState(playsHomeIntro ? "loading" : "complete");
+  const [homeIntroProgress, setHomeIntroProgress] = useState(
+    playsHomeIntro ? prebootIntro?.progress ?? 0 : 0,
+  );
   const reduceMotion = useReducedMotion();
   const cubeZoneRef = useRef(null);
   const homeCubeApiRef = useRef(null);
+  const worksSectionRef = useRef(null);
+  const titleGroupRef = useRef(null);
+  const homeIntroOverlayRef = useRef(null);
+  const homeIntroTextRef = useRef(null);
+  const homeCubeReadyRef = useRef(null);
   const sharedCubeLayerRef = useRef(null);
   const detailStageRef = useRef(null);
   const transitionLayerRef = useRef(null);
@@ -334,10 +506,224 @@ export function App() {
   const detailIndexRef = useRef(detailIndex);
   const detailReadyRef = useRef({ index: null, promise: Promise.resolve() });
 
+  if (!homeCubeReadyRef.current) homeCubeReadyRef.current = createDeferred();
+
   const renderedDetailIndex = detailIndex ?? activeIndex;
 
   transitionStateRef.current = transitionState;
   detailIndexRef.current = detailIndex;
+
+  const handleHomeCubeFirstFrameReady = useCallback(() => {
+    const ready = homeCubeReadyRef.current;
+    if (ready.settled) return;
+    ready.settled = true;
+    ready.resolve();
+  }, []);
+
+  useEffect(() => {
+    if (!playsHomeIntro) return undefined;
+
+    const overlay = homeIntroOverlayRef.current;
+    const text = homeIntroTextRef.current;
+    const worksSection = worksSectionRef.current;
+    const titleGroup = titleGroupRef.current;
+    const cubeZone = cubeZoneRef.current;
+    const nav = worksSection?.querySelector(":scope > .site-nav");
+    prebootIntro?.stop?.();
+
+    if (!overlay || !text || !worksSection || !titleGroup || !cubeZone || !nav) {
+      document.documentElement.removeAttribute("data-home-boot");
+      window.__portfolioHomeIntroBoot = null;
+      setHomeIntroPhase("complete");
+      return undefined;
+    }
+
+    let cancelled = false;
+    let displayedProgress = -1;
+    const frameIds = new Set();
+    const previousBodyOverflow = document.body.style.overflow;
+
+    const requestTick = (callback) => {
+      const frameId = requestAnimationFrame((time) => {
+        frameIds.delete(frameId);
+        callback(time);
+      });
+      frameIds.add(frameId);
+      return frameId;
+    };
+
+    const wait = (durationMs) => new Promise((resolve) => {
+      const start = performance.now();
+      const tick = (time) => {
+        if (cancelled) return;
+        if (time - start >= durationMs) {
+          resolve();
+          return;
+        }
+        requestTick(tick);
+      };
+      requestTick(tick);
+    });
+
+    const tween = (durationMs, update, easing = (value) => value) => new Promise((resolve) => {
+      const start = performance.now();
+      update(easing(0));
+      const tick = (time) => {
+        if (cancelled) return;
+        const rawProgress = Math.min(1, Math.max(0, (time - start) / durationMs));
+        update(easing(rawProgress));
+        if (rawProgress >= 1) {
+          resolve();
+          return;
+        }
+        requestTick(tick);
+      };
+      requestTick(tick);
+    });
+
+    document.body.style.overflow = "hidden";
+    overlay.style.opacity = "1";
+    text.style.opacity = "1";
+    nav.style.opacity = "0";
+    nav.style.willChange = "opacity";
+    cubeZone.style.opacity = "0";
+    cubeZone.style.willChange = "opacity";
+
+    titleGroup.style.setProperty("--home-intro-title-offset", "0px");
+    const titleRect = titleGroup.getBoundingClientRect();
+    const referenceScale = Math.min(window.innerWidth / 2048, window.innerHeight / 1394);
+    const referenceOffset = 800 * Math.max(0.42, referenceScale);
+    const titleOffset = -Math.ceil(Math.max(titleRect.bottom + 8, referenceOffset));
+    titleGroup.style.setProperty("--home-intro-title-offset", `${titleOffset}px`);
+    titleGroup.style.willChange = "transform";
+
+    const fontReady = document.fonts?.ready ?? Promise.resolve();
+    const criticalAssetsReady = Promise.allSettled([
+      fontReady,
+      homeCubeReadyRef.current.promise,
+    ]);
+    let resourcesReady = false;
+    let resourcesReadyAt = 0;
+    criticalAssetsReady.then(() => {
+      resourcesReady = true;
+      resourcesReadyAt = performance.now();
+    });
+
+    const finish = () => {
+      if (cancelled) return;
+      setHomeIntroPhase("complete");
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.removeAttribute("data-home-boot");
+      window.__portfolioHomeIntroBoot = null;
+      requestTick(() => {
+        titleGroup.style.removeProperty("transform");
+        titleGroup.style.removeProperty("will-change");
+        titleGroup.style.removeProperty("--home-intro-title-offset");
+        nav.style.removeProperty("opacity");
+        nav.style.removeProperty("will-change");
+        cubeZone.style.removeProperty("opacity");
+        cubeZone.style.removeProperty("will-change");
+      });
+    };
+
+    const runTimeline = async () => {
+      if (reduceMotion) {
+        await criticalAssetsReady;
+        finish();
+        return;
+      }
+
+      const timelineStart = prebootIntro?.startedAt ?? performance.now();
+      await new Promise((resolve) => {
+        const updateProgress = (time) => {
+          if (cancelled) return;
+          const elapsed = time - timelineStart;
+          const unit = Math.min(1, Math.max(0, elapsed / HOME_INTRO_PROGRESS_MS));
+          const curvedProgress = Math.round(100 * Math.sin(unit * Math.PI / 2));
+          const nextProgress = resourcesReady ? curvedProgress : Math.min(99, curvedProgress);
+          if (nextProgress !== displayedProgress) {
+            displayedProgress = nextProgress;
+            setHomeIntroProgress(nextProgress);
+          }
+
+          if (elapsed >= HOME_INTRO_PROGRESS_MS && resourcesReady) {
+            if (displayedProgress !== 100) {
+              displayedProgress = 100;
+              setHomeIntroProgress(100);
+            }
+            resolve();
+            return;
+          }
+          requestTick(updateProgress);
+        };
+        requestTick(updateProgress);
+      });
+      if (cancelled) return;
+
+      const progressCompletedAt = performance.now();
+      const remainingNormalHold = HOME_INTRO_PROGRESS_END_MS - (progressCompletedAt - timelineStart);
+      const reachedReadyAfterNormalWindow = resourcesReadyAt - timelineStart > HOME_INTRO_PROGRESS_END_MS;
+      const progressHold = reachedReadyAfterNormalWindow ? 53 : Math.max(0, remainingNormalHold);
+      if (progressHold > 0) await wait(progressHold);
+      if (cancelled) return;
+
+      text.textContent = "CHEN YAN";
+      setHomeIntroPhase("name");
+      text.style.opacity = "1";
+
+      for (let cycle = 0; cycle < 2; cycle += 1) {
+        await tween(HOME_INTRO_BLINK_HALF_MS, (value) => {
+          text.style.opacity = String(1 - value);
+        });
+        await tween(HOME_INTRO_BLINK_HALF_MS, (value) => {
+          text.style.opacity = String(value);
+        });
+      }
+
+      await tween(HOME_INTRO_BLINK_HALF_MS, (value) => {
+        text.style.opacity = String(1 - value);
+      });
+      if (cancelled) return;
+
+      setHomeIntroPhase("background");
+      await tween(HOME_INTRO_BACKGROUND_MS, (value) => {
+        overlay.style.opacity = String(1 - value);
+      });
+      if (cancelled) return;
+
+      setHomeIntroPhase("content");
+      await tween(HOME_INTRO_CONTENT_MS, (value) => {
+        nav.style.opacity = String(value);
+        cubeZone.style.opacity = String(value);
+      });
+      if (cancelled) return;
+
+      await wait(HOME_INTRO_TITLE_DELAY_MS);
+      if (cancelled) return;
+      setHomeIntroPhase("titles");
+      await tween(HOME_INTRO_TITLE_MS, (value) => {
+        const currentOffset = titleOffset * (1 - value);
+        titleGroup.style.setProperty("--home-intro-title-offset", `${currentOffset}px`);
+      }, easeOutCubic);
+
+      finish();
+    };
+
+    runTimeline();
+
+    return () => {
+      cancelled = true;
+      frameIds.forEach((frameId) => cancelAnimationFrame(frameId));
+      document.body.style.overflow = previousBodyOverflow;
+      titleGroup.style.removeProperty("transform");
+      titleGroup.style.removeProperty("will-change");
+      titleGroup.style.removeProperty("--home-intro-title-offset");
+      nav.style.removeProperty("opacity");
+      nav.style.removeProperty("will-change");
+      cubeZone.style.removeProperty("opacity");
+      cubeZone.style.removeProperty("will-change");
+    };
+  }, [playsHomeIntro, reduceMotion]);
 
   useEffect(() => {
     const index = renderedDetailIndex;
@@ -759,8 +1145,9 @@ export function App() {
       className={reduceMotion ? "app reduce-motion" : "app"}
       data-transition-state={transitionState}
       data-detail-nav-visible={detailNavVisible ? "true" : "false"}
+      data-home-intro={homeIntroPhase}
     >
-      <main>
+      <main inert={homeIntroPhase === "complete" ? undefined : true}>
         <Works
           activeIndex={activeIndex}
           onActiveChange={handleActiveChange}
@@ -768,6 +1155,10 @@ export function App() {
           onOpenAbout={handleOpenAbout}
           cubeZoneRef={cubeZoneRef}
           cubeApiRef={homeCubeApiRef}
+          worksSectionRef={worksSectionRef}
+          titleGroupRef={titleGroupRef}
+          onCubeFirstFrameReady={handleHomeCubeFirstFrameReady}
+          reduceMotion={reduceMotion}
         />
         <Contact
           activeIndex={activeIndex}
@@ -776,6 +1167,13 @@ export function App() {
           onCopy={handleCopyEmail}
         />
       </main>
+
+      <HomeIntro
+        phase={homeIntroPhase}
+        progress={homeIntroProgress}
+        overlayRef={homeIntroOverlayRef}
+        textRef={homeIntroTextRef}
+      />
 
       <div ref={sharedCubeLayerRef} className="persistent-project-transition" aria-hidden="true" />
 

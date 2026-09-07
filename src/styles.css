@@ -3185,6 +3185,64 @@ canvas:focus-visible {
   width: 100%;
 }
 
+.portfolio-home-intro {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #000;
+  color: #fff;
+  opacity: 1;
+  user-select: none;
+  cursor: wait;
+}
+
+.portfolio-home-intro__frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(104px, 7.93vw, 162.4px);
+  height: clamp(24px, 2.783vh, 38.8px);
+  border: 1.2px solid #fff;
+  border-radius: 0;
+  background: transparent;
+}
+
+.portfolio-home-intro__text {
+  color: #fff;
+  font-family: var(--mono);
+  font-size: clamp(9.5px, 0.708vw, 14.5px);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.035em;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.app[data-home-intro]:not([data-home-intro="complete"]) .works-section > .site-nav,
+.app[data-home-intro]:not([data-home-intro="complete"]) .works-cube-zone {
+  opacity: 0;
+  will-change: opacity;
+}
+
+.app[data-home-intro]:not([data-home-intro="complete"]) .project-title-list {
+  transform: translate3d(0, calc(-50% + var(--home-intro-title-offset, -100vh)), 0);
+  will-change: transform;
+}
+
+@media (max-width: 760px) {
+  .portfolio-home-intro__frame {
+    width: 126px;
+    height: 34px;
+  }
+
+  .portfolio-home-intro__text {
+    font-size: 12px;
+  }
+}
+
 .section-shell {
   position: relative;
   isolation: isolate;
@@ -3468,29 +3526,53 @@ canvas:focus-visible {
   color: var(--ink);
   background: var(--section-bg, #daddd4);
   overflow-anchor: none;
-  transition: background-color 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.works-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.works-background--current {
+  z-index: 0;
+}
+
+.works-background--transition {
+  z-index: 1;
+  transform: translate3d(0, 100%, 0);
+  transition: none;
+  will-change: transform;
+}
+
+.works-background--transition.is-active {
+  transform: translate3d(0, 0, 0);
+  transition: transform 600ms cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .project-title-list {
   position: absolute;
   z-index: 8;
-  top: 16vh;
+  top: 50%;
   left: var(--gutter);
-  width: min(58vw, 980px);
+  width: 83vw;
   mix-blend-mode: difference;
+  transform: translate3d(0, -50%, 0);
 }
 
 .project-title-list > button,
 .project-title-about {
   display: block;
   width: 100%;
-  margin: 0 0 clamp(8px, 1.25vh, 14px);
+  margin: 0 0 clamp(7px, 1.1vh, 12px);
   padding: 0;
   border: 0;
   background: transparent;
   color: transparent;
   font-family: var(--display);
-  font-size: clamp(48px, calc(7.35vw - 10px), 118px);
+  font-size: clamp(58px, calc(8.82vw - 12px), 142px);
   font-weight: 950;
   letter-spacing: -0.065em;
   line-height: 0.86;
@@ -3622,10 +3704,10 @@ canvas:focus-visible {
 .works-cube-zone {
   position: absolute;
   z-index: 5;
-  top: 4vh;
-  right: -3vw;
-  width: min(72vw, 1220px);
-  height: min(86vh, 900px);
+  top: 0;
+  right: 0;
+  width: 86vw;
+  height: 100vh;
 }
 
 .pending-note {
@@ -4249,7 +4331,7 @@ canvas:focus-visible {
   }
 
   .works-cube-zone {
-    right: 3vw;
+    right: 0;
   }
 }
 
@@ -4266,13 +4348,13 @@ canvas:focus-visible {
   }
 
   .project-title-list {
-    width: 62vw;
+    width: 83vw;
   }
 
   .works-cube-zone {
-    right: -9vw;
-    width: 86vw;
-    height: 84vh;
+    right: 0;
+    width: 91vw;
+    height: 100vh;
   }
 
   .contact-card {
@@ -4430,22 +4512,23 @@ canvas:focus-visible {
   }
 
   .project-title-list {
-    top: 112px;
+    top: 50%;
     right: 15px;
     left: 15px;
     width: auto;
+    transform: translate3d(0, -50%, 0);
   }
 
   .project-title-list > button,
   .project-title-about {
     display: block;
     margin-bottom: 6px;
-    font-size: clamp(28px, 8.2vw, 36px);
+    font-size: clamp(32px, 9.5vw, 43px);
   }
 
   .project-title-list > button.is-active {
     display: block;
-    font-size: clamp(28px, 8.2vw, 36px);
+    font-size: clamp(32px, 9.5vw, 43px);
     line-height: 0.86;
   }
 
@@ -4454,10 +4537,10 @@ canvas:focus-visible {
   }
 
   .works-cube-zone {
-    top: 22vh;
-    right: -14vw;
-    width: 128vw;
-    height: 50vh;
+    top: 0;
+    right: -8vw;
+    width: 116vw;
+    height: 100vh;
   }
 
   .pending-note {

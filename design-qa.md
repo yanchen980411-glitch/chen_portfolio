@@ -136,6 +136,107 @@ The reference and a 941 px implementation capture were placed side by side in on
 
 final result: passed
 
+## Homepage titles, centered composition, and 3D framing
+
+- Visual reference: `/var/folders/lx/w3v6wpwj2vjbnt5kcmfzfybh0000gn/T/codex-clipboard-4d4e8f60-37a6-4799-b3b5-9e21c5923a12.png` (2048 × 1117 px).
+- Final browser evidence: `verification/homepage-final.png` at 1280 × 720 CSS px.
+- Combined comparison input: `verification/homepage-reference-comparison.png`.
+- Motion evidence: `verification/homepage-entry-final.mp4` (1280 × 720, 5.735 s).
+
+### Fidelity review
+
+- Homepage labels: passed — both language states render exactly `ABOUT ME`, `HORIZON`, `S50C GREEN LASER`, and `TOOLS APP`; project IDs, detail names, routes, and mappings remain unchanged.
+- Typography: passed — all four buttons resolve to the same 100.896 px font size at the verification viewport, approximately 20% above the previous 84.1 px desktop size; the longest label remains on one line.
+- Vertical alignment: passed — the title group bounds are y = 170.64–549.36 px, with centerY = 360 px in a 720 px viewport.
+- Entrance endpoint: passed — the intro drives `--home-intro-title-offset` while the base centering transform remains intact; measured bounds before and after cleanup are identical, so there is no endpoint jump or duplicate title layer.
+- Model projection: passed — the final silhouette sits at approximately x = 22–83% and y = 7–98% of the verification viewport, closely matching the supplied 21–83% / 7–98% composition target.
+- Perspective: passed — the home-only camera distance, world position, and X/Y presentation rotations increase top-face exposure and preserve a readable right side without applying a 2D stretch.
+- Asset fidelity: passed — cover sources, texture fitting, panel geometry, material colors, and the black top/bottom bands were not modified.
+- Scope isolation: passed — the new framing is enabled only by the homepage `homeComposition` prop; contact and project-switch cubes retain their original tilt and camera behavior.
+- Interaction regression: passed — HORIZON selection and second-click detail entry work; `/返回` returns to the homepage; keyboard ArrowDown on the real cube advances to S50C; Chinese/English switching preserves all four homepage labels.
+- Runtime/build: passed — `pnpm run build` completes successfully. Vite reports only its pre-existing large-chunk advisory.
+
+### Comparison history
+
+- Pass 1: enlarged and centered the title group; expanded the home canvas framing and adjusted the real Three.js camera/root. The model was slightly too wide and touched the lower viewport edge.
+- Pass 2: increased top-face exposure and corrected the scene offset while keeping the original cover and black bands intact.
+- Pass 3: refined home-only camera distance and world position until the outer silhouette aligned with the supplied percentage bounds; no P0/P1/P2 visual or interaction findings remain.
+
+final result: passed
+
+## Portfolio 首次加载与首页入场
+
+- 动效参考：`/Users/ccchen/Desktop/portfolio-loading-preview (3).mp4`（2048 × 1394 px，60 fps，7.00 s）。
+- 浏览器实现：`http://127.0.0.1:4173/`；最终 QA viewport 为 1063 × 876 CSS px。
+- 验收录屏：`verification/portfolio-loading-entry-verification.mp4`（1062 × 876 px，6.30 s，H.264）。
+- 并排对照：`verification/portfolio-loading-comparison.png`，包含 Loading、名字闪烁与标题滑入三个关键状态。
+
+### Timeline and motion
+
+- Loading：passed — 首帧由 `index.html` 的轻量 preboot DOM 直接绘制纯黑背景与中央细框，不会先闪出首页；进度使用指定正弦曲线单调递增，关键资源未完成时停在 99%，资源就绪后才显示 100%。
+- 中央框：passed — 桌面基准为 162.4 × 38.8 px、1.2 px 白色直角描边；文字为小尺寸白色等宽字体，并随视口比例缩放，移动端单独保证可读尺寸。
+- 名字闪烁：passed — 文案严格为 `CHEN YAN`；边框保持稳定，仅文字执行 400 ms 渐暗 + 400 ms 渐亮，共两次，之后再以 400 ms 最终消失。
+- 背景揭示：passed — 名字结束后，黑色遮罩与边框在 600 ms 内退场，终点为真实 About Me 首页背景 `#F3D3DA`。
+- 首页内容：passed — Cube 与右上导航随后用 400 ms 同步淡入；标题容器在此阶段仍完全位于视口上方。
+- 标题运动：passed — 60 ms 间隔后，四行标题作为单一 DOM 容器以 600 ms `easeOutCubic` 从视口外上方滑入；无逐行错峰、缩放、弹跳或回弹，最终清除内联 transform 并回到原布局。
+
+### Fidelity surfaces
+
+- 字体与标题：passed — Loading / CHEN YAN 使用等宽字体；首页四行标题继续复用原有字体、字号、字重、描边与覆盖 Cube 时的视觉关系。
+- 间距与位置：passed — 中央框始终以 viewport 正中心定位；Cube、导航与标题的最终尺寸、位置和透视均来自原首页布局，没有复制节点或过渡替身。
+- 颜色：passed — Loading 为纯黑 `#000000`；首页揭示终点实测为 `rgb(243, 211, 218)`，与指定 `#F3D3DA` 一致。
+- 资源：passed — 结束 Loading 前等待 `document.fonts.ready`、About Me 当前 Cube 面纹理及首次 WebGL 渲染；不等待项目详情页素材，慢速资源不会触发计时超时跳过。
+- 响应式：passed — 桌面按 2048 × 1394 参考比例缩放中央框和文字，760 px 以下使用可读的 126 × 34 px 规格；所有入场运动只使用 opacity 与 transform。
+
+### Interaction and runtime
+
+- 首次范围：passed — 仅初始路径 `/` 或完整刷新首页时播放；直接访问 `/about` 不挂载 Loading，且 `data-home-boot` 不存在。
+- 默认状态：passed — 动画结束后选中项为 ABOUT ME，Cube 的 aria label 为“当前为 ABOUT ME”，背景保持 `#F3D3DA`。
+- 不重播：passed — 中文 → English → 中文切换、ABOUT ME 打开与 `/返回` 全部保持 intro phase 为 `complete`，没有重新出现遮罩。
+- 清理：passed — 完成后遮罩节点卸载，`body` overflow 恢复，`inert` 解除，preboot 与 React RAF 均停止，临时 opacity / transform / `will-change` 全部移除。
+- 浏览器日志：passed — 仅有 Vite 连接和 React DevTools 提示，无 error 或 warning。
+- Production build：passed — `vite build --configLoader native`。
+- Sites worker suite：passed — 4 tests，0 failures。
+
+### Comparison history
+
+- Pass 1 [P2]：中央框在 1337 × 875 viewport 下略高于参考比例，关键资源兜底计时器也可能在极慢网络下提前继续。
+- Fix：将桌面框高度下限校准到 24 px；移除 12 秒 fail-open，改为严格等待关键资源；名字节点在时间轴边界直接更新，避免额外双 RAF 延后。
+- Pass 2：并排对照确认中央框、名字透明度、背景揭示和标题整组运动的视觉关系；交互回归确认没有遮罩残留或重复播放。
+- No actionable P0/P1/P2 findings remain.
+
+final result: passed
+
+## Homepage S50C label and model horizontal alignment
+
+- Source visual truth: the browser-rendered homepage baseline plus the user's explicit target that the model's left front tip align with the vertical stem of `T` in `ABOUT ME`.
+- Baseline evidence: `verification/homepage-s50c-shift-before.png`.
+- Implementation evidence: `verification/homepage-s50c-shift-final.png`.
+- Full-view comparison evidence: `verification/homepage-s50c-shift-comparison.png`.
+- Browser CSS viewport: 1280 × 720 px; source and implementation captures: 1265 × 712 px at the same browser capture density and state.
+- State: `/`, Chinese, intro complete, `ABOUT ME` selected, default cuboid rotation.
+
+### Findings
+
+- Copy/content: passed — the homepage labels are exactly `ABOUT ME`, `HORIZON`, `S50C`, and `TOOLS APP` in both Chinese and English states; only the home display constant changed.
+- Typography: passed — the existing display family, 100.896 px desktop size, weight, outline treatment, line height, and left alignment are unchanged.
+- Spacing/layout rhythm: passed — the four-line title group retains its existing 360 px vertical center in the 720 px viewport and introduces no horizontal overflow.
+- Model alignment: passed — the whole Three.js presentation root moved horizontally; the left front tip now lands at the `T` stem instead of near the preceding `U`.
+- Colors/tokens: passed — background, title fill/outline, mix-blend behavior, model materials, lighting, and colors are unchanged.
+- Image/asset fidelity: passed — cover textures, crop logic, geometry, proportions, and the original black bands remain untouched.
+- Motion/interaction: passed — model scale, Y position, X/Y rotations, camera, and perspective are unchanged; HORIZON selection, detail opening, spatial transition, and `/返回` all complete successfully from the new horizontal baseline.
+- Responsive behavior: passed — the adjustment is a Three.js world-coordinate translation rather than a fixed 110 px CSS offset, so it scales with the rendered scene; the tested viewport has zero horizontal overflow.
+- Focused comparison: not required — the label and alignment target are clearly readable in the full-view same-state comparison.
+- Runtime/build: passed — production build succeeds and all 4 Sites worker tests pass; only the existing Vite large-chunk advisory remains.
+
+### Comparison history
+
+- Pass 1: changed the label to `S50C` and shifted the home presentation root from -0.21 to 0.04 world units; the tip remained slightly left of the `T` stem.
+- Pass 2: refined only the home X coordinate to 0.18 world units; the tip aligns with the `T` stem while size, vertical bounds, rotation, perspective, textures, and black bands remain identical.
+- No actionable P0/P1/P2 findings remain.
+
+final result: passed
+
 ## S50C 中文版第 02 页
 
 - 视觉参考：`/Users/ccchen/Desktop/01.png`（1447 × 1087 px）。

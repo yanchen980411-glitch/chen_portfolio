@@ -16,14 +16,20 @@ const CUBOID_DEPTH = 2;
 const PANEL_OFFSET = CUBOID_DEPTH / 2 + 0.006;
 const PRESENTATION_TILT_X = 0.28;
 const PRESENTATION_TILT_Y = -Math.PI / 8;
+const HOME_PRESENTATION_TILT_X = 0.63;
+const HOME_PRESENTATION_TILT_Y = -0.43;
+const HOME_PRESENTATION_X = 0.18;
+const HOME_PRESENTATION_Y = 0.1;
 const DRAG_RADIANS_PER_PIXEL = 0.008;
 const WHEEL_THRESHOLD = 5;
 const ROTATION_DURATION = 900;
 const FLAT_CAMERA_Z = 3.25;
 const FLAT_DEPTH_SCALE = 0.015;
 
-function getFilledHomeCameraZ(aspect, isDesktop) {
+function getFilledHomeCameraZ(aspect, isDesktop, useHomeComposition = false) {
   if (!isDesktop) return 7.5;
+
+  if (useHomeComposition && aspect >= 1.2) return 5.95;
 
   const safeAspect = Math.max(0.6, Number.isFinite(aspect) ? aspect : 1);
   if (safeAspect >= 1.25) return 5.9;
@@ -139,6 +145,7 @@ export function ProjectCube({
   activeIndex = 0,
   onActiveChange,
   onOpen,
+  onFirstFrameReady,
   mode = "filled",
   ariaLabel,
   className = "",
@@ -147,6 +154,7 @@ export function ProjectCube({
   rotationDuration = ROTATION_DURATION,
   coverFlatViewport = false,
   interactive = true,
+  homeComposition = false,
   apiRef,
 }) {
   const canvasRef = useRef(null);
@@ -156,6 +164,7 @@ export function ProjectCube({
   const intendedIndexRef = useRef(normalizeIndex(activeIndex));
   const onActiveChangeRef = useRef(onActiveChange);
   const onOpenRef = useRef(onOpen);
+  const onFirstFrameReadyRef = useRef(onFirstFrameReady);
   const modeRef = useRef(mode);
   const presentationRef = useRef(presentation);
   const presentationDurationRef = useRef(presentationDuration);
@@ -167,6 +176,7 @@ export function ProjectCube({
   activeIndexRef.current = normalizedActiveIndex;
   onActiveChangeRef.current = onActiveChange;
   onOpenRef.current = onOpen;
+  onFirstFrameReadyRef.current = onFirstFrameReady;
   modeRef.current = mode;
   presentationRef.current = presentation;
   presentationDurationRef.current = presentationDuration;
@@ -181,6 +191,10 @@ export function ProjectCube({
     let disposed = false;
     let wheelUnlockTimer = 0;
     let reducedMotion = false;
+    let firstFrameReadyFrameId = 0;
+    let firstFrameReadyCalled = false;
+    let initialSceneReady = false;
+    const settledFaceTextures = new Set();
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
@@ -207,8 +221,13 @@ export function ProjectCube({
     const presentationRoot = new THREE.Group();
     const startsFlat = presentationRef.current === "flat";
     presentationRoot.rotation.set(
-      startsFlat ? 0 : PRESENTATION_TILT_X,
-      startsFlat ? 0 : PRESENTATION_TILT_Y,
+      startsFlat ? 0 : (homeComposition ? HOME_PRESENTATION_TILT_X : PRESENTATION_TILT_X),
+      startsFlat ? 0 : (homeComposition ? HOME_PRESENTATION_TILT_Y : PRESENTATION_TILT_Y),
+      0,
+    );
+    presentationRoot.position.set(
+      homeComposition && !startsFlat ? HOME_PRESENTATION_X : 0,
+      homeComposition && !startsFlat ? HOME_PRESENTATION_Y : 0,
       0,
     );
     scene.add(presentationRoot);
@@ -342,6 +361,30 @@ export function ProjectCube({
       }
     }
 
+    function scheduleFirstFrameReady() {
+      if (
+        disposed
+        || firstFrameReadyCalled
+        || firstFrameReadyFrameId
+        || !initialSceneReady
+        || !settledFaceTextures.has(activeIndexRef.current)
+      ) return;
+
+      renderScene();
+      firstFrameReadyFrameId = requestAnimationFrame(() => {
+        firstFrameReadyFrameId = 0;
+        if (disposed || firstFrameReadyCalled) return;
+        firstFrameReadyCalled = true;
+        onFirstFrameReadyRef.current?.();
+      });
+    }
+
+    function markFaceTextureSettled(index) {
+      if (disposed || settledFaceTextures.has(index)) return;
+      settledFaceTextures.add(index);
+      scheduleFirstFrameReady();
+    }
+
     const maxAnisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 8);
 
     function updateCameraPosition(
@@ -365,7 +408,7 @@ export function ProjectCube({
           coverFlatViewportRef.current ? flatCoverCameraZ() : FLAT_CAMERA_Z,
         );
       } else if (isFilled && isDesktop) {
-        camera.position.set(0, 0, getFilledHomeCameraZ(camera.aspect, true));
+        camera.position.set(0, 0, getFilledHomeCameraZ(camera.aspect, true, homeComposition));
       } else if (isFilled) {
         camera.position.set(0, 0, getFilledHomeCameraZ(camera.aspect, false));
       } else {
@@ -386,10 +429,14 @@ export function ProjectCube({
           }
           texture.needsUpdate = true;
           renderScene();
+          markFaceTextureSettled(index);
         },
         undefined,
         () => {
-          if (!disposed) renderScene();
+          if (!disposed) {
+            renderScene();
+            markFaceTextureSettled(index);
+          }
         },
       );
       texture.colorSpace = THREE.SRGBColorSpace;
@@ -441,10 +488,14 @@ export function ProjectCube({
       fromTiltY: presentationRoot.rotation.y,
       fromDepth: depthRoot.scale.z,
       fromCameraZ: camera.position.z,
+      fromPositionX: presentationRoot.position.x,
+      fromPositionY: presentationRoot.position.y,
       toTiltX: presentationRoot.rotation.x,
       toTiltY: presentationRoot.rotation.y,
       toDepth: depthRoot.scale.z,
       toCameraZ: camera.position.z,
+      toPositionX: presentationRoot.position.x,
+      toPositionY: presentationRoot.position.y,
     };
     const enterState = {
       frameId: 0,
@@ -879,6 +930,16 @@ export function ProjectCube({
         presentationState.toTiltY,
         eased,
       );
+      presentationRoot.position.x = THREE.MathUtils.lerp(
+        presentationState.fromPositionX,
+        presentationState.toPositionX,
+        eased,
+      );
+      presentationRoot.position.y = THREE.MathUtils.lerp(
+        presentationState.fromPositionY,
+        presentationState.toPositionY,
+        eased,
+      );
       depthRoot.scale.z = THREE.MathUtils.lerp(
         presentationState.fromDepth,
         presentationState.toDepth,
@@ -901,7 +962,7 @@ export function ProjectCube({
       stopEnterAnimation();
       const isFlat = nextPresentation === "flat";
       const isDesktop = window.matchMedia("(min-width: 761px)").matches;
-      const filledCameraZ = getFilledHomeCameraZ(camera.aspect, isDesktop);
+      const filledCameraZ = getFilledHomeCameraZ(camera.aspect, isDesktop, homeComposition);
       const halfFovRadians = THREE.MathUtils.degToRad(camera.fov / 2);
       const heightDistance = CUBOID_HEIGHT / (2 * Math.tan(halfFovRadians));
       const widthDistance = CUBOID_WIDTH / (2 * Math.tan(halfFovRadians) * camera.aspect);
@@ -913,16 +974,26 @@ export function ProjectCube({
       presentationState.fromTiltY = presentationRoot.rotation.y;
       presentationState.fromDepth = depthRoot.scale.z;
       presentationState.fromCameraZ = camera.position.z;
-      presentationState.toTiltX = isFlat ? 0 : PRESENTATION_TILT_X;
-      presentationState.toTiltY = isFlat ? 0 : PRESENTATION_TILT_Y;
+      presentationState.fromPositionX = presentationRoot.position.x;
+      presentationState.fromPositionY = presentationRoot.position.y;
+      presentationState.toTiltX = isFlat
+        ? 0
+        : (homeComposition ? HOME_PRESENTATION_TILT_X : PRESENTATION_TILT_X);
+      presentationState.toTiltY = isFlat
+        ? 0
+        : (homeComposition ? HOME_PRESENTATION_TILT_Y : PRESENTATION_TILT_Y);
       presentationState.toDepth = isFlat ? FLAT_DEPTH_SCALE : 1;
       presentationState.toCameraZ = isFlat ? flatCameraZ : filledCameraZ;
+      presentationState.toPositionX = isFlat || !homeComposition ? 0 : HOME_PRESENTATION_X;
+      presentationState.toPositionY = isFlat || !homeComposition ? 0 : HOME_PRESENTATION_Y;
       presentationState.startTime = 0;
 
       stopPresentationAnimation();
       if (!animate || reducedMotion) {
         presentationRoot.rotation.x = presentationState.toTiltX;
         presentationRoot.rotation.y = presentationState.toTiltY;
+        presentationRoot.position.x = presentationState.toPositionX;
+        presentationRoot.position.y = presentationState.toPositionY;
         depthRoot.scale.z = presentationState.toDepth;
         camera.position.z = presentationState.toCameraZ;
         camera.lookAt(0, 0, 0);
@@ -1171,9 +1242,12 @@ export function ProjectCube({
     resizeRenderer();
     setFace(activeIndexRef.current, false);
     applyPresentation(presentationRef.current, false);
+    initialSceneReady = true;
+    scheduleFirstFrameReady();
 
     return () => {
       disposed = true;
+      if (firstFrameReadyFrameId) cancelAnimationFrame(firstFrameReadyFrameId);
       stopAnimation();
       stopPresentationAnimation();
       stopEnterAnimation();

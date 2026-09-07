@@ -9,9 +9,105 @@
     />
     <meta name="theme-color" content="#ef5a2f" />
     <title>Chen｜交互与用户体验设计师</title>
+    <script>
+      if (window.location.pathname === "/") {
+        document.documentElement.dataset.homeBoot = "true";
+      }
+    </script>
+    <style>
+      html,
+      body,
+      #root {
+        min-height: 100%;
+      }
+
+      html[data-home-boot="true"],
+      html[data-home-boot="true"] body,
+      html[data-home-boot="true"] #root {
+        background: #000;
+      }
+
+      .portfolio-preboot {
+        display: none;
+      }
+
+      html[data-home-boot="true"] .portfolio-preboot {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: #000;
+        color: #fff;
+      }
+
+      .portfolio-preboot__frame {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        width: clamp(104px, 7.93vw, 162.4px);
+        height: clamp(24px, 2.783vh, 38.8px);
+        border: 1.2px solid #fff;
+      }
+
+      .portfolio-preboot__text {
+        color: #fff;
+        font-family: "SFMono-Regular", "Roboto Mono", "PingFang SC", "Microsoft YaHei", monospace;
+        font-size: clamp(9.5px, 0.708vw, 14.5px);
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.035em;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 760px) {
+        .portfolio-preboot__frame {
+          width: 126px;
+          height: 34px;
+        }
+
+        .portfolio-preboot__text {
+          font-size: 12px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="portfolio-preboot" aria-hidden="true">
+        <div class="portfolio-preboot__frame">
+          <span class="portfolio-preboot__text">LOADING: 0%</span>
+        </div>
+      </div>
+    </div>
+    <script>
+      if (window.location.pathname === "/") {
+        (function startPortfolioPreboot() {
+          var text = document.querySelector(".portfolio-preboot__text");
+          var startedAt = performance.now();
+          var frameId = 0;
+          var state = {
+            progress: 0,
+            startedAt: startedAt,
+            stop: function stop() {
+              if (frameId) cancelAnimationFrame(frameId);
+              frameId = 0;
+            },
+          };
+
+          function update(time) {
+            var unit = Math.min(1, Math.max(0, (time - startedAt) / 1017));
+            var progress = Math.min(99, Math.round(100 * Math.sin(unit * Math.PI / 2)));
+            state.progress = progress;
+            if (text) text.textContent = "LOADING: " + progress + "%";
+            frameId = requestAnimationFrame(update);
+          }
+
+          window.__portfolioHomeIntroBoot = state;
+          frameId = requestAnimationFrame(update);
+        })();
+      }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
