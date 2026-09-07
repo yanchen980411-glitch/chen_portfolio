@@ -3257,7 +3257,7 @@ canvas:focus-visible {
   top: var(--gutter);
   right: var(--gutter);
   display: flex;
-  gap: 8px;
+  gap: clamp(14px, 0.9vw, 18px);
 }
 
 .language-switcher { position: relative; }
@@ -3270,31 +3270,48 @@ canvas:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 88px;
-  min-height: 42px;
-  padding: 9px 22px;
-  border: 1.5px solid var(--ink);
+  min-width: 104px;
+  min-height: 58px;
+  padding: 0 30px;
+  border: 1px solid rgba(8, 10, 9, 0.14);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.96);
   color: var(--ink);
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: clamp(15px, 0.84vw, 17px);
   font-weight: 700;
   line-height: 1;
+  white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
-  backdrop-filter: blur(10px);
+  box-shadow:
+    0 3px 8px rgba(8, 10, 9, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  backdrop-filter: blur(8px);
 }
 
 .pill-button:hover,
 .pill-button.is-active {
-  color: #fff;
-  background: var(--ink);
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(8, 10, 9, 0.2);
+  box-shadow:
+    0 5px 12px rgba(8, 10, 9, 0.17),
+    inset 0 1px 0 rgba(255, 255, 255, 0.98);
+  transform: translateY(-1px);
 }
 
 .pill-button:active {
-  transform: translateY(1px);
+  transform: translateY(0);
+  box-shadow:
+    0 2px 5px rgba(8, 10, 9, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.pill-button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
 }
 
 .project-cube__surface {
@@ -3996,7 +4013,7 @@ canvas:focus-visible {
 
 .detail-nav-group {
   display: flex;
-  gap: 8px;
+  gap: clamp(14px, 0.9vw, 18px);
   pointer-events: auto;
 }
 
@@ -4411,28 +4428,16 @@ canvas:focus-visible {
     position: absolute;
     top: 14px;
     right: 14px;
-    gap: 0;
-    overflow: hidden;
-    border: 1.5px solid var(--ink);
-    border-radius: 999px;
+    gap: 8px;
   }
 
   .site-nav .pill-button {
-    min-width: 74px;
-    min-height: 38px;
-    border: 0;
-    border-radius: 0;
-    background: rgba(255, 255, 255, 0.92);
-  }
-
-  .site-nav .pill-button + .pill-button {
-    border-left: 1.5px solid var(--ink);
-  }
-
-  .site-nav .pill-button.is-active,
-  .site-nav .pill-button:hover {
-    color: #fff;
-    background: var(--ink);
+    min-width: 78px;
+    min-height: 40px;
+    padding: 0 16px;
+    border: 1px solid rgba(8, 10, 9, 0.14);
+    border-radius: 999px;
+    font-size: 11px;
   }
 
   .hero-copy {
@@ -4628,14 +4633,14 @@ canvas:focus-visible {
   }
 
   .detail-nav-group {
-    gap: 4px;
+    gap: 6px;
   }
 
   .detail-nav .pill-button {
     min-width: 64px;
-    min-height: 36px;
-    padding: 8px 12px;
-    font-size: 10px;
+    min-height: 40px;
+    padding: 0 12px;
+    font-size: 11px;
   }
 
   .detail-layout {
@@ -4814,15 +4819,15 @@ canvas:focus-visible {
 }
 
 .horizon-case-nav .pill-button {
-  border-color: rgba(244, 247, 244, 0.72);
+  border-color: rgba(8, 10, 9, 0.14);
   color: #050807;
-  background: #f3f5f2;
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .horizon-case-nav .pill-button:hover {
-  border-color: var(--hud-green);
+  border-color: rgba(8, 10, 9, 0.2);
   color: #050807;
-  background: var(--hud-green);
+  background: rgba(255, 255, 255, 0.98);
 }
 
 .horizon-project-scroll {

@@ -136,6 +136,40 @@ The reference and a 941 px implementation capture were placed side by side in on
 
 final result: passed
 
+## Unified homepage and project-detail top navigation pills
+
+- Source visual truth: `/var/folders/lx/w3v6wpwj2vjbnt5kcmfzfybh0000gn/T/codex-clipboard-c52ca3b4-13e5-48f2-8184-d450653574d3.png` for the homepage pills and `/var/folders/lx/w3v6wpwj2vjbnt5kcmfzfybh0000gn/T/codex-clipboard-1e6d03fb-c672-45c5-bab1-83db59b8990e.png` for the detail-page pills.
+- Browser-rendered implementation evidence: `qa/screenshots/top-nav/home-after.png`, `qa/screenshots/top-nav/horizon-detail-after.png`, and `qa/screenshots/top-nav/tools-detail-mobile-after.png`.
+- Combined comparison input: `qa/screenshots/top-nav/reference-vs-implementation.png`, assembled by `qa/screenshots/top-nav/comparison.html` so the source and rendered states are judged together.
+- Desktop viewport: 2048 × 1065 CSS px at device scale factor 1. The homepage screenshot is 2033 × 1057 px because the browser capture excludes its 15 px scrollbar; it was normalized to the 2048 × 1066 px source frame only inside the comparison page. The detail reference is a 2048 × 324 px top strip and was compared with the matching 2048 × 324 px top strip of the 2048 × 1065 px implementation.
+- Responsive viewport: 390 × 844 CSS px at device scale factor 1.
+- States: homepage / Chinese; Horizon, S50C, and Tools Section 00 detail covers / Chinese; Tools detail / English; desktop and narrow-screen navigation.
+
+### Full-view and focused comparison
+
+- Full-view comparison: passed — the homepage retains its complete existing cube, title rail, background, and content composition while the upper-right navigation is reduced to two independent white pills.
+- Focused top-navigation comparison: passed — the implementation matches the references' separate white pill anatomy, black text, fully rounded corners, subtle low-contrast outline, soft shallow shadow, and generous horizontal spacing on both sides of the detail view.
+- Button count: passed — homepage navigation contains only Contact and Language; Horizon, S50C, Tools, and the standard detail shell each contain Back, Next, Contact, and Language, with no Work or Chen control.
+
+### Required fidelity surfaces
+
+- Fonts and typography: passed — all buttons preserve the site's established mono/PingFang stack, use 700 weight, 17 px desktop type, a compact one-line label, and 11 px type at the narrow breakpoint. The reference's different brand typeface is intentionally not copied because the user required the current site font family to remain unchanged.
+- Spacing and layout rhythm: passed — desktop pills measure 58 px high with 30 px horizontal padding, 999 px radius, and 18 px gaps at the 2048 px viewport; the navigation uses the existing responsive safe gutter. At 390 px, the independent pills measure 40 px high with 6–8 px gaps and all four detail controls remain fully inside the viewport.
+- Colors and visual tokens: passed — the pills use a near-white 96% surface, black text, a 14% black border, and a restrained two-layer ambient/inset shadow; no dark active fill remains. Hover lifts by 1 px and slightly strengthens the shadow; active returns to the resting position.
+- Image quality and asset fidelity: passed — this change introduces no image, icon, background, or project-media change. The screenshots only document the implementation.
+- Copy and content: passed — only the explicitly requested Work and Chen top controls were removed. Contact, Language, Back, and Next preserve their language-aware labels and handlers; project titles, page content, imagery, routes, and ordering remain unchanged.
+- Accessibility and interaction: passed — controls remain native buttons/links, the language control retains `aria-haspopup` and menu semantics, and a visible 2 px keyboard focus outline was added. Chinese → English → Chinese switching was exercised successfully.
+- Runtime: passed — the production build and Sites worker suite complete successfully, and the final browser console contains no errors or warnings.
+
+### Comparison history
+
+- Initial finding [P2]: the homepage had three controls including a dark active Work pill, and detail pages had five controls including Chen; the prior 42 px / 13 px buttons looked smaller, flatter, and more tightly grouped than the references.
+- Fix: removed only the two specified controls, standardized the shared pill dimensions, border, white surface, shadow, gaps, and interaction states, and replaced the mobile segmented container with independent pills.
+- Post-fix evidence: `home-after.png` and `horizon-detail-after.png` show the requested two-control and four-control layouts; DOM checks confirm the same four labels for Horizon, S50C, and Tools. `tools-detail-mobile-after.png` confirms every control remains within the 390 px viewport.
+- No actionable P0/P1/P2 findings remain.
+
+final result: passed
+
 ## Homepage titles, centered composition, and 3D framing
 
 - Visual reference: `/var/folders/lx/w3v6wpwj2vjbnt5kcmfzfybh0000gn/T/codex-clipboard-4d4e8f60-37a6-4799-b3b5-9e21c5923a12.png` (2048 × 1117 px).

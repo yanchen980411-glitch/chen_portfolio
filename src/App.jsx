@@ -11,20 +11,13 @@ function scrollToSection(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function SiteNav({ active }) {
+function SiteNav() {
   const { language } = useLanguage();
   const isZh = language === "zh";
   return (
     <nav className="site-nav" aria-label={isZh ? "主要导航" : "Primary navigation"}>
       <button
-        className={`pill-button ${active === "works" ? "is-active" : ""}`}
-        type="button"
-        onClick={() => scrollToSection("works")}
-      >
-        {translateText("Work", language)}
-      </button>
-      <button
-        className={`pill-button ${active === "contact" ? "is-active" : ""}`}
+        className="pill-button"
         type="button"
         onClick={() => scrollToSection("contact")}
       >

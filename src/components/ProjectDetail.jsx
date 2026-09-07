@@ -2250,7 +2250,6 @@ function HorizonCaseStudy({ project, onClose, onNext, active }) {
           <button className="pill-button" type="button" onClick={onNext}>下一个</button>
         </div>
         <div className="detail-nav-group detail-nav-group-right">
-          <button className="pill-button" type="button" onClick={returnFromHero}>Chen</button>
           <a className="pill-button" href="#contact" onClick={returnFromHero}>联系</a>
           <LanguageSwitcher />
         </div>
@@ -4219,7 +4218,6 @@ function ToolsCaseStudy({ project, onClose, onNext, active }) {
           <button className="pill-button" type="button" onClick={onNext}>下一个</button>
         </div>
         <div className="detail-nav-group detail-nav-group-right">
-          <button className="pill-button" type="button" onClick={returnFromHero}>Chen</button>
           <a className="pill-button" href="#contact" onClick={returnFromHero}>联系</a>
           <LanguageSwitcher />
         </div>
@@ -5999,7 +5997,6 @@ function S50CProjectOverview({ project, onClose, onNext, active }) {
           <button className="pill-button" type="button" onClick={onNext}>下一个</button>
         </div>
         <div className="detail-nav-group detail-nav-group-right">
-          <button className="pill-button" type="button" onClick={returnFromHero}>Chen</button>
           <a className="pill-button" href="#contact" onClick={returnFromHero}>联系</a>
           <LanguageSwitcher />
         </div>
@@ -6077,9 +6074,6 @@ function StandardProjectDetail({ project, onClose, onNext, active }) {
           </button>
         </div>
         <div className="detail-nav-group detail-nav-group-right">
-          <button className="pill-button" type="button" onClick={onClose}>
-            Chen
-          </button>
           <a className="pill-button" href="#contact" onClick={onClose}>
             联系
           </a>
