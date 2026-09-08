@@ -5412,7 +5412,7 @@ canvas:focus-visible {
   --case-panel: #080d0e;
   --case-line: rgba(235, 242, 236, 0.16);
   --project-case-left-background: var(--case-black);
-  --project-case-right-background: #dce8ee;
+  --project-case-right-background: #c9cdc5;
   color: #eef2ee;
   background: var(--case-black);
   font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -5623,7 +5623,7 @@ canvas:focus-visible {
   padding: clamp(92px, 13vh, 122px) clamp(34px, 3.65vw, 60px) 34px;
   overflow: hidden;
   color: #111512;
-  background: #dce8ee;
+  background: var(--project-case-right-background, #c9cdc5);
 }
 
 .horizon-project-info {
@@ -9238,7 +9238,7 @@ canvas:focus-visible {
 
 .tools-case-study {
   --project-case-left-background: #fff;
-  --project-case-right-background: #dce8ee;
+  --project-case-right-background: #fbd8c3;
   color: #171918;
   background: #fff;
 }
@@ -14976,7 +14976,7 @@ canvas:focus-visible {
 
 /* S50C project overview — image-led first page with a reserved project-information panel. */
 .s50c-case-study {
-  --s50c-panel: #dce8ee;
+  --s50c-panel: #c1cae4;
   --s50c-accent: #18bfc2;
   --project-case-left-background: #050505;
   --project-case-right-background: var(--s50c-panel);
