@@ -28,10 +28,14 @@ function SiteNav({ onContact, isContactOpen }) {
   );
 }
 
-const SPATIAL_EASE = [0.76, 0, 0.24, 1];
 const ENTER_EASE = [0.65, 0, 0.35, 1];
 const ENTER_DURATION_SECONDS = 0.48;
 const ENTER_DURATION_MS = ENTER_DURATION_SECONDS * 1000;
+const NEXT_SWITCH_EASE = [0.65, 0, 0.35, 1];
+const NEXT_SWITCH_DURATION_MS = 740;
+const NEXT_SWITCH_HANDOFF_SECONDS = 0.15;
+const NEXT_SWITCH_MIN_SCALE = 0.75;
+const NEXT_SWITCH_REVEAL_SECONDS = 0.04;
 const ABOUT_PAGE_FADE_SECONDS = 0.18;
 const ABOUT_PAGE_EASE = [0.22, 1, 0.36, 1];
 const HOME_INTRO_PROGRESS_MS = 1017;
@@ -67,10 +71,6 @@ function nextFrame() {
   return new Promise((resolve) => requestAnimationFrame(resolve));
 }
 
-function motionDelay(duration) {
-  return animate(0, 1, { duration, ease: "linear" }).finished;
-}
-
 function setRect(element, rect) {
   if (!element || !rect) return;
   element.style.left = `${rect.left}px`;
@@ -79,24 +79,16 @@ function setRect(element, rect) {
   element.style.height = `${rect.height}px`;
 }
 
-function getSwitchRect() {
-  const width = window.innerWidth * 0.64;
-  const height = window.innerHeight * 0.58;
-  return {
-    left: (window.innerWidth - width) / 2,
-    top: (window.innerHeight - height) / 2,
-    width,
-    height,
-  };
+function getCenteredScaleTransform(scale) {
+  const offsetX = window.innerWidth * (1 - scale) / 2;
+  const offsetY = window.innerHeight * (1 - scale) / 2;
+  return `translate3d(${offsetX}px, ${offsetY}px, 0) scale(${scale})`;
 }
 
-function getRectTransform(rect) {
-  return {
-    x: rect.left,
-    y: rect.top,
-    scaleX: rect.width / window.innerWidth,
-    scaleY: rect.height / window.innerHeight,
-  };
+function getDetailSwitchContent(detailStage) {
+  return detailStage?.querySelector(
+    ":scope > .detail-overlay > .project-detail-scroll-shell, :scope > .detail-overlay > .detail-scroll",
+  ) ?? null;
 }
 
 function interpolateRect(from, to, progress) {
@@ -1004,25 +996,39 @@ export function App() {
     const transitionStage = transitionStageRef.current;
     const transitionLayer = transitionLayerRef.current;
     const transitionBackdrop = transitionBackdropRef.current;
-    if (!detailStage || !transitionStage || !transitionLayer || !transitionBackdrop) return;
+    const transitionCubeApi = transitionCubeApiRef.current;
+    const currentContent = getDetailSwitchContent(detailStage);
+    if (
+      !detailStage
+      || !transitionStage
+      || !transitionLayer
+      || !transitionBackdrop
+      || !transitionCubeApi
+      || !currentContent
+    ) return;
 
     setTransitionState("switching");
     transitionStateRef.current = "switching";
-    setDetailNavVisible(false);
 
     if (reduceMotion) {
       setActiveIndex(nextIndex);
       setDetailIndex(nextIndex);
       detailIndexRef.current = nextIndex;
+      await afterPaint();
+      resetDetailScroll(detailStage);
+      await prepareDetailHero(detailStage, nextIndex);
     } else {
-      const switchRect = getSwitchRect();
-      await animate(
-        detailStage,
-        getRectTransform(switchRect),
-        { duration: 0.24, ease: SPATIAL_EASE },
-      ).finished;
+      const viewportRect = {
+        left: 0,
+        top: 0,
+        width: window.innerWidth,
+        height: window.innerHeight,
+      };
+      const physicalNextIndex = currentIndex === 2 && nextIndex === 0 ? 3 : nextIndex;
 
-      setRect(transitionStage, switchRect);
+      setRect(transitionStage, viewportRect);
+      transitionStage.style.transformOrigin = "0 0";
+      transitionStage.style.transform = "translate3d(0, 0, 0) scale(1)";
       transitionLayer.style.opacity = "1";
       transitionBackdrop.style.opacity = "1";
       transitionBackdrop.style.backgroundColor = projects[currentIndex].background;
@@ -1030,65 +1036,97 @@ export function App() {
         visible: true,
         index: currentIndex,
         presentation: "flat",
-        presentationDuration: 160,
-        rotationDuration: 400,
+        presentationDuration: 0,
+        rotationDuration: NEXT_SWITCH_DURATION_MS,
         background: projects[currentIndex].background,
       });
       await afterPaint();
-      detailStage.style.opacity = "0";
 
-      setTransitionVisual((current) => ({ ...current, presentation: "home" }));
-      await motionDelay(0.16);
+      // Align the hidden WebGL face with the live hero before the one shared
+      // switch clock starts. Only the scrollable project content participates;
+      // DetailControls remains at its fixed viewport position throughout.
+      transitionCubeApi.setFace(currentIndex, false);
+      transitionCubeApi.applyPresentation("flat", false);
+      currentContent.style.transformOrigin = "0 0";
+      currentContent.style.willChange = "transform, opacity";
 
+      const contentExit = animate(
+        currentContent,
+        {
+          opacity: [1, 0],
+          transform: [
+            "translate3d(0, 0, 0) scale(1)",
+            getCenteredScaleTransform(NEXT_SWITCH_MIN_SCALE),
+          ],
+        },
+        { duration: NEXT_SWITCH_HANDOFF_SECONDS, ease: NEXT_SWITCH_EASE },
+      );
+      const backgroundShift = animate(
+        transitionBackdrop,
+        { backgroundColor: projects[nextIndex].background },
+        { duration: 0.44, delay: 0.12, ease: NEXT_SWITCH_EASE },
+      );
+      const faceSwitch = transitionCubeApi.startFaceSwitch(
+        currentIndex,
+        physicalNextIndex,
+        NEXT_SWITCH_DURATION_MS,
+        (_progress, spatialMix) => {
+          const scale = 1 - (1 - NEXT_SWITCH_MIN_SCALE) * spatialMix;
+          transitionStage.style.transform = getCenteredScaleTransform(scale);
+        },
+      );
+
+      await contentExit.finished;
+      detailStage.dataset.switchContentHidden = "true";
       setActiveIndex(nextIndex);
-      setTransitionVisual((current) => ({
-        ...current,
-        index: nextIndex,
-        background: projects[nextIndex].background,
-      }));
-      await Promise.all([
-        motionDelay(0.4),
-        animate(
-          transitionBackdrop,
-          { backgroundColor: projects[nextIndex].background },
-          { duration: 0.4, ease: SPATIAL_EASE },
-        ).finished,
-      ]);
-
       setDetailIndex(nextIndex);
       detailIndexRef.current = nextIndex;
-      detailStage.style.transform = "none";
-      detailStage.style.opacity = "1";
-      setTransitionVisual((current) => ({
-        ...current,
-        presentation: "flat",
-        presentationDuration: 260,
-      }));
       await afterPaint();
       resetDetailScroll(detailStage);
-      await prepareDetailHero(detailStage, nextIndex);
+      await Promise.all([
+        faceSwitch,
+        backgroundShift.finished,
+        prepareDetailHero(detailStage, nextIndex),
+      ]);
 
-      const expansion = animate(
-        transitionStage,
-        {
-          left: 0,
-          top: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        },
-        { duration: 0.26, ease: SPATIAL_EASE },
-      );
-      const navReveal = (async () => {
-        await motionDelay(0.21);
-        setDetailNavVisible(true);
-      })();
-      await Promise.all([expansion.finished, navReveal]);
-      await animate(transitionLayer, { opacity: 0 }, { duration: 0.05, ease: "linear" }).finished;
+      const nextContent = getDetailSwitchContent(detailStage);
+      if (nextContent) {
+        nextContent.style.opacity = "0";
+        nextContent.style.transform = "translate3d(0, 0, 0) scale(1)";
+        nextContent.style.transformOrigin = "0 0";
+        nextContent.style.willChange = "opacity";
+      }
+      detailStage.removeAttribute("data-switch-content-hidden");
+      await nextFrame();
+      if (nextContent) {
+        await animate(
+          nextContent,
+          { opacity: 1 },
+          { duration: NEXT_SWITCH_REVEAL_SECONDS, ease: "linear" },
+        ).finished;
+        nextContent.style.removeProperty("opacity");
+        nextContent.style.removeProperty("transform");
+        nextContent.style.removeProperty("transform-origin");
+        nextContent.style.removeProperty("will-change");
+      }
+
+      transitionLayer.style.opacity = "0";
+      transitionCubeApi.setFace(nextIndex, false);
+      transitionStage.removeAttribute("style");
+      transitionBackdrop.removeAttribute("style");
+      transitionLayer.removeAttribute("style");
     }
 
+    detailStage.removeAttribute("data-switch-content-hidden");
     detailStage.style.opacity = "1";
     detailStage.style.transform = "none";
-    setTransitionVisual((current) => ({ ...current, visible: false }));
+    setTransitionVisual((current) => ({
+      ...current,
+      visible: false,
+      index: nextIndex,
+      presentation: "flat",
+      background: projects[nextIndex].background,
+    }));
     setDetailNavVisible(true);
     setTransitionState("project");
     transitionStateRef.current = "project";
@@ -1188,9 +1226,13 @@ export function App() {
             presentation={transitionVisual.presentation}
             presentationDuration={transitionVisual.presentationDuration}
             rotationDuration={transitionVisual.rotationDuration}
-            coverFlatViewport={transitionState === "opening"}
+            coverFlatViewport={
+              transitionState === "opening"
+              || transitionState === "switching"
+            }
             interactive={false}
             mediaPlaybackEnabled={transitionVisual.visible}
+            transitionProjectCycle
             className="spatial-project-transition__canvas"
             ariaLabel="项目空间转场"
           />

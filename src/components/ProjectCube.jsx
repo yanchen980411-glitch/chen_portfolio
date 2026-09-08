@@ -48,6 +48,12 @@ function getFilledHomeCameraZ(aspect, isDesktop, useHomeComposition = false) {
 
 const FACE_LABELS = ["01 AG1", "02 S50C", "03 TOOLS APP", "ABOUT ME"];
 const FACE_TEXTURES = projects.map((project) => project.cover);
+const PROJECT_SWITCH_FACE_TEXTURES = [
+  FACE_TEXTURES[0],
+  FACE_TEXTURES[1],
+  FACE_TEXTURES[2],
+  FACE_TEXTURES[0],
+];
 const S50C_FACE_INDEX = projects.findIndex((project) => project.id === "s50c");
 let sharedS50CVideoTexture = null;
 let sharedS50CVideoTextureUsers = 0;
@@ -89,10 +95,6 @@ function rotationForFace(index, currentRotation) {
   const canonicalRotation = normalizeIndex(index) * HALF_TURN;
   const fullTurns = Math.round((currentRotation - canonicalRotation) / FULL_TURN);
   return canonicalRotation + fullTurns * FULL_TURN;
-}
-
-function faceForRotation(rotation) {
-  return normalizeIndex(Math.round(rotation / HALF_TURN));
 }
 
 function easeInOutQuart(value) {
@@ -201,6 +203,7 @@ export function ProjectCube({
   interactive = true,
   homeComposition = false,
   mediaPlaybackEnabled = false,
+  transitionProjectCycle = false,
   apiRef,
 }) {
   const canvasRef = useRef(null);
@@ -276,6 +279,7 @@ export function ProjectCube({
     const canvas = canvasRef.current;
     if (!canvas) return undefined;
 
+    const playbackKey = mediaPlaybackKeyRef.current;
     let disposed = false;
     let wheelUnlockTimer = 0;
     let reducedMotion = false;
@@ -285,6 +289,27 @@ export function ProjectCube({
     const settledFaceTextures = new Set();
     const videoFrameUnsubscribers = [];
     const videoTextureReleases = [];
+    const faceTextures = transitionProjectCycle
+      ? PROJECT_SWITCH_FACE_TEXTURES
+      : FACE_TEXTURES;
+    const faceSwitchState = {
+      active: false,
+      frameId: 0,
+      resolve: null,
+      startTime: 0,
+      duration: 740,
+      progress: 0,
+      fromIndex: activeIndexRef.current,
+      toIndex: activeIndexRef.current,
+      fromRotation: activeIndexRef.current * HALF_TURN,
+      toRotation: activeIndexRef.current * HALF_TURN,
+      flatCameraZ: FLAT_CAMERA_Z,
+      onUpdate: null,
+      previousFrameTime: 0,
+      maxFrameGap: 0,
+      framesOver30: 0,
+      frameCount: 0,
+    };
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
@@ -369,6 +394,9 @@ export function ProjectCube({
     const panelGeometries = [];
     const panelMaterials = [];
     const panelMeshes = [];
+    const panelHitMeshes = [];
+    const pointerRaycaster = new THREE.Raycaster();
+    const pointerPosition = new THREE.Vector2();
     const textures = [];
     const textureLoader = new THREE.TextureLoader();
     let toolsPanel = null;
@@ -507,8 +535,8 @@ export function ProjectCube({
       camera.lookAt(0, 0, 0);
     }
 
-    for (let index = 0; index < FACE_TEXTURES.length; index += 1) {
-      const definition = FACE_TEXTURES[index];
+    for (let index = 0; index < faceTextures.length; index += 1) {
+      const definition = faceTextures[index];
       const [panelWidth, panelHeight] = getPanelGeometrySize(definition);
       const geometry = new THREE.PlaneGeometry(panelWidth, panelHeight);
       let material;
@@ -565,7 +593,16 @@ export function ProjectCube({
             }, () => (
               !disposed
               && mediaPlaybackEnabledRef.current
-              && intendedIndexRef.current === index
+              && (
+                intendedIndexRef.current === index
+                || (
+                  faceSwitchState.active
+                  && (
+                    faceSwitchState.fromIndex === index
+                    || faceSwitchState.toIndex === index
+                  )
+                )
+              )
               && modeRef.current !== "wireframe"
             )),
           );
@@ -615,6 +652,7 @@ export function ProjectCube({
       panel.position.set(...transform.position);
       panel.rotation.set(...transform.rotation);
       panel.renderOrder = 2;
+      panel.userData.faceIndex = index;
 
       if (definition.fit === "contain" && definition.background) {
         const backgroundGeometry = new THREE.PlaneGeometry(CUBOID_WIDTH, CUBOID_HEIGHT);
@@ -625,7 +663,9 @@ export function ProjectCube({
         const backgroundPanel = new THREE.Mesh(backgroundGeometry, backgroundMaterial);
         backgroundPanel.position.z = -0.002;
         backgroundPanel.renderOrder = 1;
+        backgroundPanel.userData.faceIndex = index;
         panel.add(backgroundPanel);
+        panelHitMeshes.push(backgroundPanel);
         panelGeometries.push(backgroundGeometry);
         panelMaterials.push(backgroundMaterial);
       }
@@ -639,6 +679,7 @@ export function ProjectCube({
       if (index === 2) toolsPanel = panel;
 
       panelMeshes.push(panel);
+      panelHitMeshes.push(panel);
       panelGeometries.push(geometry);
       panelMaterials.push(material);
     }
@@ -713,6 +754,8 @@ export function ProjectCube({
       lastY: 0,
       startX: 0,
       startY: 0,
+      startRotation: initialRotation,
+      wasAnimating: false,
       moved: false,
     };
     let wheelAccumulator = 0;
@@ -744,6 +787,31 @@ export function ProjectCube({
       if (enterState.resolve) {
         const resolve = enterState.resolve;
         enterState.resolve = null;
+        resolve();
+      }
+    }
+
+    function setFaceSwitchVideoIntent(active, settledIndex = intendedIndexRef.current) {
+      const includesVideoFace = faceSwitchState.fromIndex === S50C_FACE_INDEX
+        || faceSwitchState.toIndex === S50C_FACE_INDEX;
+      const shouldPlay = mediaPlaybackEnabledRef.current
+        && modeRef.current !== "wireframe"
+        && (active ? includesVideoFace : settledIndex === S50C_FACE_INDEX);
+      setS50CSharedVideoPlaybackIntent(playbackKey, shouldPlay);
+    }
+
+    function stopFaceSwitchAnimation() {
+      if (faceSwitchState.frameId !== 0) {
+        cancelAnimationFrame(faceSwitchState.frameId);
+        faceSwitchState.frameId = 0;
+      }
+      faceSwitchState.active = false;
+      faceSwitchState.startTime = 0;
+      faceSwitchState.onUpdate = null;
+      setFaceSwitchVideoIntent(false);
+      if (faceSwitchState.resolve) {
+        const resolve = faceSwitchState.resolve;
+        faceSwitchState.resolve = null;
         resolve();
       }
     }
@@ -932,6 +1000,7 @@ export function ProjectCube({
       stopAnimation();
       stopPresentationAnimation();
       stopEnterAnimation();
+      stopFaceSwitchAnimation();
 
       const nextIndex = normalizeIndex(index);
       intendedIndexRef.current = nextIndex;
@@ -1051,6 +1120,7 @@ export function ProjectCube({
       stopAnimation();
       stopPresentationAnimation();
       stopEnterAnimation();
+      stopFaceSwitchAnimation();
 
       const nextIndex = normalizeIndex(index);
       intendedIndexRef.current = nextIndex;
@@ -1084,6 +1154,138 @@ export function ProjectCube({
       return new Promise((resolve) => {
         enterState.resolve = resolve;
         enterState.frameId = requestAnimationFrame(enterFrame);
+      });
+    }
+
+    function applyFaceSwitchProgress(value) {
+      const progress = THREE.MathUtils.clamp(value, 0, 1);
+      const depthIn = THREE.MathUtils.smootherstep(progress, 0, 0.2);
+      const depthOut = 1 - THREE.MathUtils.smootherstep(progress, 0.72, 1);
+      const spatialMix = Math.min(depthIn, depthOut);
+      const turnProgress = THREE.MathUtils.clamp((progress - 0.12) / 0.64, 0, 1);
+      const easedTurn = easeInOutQuart(turnProgress);
+
+      faceSwitchState.progress = progress;
+      motionState.current = THREE.MathUtils.lerp(
+        faceSwitchState.fromRotation,
+        faceSwitchState.toRotation,
+        easedTurn,
+      );
+      motionState.target = faceSwitchState.toRotation;
+      cubeRoot.rotation.x = motionState.current;
+      presentationRoot.rotation.set(0, 0, 0);
+      presentationRoot.position.set(0, 0, 0);
+      presentationRoot.scale.setScalar(1);
+      depthRoot.scale.z = THREE.MathUtils.lerp(FLAT_DEPTH_SCALE, 1, spatialMix);
+      // As depth returns, retreat the camera by the face offset. The current
+      // face therefore keeps the same apparent size while the stage performs
+      // the deliberate shrink, and the adjoining face remains fully visible.
+      camera.position.z = faceSwitchState.flatCameraZ + PANEL_OFFSET * spatialMix;
+      camera.lookAt(0, 0, 0);
+      faceSwitchState.onUpdate?.(progress, spatialMix);
+      renderScene();
+    }
+
+    function finishFaceSwitch() {
+      faceSwitchState.active = false;
+      faceSwitchState.frameId = 0;
+      faceSwitchState.startTime = 0;
+      motionState.current = faceSwitchState.toRotation;
+      motionState.target = faceSwitchState.toRotation;
+      motionState.from = faceSwitchState.toRotation;
+      motionState.startTime = 0;
+      motionState.lastTime = 0;
+      cubeRoot.rotation.x = faceSwitchState.toRotation;
+      presentationRoot.rotation.set(0, 0, 0);
+      presentationRoot.position.set(0, 0, 0);
+      presentationRoot.scale.setScalar(1);
+      depthRoot.scale.z = FLAT_DEPTH_SCALE;
+      camera.position.z = faceSwitchState.flatCameraZ;
+      camera.lookAt(0, 0, 0);
+      faceSwitchState.onUpdate?.(1, 0);
+      faceSwitchState.onUpdate = null;
+      renderScene();
+
+      canvas.dataset.faceSwitchActive = "false";
+      canvas.dataset.faceSwitchFrameCount = String(faceSwitchState.frameCount);
+      canvas.dataset.faceSwitchMaxFrameGap = faceSwitchState.maxFrameGap.toFixed(2);
+      canvas.dataset.faceSwitchFramesOver30 = String(faceSwitchState.framesOver30);
+      setFaceSwitchVideoIntent(false, faceSwitchState.toIndex);
+
+      if (faceSwitchState.resolve) {
+        const resolve = faceSwitchState.resolve;
+        faceSwitchState.resolve = null;
+        resolve();
+      }
+    }
+
+    function faceSwitchFrame(time) {
+      faceSwitchState.frameId = 0;
+      if (!faceSwitchState.startTime) faceSwitchState.startTime = time;
+      if (faceSwitchState.previousFrameTime) {
+        const frameGap = time - faceSwitchState.previousFrameTime;
+        faceSwitchState.maxFrameGap = Math.max(faceSwitchState.maxFrameGap, frameGap);
+        if (frameGap > 30) faceSwitchState.framesOver30 += 1;
+      }
+      faceSwitchState.previousFrameTime = time;
+      faceSwitchState.frameCount += 1;
+
+      const progress = Math.min(
+        1,
+        (time - faceSwitchState.startTime) / Math.max(1, faceSwitchState.duration),
+      );
+      applyFaceSwitchProgress(progress);
+
+      if (progress < 1) {
+        faceSwitchState.frameId = requestAnimationFrame(faceSwitchFrame);
+        return;
+      }
+      finishFaceSwitch();
+    }
+
+    function startFaceSwitch(fromIndex, toIndex, duration = 740, onUpdate) {
+      stopAnimation();
+      stopPresentationAnimation();
+      stopEnterAnimation();
+      stopFaceSwitchAnimation();
+
+      const nextFromIndex = normalizeIndex(fromIndex);
+      const nextToIndex = normalizeIndex(toIndex);
+      const fromRotation = rotationForFace(nextFromIndex, motionState.current);
+      const toRotation = rotationForFace(nextToIndex, fromRotation);
+
+      intendedIndexRef.current = nextToIndex;
+      faceSwitchState.active = true;
+      faceSwitchState.duration = Math.max(1, duration);
+      faceSwitchState.startTime = 0;
+      faceSwitchState.progress = 0;
+      faceSwitchState.fromIndex = nextFromIndex;
+      faceSwitchState.toIndex = nextToIndex;
+      faceSwitchState.fromRotation = fromRotation;
+      faceSwitchState.toRotation = toRotation;
+      faceSwitchState.flatCameraZ = getFlatCameraZ();
+      faceSwitchState.onUpdate = typeof onUpdate === "function" ? onUpdate : null;
+      faceSwitchState.previousFrameTime = 0;
+      faceSwitchState.maxFrameGap = 0;
+      faceSwitchState.framesOver30 = 0;
+      faceSwitchState.frameCount = 0;
+
+      canvas.dataset.faceSwitchActive = "true";
+      canvas.dataset.faceSwitchFrom = String(nextFromIndex);
+      canvas.dataset.faceSwitchTo = String(nextToIndex);
+      canvas.dataset.faceSwitchDuration = String(faceSwitchState.duration);
+      setFaceSwitchVideoIntent(true);
+      applyFaceSwitchProgress(0);
+
+      if (reducedMotion) {
+        applyFaceSwitchProgress(1);
+        finishFaceSwitch();
+        return Promise.resolve();
+      }
+
+      return new Promise((resolve) => {
+        faceSwitchState.resolve = resolve;
+        faceSwitchState.frameId = requestAnimationFrame(faceSwitchFrame);
       });
     }
 
@@ -1134,6 +1336,7 @@ export function ProjectCube({
 
     function applyPresentation(nextPresentation, animate = true) {
       stopEnterAnimation();
+      stopFaceSwitchAnimation();
       const isFlat = nextPresentation === "flat";
       const isDesktop = window.matchMedia("(min-width: 761px)").matches;
       const filledCameraZ = getFilledHomeCameraZ(camera.aspect, isDesktop, homeComposition);
@@ -1222,6 +1425,7 @@ export function ProjectCube({
 
     function setFace(index, animate = true) {
       stopEnterAnimation();
+      stopFaceSwitchAnimation();
       const nextIndex = normalizeIndex(index);
       intendedIndexRef.current = nextIndex;
       motionState.target = rotationForFace(nextIndex, motionState.current);
@@ -1270,7 +1474,10 @@ export function ProjectCube({
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      if (spatialTransitionState.active) {
+      if (faceSwitchState.active) {
+        faceSwitchState.flatCameraZ = getFlatCameraZ();
+        applyFaceSwitchProgress(faceSwitchState.progress);
+      } else if (spatialTransitionState.active) {
         setSpatialTransitionProgress(spatialTransitionState.progress);
       } else {
         updateCameraPosition();
@@ -1280,6 +1487,8 @@ export function ProjectCube({
 
     function handlePointerDown(event) {
       if (event.button !== 0 && event.pointerType !== "touch") return;
+      dragState.wasAnimating = motionState.frameId !== 0;
+      dragState.startRotation = motionState.current;
       stopAnimation();
       presentationRoot.scale.setScalar(1);
       dragState.active = true;
@@ -1311,16 +1520,54 @@ export function ProjectCube({
       renderScene();
     }
 
+    function getFaceIndexAtPointer(event) {
+      const bounds = canvas.getBoundingClientRect();
+      if (bounds.width <= 0 || bounds.height <= 0) return -1;
+
+      pointerPosition.set(
+        ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
+        -((event.clientY - bounds.top) / bounds.height) * 2 + 1,
+      );
+      scene.updateMatrixWorld(true);
+      camera.updateMatrixWorld(true);
+      pointerRaycaster.setFromCamera(pointerPosition, camera);
+
+      const [intersection] = pointerRaycaster.intersectObjects([boxMesh, ...panelHitMeshes], false);
+      let hitObject = intersection?.object;
+      while (hitObject && !Number.isInteger(hitObject.userData.faceIndex)) {
+        hitObject = hitObject.parent;
+      }
+      return hitObject?.userData.faceIndex ?? -1;
+    }
+
     function finishDrag(event) {
       if (!dragState.active || event.pointerId !== dragState.pointerId) return;
       dragState.active = false;
       if (canvas.hasPointerCapture?.(event.pointerId)) {
         canvas.releasePointerCapture(event.pointerId);
       }
-      const snappedIndex = faceForRotation(motionState.current);
-      requestFace(snappedIndex);
-      if (event.type === "pointerup" && !dragState.moved) {
-        onOpenRef.current?.(snappedIndex);
+
+      const selectedIndex = activeIndexRef.current;
+      if (event.type !== "pointerup" || dragState.moved) {
+        setFace(selectedIndex, true);
+        return;
+      }
+
+      motionState.current = dragState.startRotation;
+      motionState.target = dragState.startRotation;
+      cubeRoot.rotation.x = dragState.startRotation;
+      presentationRoot.scale.setScalar(1);
+
+      const selectedRotation = rotationForFace(selectedIndex, dragState.startRotation);
+      const selectedFaceIsFront = Math.abs(selectedRotation - dragState.startRotation) < 0.001;
+      if (dragState.wasAnimating || !selectedFaceIsFront) {
+        setFace(selectedIndex, true);
+        return;
+      }
+
+      renderScene();
+      if (getFaceIndexAtPointer(event) === selectedIndex) {
+        onOpenRef.current?.(selectedIndex);
       }
     }
 
@@ -1402,6 +1649,7 @@ export function ProjectCube({
       applyMode,
       applyPresentation,
       startEnter,
+      startFaceSwitch,
       beginSpatialTransition,
       setSpatialTransitionProgress,
       syncSpatialTransitionEndpoint,
@@ -1425,6 +1673,7 @@ export function ProjectCube({
       stopAnimation();
       stopPresentationAnimation();
       stopEnterAnimation();
+      stopFaceSwitchAnimation();
       if (wheelUnlockTimer) window.clearTimeout(wheelUnlockTimer);
       resizeObserver.disconnect();
       reducedMotionQuery.removeEventListener?.("change", handleReducedMotionChange);

@@ -3863,13 +3863,15 @@ canvas:focus-visible {
   left: var(--gutter);
   width: 83vw;
   mix-blend-mode: difference;
+  pointer-events: none;
   transform: translate3d(0, -50%, 0);
 }
 
 .project-title-list > button,
 .project-title-about {
   display: block;
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
   margin: 0 0 clamp(7px, 1.1vh, 12px);
   padding: 0;
   border: 0;
@@ -3888,6 +3890,7 @@ canvas:focus-visible {
 
 .project-title-list > button {
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .project-title-list > button span,
@@ -4571,6 +4574,19 @@ canvas:focus-visible {
 .app[data-transition-state="opening"] .spatial-project-transition__canvas {
   backface-visibility: hidden;
   transform: translateZ(0);
+}
+
+.app[data-transition-state="switching"] .project-detail-stage {
+  z-index: 150;
+}
+
+.app[data-transition-state="switching"] .project-detail-stage .detail-overlay {
+  background: transparent;
+}
+
+.project-detail-stage[data-switch-content-hidden="true"] .project-detail-scroll-shell,
+.project-detail-stage[data-switch-content-hidden="true"] .detail-scroll {
+  opacity: 0 !important;
 }
 
 .spatial-project-transition__canvas {
