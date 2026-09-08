@@ -136,6 +136,81 @@ The reference and a 941 px implementation capture were placed side by side in on
 
 final result: passed
 
+## Shared bilingual Contact Modal
+
+- Source visual truth: `/Users/ccchen/Desktop/视觉效果.png` (1536 × 1024 px), with `/var/folders/lx/w3v6wpwj2vjbnt5kcmfzfybh0000gn/T/codex-clipboard-d4a52b2c-0c90-4267-8a1a-769b9da549aa.png` as the interaction-pattern reference.
+- Final desktop implementation evidence: `/Users/ccchen/Documents/ChatGPT/portfolio/chen_portfolio/verification/contact-modal-home-zh-1536x1024-final.png` (1536 × 1024 px).
+- Full-view comparison input: `/Users/ccchen/Documents/ChatGPT/portfolio/chen_portfolio/verification/contact-modal-comparison-full.png`.
+- Focused card comparison input: `/Users/ccchen/Documents/ChatGPT/portfolio/chen_portfolio/verification/contact-modal-comparison-focused.png`.
+- State: homepage About Me selection, Contact Modal open, Chinese; live English and Chinese switching were also exercised while the same modal remained mounted.
+
+### Fidelity review
+
+- Placement and scale: passed — the desktop card is right-aligned beneath the existing Contact / Language controls, measures 560 px wide, and keeps a 20–32 px visual gap from the controls. Mobile measures 358 px at a 390 px viewport with exactly 16 px side margins and no horizontal overflow.
+- Typography and copy: passed — `Hello!`, the exact Chinese and English biographies, Email / Phone labels, contact values, and the final English tagline are all live text. The Chinese paragraph measures four lines at the desktop target, within the requested 4–6-line range.
+- Surfaces and color: passed — the card uses a white surface, 32 px radius, low-contrast border, restrained shadow, dark navy/gray typography, pale pink icon circles, and the existing About pink accent. The background remains visible through a 5.5% dim layer without a heavy dialog blackout.
+- Contact controls: passed — the open Contact pill retains its white surface and receives only a restrained pink ring/glow; the Language pill is visually unchanged. The close affordance is a gray Phosphor X with no automatic pink focus ring on initial open.
+- Contact items: passed — two lightweight vertical bordered rows use real Phosphor icons and native `mailto:yanchen04112023@163.com` / `tel:+8613966222278` links. No raster UI, custom SVG, or placeholder artwork was introduced.
+- Motion: passed — overlay opacity plus card opacity, `translateY(-8px)`, and `scale(.98)` use a 260 ms non-bouncy easing for both entry and exit.
+- Responsiveness: passed — the verified 390 × 844 browser state kept the card below the controls, preserved readable wrapping, used 16 px side margins, and produced `documentElement.scrollWidth === 390`.
+
+### Interaction and locale verification
+
+- Shared mounting: passed — one `ContactModal` is mounted at the App root and is opened by the homepage, About Me, Horizon, S50C, and Tools controls; no per-page modal copies exist.
+- Locale: passed — the component consumes the existing `LanguageContext`; Chinese → English and English → Chinese update the already-open modal immediately without refresh or close/reopen. The language menu is portaled only for stacking, while its state and handlers remain the existing global implementation.
+- Close paths: passed — X, repeated Contact click, outside pointer press, and Escape all close the modal and clear the active ring.
+- Navigation isolation: passed — URL and page scroll positions remain unchanged. Escape closes only the Contact Modal while the Horizon project dialog remains open.
+- Project coverage: passed — About Me, Horizon, S50C, and Tools each opened the same exact modal in place; closing it left the underlying page/project mounted.
+- Legacy Contact flow: passed — no normal Contact control renders the old full-screen Contact section, route, anchor, scroll handler, or page-transition entry.
+- Clean runtime: passed — a fresh `/about` tab completed open → live English switch → close with no console errors.
+- Build/runtime: passed — `pnpm run build`, `pnpm run test:sites`, and `git diff --check` complete successfully; Vite reports only its pre-existing large-chunk advisory.
+
+### Comparison history
+
+- Pass 1 finding [P1]: the modal layer visually and interactively covered the existing language menu, preventing the required live locale switch while the card was open.
+- Fix: made the light dim layer non-intercepting, added a capture-phase outside-click guard, and rendered the existing language menu in a top-level portal without duplicating language state or changing its design.
+- Pass 2 finding [P2]: programmatic focus gave the gray close X a pink focus ring on initial open, unlike the supplied target; the Chinese biography also wrapped to only three lines.
+- Fix: moved initial focus to the dialog container while retaining keyboard-visible focus on the X, and reduced the biography measure to 430 px. The final desktop capture shows a neutral gray X and exactly four body lines.
+- No actionable P0/P1/P2 findings remain.
+
+final result: passed
+
+## About Me internal detail page reconstruction
+
+- Source visual truth: `/Users/ccchen/Desktop/about me内容.png` (1024 × 1536 px).
+- Browser implementation: `http://127.0.0.1:4173/about`.
+- Desktop evidence: `/Users/ccchen/Documents/ChatGPT/portfolio/chen_portfolio/verification/about-me-desktop-final.png` (1009 × 1237 px browser capture) and `/Users/ccchen/Documents/ChatGPT/portfolio/chen_portfolio/verification/about-me-reference-top-crop.png` (1009 × 1237 px normalized reference crop).
+- Responsive evidence: `/Users/ccchen/Documents/ChatGPT/portfolio/chen_portfolio/verification/about-me-mobile-final.png` (375 × 812 px capture from a 390 × 844 CSS viewport).
+- State: direct `/about`, Chinese default; English and Chinese language states both exercised through the visible language switcher before returning to Chinese.
+
+### Full-view and focused comparison
+
+- Full-view composition: passed — the implementation follows the reference's white editorial canvas, spacious introduction, five numbered horizontal modules, restrained pink accents, pale rules, and final footer; no full-page reference bitmap is used.
+- Focused module comparison: passed — the What I Do cards, horizontal Journey timeline, four-step AI workflow, pill-like tool tags, and two contact cards reproduce the reference hierarchy and spacing with independently editable DOM content.
+- Browser capture note: the in-app browser excludes part of its chrome and caps the physical capture to 1009 × 1237 px even when the CSS viewport is set to 1024 × 1536. DOM geometry was therefore checked in addition to the paired image comparison; the canvas height is approximately 1581 px, Contact spans y ≈ 1318–1506, and the footer follows at y ≈ 1506–1553 without horizontal overflow.
+
+### Required fidelity surfaces
+
+- Fonts and typography: passed — the About page uses the locally bundled Poppins files already present in the repository, with Chinese system fallbacks, a dark navy hierarchy, muted blue-gray secondary copy, and reference-like weight and line-height relationships.
+- Spacing and layout: passed — the 1120 px maximum canvas, 54 px desktop gutter, four-column card grid, five-point timeline, equal workflow distribution, section dividers, and compact lower-page rhythm closely follow the supplied 1024 px frame.
+- Colors and surfaces: passed — the page is white with `#ff4f87` pink accents, soft pink icon circles, pale gray dividers and borders, and no legacy green styling, gradient surfaces, or heavy shadows.
+- Copy and content: passed — Chinese intro, section titles, four capability cards, five timeline entries, workflow labels, tool tags, email, and phone match the supplied requirements. The page contains exactly the `01`–`05` modules, two contact methods, no legacy `My Skills`, no internal navigation, and no large `ABOUT ME` heading.
+- Icons: passed — all visible line icons come from the existing Phosphor icon package, use one consistent stroke family, and remain editable React elements rather than raster artwork or hand-drawn SVG substitutes.
+- Responsiveness: passed — at 390 × 844 CSS px the capability cards, timeline, workflow, and contact cards collapse to one column with no horizontal overflow; desktop retains the reference's horizontal information architecture.
+- Accessibility and interaction: passed — semantic headings, sections, ordered lists, native email/telephone links, sensible labels, visible content at text wrap, and reduced-motion-safe CSS are preserved. Contact hrefs resolve to `mailto:yanchen04112023@163.com` and `tel:+8613966222278`.
+- Scope isolation: passed — only `src/components/AboutPage.jsx` and the About-specific style block in `src/styles.css` changed. The home cover, project routes, opening/closing transition architecture, homepage navigation, Horizon, S50C, and Tools remain outside this implementation.
+- Runtime: passed — the page reports no browser errors or warnings, and the production build completes successfully with only Vite's pre-existing large-chunk advisory.
+
+### Comparison history
+
+- Pass 1 finding [P2]: the page initially retained the previous About resume structure and its unrelated green/black visual language, so the hierarchy and content did not match the supplied design.
+- Fix: rebuilt the internal page as five semantic React sections, added the exact bilingual content model, loaded the existing local Poppins assets, and isolated all new styling under `.about-page` selectors.
+- Pass 2 finding [P3]: the desktop introduction and Tools section made the lower half denser than the reference.
+- Fix: calibrated the introduction height and section padding so the 01–05 rhythm and footer land close to the 1536 px reference while remaining responsive.
+- No actionable P0/P1/P2 findings remain.
+
+final result: passed
+
 ## Unified homepage and project-detail top navigation pills
 
 - Source visual truth: `/var/folders/lx/w3v6wpwj2vjbnt5kcmfzfybh0000gn/T/codex-clipboard-c52ca3b4-13e5-48f2-8184-d450653574d3.png` for the homepage pills and `/var/folders/lx/w3v6wpwj2vjbnt5kcmfzfybh0000gn/T/codex-clipboard-1e6d03fb-c672-45c5-bab1-83db59b8990e.png` for the detail-page pills.

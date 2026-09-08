@@ -15,7 +15,8 @@ import { ToolsAnimatedCover } from "./ToolsAnimatedCover";
 import { S50CSharedCoverVideo } from "./S50CSharedCoverVideo";
 import { horizonResearchCopy } from "../content/horizonResearchCopy";
 import { s50cCopy } from "../content/s50cCopy";
-import { LanguageSwitcher, useLanguage } from "../i18n/LanguageContext";
+import { useLanguage } from "../i18n/LanguageContext";
+import { DetailControls } from "./DetailControls";
 import {
   ArrowDown,
   ArrowLeft,
@@ -89,6 +90,32 @@ function useProjectDialog(onClose, dialogRef, active = true) {
 
 function CaseStudyImage({ loading = "lazy", decoding = "async", ...props }) {
   return React.createElement("img", { loading, decoding, ...props });
+}
+
+const projectOutcomeCopy = {
+  horizon: {
+    en: "Delivered a complete interaction framework for an AR golf experience, covering in-round navigation, shot recording, scoring, course information and hardware controls. The design has continued to evolve through product feedback and real-world usage scenarios.",
+    zh: "完成 AR 高尔夫核心体验的整体交互框架，覆盖球场导航、击球记录、计分、球场信息与硬件操作，并持续结合产品反馈与真实使用场景进行迭代优化。",
+  },
+  s50c: {
+    en: "Completed the interaction and UI system for the S50C laser rangefinder, including measurement workflows, settings, dark/light themes, multilingual adaptation and design handoff specifications for development.",
+    zh: "完成 S50C 激光测距仪完整交互与 UI 体系，包括测量流程、系统设置、深浅色模式、多语言适配，并输出开发交付所需的界面与交互规范。",
+  },
+  tools: {
+    en: "Defined the core product experience from measurement capture to project organization, including floor plans, forms, photo annotation, device connection and sharing workflows, and built an interactive prototype for key scenarios.",
+    zh: "建立从测量采集到项目管理的核心产品体验，覆盖户型图、表格、照片标注、设备连接与分享流程，并完成关键场景的高保真交互原型。",
+  },
+};
+
+function ProjectInfoOutcome({ language, projectId }) {
+  const locale = language === "zh" ? "zh" : "en";
+
+  return (
+    <section className="horizon-project-info-block horizon-project-info-outcome" data-i18n-skip>
+      <h3>{locale === "zh" ? "项目结果" : "OUTCOME"}</h3>
+      <p>{projectOutcomeCopy[projectId][locale]}</p>
+    </section>
+  );
 }
 
 function ProjectFullscreenCover({ project, active = false }) {
@@ -2240,8 +2267,9 @@ function HorizonCompleteExperiencePage() {
   );
 }
 
-function HorizonCaseStudy({ project, onClose, onNext, active }) {
+function HorizonCaseStudy({ project, onClose, onNext, onContact, isContactOpen, active }) {
   const dialogRef = useRef(null);
+  const { language } = useLanguage();
   const { scrollRef, returnFromHero } = useSharedProjectDetailScroll(onClose);
   useProjectDialog(returnFromHero, dialogRef, active);
 
@@ -2254,16 +2282,13 @@ function HorizonCaseStudy({ project, onClose, onNext, active }) {
       aria-label={`${project.title} 项目详情`}
       tabIndex={-1}
     >
-      <header className="detail-nav horizon-case-nav" aria-label="项目详情导航">
-        <div className="detail-nav-group">
-          <button className="pill-button" type="button" onClick={returnFromHero}>/返回</button>
-          <button className="pill-button" type="button" onClick={onNext}>下一个</button>
-        </div>
-        <div className="detail-nav-group detail-nav-group-right">
-          <a className="pill-button" href="#contact" onClick={returnFromHero}>联系</a>
-          <LanguageSwitcher />
-        </div>
-      </header>
+      <DetailControls
+        className="horizon-case-nav"
+        onBack={returnFromHero}
+        onNext={onNext}
+        onContact={onContact}
+        isContactOpen={isContactOpen}
+      />
 
       <SharedProjectDetailScrollShell project={project} scrollRef={scrollRef}>
           <main className="horizon-pages-scroll">
@@ -2310,6 +2335,8 @@ function HorizonCaseStudy({ project, onClose, onNext, active }) {
                 DESIGN, UI DESIGN, PROTOTYPING, USABILITY TESTING
               </p>
             </section>
+
+            <ProjectInfoOutcome language={language} projectId="horizon" />
             </div>
           </aside>
       </SharedProjectDetailScrollShell>
@@ -4207,7 +4234,7 @@ function ToolsFinalExperience() {
   );
 }
 
-function ToolsCaseStudy({ project, onClose, onNext, active }) {
+function ToolsCaseStudy({ project, onClose, onNext, onContact, isContactOpen, active }) {
   const dialogRef = useRef(null);
   const { language } = useLanguage();
   const { scrollRef, returnFromHero } = useSharedProjectDetailScroll(onClose);
@@ -4222,16 +4249,13 @@ function ToolsCaseStudy({ project, onClose, onNext, active }) {
       aria-label={`${project.title} 项目详情`}
       tabIndex={-1}
     >
-      <header className="detail-nav horizon-case-nav s50c-case-nav" aria-label="项目详情导航">
-        <div className="detail-nav-group">
-          <button className="pill-button" type="button" onClick={returnFromHero}>/返回</button>
-          <button className="pill-button" type="button" onClick={onNext}>下一个</button>
-        </div>
-        <div className="detail-nav-group detail-nav-group-right">
-          <a className="pill-button" href="#contact" onClick={returnFromHero}>联系</a>
-          <LanguageSwitcher />
-        </div>
-      </header>
+      <DetailControls
+        className="horizon-case-nav s50c-case-nav"
+        onBack={returnFromHero}
+        onNext={onNext}
+        onContact={onContact}
+        isContactOpen={isContactOpen}
+      />
 
       <SharedProjectDetailScrollShell
         project={project}
@@ -4278,6 +4302,8 @@ function ToolsCaseStudy({ project, onClose, onNext, active }) {
                 measurements, drawings and photos organized within each project.
               </p>
             </section>
+
+            <ProjectInfoOutcome language={language} projectId="tools" />
 
             </div>
           </aside>
@@ -5986,7 +6012,7 @@ const s50cZhPageSequence = [
   { key: "08", render: () => <S50CFinalExperienceSection /> },
 ];
 
-function S50CProjectOverview({ project, onClose, onNext, active }) {
+function S50CProjectOverview({ project, onClose, onNext, onContact, isContactOpen, active }) {
   const dialogRef = useRef(null);
   const { scrollRef, returnFromHero } = useSharedProjectDetailScroll(onClose);
   const { language } = useLanguage();
@@ -6001,16 +6027,13 @@ function S50CProjectOverview({ project, onClose, onNext, active }) {
       aria-label={`${project.title} 项目概述`}
       tabIndex={-1}
     >
-      <header className="detail-nav horizon-case-nav s50c-case-nav" aria-label="项目详情导航">
-        <div className="detail-nav-group">
-          <button className="pill-button" type="button" onClick={returnFromHero}>/返回</button>
-          <button className="pill-button" type="button" onClick={onNext}>下一个</button>
-        </div>
-        <div className="detail-nav-group detail-nav-group-right">
-          <a className="pill-button" href="#contact" onClick={returnFromHero}>联系</a>
-          <LanguageSwitcher />
-        </div>
-      </header>
+      <DetailControls
+        className="horizon-case-nav s50c-case-nav"
+        onBack={returnFromHero}
+        onNext={onNext}
+        onContact={onContact}
+        isContactOpen={isContactOpen}
+      />
 
       <SharedProjectDetailScrollShell
         project={project}
@@ -6054,6 +6077,8 @@ function S50CProjectOverview({ project, onClose, onNext, active }) {
                 clearer feedback.
               </p>
             </section>
+
+            <ProjectInfoOutcome language={language} projectId="s50c" />
             </div>
           </aside>
       </SharedProjectDetailScrollShell>
@@ -6061,7 +6086,7 @@ function S50CProjectOverview({ project, onClose, onNext, active }) {
   );
 }
 
-function StandardProjectDetail({ project, onClose, onNext, active }) {
+function StandardProjectDetail({ project, onClose, onNext, onContact, isContactOpen, active }) {
   const dialogRef = useRef(null);
   useProjectDialog(onClose, dialogRef, active);
 
@@ -6075,22 +6100,12 @@ function StandardProjectDetail({ project, onClose, onNext, active }) {
       aria-label={`${project.title} 项目详情`}
       tabIndex={-1}
     >
-      <header className="detail-nav" aria-label="项目详情导航">
-        <div className="detail-nav-group">
-          <button className="pill-button" type="button" onClick={onClose}>
-            /返回
-          </button>
-          <button className="pill-button" type="button" onClick={onNext}>
-            下一个
-          </button>
-        </div>
-        <div className="detail-nav-group detail-nav-group-right">
-          <a className="pill-button" href="#contact" onClick={onClose}>
-            联系
-          </a>
-          <LanguageSwitcher />
-        </div>
-      </header>
+      <DetailControls
+        onBack={onClose}
+        onNext={onNext}
+        onContact={onContact}
+        isContactOpen={isContactOpen}
+      />
 
       <div className="detail-scroll">
         <div className="detail-layout">
@@ -6152,18 +6167,18 @@ function StandardProjectDetail({ project, onClose, onNext, active }) {
   );
 }
 
-export function ProjectDetail({ project, onClose, onNext, active = true }) {
+export function ProjectDetail({ project, onClose, onNext, onContact, isContactOpen, active = true }) {
   if (project.id === "ag1") {
-    return <HorizonCaseStudy project={project} onClose={onClose} onNext={onNext} active={active} />;
+    return <HorizonCaseStudy project={project} onClose={onClose} onNext={onNext} onContact={onContact} isContactOpen={isContactOpen} active={active} />;
   }
 
   if (project.id === "tools") {
-    return <ToolsCaseStudy project={project} onClose={onClose} onNext={onNext} active={active} />;
+    return <ToolsCaseStudy project={project} onClose={onClose} onNext={onNext} onContact={onContact} isContactOpen={isContactOpen} active={active} />;
   }
 
   if (project.id === "s50c") {
-    return <S50CProjectOverview project={project} onClose={onClose} onNext={onNext} active={active} />;
+    return <S50CProjectOverview project={project} onClose={onClose} onNext={onNext} onContact={onContact} isContactOpen={isContactOpen} active={active} />;
   }
 
-  return <StandardProjectDetail project={project} onClose={onClose} onNext={onNext} active={active} />;
+  return <StandardProjectDetail project={project} onClose={onClose} onNext={onNext} onContact={onContact} isContactOpen={isContactOpen} active={active} />;
 }

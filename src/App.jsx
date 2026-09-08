@@ -1,26 +1,25 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { animate, useReducedMotion } from "motion/react";
 import { AboutPage } from "./components/AboutPage";
+import { ContactModal } from "./components/ContactModal";
 import { ProjectCube } from "./components/ProjectCube";
 import { ProjectDetail } from "./components/ProjectDetail";
 import { preloadS50CSharedCoverVideo } from "./components/S50CSharedCoverVideo";
-import { CONTACT_EMAIL, projects } from "./data/projects";
+import { projects } from "./data/projects";
 import { LanguageSwitcher, useLanguage } from "./i18n/LanguageContext";
 import { translateText } from "./i18n/translations";
 
-function scrollToSection(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function SiteNav() {
+function SiteNav({ onContact, isContactOpen }) {
   const { language } = useLanguage();
   const isZh = language === "zh";
   return (
     <nav className="site-nav" aria-label={isZh ? "主要导航" : "Primary navigation"}>
       <button
-        className="pill-button"
+        className={`pill-button contact-trigger${isContactOpen ? " is-contact-open" : ""}`}
         type="button"
-        onClick={() => scrollToSection("contact")}
+        aria-controls="contact-modal"
+        aria-expanded={isContactOpen}
+        onClick={onContact}
       >
         {translateText("Contact", language)}
       </button>
@@ -240,6 +239,8 @@ function Works({
   onCubeFirstFrameReady,
   reduceMotion,
   s50cVideoPlaybackEnabled,
+  onContact,
+  isContactOpen,
 }) {
   const project = projects[activeIndex];
   const publishedProjects = projects.slice(0, 3);
@@ -358,7 +359,7 @@ function Works({
         }}
       />
 
-      <SiteNav active="works" />
+      <SiteNav onContact={onContact} isContactOpen={isContactOpen} />
 
       <div ref={titleGroupRef} className="project-title-list" id="works-title">
         <button
@@ -423,48 +424,6 @@ function Works({
   );
 }
 
-function Contact({ activeIndex, onActiveChange, copied, onCopy }) {
-  return (
-    <section id="contact" className="section-shell contact-section" aria-labelledby="contact-title">
-      <SiteNav active="contact" />
-
-      <h2 id="contact-title" className="contact-statement">
-        <span>让复杂的工具，</span>
-        <span>变得清晰。</span>
-      </h2>
-
-      <div className="contact-cube-zone" aria-hidden="true">
-        <ProjectCube
-          activeIndex={activeIndex}
-          onActiveChange={onActiveChange}
-          mode="wireframe"
-          ariaLabel="线框项目长方体"
-        />
-      </div>
-      <p className="contact-legend">01 AG1 · 02 S50C · 03 TOOLS APP · 04 ABOUT ME</p>
-
-      <div className="contact-card">
-        <h3>联系 Chen</h3>
-        <p className="contact-role">交互与用户体验设计师</p>
-        <p className="contact-copy">
-          如果你正在寻找一位能够连接智能硬件、
-          <br />
-          交互流程与视觉系统的设计师，欢迎聊聊。
-        </p>
-        <a className="email-cta" href={`mailto:${CONTACT_EMAIL}`}>
-          发送邮件
-        </a>
-        <div className="email-helper">
-          <span>点击打开邮件客户端</span>
-          <button type="button" onClick={onCopy}>{copied ? "已复制邮箱" : "复制邮箱"}</button>
-        </div>
-      </div>
-
-      <p className="contact-location">中国 · CST</p>
-    </section>
-  );
-}
-
 export function App() {
   const startsOnAbout = window.location.pathname === "/about";
   const playsHomeIntro = useRef(window.location.pathname === "/").current;
@@ -482,7 +441,7 @@ export function App() {
     rotationDuration: 400,
     background: projects[initialIndex].background,
   });
-  const [copied, setCopied] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
   const [homeIntroPhase, setHomeIntroPhase] = useState(playsHomeIntro ? "loading" : "complete");
   const [homeIntroProgress, setHomeIntroProgress] = useState(
     playsHomeIntro ? prebootIntro?.progress ?? 0 : 0,
@@ -1031,7 +990,15 @@ export function App() {
   const nextProjectTimeline = useCallback(async () => {
     if (transitionStateRef.current !== "project") return;
     const currentIndex = detailIndexRef.current;
-    if (currentIndex === null || currentIndex > 2) return;
+    if (currentIndex === null) return;
+    if (currentIndex === 3) {
+      const nextIndex = projects.findIndex((project) => project.openable);
+      if (nextIndex === -1) return;
+      await closeAboutPage();
+      await openProjectTimeline(nextIndex);
+      return;
+    }
+    if (currentIndex > 2) return;
     const nextIndex = (currentIndex + 1) % 3;
     const detailStage = detailStageRef.current;
     const transitionStage = transitionStageRef.current;
@@ -1125,21 +1092,17 @@ export function App() {
     setDetailNavVisible(true);
     setTransitionState("project");
     transitionStateRef.current = "project";
-  }, [reduceMotion]);
+  }, [closeAboutPage, openProjectTimeline, reduceMotion]);
 
   const handleOpenAbout = useCallback(() => openAboutPage(), [openAboutPage]);
   const handleCloseAbout = useCallback(() => closeAboutPage(), [closeAboutPage]);
   const handleOpenProject = useCallback((index) => openProjectTimeline(index), [openProjectTimeline]);
   const handleNextProject = useCallback(() => nextProjectTimeline(), [nextProjectTimeline]);
-
-  const handleCopyEmail = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(CONTACT_EMAIL);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
-    } catch {
-      window.location.href = `mailto:${CONTACT_EMAIL}`;
-    }
+  const handleToggleContact = useCallback(() => {
+    setIsContactOpen((current) => !current);
+  }, []);
+  const handleCloseContact = useCallback(() => {
+    setIsContactOpen(false);
   }, []);
 
   return (
@@ -1148,6 +1111,7 @@ export function App() {
       data-transition-state={transitionState}
       data-detail-nav-visible={detailNavVisible ? "true" : "false"}
       data-home-intro={homeIntroPhase}
+      data-contact-open={isContactOpen ? "true" : "false"}
     >
       <main inert={homeIntroPhase === "complete" ? undefined : true}>
         <Works
@@ -1166,12 +1130,8 @@ export function App() {
             || transitionState === "opening"
             || transitionState === "closing"
           }
-        />
-        <Contact
-          activeIndex={activeIndex}
-          onActiveChange={handleActiveChange}
-          copied={copied}
-          onCopy={handleCopyEmail}
+          onContact={handleToggleContact}
+          isContactOpen={isContactOpen}
         />
       </main>
 
@@ -1182,6 +1142,8 @@ export function App() {
         textRef={homeIntroTextRef}
       />
 
+      <ContactModal open={isContactOpen} onClose={handleCloseContact} />
+
       <div ref={sharedCubeLayerRef} className="persistent-project-transition" aria-hidden="true" />
 
       <div
@@ -1190,13 +1152,20 @@ export function App() {
         aria-hidden={detailIndex === null}
       >
         {renderedDetailIndex === 3 ? (
-          <AboutPage onBack={handleCloseAbout} />
+          <AboutPage
+            onBack={handleCloseAbout}
+            onNext={handleNextProject}
+            onContact={handleToggleContact}
+            isContactOpen={isContactOpen}
+          />
         ) : (
           <ProjectDetail
             key={projects[renderedDetailIndex].id}
             project={projects[renderedDetailIndex]}
             onClose={closeProjectTimeline}
             onNext={handleNextProject}
+            onContact={handleToggleContact}
+            isContactOpen={isContactOpen}
             active={detailIndex !== null}
           />
         )}
@@ -1227,8 +1196,6 @@ export function App() {
           />
         </div>
       </div>
-
-      <div className="sr-only" aria-live="polite">{copied ? "邮箱已复制" : ""}</div>
     </div>
   );
 }

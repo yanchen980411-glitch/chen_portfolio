@@ -1,55 +1,271 @@
 import React from "react";
-import { LanguageSwitcher } from "../i18n/LanguageContext";
+import {
+  ArrowRight,
+  Browser,
+  CheckCircle,
+  Cube,
+  EnvelopeSimple,
+  Lightbulb,
+  MagnifyingGlass,
+  Note,
+  Phone,
+  Stack,
+  UsersThree,
+} from "@phosphor-icons/react";
+import { useLanguage } from "../i18n/LanguageContext";
+import { DetailControls } from "./DetailControls";
 
-const education = [
-  { date: "2023.09 — 2024.11", school: "Goldsmiths, University of London", degree: "MSc User Experience Engineering", description: "Focused on user research, UX theory, design methodology, service design methods, web, VR, AI and UX, and UI design.", courses: ["User Research", "Service Design", "UI Design", "UX Theory", "Web UX Design", "", "Design Methodology", "AI and UX"] },
-  { date: "2016.09 — 2020.06", school: "Nanjing University of Media and Communication", degree: "BA Visual Communication Design", description: "Built a strong foundation in visual communication through typography, graphic design, photography, digital design, illustration, packaging, and interactive design.", courses: ["Visual Communication Design", "Photography Basics", "Packaging Design", "Typography", "Digital Design Basics", "Interaction Design", "Graphic Design", "Illustration"] },
+const whatIDo = [
+  {
+    icon: UsersThree,
+    zh: { title: "用户研究", lines: ["从真实需求中", "发现问题与机会"] },
+    en: { title: "User Research", lines: ["Discover needs, problems", "and opportunities"] },
+  },
+  {
+    icon: Stack,
+    zh: { title: "交互设计", lines: ["梳理信息结构", "与核心流程"] },
+    en: { title: "Interaction Design", lines: ["Shape information systems", "and core flows"] },
+  },
+  {
+    icon: Cube,
+    zh: { title: "AI 辅助原型", lines: ["借助 AI 工具", "加速探索与验证"] },
+    en: { title: "AI Prototyping", lines: ["Use AI to accelerate", "exploration and validation"] },
+  },
+  {
+    icon: Browser,
+    zh: { title: "UI 设计", lines: ["在细节与视觉中", "完成清晰表达"] },
+    en: { title: "UI Design", lines: ["Create clarity through", "visual detail"] },
+  },
 ];
 
-const experience = [
-  { date: "2025.06 — now", company: "Shenzhen Mileseey Technology Co., Ltd.", role: "Interaction Designer", lines: ["Led interaction and UI design for smart hardware products and companion digital tools.", "Conducted user research, defined interaction flows, and translated requirements into clear interface solutions.", "Created high-fidelity UI designs, specifications, and assets, and supported cross-functional collaboration with product and engineering teams.", "Improved usability and overall experience across device interfaces and connected app scenarios."] },
-  { date: "2024.10 — 2025.01", company: "Tesla (China)", role: "Interaction Design Intern", lines: ["Contributed to the analysis of Model 3 target users and supported user research planning for in-car entertainment experiences.", "Collected research feedback and crafted key opportunities for interaction design improvement.", "Analyzed competitor vehicles from an interaction perspective, focusing on the center display, voice assistant, and built-in applications.", "Studied Tesla’s user interaction habits and designed low-fi, research flow, and prototype concepts for driver interface testing and information display."] },
-  { date: "2021.08 — 2022.12", company: "Maikailai Technology Co., Ltd.", role: "Product Assistant Intern", lines: ["Led user research regarding industry pain points and focus groups to understand skincare product expectations and purchasing preferences.", "Prepared competitor reports and cross-function content to make product benefits and usage steps clearer.", "Designed user journey, wireframes, high-fi UI and supported interaction of the three (online store interface).", "Organized training course UX storylines and related packaging and UI design, contributing to stronger product perception and improved sales performance."] },
-  { date: "2020.08 — 2021.07", company: "Anhui Huaheng Measurement Co., Ltd.", role: "Graphic Design Intern", lines: ["Participated in the rebranding analysis and helped create visual-design solutions based on user pain points and expectations.", "Designed and promoted a new brand VI system to improve differentiation and market recognition.", "Created the official website interface to make information easier to find and enhanced the overall user experience through iteration.", "Produced targeted promotional materials and WeChat content that increased visibility and user inquiries."] },
+const journey = [
+  {
+    date: "2016.09 – 2020.07",
+    zh: { title: ["南京传媒学院"], role: "视觉传达设计" },
+    en: { title: ["Nanjing University", "of Media and Communication"], role: "Visual Communication Design" },
+    active: true,
+  },
+  {
+    date: "2023.09 – 2024.11",
+    zh: { title: ["Goldsmiths,", "University of London"], role: "用户体验工程" },
+    en: { title: ["Goldsmiths,", "University of London"], role: "User Experience Engineering" },
+  },
+  {
+    date: "2024.07 – 2024.10",
+    zh: { title: ["Soleil Ski App", "Experience Redesign"], role: "UX 设计师" },
+    en: { title: ["Soleil Ski App", "Experience Redesign"], role: "UX Designer" },
+  },
+  {
+    date: "2024.10 – 2025.01",
+    zh: { title: ["Tesla 特斯拉"], role: "交互设计实习生" },
+    en: { title: ["Tesla"], role: "Interaction Design Intern" },
+  },
+  {
+    date: "2025.06 – Present",
+    zh: { title: ["深圳市迈测科技", "股份有限公司"], role: "交互设计师" },
+    en: { title: ["Shenzhen Mileseey", "Technology Co., Ltd."], role: "Interaction Designer" },
+    active: true,
+  },
 ];
 
-function SectionLabel({ children }) {
-  return <div className="about-section-label"><span aria-hidden="true">•</span>{children}</div>;
+const workflow = [
+  { icon: MagnifyingGlass, title: "Research", zh: "信息整理 / 需求洞察", en: "Synthesis / User insights" },
+  { icon: Lightbulb, title: "Explore", zh: "机会定义 / 方案探索", en: "Opportunity / Exploration" },
+  { icon: Note, title: "Prototype", zh: "快速原型 / 交互验证", en: "Rapid prototypes / Testing" },
+  { icon: CheckCircle, title: "Validate", zh: "方案迭代 / 沟通交付", en: "Iteration / Delivery" },
+];
+
+const tools = [
+  "Figma",
+  "Photoshop",
+  "Illustrator",
+  "Axure",
+  "Adobe XD",
+  "ChatGPT",
+  "Codex",
+  "React",
+  "Embedded UI",
+  "Mobile App",
+  "AR / HUD",
+  "User Research",
+  "Interaction Design",
+  "Prototyping",
+  "AI-Assisted Design",
+];
+
+const copy = {
+  zh: {
+    intro: [
+      "你好，我是严琛。",
+      "我在不同设备与场景之间设计体验，",
+      "希望让技术的使用过程更自然、更清晰，也更贴近真实的人。",
+    ],
+    supporting: "拥有交互设计 / UX 背景，持续在真实场景中探索更顺畅的体验方式。",
+    sideNote: ["设计让复杂的技术", "更接近真实的人。"],
+    headings: ["我在做什么", "成长经历", "AI 在我的工作流程中", "工具与关键词", "联系我"],
+    captions: [
+      "从问题出发，创造更好的使用体验。",
+      "持续学习，在不同的阶段探索更大的可能。",
+      "让 AI 成为更高效的设计伙伴。",
+      "合适的工具，更好地实现想法。",
+      "如果你想聊设计、项目合作，或新的机会，欢迎联系我。",
+    ],
+    email: "邮箱",
+    phone: "电话",
+  },
+  en: {
+    intro: [
+      "Hello, I’m Yan Chen.",
+      "I design experiences across devices and contexts,",
+      "making technology feel more natural, clear, and human.",
+    ],
+    supporting: "With a background in interaction design and UX, I explore smoother experiences in real contexts.",
+    sideNote: ["Design brings complex technology", "closer to real people."],
+    headings: ["我在做什么", "成长经历", "AI 在我的工作流程中", "工具与关键词", "联系我"],
+    captions: [
+      "Start with the problem. Create a better experience.",
+      "Keep learning and explore wider possibilities at every stage.",
+      "Make AI a more effective design partner.",
+      "The right tools help ideas become real.",
+      "For design, collaboration, or new opportunities, let’s talk.",
+    ],
+    email: "Email",
+    phone: "Phone",
+  },
+};
+
+function SectionHeading({ id, number, title, titleZh, caption }) {
+  return (
+    <header className="about-section-heading">
+      <div className="about-section-title-row">
+        <span className="about-section-number">{number}</span>
+        <span className="about-section-rule" aria-hidden="true" />
+        <h2 id={id}>{title}</h2>
+        <span className="about-section-title-zh">/ {titleZh}</span>
+      </div>
+      <p>{caption}</p>
+    </header>
+  );
 }
 
-export function AboutPage({ onBack }) {
+function IconBadge({ icon: Icon }) {
   return (
-    <main className="about-page" aria-label="About Me">
-      <header className="detail-nav about-page-nav" aria-label="About Me navigation">
-        <div className="detail-nav-group"><button className="pill-button" type="button" onClick={onBack}>/返回</button></div>
-        <div className="detail-nav-group detail-nav-group-right"><LanguageSwitcher /></div>
-      </header>
+    <span className="about-icon-badge" aria-hidden="true">
+      <Icon size={31} weight="regular" />
+    </span>
+  );
+}
+
+export function AboutPage({ onBack, onNext, onContact, isContactOpen }) {
+  const { language } = useLanguage();
+  const locale = language === "en" ? "en" : "zh";
+  const text = copy[locale];
+
+  return (
+    <>
+      <DetailControls
+        className="horizon-case-nav"
+        onBack={onBack}
+        onNext={onNext}
+        onContact={onContact}
+        isContactOpen={isContactOpen}
+      />
+      <main className={`about-page about-page--${locale}`} aria-label="About Me" data-i18n-skip>
       <div className="about-page-canvas">
-        <div className="about-grid-lines" aria-hidden="true"><span /><span /><span /><span /></div>
-        <section className="about-intro" aria-labelledby="about-title">
-          <aside className="about-profile">
-            <div className="about-monogram">YC</div><p className="about-name">Yan Chen</p><p className="about-role">Interaction Designer</p>
+        <section className="about-intro" aria-labelledby="about-intro-title">
+          <div className="about-intro-copy">
+            <p className="about-identity"><strong>严琛</strong><span>/</span>Yan Chen</p>
+            <h1 id="about-intro-title">
+              {text.intro.map((line) => <span key={line}>{line}</span>)}
+            </h1>
+            <span className="about-intro-accent" aria-hidden="true" />
+            <p className="about-intro-supporting">{text.supporting}</p>
+          </div>
+          <aside className="about-intro-decoration" aria-hidden="true">
+            <div className="about-decor-note"><i />{text.sideNote.map((line) => <span key={line}>{line}</span>)}</div>
+            <div className="about-decor-english"><b>/</b><span>DESIGN<br />FOR A MORE<br />INTELLIGENT<br />EVERYDAY</span></div>
+            <div className="about-decor-orbit"><i />INTERACTION · DESIGN</div>
           </aside>
-          <div className="about-intro-main">
-            <h1 id="about-title">About me</h1>
-            <p className="about-lead"><span>Hey, I’m Yan Chen, an interaction designer<br />based in Shenzhen, China.</span><span>I design intuitive experiences across<br />digital products, smart hardware<br />and spatial interfaces.</span></p>
-            <div className="about-approach"><h2>My approach</h2><p>I believe good design happens when people,<br />technology and context meet.<br /><br />I focus on understanding real needs, simplifying<br />complexity and creating meaningful interactions<br />that solve problems and bring value.</p></div>
-            <div className="about-contact-strip" aria-label="Contact details"><a href="mailto:yanchen04112023@163.com">yanchen04112023@163.com</a><a href="tel:+8618711902636">+86 187 1190 2636</a><span>Shenzhen, China</span></div>
+        </section>
+
+        <section className="about-section about-what" aria-labelledby="about-what-title">
+          <SectionHeading id="about-what-title" number="01" title="What I Do" titleZh={text.headings[0]} caption={text.captions[0]} />
+          <div className="about-what-grid">
+            {whatIDo.map((item) => {
+              const itemCopy = item[locale];
+              return (
+                <article className="about-what-card" key={item.en.title}>
+                  <IconBadge icon={item.icon} />
+                  <h3>{itemCopy.title}</h3>
+                  <p>{itemCopy.lines.map((line) => <span key={line}>{line}</span>)}</p>
+                </article>
+              );
+            })}
           </div>
         </section>
-        <section className="about-resume-section about-education" aria-labelledby="education-title">
-          <aside><SectionLabel>Education</SectionLabel></aside>
-          <div className="about-resume-main"><h2 id="education-title">My Education</h2><div className="about-entries about-education-entries">
-            {education.map((item) => <article className="about-entry" key={item.school}><p className="about-entry-date">{item.date}</p><div className="about-entry-copy"><h3>{item.school}</h3><h4>{item.degree}</h4><p>{item.description}</p><p className="about-key-courses">Key Courses:</p><div className="about-course-grid">{item.courses.map((course, index) => <span key={`${course}-${index}`}>{course}</span>)}</div></div></article>)}
-          </div></div>
+
+        <section className="about-section about-journey" aria-labelledby="about-journey-title">
+          <SectionHeading id="about-journey-title" number="02" title="Journey" titleZh={text.headings[1]} caption={text.captions[1]} />
+          <ol className="about-timeline">
+            {journey.map((item, index) => {
+              const itemCopy = item[locale];
+              return (
+                <li className={item.active ? "is-active" : ""} key={`${item.date}-${index}`}>
+                  <span className="about-timeline-index">{String(index + 1).padStart(2, "0")}</span>
+                  <time>{item.date}</time>
+                  <span className="about-timeline-dot" aria-hidden="true" />
+                  <h3>{itemCopy.title.map((line) => <span key={line}>{line}</span>)}</h3>
+                  <p>{itemCopy.role}</p>
+                </li>
+              );
+            })}
+          </ol>
         </section>
-        <section className="about-resume-section about-work" aria-labelledby="work-title">
-          <aside><SectionLabel>Work experience</SectionLabel></aside>
-          <div className="about-resume-main"><h2 id="work-title">My Work Experience</h2><div className="about-entries about-work-entries">
-            {experience.map((item) => <article className="about-entry" key={item.company}><p className="about-entry-date">{item.date}</p><div className="about-entry-copy"><h3>{item.company}</h3><h4>{item.role}</h4><p>{item.lines.map((line, index) => <React.Fragment key={line}><span>{line}</span>{index < item.lines.length - 1 ? " " : null}</React.Fragment>)}</p></div></article>)}
-          </div></div>
+
+        <section className="about-section about-ai" aria-labelledby="about-ai-title">
+          <SectionHeading id="about-ai-title" number="03" title="AI in My Workflow" titleZh={text.headings[2]} caption={text.captions[2]} />
+          <ol className="about-workflow">
+            {workflow.map((item, index) => (
+              <React.Fragment key={item.title}>
+                <li>
+                  <IconBadge icon={item.icon} />
+                  <h3>{item.title}</h3>
+                  <p>{item[locale]}</p>
+                </li>
+                {index < workflow.length - 1 ? <ArrowRight className="about-workflow-arrow" size={25} weight="thin" aria-hidden="true" /> : null}
+              </React.Fragment>
+            ))}
+          </ol>
+          <div className="about-ai-toolrail" aria-label="AI workflow tools">ChatGPT <span>·</span> Codex <span>·</span> Figma <span>·</span> React</div>
         </section>
+
+        <section className="about-section about-tools" aria-labelledby="about-tools-title">
+          <SectionHeading id="about-tools-title" number="04" title="Tools & Keywords" titleZh={text.headings[3]} caption={text.captions[3]} />
+          <ul className="about-tag-list">
+            {tools.map((tool) => <li key={tool}>{tool}</li>)}
+          </ul>
+        </section>
+
+        <section className="about-section about-contact" aria-labelledby="about-contact-title">
+          <SectionHeading id="about-contact-title" number="05" title="Contact Me" titleZh={text.headings[4]} caption={text.captions[4]} />
+          <div className="about-contact-grid">
+            <a className="about-contact-card" href="mailto:yanchen04112023@163.com">
+              <IconBadge icon={EnvelopeSimple} />
+              <span><strong>{text.email}</strong><em>yanchen04112023@163.com</em></span>
+            </a>
+            <a className="about-contact-card" href="tel:+8613966222278">
+              <IconBadge icon={Phone} />
+              <span><strong>{text.phone}</strong><em>+86 13966222278</em></span>
+            </a>
+          </div>
+        </section>
+
+        <footer className="about-footer">
+          <span>INTERACTION DESIGNER&nbsp;&nbsp;·&nbsp;&nbsp;PORTFOLIO</span>
+          <span><i aria-hidden="true" />THANK YOU FOR VISITING</span>
+        </footer>
       </div>
-    </main>
+      </main>
+    </>
   );
 }
