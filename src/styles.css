@@ -3872,7 +3872,7 @@ canvas:focus-visible {
   display: block;
   width: fit-content;
   max-width: 100%;
-  margin: 0 0 clamp(7px, 1.1vh, 12px);
+  margin: 0;
   padding: 0;
   border: 0;
   background: transparent;
@@ -3897,6 +3897,24 @@ canvas:focus-visible {
 .project-title-about span {
   display: block;
   white-space: nowrap;
+}
+
+.project-title-caption {
+  min-height: 1em;
+  margin: clamp(3px, 0.45vh, 6px) 0 clamp(7px, 1vh, 11px);
+  color: rgba(255, 255, 255, 0.58);
+  font-size: clamp(9px, 0.72vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.project-title-caption.is-active {
+  opacity: 1;
 }
 
 .project-title-list > button:hover {
@@ -5147,8 +5165,12 @@ canvas:focus-visible {
   .project-title-list > button,
   .project-title-about {
     display: block;
-    margin-bottom: 6px;
     font-size: clamp(32px, 9.5vw, 43px);
+  }
+
+  .project-title-caption {
+    margin: 3px 0 6px;
+    font-size: clamp(8px, 2.5vw, 10px);
   }
 
   .project-title-list > button.is-active {
@@ -10302,6 +10324,11 @@ canvas:focus-visible {
 .tools-project-intro .horizon-project-info-block p,
 .tools-project-intro .horizon-project-meta {
   color: #171b19;
+}
+
+.tools-case-study .horizon-project-intro .horizon-project-info-block p {
+  font-size: clamp(9px, 0.68vw, 11px);
+  line-height: 1.62;
 }
 
 @media (max-width: 1120px) {

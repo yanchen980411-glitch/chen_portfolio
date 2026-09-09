@@ -48,6 +48,12 @@ const HOME_INTRO_TITLE_MS = 600;
 const HOME_BACKGROUND_WIPE_DELAY_MS = 150;
 const HOME_BACKGROUND_WIPE_DURATION_MS = 600;
 const HOME_PROJECT_TITLES = ["HORIZON", "S50C", "TOOLS APP"];
+const HOME_PROJECT_CAPTIONS = [
+  "AR Glasses · HUD Interaction",
+  "Smart Hardware · Embedded UI",
+  "Mobile App · Multi-device UX",
+];
+const HOME_ABOUT_CAPTION = "Profile · Journey · Workflow";
 
 function easeOutCubic(value) {
   return 1 - Math.pow(1 - value, 3);
@@ -368,23 +374,36 @@ function Works({
         >
           <span>ABOUT ME</span>
         </button>
+        <p
+          className={`project-title-caption${activeIndex === 3 ? " is-active" : ""}`}
+          aria-hidden={activeIndex !== 3}
+        >
+          {HOME_ABOUT_CAPTION}
+        </p>
 
         {publishedProjects.map((item, index) => (
-          <button
-            type="button"
-            key={item.id}
-            className={index === activeIndex ? "is-active" : ""}
-            aria-pressed={index === activeIndex}
-            onClick={() => {
-              if (index === activeIndex) {
-                onOpenProject(index);
-                return;
-              }
-              onActiveChange(index);
-            }}
-          >
-            <span>{HOME_PROJECT_TITLES[index]}</span>
-          </button>
+          <React.Fragment key={item.id}>
+            <button
+              type="button"
+              className={index === activeIndex ? "is-active" : ""}
+              aria-pressed={index === activeIndex}
+              onClick={() => {
+                if (index === activeIndex) {
+                  onOpenProject(index);
+                  return;
+                }
+                onActiveChange(index);
+              }}
+            >
+              <span>{HOME_PROJECT_TITLES[index]}</span>
+            </button>
+            <p
+              className={`project-title-caption${index === activeIndex ? " is-active" : ""}`}
+              aria-hidden={index !== activeIndex}
+            >
+              {HOME_PROJECT_CAPTIONS[index]}
+            </p>
+          </React.Fragment>
         ))}
 
       </div>
